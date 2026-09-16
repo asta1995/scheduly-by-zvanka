@@ -16,6 +16,7 @@
         
         .badge-FULL { background: linear-gradient(135deg, #10b981, #059669); color: white; box-shadow: 0 2px 5px rgba(16, 185, 129, 0.3); }
         .badge-Ps { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; box-shadow: 0 2px 5px rgba(245, 158, 11, 0.3); }
+        .badge-Si { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; box-shadow: 0 2px 5px rgba(59, 130, 246, 0.3); }
         .badge-P-sub { background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; box-shadow: 0 2px 5px rgba(6, 182, 212, 0.3); }
         .badge-Pc { background: linear-gradient(135deg, #d946ef, #c026d3); color: white; box-shadow: 0 2px 5px rgba(217, 70, 239, 0.3); }
         .badge-PS { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; box-shadow: 0 2px 5px rgba(99, 102, 241, 0.3); }
@@ -408,6 +409,7 @@
                 <div class="grid grid-cols-3 gap-2.5">
                     <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100 shadow-sm" data-value="FULL">FULL</button>
                     <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-white text-slate-700 border-slate-200 hover:bg-slate-100 shadow-sm" data-value="P">P (Pagi)</button>
+                    <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 shadow-sm" data-value="Si">Si (Siang)</button>
                     <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-white text-slate-700 border-slate-200 hover:bg-slate-100 shadow-sm" data-value="So">So (Sore)</button>
                     <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-cyan-50 text-cyan-700 border-cyan-200 hover:bg-cyan-100 shadow-sm" data-value="P(s)">P(s)</button>
                     <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200 hover:bg-fuchsia-100 shadow-sm" data-value="Pc">Pc</button>
@@ -775,6 +777,7 @@
                             .badge { font-weight: bold; padding: 1px 4px; border-radius: 3px; display: inline-block; font-size: 9px; }
                             .badge-FULL { background: #10b981; color: white; }
                             .badge-Ps { background: #f59e0b; color: white; }
+                            .badge-Si { background: #3b82f6; color: white; }
                             .badge-P-sub { background: #06b6d4; color: white; }
                             .badge-Pc { background: #d946ef; color: white; }
                             .badge-PS { background: #6366f1; color: white; }
@@ -799,14 +802,14 @@
                         
                         // Spacer & Rekap di PDF
                         htmlContent += `<th style="background:#fde047; width:10px; border:none;"></th>`;
-                        ["FULL", "P", "So", "P(s)", "Pc", "PS", "OFF", "C", "Total"].forEach(sh => {
+                        ["FULL", "P", "Si", "So", "P(s)", "Pc", "PS", "OFF", "C", "Total"].forEach(sh => {
                             htmlContent += `<th>${sh}</th>`;
                         });
                         htmlContent += `</tr></thead><tbody>`;
 
                         staffList.forEach(staff => {
                             htmlContent += `<tr><td class="name-col">${staff}</td>`;
-                            let counts = { FULL: 0, P: 0, So: 0, "P(s)": 0, Pc: 0, PS: 0, OFF: 0, C: 0, totalWork: 0 };
+                            let counts = { FULL: 0, P: 0, Si: 0, So: 0, "P(s)": 0, Pc: 0, PS: 0, OFF: 0, C: 0, totalWork: 0 };
                             
                             for (let d = 1; d <= totalDays; d++) {
                                 let dateKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
@@ -826,7 +829,7 @@
 
                             // Data Rekap per Staff di PDF
                             htmlContent += `<td style="background:#fde047; border:none;"></td>`;
-                            ["FULL", "P", "So", "P(s)", "Pc", "PS", "OFF", "C"].forEach(sh => {
+                            ["FULL", "P", "Si", "So", "P(s)", "Pc", "PS", "OFF", "C"].forEach(sh => {
                                 htmlContent += `<td><b>${counts[sh] || 0}</b></td>`;
                             });
                             htmlContent += `<td style="background:#fefce8;"><b>${counts.totalWork}</b></td>`;
@@ -889,10 +892,11 @@
             headerHTML += `<th class="min-w-[20px] bg-transparent border-none p-0"></th>`;
 
             // Header Rekapitulasi Shift di Kanan dengan Warna Khas
-            let shiftLabels = ["FULL", "P", "So", "P(s)", "Pc", "PS", "OFF", "C", currentLang === 'id' ? "Total" : "Total"];
+            let shiftLabels = ["FULL", "P", "Si", "So", "P(s)", "Pc", "PS", "OFF", "C", currentLang === 'id' ? "Total" : "Total"];
             let headerBgClasses = [
                 "bg-emerald-100/80 text-emerald-800", // FULL
                 "bg-slate-100 text-slate-700",       // P
+                "bg-blue-100/80 text-blue-900 font-bold", // Si
                 "bg-slate-100 text-slate-700",       // So
                 "bg-cyan-100/80 text-cyan-800",      // P(s)
                 "bg-fuchsia-100/80 text-fuchsia-800",// Pc
@@ -925,7 +929,7 @@
                 `;
                 tr.appendChild(tdName);
 
-                let counts = { FULL: 0, P: 0, So: 0, "P(s)": 0, Pc: 0, PS: 0, OFF: 0, C: 0, totalWork: 0 };
+                let counts = { FULL: 0, P: 0, Si: 0, So: 0, "P(s)": 0, Pc: 0, PS: 0, OFF: 0, C: 0, totalWork: 0 };
 
                 for (let day = 1; day <= totalDays; day++) {
                     let dateKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
@@ -961,6 +965,7 @@
                 let shiftKeys = [
                     { key: "FULL", bg: "bg-emerald-50/60 text-emerald-900 font-bold" },
                     { key: "P", bg: "bg-slate-50 text-slate-700" },
+                    { key: "Si", bg: "bg-blue-50/60 text-blue-900 font-bold" },
                     { key: "So", bg: "bg-slate-50 text-slate-700" },
                     { key: "P(s)", bg: "bg-cyan-50/60 text-cyan-900 font-bold" },
                     { key: "Pc", bg: "bg-fuchsia-50/60 text-fuchsia-900 font-bold" },
@@ -996,7 +1001,7 @@
             addTr.appendChild(addNameTd);
 
             let emptyFillerTd = document.createElement('td');
-            emptyFillerTd.colSpan = totalDays + 10;
+            emptyFillerTd.colSpan = totalDays + 11;
             emptyFillerTd.className = "border-t border-amber-200/60 bg-amber-50/20 text-slate-400 text-[11px] italic px-3";
             emptyFillerTd.innerText = staffList.length === 0 ? translations[currentLang].emptyStaff : "";
             addTr.appendChild(emptyFillerTd);

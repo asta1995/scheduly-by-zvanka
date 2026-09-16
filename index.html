@@ -10,14 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
     <!-- Web Manifest -->
     <link rel="manifest" id="my-manifest">
-    <!-- Library html2canvas untuk Ekspor Gambar -->
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-playful { font-family: 'Quicksand', sans-serif; }
         
         .badge-FULL { background: linear-gradient(135deg, #10b981, #059669); color: white; box-shadow: 0 2px 5px rgba(16, 185, 129, 0.3); }
         .badge-Ps { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; box-shadow: 0 2px 5px rgba(245, 158, 11, 0.3); }
+        .badge-P-sub { background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; box-shadow: 0 2px 5px rgba(6, 182, 212, 0.3); }
         .badge-Pc { background: linear-gradient(135deg, #d946ef, #c026d3); color: white; box-shadow: 0 2px 5px rgba(217, 70, 239, 0.3); }
         .badge-PS { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; box-shadow: 0 2px 5px rgba(99, 102, 241, 0.3); }
         .badge-OFF { background: linear-gradient(135deg, #f43f5e, #e11d48); color: white; box-shadow: 0 2px 5px rgba(244, 63, 94, 0.3); }
@@ -30,61 +29,62 @@
 </head>
 <body class="bg-gradient-to-br from-slate-50 via-amber-50/30 to-emerald-50/30 text-slate-700 min-h-screen flex flex-col selection:bg-amber-200">
 
-    <!-- Header -->
-    <header class="glass-card shadow-sm px-4 md:px-6 py-4 sticky top-0 z-30 flex justify-between items-center border-b border-amber-100/60">
-        <div class="flex items-center gap-3">
-            <div id="webBrandRefresh" class="flex items-center gap-3 cursor-pointer group" title="Tap untuk muat ulang halaman">
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-500 via-orange-400 to-emerald-500 flex items-center justify-center text-white font-bold shadow-lg shadow-amber-500/20 text-xl group-hover:scale-105 transition">☕</div>
-                <div>
-                    <h1 class="text-base font-bold text-slate-800 tracking-wide font-playful group-hover:text-amber-600 transition">Scheduly ✨</h1>
-                    <p id="saveStatusText" class="text-[11px] text-emerald-600 font-bold flex items-center gap-1">💾 Tersimpan Otomatis</p>
+    <!-- Area Dokumen (Mencakup Header, Konten Utama, hingga Footer) -->
+    <div id="exportArea" class="flex flex-col min-h-screen w-full bg-gradient-to-br from-slate-50 via-amber-50/30 to-emerald-50/30">
+
+        <!-- Header Web -->
+        <header class="glass-card shadow-sm px-4 md:px-6 py-4 sticky top-0 z-30 flex justify-between items-center border-b border-amber-100/60">
+            <div class="flex items-center gap-3">
+                <div id="webBrandRefresh" class="flex items-center gap-3 cursor-pointer group" title="Tap untuk muat ulang halaman">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-500 via-orange-400 to-emerald-500 flex items-center justify-center text-white font-bold shadow-lg shadow-amber-500/20 text-xl group-hover:scale-105 transition">☕</div>
+                    <div>
+                        <h1 class="text-base font-bold text-slate-800 tracking-wide font-playful group-hover:text-amber-600 transition">Scheduly ✨</h1>
+                        <p id="saveStatusText" class="text-[11px] text-emerald-600 font-bold flex items-center gap-1">💾 Tersimpan Otomatis</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="flex items-center gap-1.5 md:gap-2">
-            <!-- Tombol Salin Link Web -->
-            <button id="copyLinkBtn" class="bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs px-3 py-2 rounded-2xl font-bold border border-amber-200 transition shadow-sm flex items-center gap-1.5" title="Salin Link Web ini">
-                <span>🔗</span> <span class="hidden md:inline" data-i18n-copylink="Salin Link">Salin Link</span>
-            </button>
-            <!-- Tombol Undo -->
-            <button id="undoBtn" class="bg-white hover:bg-amber-50 text-slate-700 text-xs px-2.5 py-2 rounded-2xl font-bold border border-amber-200/80 transition shadow-sm" title="Undo" disabled>
-                ↩️
-            </button>
-            <!-- Tombol Redo -->
-            <button id="redoBtn" class="bg-white hover:bg-amber-50 text-slate-700 text-xs px-2.5 py-2 rounded-2xl font-bold border border-amber-200/80 transition shadow-sm" title="Redo" disabled>
-                🔁
-            </button>
-            <!-- Tombol Export Laporan -->
-            <button id="openExportModalBtn" class="bg-white hover:bg-amber-50 text-amber-900 text-xs px-3.5 py-2 rounded-2xl font-bold border border-amber-200/80 transition shadow-sm flex items-center gap-1.5 group" title="Unduh Laporan">
-                <span class="group-hover:scale-110 transition">📥</span> <span class="hidden md:inline">Export</span>
-            </button>
-            <!-- Tombol Bahasa -->
-            <button id="langToggleBtn" class="bg-white hover:bg-amber-50 text-slate-800 text-xs px-3.5 py-2 rounded-2xl font-bold border border-amber-200/80 transition shadow-sm">
-                🇮🇩 ID
-            </button>
-            <!-- Tombol Install PWA -->
-            <button id="installBtn" class="hidden bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs px-3.5 py-2 rounded-2xl font-bold shadow-md shadow-pink-500/20 transition">
-                📲
-            </button>
-        </div>
-    </header>
+            
+            <div class="flex items-center gap-1.5 md:gap-2 no-export">
+                <!-- Tombol Salin Link Web -->
+                <button id="copyLinkBtn" class="bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs px-3 py-2 rounded-2xl font-bold border border-amber-200 transition shadow-sm flex items-center gap-1.5" title="Salin Link Web ini">
+                    <span>🔗</span> <span class="hidden md:inline" data-i18n-copylink="Salin Link">Salin Link</span>
+                </button>
+                <!-- Tombol Undo -->
+                <button id="undoBtn" class="bg-white hover:bg-amber-50 text-slate-700 text-xs px-2.5 py-2 rounded-2xl font-bold border border-amber-200/80 transition shadow-sm" title="Undo" disabled>
+                    ↩️
+                </button>
+                <!-- Tombol Redo -->
+                <button id="redoBtn" class="bg-white hover:bg-amber-50 text-slate-700 text-xs px-2.5 py-2 rounded-2xl font-bold border border-amber-200/80 transition shadow-sm" title="Redo" disabled>
+                    🔁
+                </button>
+                <!-- Tombol Export Laporan -->
+                <button id="openExportModalBtn" class="bg-white hover:bg-amber-50 text-amber-900 text-xs px-3.5 py-2 rounded-2xl font-bold border border-amber-200/80 transition shadow-sm flex items-center gap-1.5 group" title="Unduh Laporan">
+                    <span class="group-hover:scale-110 transition">📥</span> <span class="hidden md:inline">Export</span>
+                </button>
+                <!-- Tombol Bahasa -->
+                <button id="langToggleBtn" class="bg-white hover:bg-amber-50 text-slate-800 text-xs px-3.5 py-2 rounded-2xl font-bold border border-amber-200/80 transition shadow-sm">
+                    🇮🇩 ID
+                </button>
+                <!-- Tombol Install PWA -->
+                <button id="installBtn" class="hidden bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs px-3.5 py-2 rounded-2xl font-bold shadow-md shadow-pink-500/20 transition">
+                    📲
+                </button>
+            </div>
+        </header>
 
-    <!-- Main Content -->
-    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 mb-16">
-        
-        <!-- Panel Navigasi Bulan -->
-        <div class="glass-card rounded-3xl p-4 mb-6 shadow-sm flex items-center justify-between max-w-md mx-auto">
-            <button id="prevMonth" class="w-10 h-10 flex items-center justify-center bg-white text-slate-700 rounded-2xl hover:bg-amber-100 hover:text-amber-900 font-bold transition shadow-sm border border-slate-100">&larr;</button>
-            <h2 id="monthYearDisplay" class="font-bold text-base text-slate-800 min-w-[160px] text-center font-playful"></h2>
-            <button id="nextMonth" class="w-10 h-10 flex items-center justify-center bg-white text-slate-700 rounded-2xl hover:bg-amber-100 hover:text-amber-900 font-bold transition shadow-sm border border-slate-100">&rarr;</button>
-        </div>
+        <!-- Main Content -->
+        <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 mb-16">
+            
+            <!-- Panel Navigasi Bulan -->
+            <div class="glass-card rounded-3xl p-4 mb-6 shadow-sm flex items-center justify-between max-w-md mx-auto">
+                <button id="prevMonth" class="no-export w-10 h-10 flex items-center justify-center bg-white text-slate-700 rounded-2xl hover:bg-amber-100 hover:text-amber-900 font-bold transition shadow-sm border border-slate-100">&larr;</button>
+                <h2 id="monthYearDisplay" class="font-bold text-base text-slate-800 min-w-[160px] text-center font-playful"></h2>
+                <button id="nextMonth" class="no-export w-10 h-10 flex items-center justify-center bg-white text-slate-700 rounded-2xl hover:bg-amber-100 hover:text-amber-900 font-bold transition shadow-sm border border-slate-100">&rarr;</button>
+            </div>
 
-        <!-- Area Tangkap Gambar (Export Gambar Sebatas Konten Tabel & Catatan) -->
-        <div id="exportArea">
-            <!-- Tabel Matrix Satu Halaman -->
+            <!-- Tabel Matrix & Rekapitulasi Shift Gabungan -->
             <div class="glass-card rounded-3xl shadow-sm overflow-hidden mb-6 border border-amber-100">
-                <div class="overflow-x-auto">
+                <div id="tableWrapperContainer" class="overflow-x-auto">
                     <table id="scheduleTable" class="w-full text-left border-collapse text-xs">
                         <thead>
                             <!-- Header digenerate lewat JS -->
@@ -102,89 +102,319 @@
                     <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2 font-playful">
                         <span class="w-8 h-8 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xs shadow-inner">📝</span> <span id="notesHeadingText">Catatan</span>
                     </h3>
-                    <button id="addGlobalNoteBtn" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-4 py-2 rounded-2xl font-bold text-xs shadow-md shadow-amber-500/20 transition">+ Tambah Catatan</button>
+                    <button id="addGlobalNoteBtn" class="no-export bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-4 py-2 rounded-2xl font-bold text-xs shadow-md shadow-amber-500/20 transition">+ Tambah Catatan</button>
                 </div>
                 <div id="globalNotesContainer" class="flex flex-col gap-2.5 text-xs">
                     <!-- Catatan dirender di sini -->
                 </div>
             </div>
-        </div>
 
-        <!-- Pop-Up Pilih Format Laporan -->
-        <div id="exportModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-            <div class="glass-card rounded-3xl shadow-2xl p-6 w-full max-w-sm border border-amber-200 relative z-50">
-                <div class="flex justify-between items-center mb-4 border-b border-amber-100 pb-3">
-                    <h3 id="exportModalTitle" class="font-bold text-slate-800 text-sm font-playful">Pilih Format Laporan</h3>
-                    <button id="closeExportModalBtn" class="w-8 h-8 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center transition">✕</button>
-                </div>
-                
-                <p class="text-xs text-slate-500 mb-4 leading-relaxed">Silakan pilih format dokumen laporan yang ingin diunduh:</p>
-
-                <div class="grid grid-cols-2 gap-2.5 mb-2">
-                    <button type="button" class="export-format-btn py-3 px-3 rounded-2xl border font-bold text-xs transition bg-white text-emerald-700 border-emerald-200 hover:bg-emerald-50 text-left flex items-center gap-2 shadow-sm" data-format="xlsx">
-                        <span class="text-lg">📊</span> <div><div>Excel (.xlsx)</div><div class="text-[9px] font-normal text-emerald-600">Spreadsheet</div></div>
-                    </button>
-                    <button type="button" class="export-format-btn py-3 px-3 rounded-2xl border font-bold text-xs transition bg-white text-sky-700 border-sky-200 hover:bg-sky-50 text-left flex items-center gap-2 shadow-sm" data-format="docx">
-                        <span class="text-lg">📄</span> <div><div>Word (.docx)</div><div class="text-[9px] font-normal text-sky-600">Dokumen Teks</div></div>
-                    </button>
-                    <button type="button" class="export-format-btn py-3 px-3 rounded-2xl border font-bold text-xs transition bg-white text-rose-700 border-rose-200 hover:bg-rose-50 text-left flex items-center gap-2 shadow-sm" data-format="pdf">
-                        <span class="text-lg">📕</span> <div><div>PDF (.pdf)</div><div class="text-[9px] font-normal text-rose-600">Full Design</div></div>
-                    </button>
-                    <button type="button" class="export-format-btn py-3 px-3 rounded-2xl border font-bold text-xs transition bg-white text-amber-700 border-amber-200 hover:bg-amber-50 text-left flex items-center gap-2 shadow-sm" data-format="csv">
-                        <span class="text-lg">📑</span> <div><div>CSV (.csv)</div><div class="text-[9px] font-normal text-amber-600">Kompatibel</div></div>
-                    </button>
-                    <button type="button" class="export-format-btn py-3 px-3 rounded-2xl border font-bold text-xs transition bg-white text-indigo-700 border-indigo-200 hover:bg-indigo-50 text-left flex items-center gap-2 shadow-sm col-span-2" data-format="png">
-                        <span class="text-lg">📷</span> <div><div>Gambar (.png)</div><div class="text-[9px] font-normal text-indigo-600">Sebatas Konten Tabel & Catatan</div></div>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Form Pop-Up Pilih Shift Instant (1x Tap) -->
-        <div id="formSection" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-            <div class="glass-card rounded-3xl shadow-2xl p-6 w-full max-w-sm border border-amber-200 relative z-50">
-                <div class="flex justify-between items-center mb-4 border-b border-amber-100 pb-3">
-                    <h3 id="selectedDateTitle" class="font-bold text-slate-800 text-sm font-playful">Pilih Shift</h3>
-                    <button id="closeFormBtn" class="w-8 h-8 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center transition">✕</button>
-                </div>
-                
-                <input type="hidden" id="activeStaffKey">
-                <input type="hidden" id="activeDateKey">
-                
-                <div class="mb-2">
-                    <div class="grid grid-cols-3 gap-2.5">
-                        <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100 shadow-sm" data-value="FULL">FULL</button>
-                        <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-white text-slate-700 border-slate-200 hover:bg-slate-100 shadow-sm" data-value="P">P (Pagi)</button>
-                        <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-white text-slate-700 border-slate-200 hover:bg-slate-100 shadow-sm" data-value="So">So (Sore)</button>
-                        <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100 shadow-sm" data-value="P(s)">P(s)</button>
-                        <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200 hover:bg-fuchsia-100 shadow-sm" data-value="Pc">Pc</button>
-                        <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-indigo-50 text-indigo-700 border-indigo-200 hover:bg-indigo-100 shadow-sm" data-value="PS">PS</button>
-                        <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100 shadow-sm" data-value="OFF">OFF</button>
-                        <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 shadow-sm" data-value="C">C (Cuti)</button>
-                        <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-red-100 text-red-600 border-red-200 hover:bg-red-200 shadow-sm col-span-3 flex items-center justify-center gap-1" data-value="CLEAR" id="clearShiftText">🗑️ Hapus Shift</button>
+            <!-- ======================================================= -->
+            <!-- MINI GAME RPG: BARISTA QUEST (RANDOM DROP & BOSS CHECKPOINT) -->
+            <!-- ======================================================= -->
+            <section class="max-w-7xl w-full mx-auto mb-6 no-export">
+                <div class="glass-card rounded-3xl shadow-sm p-5 border border-amber-100 overflow-hidden relative">
+                    
+                    <!-- Header Mini Game -->
+                    <div class="flex flex-col sm:flex-row justify-between items-center gap-3 mb-4 pb-3 border-b border-amber-100">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-orange-400 to-amber-500 flex items-center justify-center text-white font-bold shadow-md shadow-amber-500/20 text-lg">⚔️</div>
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-sm font-playful">Barista Quest: Random Drop & Boss Checkpoint</h3>
+                                <p class="text-[11px] text-slate-500">Sistem drop rate acak, checkpoint lantai boss, alokasi stat & requirement equipment!</p>
+                            </div>
+                        </div>
+                        <button id="startRpgBtn" class="bg-gradient-to-r from-amber-500 to-emerald-500 hover:from-amber-600 hover:to-emerald-600 text-white px-4 py-2 rounded-2xl font-bold text-xs shadow-md shadow-amber-500/20 transition flex items-center gap-1.5">
+                            <span>🎮</span> <span id="rpgBtnText">Buka Game Arena</span>
+                        </button>
                     </div>
+
+                    <!-- Area Arena Game (Hidden Default) -->
+                    <div id="rpgArena" class="hidden flex flex-col gap-4 bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-4 md:p-6 text-white shadow-inner">
+                        
+                        <!-- Navigasi Tab Game -->
+                        <div class="flex flex-wrap gap-2 border-b border-slate-700 pb-3">
+                            <button onclick="switchRpgTab('battle')" id="tabBattleBtn" class="px-3 py-1.5 rounded-xl bg-amber-500 text-white font-bold text-xs transition">⚔️ Arena Battle</button>
+                            <button onclick="switchRpgTab('shop')" id="tabShopBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🛒 Gearshop</button>
+                            <button onclick="switchRpgTab('alchemy')" id="tabAlchemyBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🧪 Alchemy Lab</button>
+                            <button onclick="switchRpgTab('enhance')" id="tabEnhanceBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🛠️ Enhancement</button>
+                            <button onclick="switchRpgTab('stats')" id="tabStatsBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">📊 Stat Stats</button>
+                        </div>
+
+                        <!-- PANEL 1: BATTLE ARENA -->
+                        <div id="panelBattle" class="flex flex-col gap-4">
+                            <div class="flex flex-wrap justify-between items-center bg-slate-800/90 p-3 rounded-xl border border-slate-700 text-xs gap-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 font-bold rounded-lg border border-amber-500/30" id="rpgLevelBadge">Level 1</span>
+                                    <span class="text-slate-400">XP: <span id="rpgXpDisplay">0</span> / <span id="rpgXpNext">50</span></span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-emerald-400 font-bold">🏆 Wins: <span id="rpgWinsCount">0</span></span>
+                                    <span class="text-amber-300 font-bold">🪙 Koin: <span id="rpgCoins">0</span></span>
+                                </div>
+                            </div>
+
+                            <!-- Indikator Checkpoint Boss & Floor -->
+                            <div class="bg-rose-950/40 border border-rose-800/60 p-2.5 rounded-xl flex flex-col sm:flex-row justify-between items-center text-xs gap-1">
+                                <span class="text-rose-300 font-bold" id="bossCounterText">⚔️ Progress Lantai: 1 / Menuju Boss ke-1</span>
+                                <span class="text-cyan-300 text-[10px]" id="checkpointInfoText">📌 Checkpoint Aktif: Lantai 1</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                                <div class="flex flex-col gap-1.5">
+                                    <div class="flex justify-between text-xs font-bold">
+                                        <span id="playerNameDisplay">☕ Barista Scheduly</span>
+                                        <span>HP: <span id="playerHp">100</span>/<span id="playerMaxHp">100</span></span>
+                                    </div>
+                                    <div class="w-full bg-slate-700 h-3 rounded-full overflow-hidden p-0.5 border border-slate-600">
+                                        <div id="playerHpBar" class="bg-emerald-500 h-full rounded-full transition-all duration-300" style="width: 100%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col gap-1.5">
+                                    <div class="flex justify-between text-xs font-bold">
+                                        <span id="monsterNameDisplay">💤 Monster Mager</span>
+                                        <span>HP: <span id="monsterHp">80</span>/<span id="monsterMaxHp">80</span></span>
+                                    </div>
+                                    <div class="w-full bg-slate-700 h-3 rounded-full overflow-hidden p-0.5 border border-slate-600">
+                                        <div id="monsterHpBar" class="bg-rose-500 h-full rounded-full transition-all duration-300" style="width: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-slate-950/60 p-6 rounded-xl border border-slate-800 min-h-[140px] text-center md:text-left">
+                                <div class="flex items-center gap-6 justify-center w-full">
+                                    <div class="text-4xl animate-bounce" id="playerSprite">🧑‍🍳</div>
+                                    <div class="text-xs font-bold text-amber-400 uppercase tracking-widest px-3 py-1 bg-amber-950/40 rounded-full border border-amber-800/50">VS</div>
+                                    <div class="text-4xl animate-pulse" id="monsterSprite">💤</div>
+                                </div>
+                                <div class="w-full md:w-1/2 bg-slate-900/90 p-3 rounded-xl border border-slate-800 text-xs text-slate-300 h-24 overflow-y-auto flex flex-col justify-end" id="rpgLog">
+                                    <div>✨ Selamat datang di Barista Quest! Siapkan alokasi stat dan gearmu.</div>
+                                </div>
+                            </div>
+
+                            <div id="rpgActionControls" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                                <button onclick="rpgAction('espresso')" class="bg-amber-600 hover:bg-amber-500 text-white p-3 rounded-xl font-bold text-xs shadow transition flex flex-col items-center gap-1">
+                                    <span class="text-base">☕</span> <span>Espresso Shot</span>
+                                    <span class="text-[9px] opacity-80 font-normal">DMG Berdasarkan STR</span>
+                                </button>
+                                <button onclick="rpgAction('latte')" class="bg-cyan-600 hover:bg-cyan-500 text-white p-3 rounded-xl font-bold text-xs shadow transition flex flex-col items-center gap-1">
+                                    <span class="text-base">🥛</span> <span>Latte Heal</span>
+                                    <span class="text-[9px] opacity-80 font-normal">Pulihkan HP</span>
+                                </button>
+                                <button id="skillUnlockBtn2" onclick="rpgAction('shift')" class="bg-slate-700 text-slate-400 p-3 rounded-xl font-bold text-xs shadow transition flex flex-col items-center gap-1 cursor-not-allowed" disabled>
+                                    <span class="text-base" id="skill2Icon">🔒</span> <span id="skill2Title">Full Shift Strike</span>
+                                    <span class="text-[9px] opacity-80 font-normal" id="skill2Desc">Butuh 2 Wins</span>
+                                </button>
+                                <button onclick="rpgAction('usePotion')" class="bg-emerald-700 hover:bg-emerald-600 text-white p-3 rounded-xl font-bold text-xs shadow transition flex flex-col items-center gap-1">
+                                    <span class="text-base">🧪</span> <span>Minum Potion</span>
+                                    <span class="text-[9px] opacity-80 font-normal" id="potionCountDisplay">Milik: 1</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- PANEL 2: GEARSHOP -->
+                        <div id="panelShop" class="hidden flex flex-col gap-3 text-xs">
+                            <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-2">
+                                <span class="font-bold text-amber-300">🛒 Toko Peralatan Barista Legendaris</span>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-cyan-300">⏳ Reset Stok: <b id="shopTimerDisplay" class="text-cyan-400">00:00:00</b></span>
+                                    <span>Koin: <b class="text-amber-400" id="shopCoinsDisplay">0</b> 🪙</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div class="bg-slate-900/90 border border-slate-700 p-3.5 rounded-xl flex flex-col justify-between gap-2">
+                                    <div>
+                                        <div class="text-base">🥄</div>
+                                        <div class="font-bold text-amber-200">Sendok Emas Barista</div>
+                                        <div class="text-[10px] text-slate-400">+10 Base Damage Serangan</div>
+                                        <div class="text-[10px] text-purple-300 mt-1">Req: 3 Strength</div>
+                                    </div>
+                                    <div class="flex justify-between items-center mt-2">
+                                        <span class="text-amber-400 font-bold">50 🪙</span>
+                                        <button onclick="buyGear('spoon')" id="buySpoonBtn" class="bg-amber-600 hover:bg-amber-500 text-white px-3 py-1.5 rounded-lg font-bold transition">Beli</button>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-900/90 border border-slate-700 p-3.5 rounded-xl flex flex-col justify-between gap-2">
+                                    <div>
+                                        <div class="text-base">🏺</div>
+                                        <div class="font-bold text-amber-200">Kendi Kopi Perunggu</div>
+                                        <div class="text-[10px] text-slate-400">+50 Maksimal HP Pemain</div>
+                                        <div class="text-[10px] text-purple-300 mt-1">Req: 3 Vitality</div>
+                                    </div>
+                                    <div class="flex justify-between items-center mt-2">
+                                        <span class="text-amber-400 font-bold">80 🪙</span>
+                                        <button onclick="buyGear('pitcher')" id="buyPitcherBtn" class="bg-amber-600 hover:bg-amber-500 text-white px-3 py-1.5 rounded-lg font-bold transition">Beli</button>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-900/90 border border-slate-700 p-3.5 rounded-xl flex flex-col justify-between gap-2">
+                                    <div>
+                                        <div class="text-base">👑</div>
+                                        <div class="font-bold text-amber-200">Mahkota Kafe Supreme</div>
+                                        <div class="text-[10px] text-slate-400">+30 DMG & +100 Maks HP</div>
+                                        <div class="text-[10px] text-purple-300 mt-1">Req: 6 Strength & Vitality</div>
+                                    </div>
+                                    <div class="flex justify-between items-center mt-2">
+                                        <span class="text-amber-400 font-bold">150 🪙</span>
+                                        <button onclick="buyGear('crown')" id="buyCrownBtn" class="bg-amber-600 hover:bg-amber-500 text-white px-3 py-1.5 rounded-lg font-bold transition">Beli</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PANEL 3: ALCHEMY LAB -->
+                        <div id="panelAlchemy" class="hidden flex flex-col gap-3 text-xs">
+                            <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
+                                <span class="font-bold text-cyan-300">🧪 Lab Alkimia Racikan Kafe</span>
+                                <span class="text-slate-300">Biji Kopi Bahan: <b class="text-cyan-400" id="coffeeBeansDisplay">0</b> 🫘</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">Kumpulkan Biji Kopi (🫘) dari monster untuk meracik Health Potion pemulih HP!</p>
+                            <div class="bg-slate-900/90 border border-slate-700 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="text-3xl">🧪</div>
+                                    <div>
+                                        <div class="font-bold text-white">Racik Health Potion</div>
+                                        <div class="text-[10px] text-slate-400">Membutuhkan 3 Biji Kopi (🫘) untuk 1 Potion Pemulih (+50 HP).</div>
+                                        <div class="text-[10px] text-emerald-400 font-bold mt-1">Potion Dimiliki: <span id="potionInventoryCount">1</span> Potion</div>
+                                    </div>
+                                </div>
+                                <button onclick="craftPotion()" class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-2 rounded-xl font-bold transition shrink-0">Racik Sekarang</button>
+                            </div>
+                        </div>
+
+                        <!-- PANEL 4: ENHANCEMENT -->
+                        <div id="panelEnhance" class="hidden flex flex-col gap-3 text-xs">
+                            <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
+                                <span class="font-bold text-purple-300">🛠️ Meja Enhancement Peralatan</span>
+                                <span class="text-amber-300">Koin: <b id="enhanceCoinsDisplay">0</b> 🪙 | Biji Kopi: <b id="enhanceBeansDisplay" class="text-cyan-400">0</b> 🫘</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">Tingkatkan level senjata untuk memperkuat serangan. Setiap upgrade memerlukan Koin, Biji Kopi, dan minimal Stat Strength tertentu!</p>
+                            <div class="bg-slate-900/90 border border-slate-700 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="text-3xl">⚔️</div>
+                                    <div>
+                                        <div class="font-bold text-white">Enhance Senjata Barista</div>
+                                        <div class="text-[10px] text-slate-400">Level Senjata Saat Ini: <b id="weaponLevelDisplay" class="text-purple-400">Lv. 0</b></div>
+                                        <div class="text-[10px] text-slate-300 mt-1">Requirement: <span id="reqCoinsText" class="text-amber-400 font-bold">30 🪙</span>, <span id="reqBeansText" class="text-cyan-400 font-bold">2 🫘</span> & <span id="reqStatText" class="text-purple-300 font-bold">Req: 2 STR</span></div>
+                                    </div>
+                                </div>
+                                <button onclick="enhanceWeapon()" class="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-xl font-bold transition shrink-0">Upgrade Senjata</button>
+                            </div>
+                        </div>
+
+                        <!-- PANEL 5: STAT ALOKASI POINT -->
+                        <div id="panelStats" class="hidden flex flex-col gap-3 text-xs">
+                            <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
+                                <span class="font-bold text-amber-300">📊 Alokasi Point Karakter</span>
+                                <span class="text-emerald-400 font-bold">Sisa Point: <b id="availablePointsDisplay" class="text-emerald-300">0</b> Poin</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">Setiap naik level, kamu mendapat 3 Poin Atribut untuk dibagikan ke Strength (Kekuatan Serangan) atau Vitality (Ketahanan HP)!</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="bg-slate-900/90 border border-slate-700 p-4 rounded-xl flex flex-col justify-between gap-3">
+                                    <div>
+                                        <div class="font-bold text-amber-200 text-sm">💪 Strength (STR)</div>
+                                        <div class="text-[10px] text-slate-400">Meningkatkan damage serangan fisik & syarat equipment tingkat tinggi.</div>
+                                        <div class="text-sm font-bold text-amber-400 mt-2">Level STR: <span id="statStrDisplay">0</span></div>
+                                    </div>
+                                    <button onclick="allocateStat('str')" class="bg-amber-600 hover:bg-amber-500 text-white py-2 rounded-lg font-bold transition">+ Tambah STR</button>
+                                </div>
+                                <div class="bg-slate-900/90 border border-slate-700 p-4 rounded-xl flex flex-col justify-between gap-3">
+                                    <div>
+                                        <div class="font-bold text-cyan-200 text-sm">❤️ Vitality (VIT)</div>
+                                        <div class="text-[10px] text-slate-400">Meningkatkan total maksimal HP hero & pertahanan dasar.</div>
+                                        <div class="text-sm font-bold text-cyan-400 mt-2">Level VIT: <span id="statVitDisplay">0</span></div>
+                                    </div>
+                                    <button onclick="allocateStat('vit')" class="bg-cyan-600 hover:bg-cyan-500 text-white py-2 rounded-lg font-bold transition">+ Tambah VIT</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tombol Keluar / Istirahat -->
+                        <div class="flex justify-end mt-1 border-t border-slate-700 pt-3">
+                            <button onclick="rpgAction('surrender')" class="bg-rose-600/80 hover:bg-rose-600 text-white px-4 py-2 rounded-xl font-bold text-xs transition shadow">
+                                🏳️ Istirahat (Keluar Arena)
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer Web -->
+        <footer class="text-center py-4 text-xs text-slate-500 font-medium bg-white/80 backdrop-blur-md border-t border-amber-100/60 mt-auto" id="footerText">
+            © 2026 Scheduly PWA • Created with ☕ & Code by Zvanka & Gemini ✨
+        </footer>
+
+    </div>
+
+    <!-- Pop-Up Pilih Format Laporan -->
+    <div id="exportModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-card rounded-3xl shadow-2xl p-6 w-full max-w-sm border border-amber-200 relative z-50">
+            <div class="flex justify-between items-center mb-4 border-b border-amber-100 pb-3">
+                <h3 id="exportModalTitle" class="font-bold text-slate-800 text-sm font-playful">Pilih Format Laporan</h3>
+                <button id="closeExportModalBtn" class="w-8 h-8 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center transition">✕</button>
+            </div>
+            
+            <p class="text-xs text-slate-500 mb-4 leading-relaxed">Silakan pilih format dokumen laporan yang ingin diunduh:</p>
+
+            <div class="grid grid-cols-2 gap-2.5 mb-2">
+                <button type="button" class="export-format-btn py-3 px-3 rounded-2xl border font-bold text-xs transition bg-white text-emerald-700 border-emerald-200 hover:bg-emerald-50 text-left flex items-center gap-2 shadow-sm" data-format="xlsx">
+                    <span class="text-lg">📊</span> <div><div>Excel (.xlsx)</div><div class="text-[9px] font-normal text-emerald-600">Spreadsheet</div></div>
+                </button>
+                <button type="button" class="export-format-btn py-3 px-3 rounded-2xl border font-bold text-xs transition bg-white text-sky-700 border-sky-200 hover:bg-sky-50 text-left flex items-center gap-2 shadow-sm" data-format="docx">
+                    <span class="text-lg">📄</span> <div><div>Word (.docx)</div><div class="text-[9px] font-normal text-sky-600">Dokumen Teks</div></div>
+                </button>
+                <button type="button" class="export-format-btn py-3 px-3 rounded-2xl border font-bold text-xs transition bg-white text-rose-700 border-rose-200 hover:bg-rose-50 text-left flex items-center gap-2 shadow-sm" data-format="pdf">
+                    <span class="text-lg">📕</span> <div><div>PDF (.pdf)</div><div class="text-[9px] font-normal text-rose-600">Full Design (1 Halaman)</div></div>
+                </button>
+                <button type="button" class="export-format-btn py-3 px-3 rounded-2xl border font-bold text-xs transition bg-white text-amber-700 border-amber-200 hover:bg-amber-50 text-left flex items-center gap-2 shadow-sm" data-format="csv">
+                    <span class="text-lg">📑</span> <div><div>CSV (.csv)</div><div class="text-[9px] font-normal text-amber-600">Kompatibel</div></div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Pop-Up Pilih Shift Instant (1x Tap) -->
+    <div id="formSection" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-card rounded-3xl shadow-2xl p-6 w-full max-w-sm border border-amber-200 relative z-50">
+            <div class="flex justify-between items-center mb-4 border-b border-amber-100 pb-3">
+                <h3 id="selectedDateTitle" class="font-bold text-slate-800 text-sm font-playful">Pilih Shift</h3>
+                <button id="closeFormBtn" class="w-8 h-8 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center transition">✕</button>
+            </div>
+            
+            <input type="hidden" id="activeStaffKey">
+            <input type="hidden" id="activeDateKey">
+            
+            <div class="mb-2">
+                <div class="grid grid-cols-3 gap-2.5">
+                    <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100 shadow-sm" data-value="FULL">FULL</button>
+                    <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-white text-slate-700 border-slate-200 hover:bg-slate-100 shadow-sm" data-value="P">P (Pagi)</button>
+                    <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-white text-slate-700 border-slate-200 hover:bg-slate-100 shadow-sm" data-value="So">So (Sore)</button>
+                    <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-cyan-50 text-cyan-700 border-cyan-200 hover:bg-cyan-100 shadow-sm" data-value="P(s)">P(s)</button>
+                    <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200 hover:bg-fuchsia-100 shadow-sm" data-value="Pc">Pc</button>
+                    <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-indigo-50 text-indigo-700 border-indigo-200 hover:bg-indigo-100 shadow-sm" data-value="PS">PS</button>
+                    <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100 shadow-sm" data-value="OFF">OFF</button>
+                    <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 shadow-sm" data-value="C">C (Cuti)</button>
+                    <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-red-100 text-red-600 border-red-200 hover:bg-red-200 shadow-sm col-span-3 flex items-center justify-center gap-1" data-value="CLEAR" id="clearShiftText">🗑️ Hapus Shift</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Pop-Up Konfirmasi / Notifikasi Toast -->
-        <div id="confirmModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-            <div class="glass-card rounded-3xl shadow-2xl p-6 w-full max-w-xs border border-amber-200 text-center relative z-50">
-                <div id="confirmIcon" class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 font-bold flex items-center justify-center mx-auto mb-3 text-xl shadow-inner">⚠️</div>
-                <h3 id="confirmTitle" class="font-bold text-slate-800 text-sm mb-1 font-playful">Konfirmasi</h3>
-                <p id="confirmMessage" class="text-xs text-slate-500 mb-5 leading-relaxed">Apakah kamu yakin?</p>
-                <div class="flex gap-2">
-                    <button id="confirmNoBtn" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-600 py-2.5 rounded-2xl font-bold transition text-xs shadow-sm">Tidak</button>
-                    <button id="confirmYesBtn" class="flex-1 bg-amber-500 hover:bg-amber-600 text-white py-2.5 rounded-2xl font-bold transition text-xs shadow-md shadow-amber-500/20">Ya</button>
-                </div>
+    <!-- Pop-Up Konfirmasi / Notifikasi Toast -->
+    <div id="confirmModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-card rounded-3xl shadow-2xl p-6 w-full max-w-xs border border-amber-200 text-center relative z-50">
+            <div id="confirmIcon" class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 font-bold flex items-center justify-center mx-auto mb-3 text-xl shadow-inner">⚠️</div>
+            <h3 id="confirmTitle" class="font-bold text-slate-800 text-sm mb-1 font-playful">Konfirmasi</h3>
+            <p id="confirmMessage" class="text-xs text-slate-500 mb-5 leading-relaxed">Apakah kamu yakin?</p>
+            <div class="flex gap-2">
+                <button id="confirmNoBtn" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-600 py-2.5 rounded-2xl font-bold transition text-xs shadow-sm">Tidak</button>
+                <button id="confirmYesBtn" class="flex-1 bg-amber-500 hover:bg-amber-600 text-white py-2.5 rounded-2xl font-bold transition text-xs shadow-md shadow-amber-500/20">Ya</button>
             </div>
         </div>
-    </main>
-
-    <!-- Footer Copyright Zvanka & Kita Berdua -->
-    <footer class="text-center py-4 text-xs text-slate-500 font-medium bg-white/80 backdrop-blur-md border-t border-amber-100/60" id="footerText">
-        © 2026 Scheduly PWA • Created with ☕ & Code by Zvanka & Gemini ✨
-    </footer>
+    </div>
 
     <!-- Script Utama -->
     <script>
@@ -196,7 +426,6 @@
                 title: "☕ Scheduly – Jadwal & Catatan Tim",
                 notesHead: "Catatan",
                 addNoteBtn: "+ Tambah Catatan",
-                emptyStaff: "Belum ada staff. Ketik nama di bawah untuk menambahkan staff baru.",
                 newStaffPlaceholder: "＋ Ketik nama baru...",
                 deleteStaffTitle: "Hapus Staff",
                 deleteStaffConfirm: "Apakah kamu yakin ingin menghapus {name} beserta seluruh jadwalnya?",
@@ -219,7 +448,6 @@
                 title: "☕ Scheduly – Team Schedule & Notes",
                 notesHead: "Notes",
                 addNoteBtn: "+ Add Note",
-                emptyStaff: "No staff yet. Type a name below to add a new staff member.",
                 newStaffPlaceholder: "＋ Type new name...",
                 deleteStaffTitle: "Delete Staff",
                 deleteStaffConfirm: "Are you sure you want to delete {name} and all their schedules?",
@@ -251,9 +479,6 @@
             
             const copyLinkSpan = document.querySelector('#copyLinkBtn span:nth-child(2)');
             if (copyLinkSpan) copyLinkSpan.innerText = translations[currentLang].copyLinkText;
-
-            const inlineInput = document.getElementById('inlineStaffInput');
-            if (inlineInput) inlineInput.placeholder = translations[currentLang].newStaffPlaceholder;
         }
 
         langToggleBtn.addEventListener('click', () => {
@@ -457,37 +682,17 @@
                 let format = btn.getAttribute('data-format');
                 exportModal.classList.add('hidden');
 
-                if (format === 'png') {
-                    const exportArea = document.getElementById('exportArea');
-                    const deleteButtons = exportArea.querySelectorAll('button');
-                    deleteButtons.forEach(btn => btn.style.display = 'none');
-
-                    html2canvas(exportArea, {
-                        scale: 2,
-                        useCORS: true,
-                        backgroundColor: '#ffffff'
-                    }).then(canvas => {
-                        deleteButtons.forEach(btn => btn.style.display = '');
-                        let link = document.createElement('a');
-                        link.download = `Scheduly_Report_${currentYear}-${currentMonth + 1}.png`;
-                        link.href = canvas.toDataURL('image/png');
-                        link.click();
-                    }).catch(() => {
-                        deleteButtons.forEach(btn => btn.style.display = '');
-                        alert("Gagal mengunduh gambar. Silakan coba lagi!");
-                    });
-                    return;
-                }
-
                 showConfirm(translations[currentLang].saveFileTitle, translations[currentLang].saveFileConfirm.replace('{format}', format), () => {
                     let content = "", mimeType = "text/plain;charset=utf-8";
                     let holidayNotes = getHolidaysTextForExport();
                     let monthKey = `${currentYear}-${currentMonth}`;
                     let userNotesList = globalNotes[monthKey] || [];
+                    let monthsName = currentLang === 'id' ? monthsNameID : monthsNameENG;
+                    let headerInfoText = `Scheduly Web Report - ${monthsName[currentMonth]} ${currentYear} (Created by Zvanka & Gemini)`;
 
                     if (format === 'csv') {
                         let daysShort = currentLang === 'id' ? daysShortID : daysShortENG;
-                        content = "Staff,Date,Day,Shift\n";
+                        content = `# ${headerInfoText}\nStaff,Date,Day,Shift\n`;
                         let totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
                         for (let staff of staffList) {
                             for (let d = 1; d <= totalDays; d++) {
@@ -498,15 +703,15 @@
                             }
                         }
                         
-                        // Catatan di bagian bawah dengan penanda khusus
                         content += "\n# --- CATATAN & HARI PERINGATAN (RED DATES) ---\n";
                         holidayNotes.forEach(h => { content += `# [PERINGATAN/LIBUR] ${h}\n`; });
                         userNotesList.forEach(n => { content += `# [CATATAN] ${n}\n`; });
+                        content += `# Footer: © 2026 Scheduly PWA • Created with ☕ & Code by Zvanka & Gemini ✨\n`;
 
                         mimeType = "text/csv;charset=utf-8";
                     } else if (format === 'xlsx') {
                         let daysShort = currentLang === 'id' ? daysShortID : daysShortENG;
-                        content = "Scheduly Excel Export\nStaff\tDate\tDay\tShift\n";
+                        content = `${headerInfoText}\nStaff\tDate\tDay\tShift\n`;
                         let totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
                         for (let staff of staffList) {
                             for (let d = 1; d <= totalDays; d++) {
@@ -517,80 +722,108 @@
                             }
                         }
 
-                        // Catatan di bagian bawah dengan penanda khusus
                         content += "\n--- CATATAN & HARI PERINGATAN (RED DATES) ---\n";
                         holidayNotes.forEach(h => { content += `[PERINGATAN/LIBUR]\t${h}\n`; });
                         userNotesList.forEach(n => { content += `[CATATAN]\t${n}\n`; });
+                        content += `Footer Info\t© 2026 Scheduly PWA • Created with ☕ & Code by Zvanka & Gemini ✨\n`;
 
                         mimeType = "application/vnd.ms-excel;charset=utf-8";
                     } else if (format === 'docx') {
                         let backupData = { 
+                            header_web: headerInfoText,
                             staff: staffList, 
                             schedules: schedules, 
                             catatan_dan_hari_peringatan: {
                                 hari_peringatan_warna_merah: holidayNotes,
                                 catatan_pengguna: userNotesList
-                            }
+                            },
+                            footer_web: "© 2026 Scheduly PWA • Created with ☕ & Code by Zvanka & Gemini ✨"
                         };
-                        content = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>\n<head><title>Scheduly Report</title></head>\n<body><h2>Scheduly Report</h2><pre>${JSON.stringify(backupData, null, 2)}</pre></body></html>`;
+                        content = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>\n<head><title>Scheduly Report</title></head>\n<body><h2>☕ Scheduly Report</h2><pre>${JSON.stringify(backupData, null, 2)}</pre></body></html>`;
                         mimeType = "application/msword;charset=utf-8";
                     } else if (format === 'pdf') {
                         let printWindow = window.open('', '_blank');
-                        let monthsName = currentLang === 'id' ? monthsNameID : monthsNameENG;
                         let daysShort = currentLang === 'id' ? daysShortID : daysShortENG;
                         let totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
 
                         let htmlContent = `<!DOCTYPE html><html><head><title>Scheduly Report</title><style>
-                            @page { size: landscape; margin: 10mm; }
-                            body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fffbeb; color: #334155; padding: 15px; }
-                            h2 { color: #b45309; }
-                            table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; margin-bottom: 15px; }
-                            th, td { border: 1px solid #fde68a; padding: 6px; text-align: center; font-size: 11px; }
+                            @page { size: landscape; margin: 6mm; }
+                            body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fffbeb; color: #334155; padding: 5px; margin: 0; display: flex; flex-direction: column; max-height: 100vh; box-sizing: border-box; page-break-after: avoid; page-break-before: avoid; }
+                            .web-header { font-weight: bold; color: #b45309; margin-bottom: 6px; font-size: 12px; border-bottom: 2px solid #fde68a; padding-bottom: 4px; }
+                            table { width: 100%; border-collapse: collapse; background: white; border-radius: 6px; overflow: hidden; margin-bottom: 8px; page-break-inside: avoid; }
+                            th, td { border: 1px solid #fde68a; padding: 4px; text-align: center; font-size: 10px; }
                             th { background: #fef3c7; color: #78350f; font-weight: bold; }
-                            .name-col { text-align: left; padding-left: 10px; font-weight: bold; background: #fffbeb; }
+                            .name-col { text-align: left; padding-left: 8px; font-weight: bold; background: #fffbeb; }
                             .red-day { background: #ffe4e6 !important; color: #9f1239 !important; }
-                            .badge { font-weight: bold; padding: 2px 6px; border-radius: 4px; display: inline-block; }
+                            .badge { font-weight: bold; padding: 1px 4px; border-radius: 3px; display: inline-block; font-size: 9px; }
                             .badge-FULL { background: #10b981; color: white; }
                             .badge-Ps { background: #f59e0b; color: white; }
+                            .badge-P-sub { background: #06b6d4; color: white; }
                             .badge-Pc { background: #d946ef; color: white; }
                             .badge-PS { background: #6366f1; color: white; }
                             .badge-OFF { background: #f43f5e; color: white; }
                             .badge-C { background: #64748b; color: white; }
                             .badge-P, .badge-So { background: #f8fafc; color: #334155; border: 1px solid #cbd5e1; }
-                            .notes-section { background: white; border: 1px solid #fde68a; padding: 12px; border-radius: 8px; font-size: 11px; }
-                            .notes-section h3 { margin-top: 0; color: #b45309; font-size: 13px; }
-                            .holiday-text-colored { color: #991b1b; font-weight: bold; background-color: #fee2e2; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-bottom: 4px; }
+                            .notes-section { background: white; border: 1px solid #fde68a; padding: 8px; border-radius: 6px; font-size: 10px; margin-bottom: 6px; page-break-inside: avoid; }
+                            .notes-section h3 { margin-top: 0; margin-bottom: 4px; color: #b45309; font-size: 11px; }
+                            .notes-section ul { margin: 0; padding-left: 15px; }
+                            .holiday-text-colored { color: #991b1b; font-weight: bold; background-color: #fee2e2; padding: 1px 4px; border-radius: 3px; display: inline-block; margin-bottom: 2px; }
+                            .web-footer { text-align: center; font-size: 9px; color: #64748b; border-top: 1px solid #fde68a; padding-top: 4px; margin-top: auto; page-break-inside: avoid; }
                         </style></head><body>
-                            <h2>☕ Scheduly Team Schedule - ${monthsName[currentMonth]} ${currentYear}</h2>
+                            <div class="web-header">☕ Scheduly – Team Schedule & Notes (${monthsName[currentMonth]} ${currentYear})</div>
                             <table><thead><tr><th class="name-col">Nama / Name</th>`;
                         
                         for (let d = 1; d <= totalDays; d++) {
                             let dateKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
                             let dateObj = new Date(currentYear, currentMonth, d);
                             let isRed = (dateObj.getDay() === 0 || dateObj.getDay() === 6 || getNationalHolidayName(dateKey));
-                            htmlContent += `<th class="${isRed ? 'red-day' : ''}"><div>${d}</div><div style="font-size:9px;">${daysShort[dateObj.getDay()]}</div></th>`;
+                            htmlContent += `<th class="${isRed ? 'red-day' : ''}"><div>${d}</div><div style="font-size:8px;">${daysShort[dateObj.getDay()]}</div></th>`;
                         }
+                        
+                        // Spacer & Rekap di PDF
+                        htmlContent += `<th style="background:#fde047; width:10px; border:none;"></th>`;
+                        ["FULL", "P", "So", "P(s)", "Pc", "PS", "OFF", "C", "Total"].forEach(sh => {
+                            htmlContent += `<th>${sh}</th>`;
+                        });
                         htmlContent += `</tr></thead><tbody>`;
 
                         staffList.forEach(staff => {
                             htmlContent += `<tr><td class="name-col">${staff}</td>`;
+                            let counts = { FULL: 0, P: 0, So: 0, "P(s)": 0, Pc: 0, PS: 0, OFF: 0, C: 0, totalWork: 0 };
+                            
                             for (let d = 1; d <= totalDays; d++) {
                                 let dateKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
                                 let dateObj = new Date(currentYear, currentMonth, d);
                                 let isRed = (dateObj.getDay() === 0 || dateObj.getDay() === 6 || getNationalHolidayName(dateKey));
                                 let shift = (schedules[staff] && schedules[staff][dateKey]) ? schedules[staff][dateKey].shift : '';
-                                let badgeHTML = shift ? `<span class="badge badge-${shift}">${shift}</span>` : '-';
+                                
+                                if (shift) {
+                                    if (counts[shift] !== undefined) counts[shift]++;
+                                    if (shift !== 'OFF' && shift !== 'C') counts.totalWork++;
+                                }
+                                
+                                let badgeClass = shift === 'P(s)' ? 'badge-P-sub' : `badge-${shift}`;
+                                let badgeHTML = shift ? `<span class="badge ${badgeClass}">${shift}</span>` : '-';
                                 htmlContent += `<td class="${isRed ? 'red-day' : ''}">${badgeHTML}</td>`;
                             }
+
+                            // Data Rekap per Staff di PDF
+                            htmlContent += `<td style="background:#fde047; border:none;"></td>`;
+                            ["FULL", "P", "So", "P(s)", "Pc", "PS", "OFF", "C"].forEach(sh => {
+                                htmlContent += `<td><b>${counts[sh] || 0}</b></td>`;
+                            });
+                            htmlContent += `<td style="background:#fefce8;"><b>${counts.totalWork}</b></td>`;
+
                             htmlContent += `</tr>`;
                         });
                         htmlContent += `</tbody></table>`;
 
-                        // Catatan di bagian bawah dengan warna khusus untuk hari peringatan
                         htmlContent += `<div class="notes-section"><h3>📝 Catatan & Hari Peringatan</h3><ul>`;
                         holidayNotes.forEach(h => { htmlContent += `<li><span class="holiday-text-colored">🚨 ${h}</span></li>`; });
                         userNotesList.forEach(n => { htmlContent += `<li>💬 ${n}</li>`; });
                         htmlContent += `</ul></div>`;
+
+                        htmlContent += `<div class="web-footer">© 2026 Scheduly PWA • Created with ☕ & Code by Zvanka & Gemini ✨</div>`;
 
                         htmlContent += `</body></html>`;
                         printWindow.document.write(htmlContent);
@@ -621,7 +854,7 @@
 
             let thead = scheduleTable.querySelector('thead');
             let headerHTML = `<tr class="bg-amber-100/50 text-slate-700 border-b border-amber-200/60 font-playful">
-                <th class="p-3.5 sticky left-0 bg-amber-100/80 backdrop-blur-md z-10 font-bold min-w-[150px] shadow-sm">Nama / Name</th>`;
+                <th class="p-3.5 sticky left-0 bg-amber-100/90 backdrop-blur-md z-10 font-bold min-w-[150px] shadow-sm">Nama / Name</th>`;
             
             for (let day = 1; day <= totalDays; day++) {
                 let dateObj = new Date(currentYear, currentMonth, day);
@@ -634,78 +867,142 @@
                     <div class="text-[9px] opacity-90">${daysShort[dayOfWeek]}</div>
                 </th>`;
             }
+
+            // Kolom Pembatas Spacer (Transparan bersih tanpa warna kotak agar minimalis & profesional)
+            headerHTML += `<th class="min-w-[20px] bg-transparent border-none p-0"></th>`;
+
+            // Header Rekapitulasi Shift di Kanan dengan Warna Khas
+            let shiftLabels = ["FULL", "P", "So", "P(s)", "Pc", "PS", "OFF", "C", currentLang === 'id' ? "Total" : "Total"];
+            let headerBgClasses = [
+                "bg-emerald-100/80 text-emerald-800", // FULL
+                "bg-slate-100 text-slate-700",       // P
+                "bg-slate-100 text-slate-700",       // So
+                "bg-cyan-100/80 text-cyan-800",      // P(s)
+                "bg-fuchsia-100/80 text-fuchsia-800",// Pc
+                "bg-indigo-100/80 text-indigo-800",  // PS
+                "bg-rose-100/80 text-rose-800",      // OFF
+                "bg-slate-200/80 text-slate-800",    // C (Cuti)
+                "bg-amber-200/80 text-amber-900"     // Total
+            ];
+
+            shiftLabels.forEach((sh, idx) => {
+                headerHTML += `<th class="p-2 text-center min-w-[38px] border-l border-amber-200/40 text-[11px] font-bold ${headerBgClasses[idx]}">${sh}</th>`;
+            });
+
             headerHTML += `</tr>`;
             thead.innerHTML = headerHTML;
 
             let tbody = scheduleTable.querySelector('tbody');
             tbody.innerHTML = "";
 
-            if (staffList.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="${totalDays + 1}" class="p-8 text-center text-slate-400 italic text-xs">${translations[currentLang].emptyStaff}</td></tr>`;
-            } else {
-                staffList.forEach((staff, staffIdx) => {
-                    let tr = document.createElement('tr');
-                    tr.className = staffIdx % 2 === 0 ? "bg-white/80 hover:bg-amber-50/50 transition" : "bg-amber-50/20 hover:bg-amber-50/50 transition";
+            // Render baris staff yang sudah ada
+            staffList.forEach((staff, staffIdx) => {
+                let tr = document.createElement('tr');
+                tr.className = staffIdx % 2 === 0 ? "bg-white/80 hover:bg-amber-50/50 transition" : "bg-amber-50/20 hover:bg-amber-50/50 transition";
 
-                    let tdName = document.createElement('td');
-                    tdName.className = "p-3.5 sticky left-0 bg-inherit z-10 font-bold border-r border-amber-100 flex justify-between items-center shadow-sm gap-2";
-                    tdName.innerHTML = `
-                        <input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-amber-400 focus:border-amber-500 focus:bg-white focus:outline-none px-1.5 py-0.5 rounded text-slate-800 font-bold truncate max-w-[100px] transition staff-name-input" data-old-name="${staff}">
-                        <button class="text-slate-300 hover:text-rose-500 text-xs px-1.5 py-0.5 rounded transition shrink-0" title="Hapus" onclick="deleteStaff('${staff}')">🗑️</button>
-                    `;
-                    tr.appendChild(tdName);
+                let tdName = document.createElement('td');
+                tdName.className = "p-3.5 sticky left-0 bg-inherit z-10 font-bold border-r border-amber-100 flex justify-between items-center shadow-sm gap-2";
+                tdName.innerHTML = `
+                    <input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-amber-400 focus:border-amber-500 focus:bg-white focus:outline-none px-1.5 py-0.5 rounded text-slate-800 font-bold truncate max-w-[100px] transition staff-name-input" data-old-name="${staff}">
+                    <button class="no-export text-slate-300 hover:text-rose-500 text-xs px-1.5 py-0.5 rounded transition shrink-0" title="Hapus" onclick="deleteStaff('${staff}')">🗑️</button>
+                `;
+                tr.appendChild(tdName);
 
-                    for (let day = 1; day <= totalDays; day++) {
-                        let dateKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                        let dateObj = new Date(currentYear, currentMonth, day);
-                        let isRed = (dateObj.getDay() === 0 || dateObj.getDay() === 6 || getNationalHolidayName(dateKey));
+                let counts = { FULL: 0, P: 0, So: 0, "P(s)": 0, Pc: 0, PS: 0, OFF: 0, C: 0, totalWork: 0 };
 
-                        let td = document.createElement('td');
-                        td.className = `p-1.5 text-center border-l border-b border-amber-100/40 cursor-pointer align-middle transition text-[11px] ${isRed ? 'bg-rose-50/50' : ''}`;
+                for (let day = 1; day <= totalDays; day++) {
+                    let dateKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    let dateObj = new Date(currentYear, currentMonth, day);
+                    let isRed = (dateObj.getDay() === 0 || dateObj.getDay() === 6 || getNationalHolidayName(dateKey));
 
-                        let shift = (schedules[staff] && schedules[staff][dateKey]) ? schedules[staff][dateKey].shift : "";
-                        if (shift) {
-                            td.innerHTML = `<div class="font-bold py-1.5 px-1 rounded-xl text-[10px] shadow-sm badge-${shift}">${shift}</div>`;
-                        } else {
-                            td.innerHTML = `<span class="text-slate-300 font-light">-</span>`;
-                        }
+                    let td = document.createElement('td');
+                    td.className = `p-1.5 text-center border-l border-b border-amber-100/40 cursor-pointer align-middle transition text-[11px] ${isRed ? 'bg-rose-50/50' : ''}`;
 
-                        td.addEventListener('click', () => {
-                            saveStateToHistory();
-                            openForm(staff, dateKey, day);
-                        });
-                        tr.appendChild(td);
+                    let shift = (schedules[staff] && schedules[staff][dateKey]) ? schedules[staff][dateKey].shift : "";
+                    if (shift) {
+                        let badgeClass = shift === 'P(s)' ? 'badge-P-sub' : `badge-${shift}`;
+                        td.innerHTML = `<div class="font-bold py-1.5 px-1 rounded-xl text-[10px] shadow-sm ${badgeClass}">${shift}</div>`;
+                        if (counts[shift] !== undefined) counts[shift]++;
+                        if (shift !== 'OFF' && shift !== 'C') counts.totalWork++;
+                    } else {
+                        td.innerHTML = `<span class="text-slate-300 font-light">-</span>`;
                     }
-                    tbody.appendChild(tr);
-                });
-            }
 
+                    td.addEventListener('click', () => {
+                        saveStateToHistory();
+                        openForm(staff, dateKey, day);
+                    });
+                    tr.appendChild(td);
+                }
+
+                // Kolom Pembatas Spacer (Transparan agar rapi)
+                let spacerTd = document.createElement('td');
+                spacerTd.className = "min-w-[20px] bg-transparent border-none p-0";
+                tr.appendChild(spacerTd);
+
+                // Sel Rekapitulasi
+                let shiftKeys = [
+                    { key: "FULL", bg: "bg-emerald-50/60 text-emerald-900 font-bold" },
+                    { key: "P", bg: "bg-slate-50 text-slate-700" },
+                    { key: "So", bg: "bg-slate-50 text-slate-700" },
+                    { key: "P(s)", bg: "bg-cyan-50/60 text-cyan-900 font-bold" },
+                    { key: "Pc", bg: "bg-fuchsia-50/60 text-fuchsia-900 font-bold" },
+                    { key: "PS", bg: "bg-indigo-50/60 text-indigo-900 font-bold" },
+                    { key: "OFF", bg: "bg-rose-50/60 text-rose-900 font-bold" },
+                    { key: "C", bg: "bg-slate-100 text-slate-800 font-bold" }
+                ];
+
+                shiftKeys.forEach(item => {
+                    let rekapTd = document.createElement('td');
+                    rekapTd.className = `p-1.5 text-center border-l border-b border-amber-100/40 text-[11px] ${item.bg}`;
+                    rekapTd.innerText = counts[item.key] > 0 ? counts[item.key] : "-";
+                    tr.appendChild(rekapTd);
+                });
+
+                let totalTd = document.createElement('td');
+                totalTd.className = "p-1.5 text-center border-l border-b border-amber-200 text-[11px] font-extrabold text-amber-900 bg-amber-100/50";
+                totalTd.innerText = counts.totalWork > 0 ? counts.totalWork : "0";
+                tr.appendChild(totalTd);
+
+                tbody.appendChild(tr);
+            });
+
+            // Baris terakhir untuk input staff baru langsung di dalam tabel
             let addTr = document.createElement('tr');
-            addTr.className = "bg-amber-50/40";
-            let addTd = document.createElement('td');
-            addTd.colSpan = totalDays + 1;
-            addTd.className = "p-3 sticky left-0 bg-amber-50/90 backdrop-blur-md z-10 border-t border-amber-200/60";
-            addTd.innerHTML = `
-                <div class="flex items-center gap-2 max-w-xs">
-                    <input type="text" id="inlineStaffInput" placeholder="${translations[currentLang].newStaffPlaceholder}" class="p-2.5 border border-dashed border-amber-300 rounded-2xl bg-white focus:bg-amber-50 focus:outline-none focus:ring-2 focus:ring-amber-400 text-xs w-full shadow-sm text-slate-700 placeholder:text-amber-700/60 transition">
-                </div>
+            addTr.className = "no-export bg-amber-50/40";
+            
+            let addNameTd = document.createElement('td');
+            addNameTd.className = "p-3.5 sticky left-0 bg-amber-50/90 backdrop-blur-md z-10 border-t border-amber-200/60 shadow-sm";
+            addNameTd.innerHTML = `
+                <input type="text" id="inlineStaffInput" placeholder="${translations[currentLang].newStaffPlaceholder}" class="p-1.5 border border-dashed border-amber-400 rounded-xl bg-white focus:bg-amber-50 focus:outline-none focus:ring-2 focus:ring-amber-500 text-xs w-full shadow-sm text-slate-700 placeholder:text-amber-700/60 transition">
             `;
-            addTr.appendChild(addTd);
+            addTr.appendChild(addNameTd);
+
+            let emptyFillerTd = document.createElement('td');
+            emptyFillerTd.colSpan = totalDays + 10;
+            emptyFillerTd.className = "border-t border-amber-200/60 bg-amber-50/20 text-slate-400 text-[11px] italic px-3";
+            emptyFillerTd.innerText = staffList.length === 0 ? translations[currentLang].emptyStaff : "";
+            addTr.appendChild(emptyFillerTd);
+
             tbody.appendChild(addTr);
 
             const inlineInput = document.getElementById('inlineStaffInput');
-            const saveNewStaff = () => {
-                let name = inlineInput.value.trim();
-                if (!name) return;
-                if (!staffList.includes(name)) {
-                    saveStateToHistory();
-                    staffList.push(name);
-                    triggerAutoSave();
-                }
-                renderTable();
-            };
-            inlineInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') saveNewStaff(); });
-            inlineInput.addEventListener('blur', () => { if (inlineInput.value.trim()) saveNewStaff(); });
+            if (inlineInput) {
+                inlineInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        let name = inlineInput.value.trim();
+                        if (!name) return;
+                        if (!staffList.includes(name)) {
+                            saveStateToHistory();
+                            staffList.push(name);
+                            triggerAutoSave();
+                            renderTable();
+                            let nextInput = document.getElementById('inlineStaffInput');
+                            if (nextInput) nextInput.focus();
+                        }
+                    }
+                });
+            }
 
             document.querySelectorAll('.staff-name-input').forEach(input => {
                 const updateStaffName = () => {
@@ -790,7 +1087,7 @@
                 setTimeout(() => autoResize(textarea), 0);
 
                 let deleteBtn = document.createElement('button');
-                deleteBtn.className = "text-slate-300 hover:text-rose-500 text-xs p-1 transition shrink-0";
+                deleteBtn.className = "no-export text-slate-300 hover:text-rose-500 text-xs p-1 transition shrink-0";
                 deleteBtn.innerHTML = "🗑️";
                 deleteBtn.title = "Hapus";
                 deleteBtn.addEventListener('click', () => {
@@ -867,6 +1164,539 @@
 
         updateLanguageUI();
         renderTable();
+    </script>
+
+    <!-- Script Mini Game RPG: Random Drop Rate & Boss Checkpoint 5-Level Backward -->
+    <script>
+        let rpgSaveData = JSON.parse(localStorage.getItem('barista_rpg_save_v5')) || {
+            level: 1,
+            xp: 0,
+            xpNext: 50,
+            wins: 0,
+            coins: 100,
+            beans: 0,
+            potions: 1,
+            weaponLevel: 0,
+            maxHp: 100,
+            statPoints: 0,
+            strength: 1,
+            vitality: 1,
+            gears: { spoon: false, pitcher: false, crown: false },
+            lastShopReset: Date.now(),
+            currentFloor: 1
+        };
+
+        // Sanitasi Data
+        if (isNaN(rpgSaveData.maxHp) || !rpgSaveData.maxHp) rpgSaveData.maxHp = 100;
+        if (isNaN(rpgSaveData.coins)) rpgSaveData.coins = 100;
+        if (isNaN(rpgSaveData.beans)) rpgSaveData.beans = 0;
+        if (isNaN(rpgSaveData.potions)) rpgSaveData.potions = 1;
+        if (isNaN(rpgSaveData.weaponLevel)) rpgSaveData.weaponLevel = 0;
+        if (isNaN(rpgSaveData.level)) rpgSaveData.level = 1;
+        if (isNaN(rpgSaveData.xp)) rpgSaveData.xp = 0;
+        if (isNaN(rpgSaveData.xpNext)) rpgSaveData.xpNext = 50;
+        if (isNaN(rpgSaveData.wins)) rpgSaveData.wins = 0;
+        if (isNaN(rpgSaveData.statPoints)) rpgSaveData.statPoints = 0;
+        if (isNaN(rpgSaveData.strength)) rpgSaveData.strength = 1;
+        if (isNaN(rpgSaveData.vitality)) rpgSaveData.vitality = 1;
+        if (isNaN(rpgSaveData.currentFloor)) rpgSaveData.currentFloor = 1;
+        if (!rpgSaveData.gears) rpgSaveData.gears = { spoon: false, pitcher: false, crown: false };
+
+        let rpgState = {
+            playerHp: rpgSaveData.maxHp,
+            playerMaxHp: rpgSaveData.maxHp,
+            monsterHp: 80,
+            monsterMaxHp: 80,
+            monsterName: "💤 Monster Mager",
+            monsterAtk: 12,
+            isBoss: false,
+            isPlayerTurn: true,
+            gameActive: false
+        };
+
+        const monstersList = [
+            { name: "💤 Monster Mager", hp: 80, atk: 12, sprite: "💤" },
+            { name: "⏰ Hantu Deadline", hp: 120, atk: 18, sprite: "👻" },
+            { name: "☕ Raja Insomnia", hp: 170, atk: 24, sprite: "👑" },
+            { name: "🔥 Lord Burnout", hp: 250, atk: 32, sprite: "🐉" }
+        ];
+
+        const bossList = [
+            { name: "👑 ARCH-DEMON KAFE (BOSS 1)", hp: 1000, atk: 60, sprite: "👹" },
+            { name: "👑 OVERLORD OVERTIME (BOSS 2)", hp: 1600, atk: 80, sprite: "💀" },
+            { name: "👑 GOD OF BURNOUT (BOSS 3)", hp: 2400, atk: 110, sprite: "👿" }
+        ];
+
+        const startRpgBtn = document.getElementById('startRpgBtn');
+        const rpgArena = document.getElementById('rpgArena');
+        const rpgBtnText = document.getElementById('rpgBtnText');
+        const rpgLog = document.getElementById('rpgLog');
+
+        startRpgBtn.addEventListener('click', () => {
+            if (!rpgState.gameActive) {
+                initRpgGame();
+                rpgArena.classList.remove('hidden');
+                rpgBtnText.innerText = currentLang === 'id' ? "Tutup Game" : "Close Game";
+                rpgState.gameActive = true;
+            } else {
+                rpgArena.classList.add('hidden');
+                rpgBtnText.innerText = currentLang === 'id' ? "Buka Game Arena" : "Open Game Arena";
+                rpgState.gameActive = false;
+            }
+        });
+
+        function saveRpgProgress() {
+            localStorage.setItem('barista_rpg_save_v5', JSON.stringify(rpgSaveData));
+        }
+
+        // Timer Gearshop Reset 24 Jam
+        function checkShopResetTimer() {
+            let now = Date.now();
+            let twentyFourHours = 24 * 60 * 60 * 1000;
+            let elapsed = now - (rpgSaveData.lastShopReset || now);
+            let timeLeft = twentyFourHours - elapsed;
+
+            if (timeLeft <= 0) {
+                rpgSaveData.gears = { spoon: false, pitcher: false, crown: false };
+                rpgSaveData.lastShopReset = now;
+                saveRpgProgress();
+                timeLeft = twentyFourHours;
+            }
+
+            let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            let timerEl = document.getElementById('shopTimerDisplay');
+            if (timerEl) {
+                timerEl.innerText = `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+            }
+        }
+        setInterval(checkShopResetTimer, 1000);
+
+        function switchRpgTab(tab) {
+            document.getElementById('panelBattle').classList.add('hidden');
+            document.getElementById('panelShop').classList.add('hidden');
+            document.getElementById('panelAlchemy').classList.add('hidden');
+            document.getElementById('panelEnhance').classList.add('hidden');
+            document.getElementById('panelStats').classList.add('hidden');
+
+            document.getElementById('tabBattleBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs transition";
+            document.getElementById('tabShopBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs transition";
+            document.getElementById('tabAlchemyBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs transition";
+            document.getElementById('tabEnhanceBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs transition";
+            document.getElementById('tabStatsBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs transition";
+
+            if (tab === 'battle') {
+                document.getElementById('panelBattle').classList.remove('hidden');
+                document.getElementById('tabBattleBtn').className = "px-3 py-1.5 rounded-xl bg-amber-500 text-white font-bold text-xs transition";
+            } else if (tab === 'shop') {
+                document.getElementById('panelShop').classList.remove('hidden');
+                document.getElementById('tabShopBtn').className = "px-3 py-1.5 rounded-xl bg-amber-500 text-white font-bold text-xs transition";
+            } else if (tab === 'alchemy') {
+                document.getElementById('panelAlchemy').classList.remove('hidden');
+                document.getElementById('tabAlchemyBtn').className = "px-3 py-1.5 rounded-xl bg-cyan-600 text-white font-bold text-xs transition";
+            } else if (tab === 'enhance') {
+                document.getElementById('panelEnhance').classList.remove('hidden');
+                document.getElementById('tabEnhanceBtn').className = "px-3 py-1.5 rounded-xl bg-purple-600 text-white font-bold text-xs transition";
+            } else if (tab === 'stats') {
+                document.getElementById('panelStats').classList.remove('hidden');
+                document.getElementById('tabStatsBtn').className = "px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-bold text-xs transition";
+            }
+            updateRpgMetaUI();
+        }
+
+        function updateRpgMetaUI() {
+            document.getElementById('rpgLevelBadge').innerText = `Level ${rpgSaveData.level}`;
+            document.getElementById('rpgXpDisplay').innerText = rpgSaveData.xp;
+            document.getElementById('rpgXpNext').innerText = rpgSaveData.xpNext;
+            document.getElementById('rpgWinsCount').innerText = rpgSaveData.wins;
+            document.getElementById('rpgCoins').innerText = rpgSaveData.coins;
+            document.getElementById('shopCoinsDisplay').innerText = rpgSaveData.coins;
+            document.getElementById('enhanceCoinsDisplay').innerText = rpgSaveData.coins;
+            document.getElementById('coffeeBeansDisplay').innerText = rpgSaveData.beans;
+            document.getElementById('enhanceBeansDisplay').innerText = rpgSaveData.beans;
+            document.getElementById('potionInventoryCount').innerText = rpgSaveData.potions;
+            document.getElementById('potionCountDisplay').innerText = `Milik: ${rpgSaveData.potions}`;
+            document.getElementById('weaponLevelDisplay').innerText = `Lv. ${rpgSaveData.weaponLevel}`;
+            document.getElementById('availablePointsDisplay').innerText = rpgSaveData.statPoints;
+            document.getElementById('statStrDisplay').innerText = rpgSaveData.strength;
+            document.getElementById('statVitDisplay').innerText = rpgSaveData.vitality;
+
+            let currentMod = (rpgSaveData.currentFloor - 1) % 6; // 0 s.d 4 adalah musuh biasa, 5 adalah boss
+            let remainingToBoss = 5 - currentMod;
+            let bossIdx = Math.floor((rpgSaveData.currentFloor - 1) / 6) + 1;
+
+            let bossCounterEl = document.getElementById('bossCounterText');
+            let checkpointEl = document.getElementById('checkpointInfoText');
+            
+            if (bossCounterEl) {
+                if (currentMod === 5) {
+                    bossCounterEl.innerText = `🚨 BOSS RAID LANTAI ${rpgSaveData.currentFloor} (Boss ke-${bossIdx})!`;
+                } else {
+                    bossCounterEl.innerText = `⚔️ Lantai ${rpgSaveData.currentFloor} | Menuju Boss ke-${bossIdx} dalam: ${remainingToBoss} musuh`;
+                }
+            }
+            if (checkpointEl) {
+                let checkpointFloor = Math.max(1, (bossIdx - 1) * 6 + 1);
+                checkpointEl.innerText = `📌 Checkpoint Gagal Boss: Kembali ke Lantai ${checkpointFloor}`;
+            }
+
+            let reqCoins = 30 + (rpgSaveData.weaponLevel * 20);
+            let reqBeans = 2 + rpgSaveData.weaponLevel;
+            let reqStr = 1 + rpgSaveData.weaponLevel;
+            document.getElementById('reqCoinsText').innerText = `${reqCoins} 🪙`;
+            document.getElementById('reqBeansText').innerText = `${reqBeans} 🫘`;
+            document.getElementById('reqStatText').innerText = `Req: ${reqStr} STR`;
+
+            updateGearshopButtons();
+
+            let btn2 = document.getElementById('skillUnlockBtn2');
+            let desc2 = document.getElementById('skill2Desc');
+            let icon2 = document.getElementById('skill2Icon');
+            if (rpgSaveData.wins >= 2 || rpgSaveData.level >= 2) {
+                btn2.disabled = false;
+                btn2.className = "bg-purple-600 hover:bg-purple-500 text-white p-3 rounded-xl font-bold text-xs shadow transition flex flex-col items-center gap-1 cursor-pointer";
+                icon2.innerText = "⚡";
+                desc2.innerText = "DMG Berdasarkan STR";
+            } else {
+                btn2.disabled = true;
+                btn2.className = "bg-slate-700 text-slate-400 p-3 rounded-xl font-bold text-xs shadow transition flex flex-col items-center gap-1 cursor-not-allowed";
+                icon2.innerText = "🔒";
+                desc2.innerText = `Butuh 2 Wins (${rpgSaveData.wins}/2)`;
+            }
+        }
+
+        function updateGearshopButtons() {
+            let spoonBtn = document.getElementById('buySpoonBtn');
+            if (rpgSaveData.gears.spoon) {
+                spoonBtn.innerText = "Dibeli";
+                spoonBtn.disabled = true;
+                spoonBtn.className = "bg-slate-700 text-slate-400 px-3 py-1.5 rounded-lg font-bold cursor-not-allowed";
+            } else {
+                spoonBtn.innerText = "Beli";
+                spoonBtn.disabled = false;
+                spoonBtn.className = "bg-amber-600 hover:bg-amber-500 text-white px-3 py-1.5 rounded-lg font-bold transition";
+            }
+
+            let pitcherBtn = document.getElementById('buyPitcherBtn');
+            if (rpgSaveData.gears.pitcher) {
+                pitcherBtn.innerText = "Dibeli";
+                pitcherBtn.disabled = true;
+                pitcherBtn.className = "bg-slate-700 text-slate-400 px-3 py-1.5 rounded-lg font-bold cursor-not-allowed";
+            } else {
+                pitcherBtn.innerText = "Beli";
+                pitcherBtn.disabled = false;
+                pitcherBtn.className = "bg-amber-600 hover:bg-amber-500 text-white px-3 py-1.5 rounded-lg font-bold transition";
+            }
+
+            let crownBtn = document.getElementById('buyCrownBtn');
+            if (rpgSaveData.gears.crown) {
+                crownBtn.innerText = "Dibeli";
+                crownBtn.disabled = true;
+                crownBtn.className = "bg-slate-700 text-slate-400 px-3 py-1.5 rounded-lg font-bold cursor-not-allowed";
+            } else {
+                crownBtn.innerText = "Beli";
+                crownBtn.disabled = false;
+                crownBtn.className = "bg-amber-600 hover:bg-amber-500 text-white px-3 py-1.5 rounded-lg font-bold transition";
+            }
+        }
+
+        function allocateStat(type) {
+            if (rpgSaveData.statPoints > 0) {
+                rpgSaveData.statPoints -= 1;
+                if (type === 'str') {
+                    rpgSaveData.strength += 1;
+                    alert("💪 Kekuatan (Strength) bertambah +1!");
+                } else if (type === 'vit') {
+                    rpgSaveData.vitality += 1;
+                    rpgSaveData.maxHp += 15;
+                    rpgState.playerMaxHp = rpgSaveData.maxHp;
+                    rpgState.playerHp = rpgState.playerMaxHp;
+                    alert("❤️ Vitalitas bertambah +1! Maks HP meningkat.");
+                }
+                saveRpgProgress();
+                updateRpgMetaUI();
+                updateRpgUI();
+            } else {
+                alert("❌ Tidak ada sisa point atribut! Naikkan level karakter untuk mendapatkan point.");
+            }
+        }
+
+        function buyGear(item) {
+            if (item === 'spoon' && !rpgSaveData.gears.spoon) {
+                if (rpgSaveData.strength < 3) { alert("❌ Requirement tidak terpenuhi! Butuh minimal 3 Strength."); return; }
+                if (rpgSaveData.coins >= 50) {
+                    rpgSaveData.coins -= 50;
+                    rpgSaveData.gears.spoon = true;
+                    alert("🎉 Berhasil membeli Sendok Emas Barista!");
+                } else { alert("❌ Koin Anda tidak cukup!"); }
+            } else if (item === 'pitcher' && !rpgSaveData.gears.pitcher) {
+                if (rpgSaveData.vitality < 3) { alert("❌ Requirement tidak terpenuhi! Butuh minimal 3 Vitality."); return; }
+                if (rpgSaveData.coins >= 80) {
+                    rpgSaveData.coins -= 80;
+                    rpgSaveData.gears.pitcher = true;
+                    rpgSaveData.maxHp += 50;
+                    rpgState.playerMaxHp = rpgSaveData.maxHp;
+                    rpgState.playerHp = rpgState.playerMaxHp;
+                    alert("🎉 Berhasil membeli Kendi Kopi Perunggu!");
+                } else { alert("❌ Koin Anda tidak cukup!"); }
+            } else if (item === 'crown' && !rpgSaveData.gears.crown) {
+                if (rpgSaveData.strength < 6 || rpgSaveData.vitality < 6) { alert("❌ Requirement tidak terpenuhi! Butuh minimal 6 Strength & 6 Vitality."); return; }
+                if (rpgSaveData.coins >= 150) {
+                    rpgSaveData.coins -= 150;
+                    rpgSaveData.gears.crown = true;
+                    rpgSaveData.maxHp += 100;
+                    rpgState.playerMaxHp = rpgSaveData.maxHp;
+                    rpgState.playerHp = rpgState.playerMaxHp;
+                    alert("🎉 Berhasil membeli Mahkota Kafe Supreme!");
+                } else { alert("❌ Koin Anda tidak cukup!"); }
+            }
+            saveRpgProgress();
+            updateRpgMetaUI();
+            updateRpgUI();
+        }
+
+        function craftPotion() {
+            if (rpgSaveData.beans >= 3) {
+                rpgSaveData.beans -= 3;
+                rpgSaveData.potions += 1;
+                alert("🧪 Berhasil meracik 1 Health Potion!");
+                saveRpgProgress();
+                updateRpgMetaUI();
+            } else {
+                alert("❌ Biji Kopi (🫘) kurang! Butuh 3 Biji Kopi.");
+            }
+        }
+
+        function enhanceWeapon() {
+            let reqCoins = 30 + (rpgSaveData.weaponLevel * 20);
+            let reqBeans = 2 + rpgSaveData.weaponLevel;
+            let reqStr = 1 + rpgSaveData.weaponLevel;
+
+            if (rpgSaveData.strength < reqStr) {
+                alert(`❌ Requirement Stat tidak cukup! Butuh ${reqStr} Strength.`);
+                return;
+            }
+
+            if (rpgSaveData.coins >= reqCoins && rpgSaveData.beans >= reqBeans) {
+                rpgSaveData.coins -= reqCoins;
+                rpgSaveData.beans -= reqBeans;
+                rpgSaveData.weaponLevel += 1;
+                alert(`🛠️ Berhasil meningkatkan Senjata ke Level ${rpgSaveData.weaponLevel}!`);
+                saveRpgProgress();
+                updateRpgMetaUI();
+            } else {
+                alert(`❌ Material atau Koin tidak memenuhi requirement! Butuh ${reqCoins} 🪙 dan ${reqBeans} 🫘.`);
+            }
+        }
+
+        function initRpgGame() {
+            let baseHp = 100 + ((rpgSaveData.level - 1) * 20) + ((rpgSaveData.vitality - 1) * 15);
+            if (rpgSaveData.gears.pitcher) baseHp += 50;
+            if (rpgSaveData.gears.crown) baseHp += 100;
+
+            rpgSaveData.maxHp = baseHp;
+
+            let currentMod = (rpgSaveData.currentFloor - 1) % 6;
+
+            if (currentMod === 5) {
+                // Pertarungan Boss Lantai Kelipatan 6
+                let bossIdx = Math.floor((rpgSaveData.currentFloor - 1) / 6);
+                let boss = bossList[Math.min(bossIdx, bossList.length - 1)];
+                let scalingMultiplier = 1 + (bossIdx * 0.5);
+
+                rpgState.isBoss = true;
+                rpgState.monsterName = boss.name;
+                rpgState.monsterMaxHp = Math.floor(boss.hp * scalingMultiplier);
+                rpgState.monsterHp = rpgState.monsterMaxHp;
+                rpgState.monsterAtk = Math.floor(boss.atk * scalingMultiplier);
+                document.getElementById('monsterSprite').innerText = boss.sprite;
+                rpgLog.innerHTML = `<div>🚨 PERINGATAN: ${boss.name} MUNCUL DI LANTAI ${rpgSaveData.currentFloor}! Kekuatan 10x lipat!</div>`;
+            } else {
+                // Musuh Biasa
+                let availableMonsters = monstersList.slice(0, Math.min(monstersList.length, rpgSaveData.level + 1));
+                let randomMonster = availableMonsters[Math.floor(Math.random() * availableMonsters.length)];
+                let floorScale = 1 + ((rpgSaveData.currentFloor - 1) * 0.1);
+
+                rpgState.isBoss = false;
+                rpgState.monsterName = `${randomMonster.name} (Lantai ${rpgSaveData.currentFloor})`;
+                rpgState.monsterMaxHp = Math.floor(randomMonster.hp * floorScale);
+                rpgState.monsterHp = rpgState.monsterMaxHp;
+                rpgState.monsterAtk = Math.floor(randomMonster.atk * floorScale);
+                document.getElementById('monsterSprite').innerText = randomMonster.sprite;
+                rpgLog.innerHTML = `<div>✨ Memasuki Lantai ${rpgSaveData.currentFloor}: ${randomMonster.name} muncul!</div>`;
+            }
+
+            rpgState.playerMaxHp = rpgSaveData.maxHp;
+            rpgState.playerHp = rpgState.playerMaxHp;
+            rpgState.isPlayerTurn = true;
+            
+            document.getElementById('monsterNameDisplay').innerText = rpgState.monsterName;
+            document.getElementById('playerMaxHp').innerText = rpgState.playerMaxHp;
+            
+            updateRpgUI();
+            updateRpgMetaUI();
+        }
+
+        function updateRpgUI() {
+            if (isNaN(rpgState.playerHp)) rpgState.playerHp = rpgSaveData.maxHp;
+            if (isNaN(rpgState.monsterHp)) rpgState.monsterHp = rpgState.monsterMaxHp;
+
+            document.getElementById('playerHp').innerText = Math.max(0, rpgState.playerHp);
+            document.getElementById('monsterHp').innerText = Math.max(0, rpgState.monsterHp);
+            document.getElementById('monsterMaxHp').innerText = rpgState.monsterMaxHp;
+            document.getElementById('playerMaxHp').innerText = rpgState.playerMaxHp;
+            
+            let playerPct = Math.max(0, (rpgState.playerHp / rpgState.playerMaxHp) * 100);
+            let monsterPct = Math.max(0, (rpgState.monsterHp / rpgState.monsterMaxHp) * 100);
+            
+            document.getElementById('playerHpBar').style.width = playerPct + '%';
+            document.getElementById('monsterHpBar').style.width = monsterPct + '%';
+        }
+
+        function appendRpgLog(text) {
+            let div = document.createElement('div');
+            div.innerText = text;
+            rpgLog.appendChild(div);
+            rpgLog.scrollTop = rpgLog.scrollHeight;
+        }
+
+        function rpgAction(type) {
+            if (!rpgState.isPlayerTurn || rpgState.playerHp <= 0 || rpgState.monsterHp <= 0) return;
+
+            let controls = document.getElementById('rpgActionControls');
+            controls.style.pointerEvents = 'none';
+
+            let strBonus = (rpgSaveData.strength - 1) * 3;
+            let bonusDmg = (rpgSaveData.weaponLevel * 6) + strBonus;
+            if (rpgSaveData.gears.spoon) bonusDmg += 10;
+            if (rpgSaveData.gears.crown) bonusDmg += 30;
+
+            if (type === 'espresso') {
+                let dmg = Math.floor(Math.random() * 11) + 15 + bonusDmg;
+                rpgState.monsterHp -= dmg;
+                appendRpgLog(`☕ Espresso Shot sukses! Memberikan ${dmg} damage.`);
+            } else if (type === 'latte') {
+                let heal = Math.floor(Math.random() * 10) + 20 + (rpgSaveData.level * 5) + rpgSaveData.vitality;
+                rpgState.playerHp = Math.min(rpgState.playerMaxHp, rpgState.playerHp + heal);
+                appendRpgLog(`🥛 Menikmati Latte Art! Memulihkan ${heal} HP.`);
+            } else if (type === 'shift') {
+                let dmg = Math.floor(Math.random() * 16) + 35 + bonusDmg + (rpgSaveData.strength * 2);
+                rpgState.monsterHp -= dmg;
+                appendRpgLog(`⚡ Full Shift Strike menghantam! Memberikan ${dmg} damage!`);
+            } else if (type === 'usePotion') {
+                if (rpgSaveData.potions > 0) {
+                    rpgSaveData.potions -= 1;
+                    let heal = 50 + (rpgSaveData.vitality * 5);
+                    rpgState.playerHp = Math.min(rpgState.playerMaxHp, rpgState.playerHp + heal);
+                    appendRpgLog(`🧪 Menggunakan Health Potion! HP pulih sebesar +${heal}.`);
+                } else {
+                    appendRpgLog(`❌ Potion habis! Racik potion di tab Alchemy Lab.`);
+                    controls.style.pointerEvents = 'auto';
+                    return;
+                }
+            } else if (type === 'surrender') {
+                appendRpgLog(`🏳️ Kamu memilih istirahat. Kembali ke panel utama.`);
+                setTimeout(() => { startRpgBtn.click(); }, 1200);
+                return;
+            }
+
+            updateRpgUI();
+
+            // Cek Kemenangan
+            if (rpgState.monsterHp <= 0) {
+                let multiplier = rpgState.isBoss ? 5 : 1;
+                let earnedXp = (35 + (rpgSaveData.level * 15)) * multiplier;
+                let earnedCoins = (15 + (rpgSaveData.level * 8)) * multiplier;
+
+                // Sistem Drop Rate Item Acak Berdasarkan Lantai/Level Musuh
+                let dropChance = Math.random();
+                let earnedBeans = 0;
+                let dropText = "Tidak ada item drop langka.";
+
+                if (rpgState.isBoss) {
+                    // Boss Drop rate pasti / tinggi
+                    earnedBeans = Math.floor(Math.random() * 3) + 3; // 3 - 5 Biji Kopi
+                    dropText = `🎁 DROP BOSS LANGKA: +${earnedBeans} Biji Kopi Eksklusif!`;
+                } else {
+                    // Drop Rate acak musuh biasa (sesuai lantai)
+                    let successRate = 0.4 + (rpgSaveData.currentFloor * 0.02); // Max ~70%
+                    if (dropChance <= successRate) {
+                        earnedBeans = Math.floor(Math.random() * 2) + 1;
+                        dropText = `🎁 Drop Acak Sukses: +${earnedBeans} Biji Kopi (🫘)!`;
+                    } else {
+                        dropText = `💤 Drop acak gagal mendapatkan item kali ini.`;
+                    }
+                }
+
+                rpgSaveData.wins += 1;
+                rpgSaveData.coins += earnedCoins;
+                rpgSaveData.beans += earnedBeans;
+                rpgSaveData.xp += earnedXp;
+                rpgSaveData.currentFloor += 1; // Naik ke lantai berikutnya
+
+                appendRpgLog(`🎉 Kemenangan di Lantai! Mendapat +${earnedXp} XP, +${earnedCoins} 🪙. ${dropText}`);
+
+                if (rpgSaveData.xp >= rpgSaveData.xpNext) {
+                    rpgSaveData.level += 1;
+                    rpgSaveData.statPoints += 3;
+                    rpgSaveData.xp = rpgSaveData.xp - rpgSaveData.xpNext;
+                    rpgSaveData.xpNext = Math.floor(rpgSaveData.xpNext * 1.5);
+                    appendRpgLog(`🌟 SELAMAT! Kamu naik ke Level ${rpgSaveData.level}! Mendapatkan +3 Point Atribut.`);
+                }
+
+                saveRpgProgress();
+                updateRpgMetaUI();
+
+                setTimeout(() => {
+                    initRpgGame();
+                    controls.style.pointerEvents = 'auto';
+                }, 2500);
+                return;
+            }
+
+            // Giliran Monster Menyerang
+            rpgState.isPlayerTurn = false;
+            setTimeout(() => {
+                let reduction = Math.floor(rpgSaveData.vitality * 1.5);
+                let monsterDmg = Math.max(5, (Math.floor(Math.random() * 8) + rpgState.monsterAtk) - reduction);
+                rpgState.playerHp -= monsterDmg;
+                appendRpgLog(`${rpgState.monsterName} menyerang balik sebesar ${monsterDmg} damage!`);
+                updateRpgUI();
+
+                if (rpgState.playerHp <= 0) {
+                    rpgState.playerHp = 0;
+                    
+                    if (rpgState.isBoss) {
+                        // Jika Gagal Melawan Boss: Mundur ke 5 lantai sebelumnya (Checkpoint Boss)
+                        // Contoh: Gagal di Boss ke-1 (Lantai 6) -> Kembali ke Lantai 1
+                        // Gagal di Boss ke-2 (Lantai 12) -> Kembali ke Lantai 6
+                        let currentBossIdx = Math.floor((rpgSaveData.currentFloor - 1) / 6);
+                        let checkpointFloor = Math.max(1, (currentBossIdx - 1) * 6 + 1);
+                        rpgSaveData.currentFloor = checkpointFloor;
+                        
+                        appendRpgLog(`💀 GAGAL MENGALAHKAN BOSS! Kamu terpental mundur ke Lantai ${checkpointFloor} (Checkpoint Check).`);
+                    } else {
+                        // Jika gagal di musuh biasa, ulangi lantai saat ini
+                        appendRpgLog(`💀 Kalahkan musuh biasa ini dengan memperkuat Stat/Gearmu! Mengulang lantai ${rpgSaveData.currentFloor}.`);
+                    }
+
+                    saveRpgProgress();
+                    updateRpgMetaUI();
+
+                    setTimeout(() => {
+                        initRpgGame();
+                        controls.style.pointerEvents = 'auto';
+                    }, 3000);
+                } else {
+                    rpgState.isPlayerTurn = true;
+                    controls.style.pointerEvents = 'auto';
+                }
+            }, 1000);
+        }
+
+        updateRpgMetaUI();
     </script>
 </body>
 </html>

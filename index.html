@@ -45,6 +45,10 @@
             </div>
             
             <div class="flex items-center gap-1.5 md:gap-2 no-export">
+                <!-- Tombol BGM Chill Kafe (Icon Speaker) -->
+                <button id="chillBgmBtn" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 w-9 h-9 rounded-2xl font-bold border border-emerald-200 transition shadow-sm flex items-center justify-center text-base" title="Toggle Chill BGM">
+                    <span id="bgmIcon">🔇</span>
+                </button>
                 <!-- Tombol Salin Link Web -->
                 <button id="copyLinkBtn" class="bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs px-3 py-2 rounded-2xl font-bold border border-amber-200 transition shadow-sm flex items-center gap-1.5" title="Salin Link Web ini">
                     <span>🔗</span> <span class="hidden md:inline" data-i18n-copylink="Salin Link">Salin Link</span>
@@ -120,8 +124,8 @@
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-orange-400 to-amber-500 flex items-center justify-center text-white font-bold shadow-md shadow-amber-500/20 text-lg">⚔️</div>
                             <div>
-                                <h3 class="font-bold text-slate-800 text-sm font-playful">Barista Quest: Random Drop & Boss Checkpoint</h3>
-                                <p class="text-[11px] text-slate-500">Sistem drop rate acak, checkpoint lantai boss, alokasi stat & requirement equipment!</p>
+                                <h3 class="font-bold text-slate-800 text-sm font-playful">Barista Quest: Inventory & Boss Special Gear Drop</h3>
+                                <p class="text-[11px] text-slate-500">Sistem inventory item, drop rate spesial boss, & musik BGM chill kafe!</p>
                             </div>
                         </div>
                         <button id="startRpgBtn" class="bg-gradient-to-r from-amber-500 to-emerald-500 hover:from-amber-600 hover:to-emerald-600 text-white px-4 py-2 rounded-2xl font-bold text-xs shadow-md shadow-amber-500/20 transition flex items-center gap-1.5">
@@ -135,6 +139,7 @@
                         <!-- Navigasi Tab Game -->
                         <div class="flex flex-wrap gap-2 border-b border-slate-700 pb-3">
                             <button onclick="switchRpgTab('battle')" id="tabBattleBtn" class="px-3 py-1.5 rounded-xl bg-amber-500 text-white font-bold text-xs transition">⚔️ Arena Battle</button>
+                            <button onclick="switchRpgTab('inventory')" id="tabInventoryBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🎒 Inventory</button>
                             <button onclick="switchRpgTab('shop')" id="tabShopBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🛒 Gearshop</button>
                             <button onclick="switchRpgTab('alchemy')" id="tabAlchemyBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🧪 Alchemy Lab</button>
                             <button onclick="switchRpgTab('enhance')" id="tabEnhanceBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🛠️ Enhancement</button>
@@ -189,7 +194,7 @@
                                     <div class="text-4xl animate-pulse" id="monsterSprite">💤</div>
                                 </div>
                                 <div class="w-full md:w-1/2 bg-slate-900/90 p-3 rounded-xl border border-slate-800 text-xs text-slate-300 h-24 overflow-y-auto flex flex-col justify-end" id="rpgLog">
-                                    <div>✨ Selamat datang di Barista Quest! Siapkan alokasi stat dan gearmu.</div>
+                                    <div>✨ Selamat datang di Barista Quest! Musik chill aktif, siap berpetualang.</div>
                                 </div>
                             </div>
 
@@ -213,7 +218,19 @@
                             </div>
                         </div>
 
-                        <!-- PANEL 2: GEARSHOP -->
+                        <!-- PANEL 2: INVENTORY -->
+                        <div id="panelInventory" class="hidden flex flex-col gap-3 text-xs">
+                            <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
+                                <span class="font-bold text-amber-300">🎒 Inventory & Storage Item Spesial</span>
+                                <span class="text-slate-300">Total Slot Item: <b class="text-amber-400" id="inventoryCountDisplay">0</b></span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">Menyimpan Biji Kopi, Potion, dan Equipment Spesial langka yang didapat dari Boss lantai!</p>
+                            <div id="inventoryItemsContainer" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <!-- Item inventory dirender dinamis -->
+                            </div>
+                        </div>
+
+                        <!-- PANEL 3: GEARSHOP -->
                         <div id="panelShop" class="hidden flex flex-col gap-3 text-xs">
                             <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-2">
                                 <span class="font-bold text-amber-300">🛒 Toko Peralatan Barista Legendaris</span>
@@ -262,7 +279,7 @@
                             </div>
                         </div>
 
-                        <!-- PANEL 3: ALCHEMY LAB -->
+                        <!-- PANEL 4: ALCHEMY LAB -->
                         <div id="panelAlchemy" class="hidden flex flex-col gap-3 text-xs">
                             <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
                                 <span class="font-bold text-cyan-300">🧪 Lab Alkimia Racikan Kafe</span>
@@ -282,7 +299,7 @@
                             </div>
                         </div>
 
-                        <!-- PANEL 4: ENHANCEMENT -->
+                        <!-- PANEL 5: ENHANCEMENT -->
                         <div id="panelEnhance" class="hidden flex flex-col gap-3 text-xs">
                             <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
                                 <span class="font-bold text-purple-300">🛠️ Meja Enhancement Peralatan</span>
@@ -302,7 +319,7 @@
                             </div>
                         </div>
 
-                        <!-- PANEL 5: STAT ALOKASI POINT -->
+                        <!-- PANEL 6: STAT ALOKASI POINT -->
                         <div id="panelStats" class="hidden flex flex-col gap-3 text-xs">
                             <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
                                 <span class="font-bold text-amber-300">📊 Alokasi Point Karakter</span>
@@ -1166,9 +1183,9 @@
         renderTable();
     </script>
 
-    <!-- Script Mini Game RPG: Random Drop Rate & Boss Checkpoint 5-Level Backward -->
+    <!-- Script Mini Game RPG & Ambient Chill BGM Icon & Inventory System -->
     <script>
-        let rpgSaveData = JSON.parse(localStorage.getItem('barista_rpg_save_v5')) || {
+        let rpgSaveData = JSON.parse(localStorage.getItem('barista_rpg_save_v6')) || {
             level: 1,
             xp: 0,
             xpNext: 50,
@@ -1182,11 +1199,11 @@
             strength: 1,
             vitality: 1,
             gears: { spoon: false, pitcher: false, crown: false },
+            inventory: [],
             lastShopReset: Date.now(),
             currentFloor: 1
         };
 
-        // Sanitasi Data
         if (isNaN(rpgSaveData.maxHp) || !rpgSaveData.maxHp) rpgSaveData.maxHp = 100;
         if (isNaN(rpgSaveData.coins)) rpgSaveData.coins = 100;
         if (isNaN(rpgSaveData.beans)) rpgSaveData.beans = 0;
@@ -1201,6 +1218,7 @@
         if (isNaN(rpgSaveData.vitality)) rpgSaveData.vitality = 1;
         if (isNaN(rpgSaveData.currentFloor)) rpgSaveData.currentFloor = 1;
         if (!rpgSaveData.gears) rpgSaveData.gears = { spoon: false, pitcher: false, crown: false };
+        if (!rpgSaveData.inventory) rpgSaveData.inventory = [];
 
         let rpgState = {
             playerHp: rpgSaveData.maxHp,
@@ -1222,10 +1240,126 @@
         ];
 
         const bossList = [
-            { name: "👑 ARCH-DEMON KAFE (BOSS 1)", hp: 1000, atk: 60, sprite: "👹" },
-            { name: "👑 OVERLORD OVERTIME (BOSS 2)", hp: 1600, atk: 80, sprite: "💀" },
-            { name: "👑 GOD OF BURNOUT (BOSS 3)", hp: 2400, atk: 110, sprite: "👿" }
+            { name: "👑 ARCH-DEMON KAFE (BOSS 1)", hp: 1000, atk: 60, sprite: "👹", specialItem: "✨ Cangkir Emas Legendaris (+25 DMG)" },
+            { name: "👑 OVERLORD OVERTIME (BOSS 2)", hp: 1600, atk: 80, sprite: "💀", specialItem: "🛡️ Jubah Barista Abadi (+100 Maks HP)" },
+            { name: "👑 GOD OF BURNOUT (BOSS 3)", hp: 2400, atk: 110, sprite: "👿", specialItem: "🌟 Tongkat Supreme Barista (Ultimate Power)" }
         ];
+
+        // SINTESIS AUDIO & AMBIENT CHILL BGM
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let bgmInterval = null;
+        let isBgmPlaying = false;
+
+        function playSound(type) {
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            let now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, now);
+                osc.frequency.exponentialRampToValueAtTime(400, now + 0.05);
+                gainNode.gain.setValueAtTime(0.08, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                osc.start(now); osc.stop(now + 0.05);
+            } 
+            else if (type === 'espresso') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(300, now);
+                osc.frequency.exponentialRampToValueAtTime(800, now + 0.15);
+                gainNode.gain.setValueAtTime(0.15, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+                osc.start(now); osc.stop(now + 0.15);
+            }
+            else if (type === 'heal') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, now);
+                osc.frequency.setValueAtTime(600, now + 0.1);
+                osc.frequency.setValueAtTime(800, now + 0.2);
+                gainNode.gain.setValueAtTime(0.12, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now); osc.stop(now + 0.3);
+            }
+            else if (type === 'boss') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(120, now);
+                osc.frequency.linearRampToValueAtTime(60, now + 0.4);
+                gainNode.gain.setValueAtTime(0.2, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                osc.start(now); osc.stop(now + 0.4);
+            }
+            else if (type === 'victory') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, now);
+                osc.frequency.setValueAtTime(659.25, now + 0.1);
+                osc.frequency.setValueAtTime(783.99, now + 0.2);
+                osc.frequency.setValueAtTime(1046.50, now + 0.3);
+                gainNode.gain.setValueAtTime(0.15, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+                osc.start(now); osc.stop(now + 0.5);
+            }
+            else if (type === 'gameover') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(300, now);
+                osc.frequency.linearRampToValueAtTime(100, now + 0.4);
+                gainNode.gain.setValueAtTime(0.2, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                osc.start(now); osc.stop(now + 0.4);
+            }
+        }
+
+        function playChillNote() {
+            if (!isBgmPlaying || !audioCtx) return;
+            const chords = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23];
+            let note = chords[Math.floor(Math.random() * chords.length)];
+            
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(note, audioCtx.currentTime);
+            
+            gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 0.8);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 3.5);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 3.6);
+        }
+
+        const chillBgmBtn = document.getElementById('chillBgmBtn');
+        const bgmIcon = document.getElementById('bgmIcon');
+
+        chillBgmBtn.addEventListener('click', () => {
+            playSound('click');
+            if (!isBgmPlaying) {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                isBgmPlaying = true;
+                bgmIcon.innerText = "🔊";
+                chillBgmBtn.className = "bg-emerald-500 text-white w-9 h-9 rounded-2xl font-bold border border-emerald-400 transition shadow-sm flex items-center justify-center text-base";
+                playChillNote();
+                bgmInterval = setInterval(playChillNote, 4000);
+            } else {
+                isBgmPlaying = false;
+                bgmIcon.innerText = "🔇";
+                chillBgmBtn.className = "bg-emerald-50 hover:bg-emerald-100 text-emerald-800 w-9 h-9 rounded-2xl font-bold border border-emerald-200 transition shadow-sm flex items-center justify-center text-base";
+                if (bgmInterval) clearInterval(bgmInterval);
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                if (!e.target.getAttribute('onclick')?.includes('rpgAction') && e.target.id !== 'chillBgmBtn') {
+                    playSound('click');
+                }
+            }
+        });
 
         const startRpgBtn = document.getElementById('startRpgBtn');
         const rpgArena = document.getElementById('rpgArena');
@@ -1233,6 +1367,7 @@
         const rpgLog = document.getElementById('rpgLog');
 
         startRpgBtn.addEventListener('click', () => {
+            playSound('click');
             if (!rpgState.gameActive) {
                 initRpgGame();
                 rpgArena.classList.remove('hidden');
@@ -1246,10 +1381,9 @@
         });
 
         function saveRpgProgress() {
-            localStorage.setItem('barista_rpg_save_v5', JSON.stringify(rpgSaveData));
+            localStorage.setItem('barista_rpg_save_v6', JSON.stringify(rpgSaveData));
         }
 
-        // Timer Gearshop Reset 24 Jam
         function checkShopResetTimer() {
             let now = Date.now();
             let twentyFourHours = 24 * 60 * 60 * 1000;
@@ -1275,21 +1409,28 @@
         setInterval(checkShopResetTimer, 1000);
 
         function switchRpgTab(tab) {
+            playSound('click');
             document.getElementById('panelBattle').classList.add('hidden');
+            document.getElementById('panelInventory').classList.add('hidden');
             document.getElementById('panelShop').classList.add('hidden');
             document.getElementById('panelAlchemy').classList.add('hidden');
             document.getElementById('panelEnhance').classList.add('hidden');
             document.getElementById('panelStats').classList.add('hidden');
 
             document.getElementById('tabBattleBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs transition";
-            document.getElementById('tabShopBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs transition";
-            document.getElementById('tabAlchemyBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs transition";
-            document.getElementById('tabEnhanceBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs transition";
-            document.getElementById('tabStatsBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs transition";
+            document.getElementById('tabInventoryBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition";
+            document.getElementById('tabShopBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition";
+            document.getElementById('tabAlchemyBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition";
+            document.getElementById('tabEnhanceBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition";
+            document.getElementById('tabStatsBtn').className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition";
 
             if (tab === 'battle') {
                 document.getElementById('panelBattle').classList.remove('hidden');
                 document.getElementById('tabBattleBtn').className = "px-3 py-1.5 rounded-xl bg-amber-500 text-white font-bold text-xs transition";
+            } else if (tab === 'inventory') {
+                document.getElementById('panelInventory').classList.remove('hidden');
+                document.getElementById('tabInventoryBtn').className = "px-3 py-1.5 rounded-xl bg-amber-500 text-white font-bold text-xs transition";
+                renderInventoryUI();
             } else if (tab === 'shop') {
                 document.getElementById('panelShop').classList.remove('hidden');
                 document.getElementById('tabShopBtn').className = "px-3 py-1.5 rounded-xl bg-amber-500 text-white font-bold text-xs transition";
@@ -1304,6 +1445,32 @@
                 document.getElementById('tabStatsBtn').className = "px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-bold text-xs transition";
             }
             updateRpgMetaUI();
+        }
+
+        function renderInventoryUI() {
+            let container = document.getElementById('inventoryItemsContainer');
+            container.innerHTML = "";
+            let totalItemsCount = rpgSaveData.inventory.length + 2;
+            document.getElementById('inventoryCountDisplay').innerText = totalItemsCount;
+
+            let itemsList = [
+                { name: `Biji Kopi (🫘): ${rpgSaveData.beans}`, desc: "Bahan mentah alkimia untuk meracik Health Potion." },
+                { name: `Health Potion (🧪): ${rpgSaveData.potions}`, desc: "Potion pemulih HP instan dalam pertempuran." },
+                ...rpgSaveData.inventory.map(item => ({ name: item, desc: "Item / Equipment Spesial Langka hasil kemenangan Boss!" }))
+            ];
+
+            itemsList.forEach(item => {
+                let card = document.createElement('div');
+                card.className = "bg-slate-900/90 border border-slate-700 p-3.5 rounded-xl flex flex-col justify-between gap-2 shadow-sm";
+                card.innerHTML = `
+                    <div>
+                        <div class="font-bold text-amber-200">${item.name}</div>
+                        <div class="text-[10px] text-slate-400 mt-1">${item.desc}</div>
+                    </div>
+                    <span class="text-[9px] text-emerald-400 font-bold">Tersimpan di Tas</span>
+                `;
+                container.appendChild(card);
+            });
         }
 
         function updateRpgMetaUI() {
@@ -1323,7 +1490,7 @@
             document.getElementById('statStrDisplay').innerText = rpgSaveData.strength;
             document.getElementById('statVitDisplay').innerText = rpgSaveData.vitality;
 
-            let currentMod = (rpgSaveData.currentFloor - 1) % 6; // 0 s.d 4 adalah musuh biasa, 5 adalah boss
+            let currentMod = (rpgSaveData.currentFloor - 1) % 6;
             let remainingToBoss = 5 - currentMod;
             let bossIdx = Math.floor((rpgSaveData.currentFloor - 1) / 6) + 1;
 
@@ -1403,6 +1570,7 @@
         }
 
         function allocateStat(type) {
+            playSound('click');
             if (rpgSaveData.statPoints > 0) {
                 rpgSaveData.statPoints -= 1;
                 if (type === 'str') {
@@ -1424,6 +1592,7 @@
         }
 
         function buyGear(item) {
+            playSound('click');
             if (item === 'spoon' && !rpgSaveData.gears.spoon) {
                 if (rpgSaveData.strength < 3) { alert("❌ Requirement tidak terpenuhi! Butuh minimal 3 Strength."); return; }
                 if (rpgSaveData.coins >= 50) {
@@ -1458,6 +1627,7 @@
         }
 
         function craftPotion() {
+            playSound('click');
             if (rpgSaveData.beans >= 3) {
                 rpgSaveData.beans -= 3;
                 rpgSaveData.potions += 1;
@@ -1470,6 +1640,7 @@
         }
 
         function enhanceWeapon() {
+            playSound('click');
             let reqCoins = 30 + (rpgSaveData.weaponLevel * 20);
             let reqBeans = 2 + rpgSaveData.weaponLevel;
             let reqStr = 1 + rpgSaveData.weaponLevel;
@@ -1501,7 +1672,6 @@
             let currentMod = (rpgSaveData.currentFloor - 1) % 6;
 
             if (currentMod === 5) {
-                // Pertarungan Boss Lantai Kelipatan 6
                 let bossIdx = Math.floor((rpgSaveData.currentFloor - 1) / 6);
                 let boss = bossList[Math.min(bossIdx, bossList.length - 1)];
                 let scalingMultiplier = 1 + (bossIdx * 0.5);
@@ -1512,9 +1682,9 @@
                 rpgState.monsterHp = rpgState.monsterMaxHp;
                 rpgState.monsterAtk = Math.floor(boss.atk * scalingMultiplier);
                 document.getElementById('monsterSprite').innerText = boss.sprite;
-                rpgLog.innerHTML = `<div>🚨 PERINGATAN: ${boss.name} MUNCUL DI LANTAI ${rpgSaveData.currentFloor}! Kekuatan 10x lipat!</div>`;
+                rpgLog.innerHTML = `<div>🚨 PERINGATAN: ${boss.name} MUNCUL DI LANTAI ${rpgSaveData.currentFloor}! Drop rate equipment spesial aktif!</div>`;
+                playSound('boss');
             } else {
-                // Musuh Biasa
                 let availableMonsters = monstersList.slice(0, Math.min(monstersList.length, rpgSaveData.level + 1));
                 let randomMonster = availableMonsters[Math.floor(Math.random() * availableMonsters.length)];
                 let floorScale = 1 + ((rpgSaveData.currentFloor - 1) * 0.1);
@@ -1572,20 +1742,26 @@
             let bonusDmg = (rpgSaveData.weaponLevel * 6) + strBonus;
             if (rpgSaveData.gears.spoon) bonusDmg += 10;
             if (rpgSaveData.gears.crown) bonusDmg += 30;
+            if (rpgSaveData.inventory.includes("✨ Cangkir Emas Legendaris (+25 DMG)")) bonusDmg += 25;
+            if (rpgSaveData.inventory.includes("🌟 Tongkat Supreme Barista (Ultimate Power)")) bonusDmg += 50;
 
             if (type === 'espresso') {
+                playSound('espresso');
                 let dmg = Math.floor(Math.random() * 11) + 15 + bonusDmg;
                 rpgState.monsterHp -= dmg;
                 appendRpgLog(`☕ Espresso Shot sukses! Memberikan ${dmg} damage.`);
             } else if (type === 'latte') {
+                playSound('heal');
                 let heal = Math.floor(Math.random() * 10) + 20 + (rpgSaveData.level * 5) + rpgSaveData.vitality;
                 rpgState.playerHp = Math.min(rpgState.playerMaxHp, rpgState.playerHp + heal);
                 appendRpgLog(`🥛 Menikmati Latte Art! Memulihkan ${heal} HP.`);
             } else if (type === 'shift') {
+                playSound('espresso');
                 let dmg = Math.floor(Math.random() * 16) + 35 + bonusDmg + (rpgSaveData.strength * 2);
                 rpgState.monsterHp -= dmg;
                 appendRpgLog(`⚡ Full Shift Strike menghantam! Memberikan ${dmg} damage!`);
             } else if (type === 'usePotion') {
+                playSound('heal');
                 if (rpgSaveData.potions > 0) {
                     rpgSaveData.potions -= 1;
                     let heal = 50 + (rpgSaveData.vitality * 5);
@@ -1597,6 +1773,7 @@
                     return;
                 }
             } else if (type === 'surrender') {
+                playSound('click');
                 appendRpgLog(`🏳️ Kamu memilih istirahat. Kembali ke panel utama.`);
                 setTimeout(() => { startRpgBtn.click(); }, 1200);
                 return;
@@ -1604,25 +1781,33 @@
 
             updateRpgUI();
 
-            // Cek Kemenangan
             if (rpgState.monsterHp <= 0) {
+                playSound('victory');
                 let multiplier = rpgState.isBoss ? 5 : 1;
                 let earnedXp = (35 + (rpgSaveData.level * 15)) * multiplier;
                 let earnedCoins = (15 + (rpgSaveData.level * 8)) * multiplier;
 
-                // Sistem Drop Rate Item Acak Berdasarkan Lantai/Level Musuh
-                let dropChance = Math.random();
                 let earnedBeans = 0;
-                let dropText = "Tidak ada item drop langka.";
+                let dropText = "";
 
                 if (rpgState.isBoss) {
-                    // Boss Drop rate pasti / tinggi
-                    earnedBeans = Math.floor(Math.random() * 3) + 3; // 3 - 5 Biji Kopi
-                    dropText = `🎁 DROP BOSS LANGKA: +${earnedBeans} Biji Kopi Eksklusif!`;
+                    let bossIdx = Math.floor((rpgSaveData.currentFloor - 1) / 6);
+                    let boss = bossList[Math.min(bossIdx, bossList.length - 1)];
+                    earnedBeans = Math.floor(Math.random() * 5) + 5;
+                    
+                    if (!rpgSaveData.inventory.includes(boss.specialItem)) {
+                        rpgSaveData.inventory.push(boss.specialItem);
+                        if (boss.specialItem.includes("Jubah Barista Abadi")) {
+                            rpgSaveData.maxHp += 100;
+                            rpgState.playerMaxHp = rpgSaveData.maxHp;
+                        }
+                        dropText = `🌟 JACKPOT BOSS! Drop Rate Tinggi Berhasil! Mendapatkan Equipment Spesial: [${boss.specialItem}] & +${earnedBeans} Biji Kopi!`;
+                    } else {
+                        dropText = `🎁 DROP BOSS: +${earnedBeans} Biji Kopi Eksklusif!`;
+                    }
                 } else {
-                    // Drop Rate acak musuh biasa (sesuai lantai)
-                    let successRate = 0.4 + (rpgSaveData.currentFloor * 0.02); // Max ~70%
-                    if (dropChance <= successRate) {
+                    let successRate = 0.4 + (rpgSaveData.currentFloor * 0.02);
+                    if (Math.random() <= successRate) {
                         earnedBeans = Math.floor(Math.random() * 2) + 1;
                         dropText = `🎁 Drop Acak Sukses: +${earnedBeans} Biji Kopi (🫘)!`;
                     } else {
@@ -1634,7 +1819,7 @@
                 rpgSaveData.coins += earnedCoins;
                 rpgSaveData.beans += earnedBeans;
                 rpgSaveData.xp += earnedXp;
-                rpgSaveData.currentFloor += 1; // Naik ke lantai berikutnya
+                rpgSaveData.currentFloor += 1;
 
                 appendRpgLog(`🎉 Kemenangan di Lantai! Mendapat +${earnedXp} XP, +${earnedCoins} 🪙. ${dropText}`);
 
@@ -1656,7 +1841,6 @@
                 return;
             }
 
-            // Giliran Monster Menyerang
             rpgState.isPlayerTurn = false;
             setTimeout(() => {
                 let reduction = Math.floor(rpgSaveData.vitality * 1.5);
@@ -1667,18 +1851,15 @@
 
                 if (rpgState.playerHp <= 0) {
                     rpgState.playerHp = 0;
+                    playSound('gameover');
                     
                     if (rpgState.isBoss) {
-                        // Jika Gagal Melawan Boss: Mundur ke 5 lantai sebelumnya (Checkpoint Boss)
-                        // Contoh: Gagal di Boss ke-1 (Lantai 6) -> Kembali ke Lantai 1
-                        // Gagal di Boss ke-2 (Lantai 12) -> Kembali ke Lantai 6
                         let currentBossIdx = Math.floor((rpgSaveData.currentFloor - 1) / 6);
                         let checkpointFloor = Math.max(1, (currentBossIdx - 1) * 6 + 1);
                         rpgSaveData.currentFloor = checkpointFloor;
                         
                         appendRpgLog(`💀 GAGAL MENGALAHKAN BOSS! Kamu terpental mundur ke Lantai ${checkpointFloor} (Checkpoint Check).`);
                     } else {
-                        // Jika gagal di musuh biasa, ulangi lantai saat ini
                         appendRpgLog(`💀 Kalahkan musuh biasa ini dengan memperkuat Stat/Gearmu! Mengulang lantai ${rpgSaveData.currentFloor}.`);
                     }
 

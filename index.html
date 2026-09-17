@@ -30,17 +30,92 @@
 </head>
 <body class="bg-gradient-to-br from-slate-50 via-amber-50/30 to-emerald-50/30 text-slate-700 min-h-screen flex flex-col selection:bg-amber-200">
 
-    <!-- Area Dokumen (Mencakup Header, Konten Utama, hingga Footer) -->
-    <div id="exportArea" class="flex flex-col min-h-screen w-full bg-gradient-to-br from-slate-50 via-amber-50/30 to-emerald-50/30">
+    <!-- Halaman Beranda / Landing Page Hub (Tampil Pertama) -->
+    <div id="landingPageView" class="flex flex-col min-h-screen w-full bg-gradient-to-br from-amber-50/60 via-orange-50/20 to-emerald-50/40 p-4 md:p-8 justify-between">
+        <div class="max-w-4xl w-full mx-auto flex flex-col items-center text-center my-auto py-10">
+            <!-- Icon Hero -->
+            <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-amber-500 via-orange-400 to-emerald-500 flex items-center justify-center text-white font-bold shadow-xl shadow-amber-500/20 text-4xl mb-6 animate-bounce">☕</div>
+            
+            <h1 class="text-3xl md:text-5xl font-extrabold text-slate-800 tracking-tight font-playful mb-4">
+                Scheduly ✨
+            </h1>
+            <p class="text-sm md:text-base text-slate-600 max-w-2xl leading-relaxed mb-8">
+                Ruang kerja hangat penuh aroma kopi untuk mengelola ritme kerja tim, menyusun jadwal shift harian yang presisi, dan merilekskan pikiran lewat petualangan mini game kafe yang menyenangkan.
+            </p>
 
-        <!-- Header Web -->
+            <!-- Menu Interaktif Akses Fitur Utama yang Rapi -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl mb-8">
+                <!-- Menu 1: Racikan Shift Tim -->
+                <button onclick="navigateToApp('schedule')" class="glass-card hover:bg-white p-5 rounded-3xl border border-amber-200/80 shadow-md hover:shadow-lg transition flex flex-col items-center text-center group cursor-pointer">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3 shadow-inner group-hover:scale-110 transition">📅</div>
+                    <h3 class="font-bold text-slate-800 text-sm font-playful mb-1">Racikan Shift Tim</h3>
+                    <p class="text-[11px] text-slate-500">Susun matriks shift, kelola catatan harian, dan pantau kehadiran.</p>
+                </button>
+
+                <!-- Menu 2: Menu Buku Resep & Arsip -->
+                <button onclick="navigateToApp('draft')" class="glass-card hover:bg-white p-5 rounded-3xl border border-purple-200/80 shadow-md hover:shadow-lg transition flex flex-col items-center text-center group cursor-pointer">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center text-xl mb-3 shadow-inner group-hover:scale-110 transition">📂</div>
+                    <h3 class="font-bold text-slate-800 text-sm font-playful mb-1">Menu Buku Resep & Arsip</h3>
+                    <p class="text-[11px] text-slate-500">Simpan arsip jadwal tanpa batas atau mulai lembar kerja baru.</p>
+                </button>
+
+                <!-- Menu 3: Barista Quest RPG -->
+                <button onclick="navigateToApp('game')" class="glass-card hover:bg-white p-5 rounded-3xl border border-orange-200/80 shadow-md hover:shadow-lg transition flex flex-col items-center text-center group cursor-pointer">
+                    <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-700 flex items-center justify-center text-xl mb-3 shadow-inner group-hover:scale-110 transition">⚔️</div>
+                    <h3 class="font-bold text-slate-800 text-sm font-playful mb-1">Barista Quest</h3>
+                    <p class="text-[11px] text-slate-500">Jelajahi arena RPG kafe, taklukkan boss, dan nikmati musik chill.</p>
+                </button>
+            </div>
+
+            <button onclick="navigateToApp('schedule')" class="bg-gradient-to-r from-amber-500 via-orange-500 to-emerald-500 hover:from-amber-600 hover:to-emerald-600 text-white font-bold py-3.5 px-8 rounded-2xl shadow-lg shadow-amber-500/25 transition text-sm flex items-center gap-2">
+                <span>🚀</span> <span>Masuk ke Kedai Scheduly</span>
+            </button>
+        </div>
+
+        <footer class="text-center py-4 text-xs text-slate-500 font-medium">
+            © 2026 Scheduly PWA • Created with ☕ & Code by Zvanka & Gemini ✨
+        </footer>
+    </div>
+
+    <!-- Area Dokumen Aplikasi Utama (Hidden Default Sebelum Masuk dari Beranda) -->
+    <div id="exportArea" class="hidden flex-col min-h-screen w-full bg-gradient-to-br from-slate-50 via-amber-50/30 to-emerald-50/30">
+
+        <!-- Header Web dengan Sidebar Menu Sudut Kiri & Action Buttons di Sudut Kanan -->
         <header class="glass-card shadow-sm px-4 md:px-6 py-4 sticky top-0 z-30 flex justify-between items-center border-b border-amber-100/60">
             <div class="flex items-center gap-3">
-                <div id="webBrandRefresh" class="flex items-center gap-3 cursor-pointer group" title="Tap untuk muat ulang halaman">
-                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-500 via-orange-400 to-emerald-500 flex items-center justify-center text-white font-bold shadow-lg shadow-amber-500/20 text-xl group-hover:scale-105 transition">☕</div>
+                <!-- Sidebar Menu Sudut Kiri (Model Web Umum Interaktif) -->
+                <div class="relative">
+                    <button id="sidebarMenuBtn" class="w-10 h-10 rounded-2xl bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold flex items-center justify-center text-lg transition shadow-sm border border-amber-200" title="Daftar Menu Barista">
+                        ☰
+                    </button>
+                    <!-- Dropdown Menu Sidebar Interaktif -->
+                    <div id="sidebarDropdown" class="absolute left-0 mt-2 w-56 glass-card rounded-2xl shadow-xl border border-amber-200 p-2 hidden z-50 flex flex-col gap-1 text-xs">
+                        <div class="px-3 py-2 font-bold text-slate-800 border-b border-amber-100 flex items-center gap-2 font-playful">
+                            <span>☕</span> Daftar Menu Barista
+                        </div>
+                        <button onclick="returnToHome()" class="w-full text-left px-3 py-2 rounded-xl hover:bg-amber-50 text-slate-700 font-bold flex items-center gap-2 transition">
+                            <span>🏠</span> Kasir Utama Kedai
+                        </button>
+                        <button onclick="document.getElementById('openDraftModalBtn').click(); toggleSidebar();" class="w-full text-left px-3 py-2 rounded-xl hover:bg-purple-50 text-purple-900 font-bold flex items-center gap-2 transition">
+                            <span>📂</span> Buku Resep & Arsip
+                        </button>
+                        <button onclick="document.getElementById('openTrashModalBtn').click(); toggleSidebar();" class="w-full text-left px-3 py-2 rounded-xl hover:bg-rose-50 text-rose-900 font-bold flex items-center gap-2 transition">
+                            <span>🗑️</span> Keranjang Daur Ulang
+                        </button>
+                        <button onclick="document.getElementById('rpgSectionAnchor').scrollIntoView({ behavior: 'smooth' }); toggleSidebar();" class="w-full text-left px-3 py-2 rounded-xl hover:bg-orange-50 text-orange-800 font-bold flex items-center gap-2 transition">
+                            <span>⚔️</span> Barista Quest (RPG)
+                        </button>
+                        <button onclick="document.getElementById('openExportModalBtn').click(); toggleSidebar();" class="w-full text-left px-3 py-2 rounded-xl hover:bg-amber-50 text-amber-900 font-bold flex items-center gap-2 transition">
+                            <span>📥</span> Cetak Nota Pesanan
+                        </button>
+                    </div>
+                </div>
+
+                <div id="webBrandRefresh" class="flex items-center gap-3 cursor-pointer group" title="Kembali ke Beranda">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-500 via-orange-400 to-emerald-500 flex items-center justify-center text-white font-bold shadow-lg shadow-amber-500/20 text-lg group-hover:scale-105 transition">☕</div>
                     <div>
-                        <h1 class="text-base font-bold text-slate-800 tracking-wide font-playful group-hover:text-amber-600 transition">Scheduly ✨</h1>
-                        <p id="saveStatusText" class="text-[11px] text-emerald-600 font-bold flex items-center gap-1">💾 Tersimpan Otomatis</p>
+                        <h1 class="text-sm font-bold text-slate-800 tracking-wide font-playful group-hover:text-amber-600 transition">Scheduly ✨</h1>
+                        <p id="saveStatusText" class="text-[10px] text-emerald-600 font-bold flex items-center gap-1">💾 Tersimpan Otomatis</p>
                     </div>
                 </div>
             </div>
@@ -53,18 +128,6 @@
                 <!-- Tombol Salin Link Web -->
                 <button id="copyLinkBtn" class="bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs px-3 py-2 rounded-2xl font-bold border border-amber-200 transition shadow-sm flex items-center gap-1.5" title="Salin Link Web ini">
                     <span>🔗</span> <span class="hidden md:inline" data-i18n-copylink="Salin Link">Salin Link</span>
-                </button>
-                <!-- Tombol Undo -->
-                <button id="undoBtn" class="bg-white hover:bg-amber-50 text-slate-700 text-xs px-2.5 py-2 rounded-2xl font-bold border border-amber-200/80 transition shadow-sm" title="Undo" disabled>
-                    ↩️
-                </button>
-                <!-- Tombol Redo -->
-                <button id="redoBtn" class="bg-white hover:bg-amber-50 text-slate-700 text-xs px-2.5 py-2 rounded-2xl font-bold border border-amber-200/80 transition shadow-sm" title="Redo" disabled>
-                    🔁
-                </button>
-                <!-- Tombol Export Laporan -->
-                <button id="openExportModalBtn" class="bg-white hover:bg-amber-50 text-amber-900 text-xs px-3.5 py-2 rounded-2xl font-bold border border-amber-200/80 transition shadow-sm flex items-center gap-1.5 group" title="Unduh Laporan">
-                    <span class="group-hover:scale-110 transition">📥</span> <span class="hidden md:inline">Export</span>
                 </button>
                 <!-- Tombol Bahasa -->
                 <button id="langToggleBtn" class="bg-white hover:bg-amber-50 text-slate-800 text-xs px-3.5 py-2 rounded-2xl font-bold border border-amber-200/80 transition shadow-sm">
@@ -87,6 +150,39 @@
                 <button id="nextMonth" class="no-export w-10 h-10 flex items-center justify-center bg-white text-slate-700 rounded-2xl hover:bg-amber-100 hover:text-amber-900 font-bold transition shadow-sm border border-slate-100">&rarr;</button>
             </div>
 
+            <!-- Panel Barista Workspace (Pengganti istilah Aksi Cepat) -->
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3 no-export px-1">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-slate-700 font-playful flex items-center gap-1.5"><span>☕</span> Barista Workspace:</span>
+                    <!-- Tombol Undo Dekat Tabel -->
+                    <button id="undoBtn" class="bg-white hover:bg-amber-50 text-slate-700 text-xs px-2.5 py-1.5 rounded-xl font-bold border border-amber-200/80 transition shadow-sm flex items-center gap-1" title="Undo" disabled>
+                        <span>↩️</span> <span class="hidden sm:inline">Undo</span>
+                    </button>
+                    <!-- Tombol Redo Dekat Tabel -->
+                    <button id="redoBtn" class="bg-white hover:bg-amber-50 text-slate-700 text-xs px-2.5 py-1.5 rounded-xl font-bold border border-amber-200/80 transition shadow-sm flex items-center gap-1" title="Redo" disabled>
+                        <span>🔁</span> <span class="hidden sm:inline">Redo</span>
+                    </button>
+                </div>
+                <div class="flex items-center gap-2">
+                    <!-- Tombol Keranjang Daur Ulang -->
+                    <button id="openTrashModalBtn" class="bg-rose-50 hover:bg-rose-100 text-rose-800 text-xs px-3 py-1.5 rounded-xl font-bold border border-rose-200 transition shadow-sm flex items-center gap-1.5" title="Keranjang Daur Ulang / Arsip Terhapus">
+                        <span>🗑️</span> <span>Daur Ulang</span>
+                    </button>
+                    <!-- Tombol Clear Lembar Kerja -->
+                    <button id="clearWorksheetBtn" class="bg-rose-50 hover:bg-rose-100 text-rose-800 text-xs px-3 py-1.5 rounded-xl font-bold border border-rose-200 transition shadow-sm flex items-center gap-1.5" title="Bersihkan Semua Jadwal di Lembar Kerja">
+                        <span>🧹</span> <span>Bersihkan Meja</span>
+                    </button>
+                    <!-- Tombol Buku Resep & Arsip Dekat Tabel -->
+                    <button id="openDraftModalBtn" class="bg-purple-50 hover:bg-purple-100 text-purple-900 text-xs px-3 py-1.5 rounded-xl font-bold border border-purple-200 transition shadow-sm flex items-center gap-1.5" title="Buku Resep & Arsip Jadwal">
+                        <span>📂</span> <span>Buku Resep</span>
+                    </button>
+                    <!-- Tombol Cetak Nota Pesanan Dekat Tabel -->
+                    <button id="openExportModalBtn" class="bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs px-3 py-1.5 rounded-xl font-bold border border-amber-200 transition shadow-sm flex items-center gap-1.5 group" title="Cetak Nota Pesanan">
+                        <span class="group-hover:scale-110 transition">📥</span> <span>Cetak Nota</span>
+                    </button>
+                </div>
+            </div>
+
             <!-- Tabel Matrix & Rekapitulasi Shift Gabungan -->
             <div class="glass-card rounded-3xl shadow-sm overflow-hidden mb-6 border border-amber-100">
                 <div id="tableWrapperContainer" class="overflow-x-auto">
@@ -105,9 +201,9 @@
             <div class="glass-card rounded-3xl shadow-sm p-5 mb-6 border border-amber-100">
                 <div class="flex justify-between items-center mb-3">
                     <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2 font-playful">
-                        <span class="w-8 h-8 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xs shadow-inner">📝</span> <span id="notesHeadingText">Catatan</span>
+                        <span class="w-8 h-8 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xs shadow-inner">📝</span> <span id="notesHeadingText">Catatan Resepsionis</span>
                     </h3>
-                    <button id="addGlobalNoteBtn" class="no-export bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-4 py-2 rounded-2xl font-bold text-xs shadow-md shadow-amber-500/20 transition">+ Tambah Catatan</button>
+                    <button id="addGlobalNoteBtn" class="no-export bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-4 py-2 rounded-2xl font-bold text-xs shadow-md shadow-amber-500/20 transition">+ Catatan Baru</button>
                 </div>
                 <div id="globalNotesContainer" class="flex flex-col gap-2.5 text-xs">
                     <!-- Catatan dirender di sini -->
@@ -117,7 +213,7 @@
             <!-- ======================================================= -->
             <!-- MINI GAME RPG: BARISTA QUEST (RANDOM DROP & BOSS CHECKPOINT) -->
             <!-- ======================================================= -->
-            <section class="max-w-7xl w-full mx-auto mb-6 no-export">
+            <section id="rpgSectionAnchor" class="max-w-7xl w-full mx-auto mb-6 no-export">
                 <div class="glass-card rounded-3xl shadow-sm p-5 border border-amber-100 overflow-hidden relative">
                     
                     <!-- Header Mini Game -->
@@ -140,11 +236,11 @@
                         <!-- Navigasi Tab Game -->
                         <div class="flex flex-wrap gap-2 border-b border-slate-700 pb-3">
                             <button onclick="switchRpgTab('battle')" id="tabBattleBtn" class="px-3 py-1.5 rounded-xl bg-amber-500 text-white font-bold text-xs transition">⚔️ Arena Battle</button>
-                            <button onclick="switchRpgTab('inventory')" id="tabInventoryBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🎒 Inventory</button>
-                            <button onclick="switchRpgTab('shop')" id="tabShopBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🛒 Gearshop</button>
-                            <button onclick="switchRpgTab('alchemy')" id="tabAlchemyBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🧪 Alchemy Lab</button>
-                            <button onclick="switchRpgTab('enhance')" id="tabEnhanceBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🛠️ Enhancement</button>
-                            <button onclick="switchRpgTab('stats')" id="tabStatsBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">📊 Stat Stats</button>
+                            <button onclick="switchRpgTab('inventory')" id="tabInventoryBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🎒 Rak Barang</button>
+                            <button onclick="switchRpgTab('shop')" id="tabShopBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🛒 Kios Alat Kopi</button>
+                            <button onclick="switchRpgTab('alchemy')" id="tabAlchemyBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🧪 Bar Racikan</button>
+                            <button onclick="switchRpgTab('enhance')" id="tabEnhanceBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">🛠️ Meja Poles Alat</button>
+                            <button onclick="switchRpgTab('stats')" id="tabStatsBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs transition">📊 Keahlian Barista</button>
                         </div>
 
                         <!-- PANEL 1: BATTLE ARENA -->
@@ -155,7 +251,7 @@
                                     <span class="text-slate-400">XP: <span id="rpgXpDisplay">0</span> / <span id="rpgXpNext">50</span></span>
                                 </div>
                                 <div class="flex items-center gap-3">
-                                    <span class="text-emerald-400 font-bold">🏆 Wins: <span id="rpgWinsCount">0</span></span>
+                                    <span class="text-emerald-400 font-bold">🏆 Kemenangan: <span id="rpgWinsCount">0</span></span>
                                     <span class="text-amber-300 font-bold">🪙 Koin: <span id="rpgCoins">0</span></span>
                                 </div>
                             </div>
@@ -222,7 +318,7 @@
                         <!-- PANEL 2: INVENTORY -->
                         <div id="panelInventory" class="hidden flex flex-col gap-3 text-xs">
                             <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
-                                <span class="font-bold text-amber-300">🎒 Inventory & Storage Item Spesial</span>
+                                <span class="font-bold text-amber-300">🎒 Rak Barang & Koleksi Spesial</span>
                                 <span class="text-slate-300">Total Slot Item: <b class="text-amber-400" id="inventoryCountDisplay">0</b></span>
                             </div>
                             <p class="text-[11px] text-slate-400">Menyimpan Biji Kopi, Potion, dan Equipment Spesial langka yang didapat dari Boss lantai!</p>
@@ -234,7 +330,7 @@
                         <!-- PANEL 3: GEARSHOP -->
                         <div id="panelShop" class="hidden flex flex-col gap-3 text-xs">
                             <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-2">
-                                <span class="font-bold text-amber-300">🛒 Toko Peralatan Barista Legendaris</span>
+                                <span class="font-bold text-amber-300">🛒 Kios Alat Kopi Legendaris</span>
                                 <div class="flex items-center gap-3">
                                     <span class="text-cyan-300">⏳ Reset Stok: <b id="shopTimerDisplay" class="text-cyan-400">00:00:00</b></span>
                                     <span>Koin: <b class="text-amber-400" id="shopCoinsDisplay">0</b> 🪙</span>
@@ -283,7 +379,7 @@
                         <!-- PANEL 4: ALCHEMY LAB -->
                         <div id="panelAlchemy" class="hidden flex flex-col gap-3 text-xs">
                             <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
-                                <span class="font-bold text-cyan-300">🧪 Lab Alkimia Racikan Kafe</span>
+                                <span class="font-bold text-cyan-300">🧪 Bar Racikan Minuman Spesial</span>
                                 <span class="text-slate-300">Biji Kopi Bahan: <b class="text-cyan-400" id="coffeeBeansDisplay">0</b> 🫘</span>
                             </div>
                             <p class="text-[11px] text-slate-400">Kumpulkan Biji Kopi (🫘) dari monster untuk meracik Health Potion pemulih HP!</p>
@@ -303,7 +399,7 @@
                         <!-- PANEL 5: ENHANCEMENT -->
                         <div id="panelEnhance" class="hidden flex flex-col gap-3 text-xs">
                             <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
-                                <span class="font-bold text-purple-300">🛠️ Meja Enhancement Peralatan</span>
+                                <span class="font-bold text-purple-300">🛠️ Meja Poles Alat Barista</span>
                                 <span class="text-amber-300">Koin: <b id="enhanceCoinsDisplay">0</b> 🪙 | Biji Kopi: <b id="enhanceBeansDisplay" class="text-cyan-400">0</b> 🫘</span>
                             </div>
                             <p class="text-[11px] text-slate-400">Tingkatkan level senjata untuk memperkuat serangan. Setiap upgrade memerlukan Koin, Biji Kopi, dan minimal Stat Strength tertentu!</p>
@@ -323,8 +419,8 @@
                         <!-- PANEL 6: STAT ALOKASI POINT -->
                         <div id="panelStats" class="hidden flex flex-col gap-3 text-xs">
                             <div class="bg-slate-800/90 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
-                                <span class="font-bold text-amber-300">📊 Alokasi Point Karakter</span>
-                                <span class="text-emerald-400 font-bold">Sisa Point: <b id="availablePointsDisplay" class="text-emerald-300">0</b> Poin</span>
+                                <span class="font-bold text-amber-300">📊 Keahlian Barista & Atribut</span>
+                                <span class="text-emerald-400 font-bold">Sisa Poin: <b id="availablePointsDisplay" class="text-emerald-300">0</b> Poin</span>
                             </div>
                             <p class="text-[11px] text-slate-400">Setiap naik level, kamu mendapat 3 Poin Atribut untuk dibagikan ke Strength (Kekuatan Serangan) atau Vitality (Ketahanan HP)!</p>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -367,15 +463,68 @@
 
     </div>
 
-    <!-- Pop-Up Pilih Format Laporan -->
+    <!-- Pop-Up Keranjang Daur Ulang (Trash Bin dengan Retensi 30 Hari & Restore) -->
+    <div id="trashModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-card rounded-3xl shadow-2xl p-6 w-full max-w-lg border border-rose-200 relative z-50 flex flex-col max-h-[90vh]">
+            <div class="flex justify-between items-center mb-4 border-b border-rose-100 pb-3">
+                <h3 class="font-bold text-slate-800 text-sm font-playful flex items-center gap-2"><span>🗑️</span> Keranjang Daur Ulang (Arsip Terhapus)</h3>
+                <button id="closeTrashModalBtn" class="w-8 h-8 rounded-full bg-rose-100 hover:bg-rose-200 text-rose-900 font-bold text-xs flex items-center justify-center transition">✕</button>
+            </div>
+            
+            <p class="text-xs text-slate-500 mb-4 leading-relaxed">Staff atau data yang dihapus akan disimpan sementara di sini dan dapat dipulihkan kapan saja. Data akan terhapus otomatis secara permanen setelah 30 hari.</p>
+
+            <div class="font-bold text-xs text-slate-700 mb-2 flex items-center justify-between">
+                <span>Daftar Item Terhapus (<span id="trashCountDisplay">0</span>)</span>
+                <button type="button" onclick="emptyTrashBin()" class="text-[11px] text-rose-600 hover:text-rose-700 font-bold underline">Kosongkan Keranjang</button>
+            </div>
+
+            <!-- List Item Trash Bin (Scrollable) -->
+            <div id="trashListContainer" class="flex flex-col gap-2.5 overflow-y-auto flex-grow pr-1 max-h-[300px]">
+                <!-- Item trash dirender secara dinamis lewat JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop-Up Buku Resep & Arsip (Unlimited Slots) -->
+    <div id="draftModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-card rounded-3xl shadow-2xl p-6 w-full max-w-lg border border-purple-200 relative z-50 flex flex-col max-h-[90vh]">
+            <div class="flex justify-between items-center mb-4 border-b border-purple-100 pb-3">
+                <h3 class="font-bold text-slate-800 text-sm font-playful flex items-center gap-2"><span>📂</span> Buku Resep & Arsip Jadwal</h3>
+                <button id="closeDraftModalBtn" class="w-8 h-8 rounded-full bg-purple-100 hover:bg-purple-200 text-purple-900 font-bold text-xs flex items-center justify-center transition">✕</button>
+            </div>
+            
+            <p class="text-xs text-slate-500 mb-4 leading-relaxed">Simpan racikan jadwal Anda ke dalam buku resep tanpa batas, mulai lembar kerja baru yang bersih, atau muat kembali arsip yang pernah disimpan.</p>
+
+            <!-- Aksi Utama: Meja Kosong Baru & Simpan Resep Aktif -->
+            <div class="grid grid-cols-2 gap-2.5 mb-4">
+                <button type="button" id="newProjectBtn" class="py-2.5 px-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition flex items-center justify-center gap-1.5">
+                    <span>✨</span> <span>Meja Kosong Baru</span>
+                </button>
+                <button type="button" id="saveCurrentDraftBtn" class="py-2.5 px-3 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-bold text-xs shadow-md shadow-purple-500/20 transition flex items-center justify-center gap-1.5">
+                    <span>💾</span> <span>Simpan Resep Baru</span>
+                </button>
+            </div>
+
+            <div class="font-bold text-xs text-slate-700 mb-2 flex items-center justify-between">
+                <span>Daftar Resep Tersimpan (<span id="draftCountDisplay">0</span>)</span>
+            </div>
+
+            <!-- List Slot Draft Tanpa Batas (Scrollable) -->
+            <div id="draftListContainer" class="flex flex-col gap-2.5 overflow-y-auto flex-grow pr-1 max-h-[300px]">
+                <!-- Item draft dirender secara dinamis lewat JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop-Up Cetak Nota Pesanan -->
     <div id="exportModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
         <div class="glass-card rounded-3xl shadow-2xl p-6 w-full max-w-sm border border-amber-200 relative z-50">
             <div class="flex justify-between items-center mb-4 border-b border-amber-100 pb-3">
-                <h3 id="exportModalTitle" class="font-bold text-slate-800 text-sm font-playful">Pilih Format Laporan</h3>
+                <h3 id="exportModalTitle" class="font-bold text-slate-800 text-sm font-playful">Cetak Nota Pesanan</h3>
                 <button id="closeExportModalBtn" class="w-8 h-8 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center transition">✕</button>
             </div>
             
-            <p class="text-xs text-slate-500 mb-4 leading-relaxed">Silakan pilih format dokumen laporan yang ingin diunduh:</p>
+            <p class="text-xs text-slate-500 mb-4 leading-relaxed">Silakan pilih format nota laporan yang ingin diunduh:</p>
 
             <div class="grid grid-cols-2 gap-2.5 mb-2">
                 <button type="button" class="export-format-btn py-3 px-3 rounded-2xl border font-bold text-xs transition bg-white text-emerald-700 border-emerald-200 hover:bg-emerald-50 text-left flex items-center gap-2 shadow-sm" data-format="xlsx">
@@ -398,7 +547,7 @@
     <div id="formSection" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
         <div class="glass-card rounded-3xl shadow-2xl p-6 w-full max-w-sm border border-amber-200 relative z-50">
             <div class="flex justify-between items-center mb-4 border-b border-amber-100 pb-3">
-                <h3 id="selectedDateTitle" class="font-bold text-slate-800 text-sm font-playful">Pilih Shift</h3>
+                <h3 id="selectedDateTitle" class="font-bold text-slate-800 text-sm font-playful">Pilih Racikan Shift</h3>
                 <button id="closeFormBtn" class="w-8 h-8 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center transition">✕</button>
             </div>
             
@@ -416,7 +565,7 @@
                     <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-indigo-50 text-indigo-700 border-indigo-200 hover:bg-indigo-100 shadow-sm" data-value="PS">PS</button>
                     <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100 shadow-sm" data-value="OFF">OFF</button>
                     <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 shadow-sm" data-value="C">C (Cuti)</button>
-                    <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-red-100 text-red-600 border-red-200 hover:bg-red-200 shadow-sm col-span-3 flex items-center justify-center gap-1" data-value="CLEAR" id="clearShiftText">🗑️ Hapus Shift</button>
+                    <button type="button" class="shift-instant-btn py-3 px-2 rounded-2xl border font-bold text-xs transition bg-red-100 text-red-600 border-red-200 hover:bg-red-200 shadow-sm col-span-3 flex items-center justify-center gap-1" data-value="CLEAR" id="clearShiftText">🗑️ Kosongkan Racikan</button>
                 </div>
             </div>
         </div>
@@ -443,49 +592,97 @@
         const translations = {
             id: {
                 title: "☕ Scheduly – Jadwal & Catatan Tim",
-                notesHead: "Catatan",
-                addNoteBtn: "+ Tambah Catatan",
+                notesHead: "Catatan Resepsionis",
+                addNoteBtn: "+ Catatan Baru",
                 newStaffPlaceholder: "＋ Ketik nama baru...",
-                deleteStaffTitle: "Hapus Staff",
-                deleteStaffConfirm: "Apakah kamu yakin ingin menghapus {name} beserta seluruh jadwalnya?",
+                deleteStaffTitle: "Hapus Barista",
+                deleteStaffConfirm: "Apakah kamu yakin ingin menghapus {name} beserta seluruh jadwalnya? Data akan dikirim ke Keranjang Daur Ulang.",
                 deleteNoteTitle: "Hapus Catatan",
                 deleteNoteConfirm: "Apakah kamu yakin ingin menghapus catatan ini?",
-                clearShift: "🗑️ Hapus Shift",
-                modalTitle: "Pilih Shift",
+                clearShift: "🗑️ Kosongkan Racikan",
+                modalTitle: "Pilih Racikan Shift",
                 confirmYes: "Ya",
                 confirmNo: "Tidak",
                 copyLinkText: "Salin Link",
                 copyLinkSuccess: "🔗 Link web berhasil disalin ke clipboard!",
-                exportTitle: "Pilih Format Laporan",
-                saveFileTitle: "Konfirmasi Unduh Laporan",
-                saveFileConfirm: "Apakah kamu yakin ingin mengunduh laporan dalam format .{format} ke perangkatmu?",
-                refreshWarningTitle: "Muat Ulang Halaman",
-                refreshWarningMsg: "Yakin ingin memuat ulang halaman?",
+                exportTitle: "Cetak Nota Pesanan",
+                saveFileTitle: "Konfirmasi Cetak Nota",
+                saveFileConfirm: "Apakah kamu yakin ingin mengunduh nota laporan dalam format .{format} ke perangkatmu?",
+                refreshWarningTitle: "Kasir Utama",
+                refreshWarningMsg: "Yakin ingin kembali ke kasir utama?",
                 footer: "© 2026 Scheduly PWA • Created with ☕ & Code by Zvanka & Gemini ✨"
             },
             eng: {
                 title: "☕ Scheduly – Team Schedule & Notes",
-                notesHead: "Notes",
-                addNoteBtn: "+ Add Note",
+                notesHead: "Front Desk Notes",
+                addNoteBtn: "+ New Note",
                 newStaffPlaceholder: "＋ Type new name...",
-                deleteStaffTitle: "Delete Staff",
-                deleteStaffConfirm: "Are you sure you want to delete {name} and all their schedules?",
+                deleteStaffTitle: "Remove Barista",
+                deleteStaffConfirm: "Are you sure you want to remove {name} and all their schedules? Data will be moved to Recycling Bin.",
                 deleteNoteTitle: "Delete Note",
                 deleteNoteConfirm: "Are you sure you want to delete this note?",
-                clearShift: "🗑️ Clear Shift",
-                modalTitle: "Select Shift",
+                clearShift: "🗑️ Clear Shift Mix",
+                modalTitle: "Select Shift Mix",
                 confirmYes: "Yes",
                 confirmNo: "No",
                 copyLinkText: "Copy Link",
                 copyLinkSuccess: "🔗 Web link successfully copied to clipboard!",
-                exportTitle: "Select Report Format",
-                saveFileTitle: "Confirm Report Download",
-                saveFileConfirm: "Are you sure you want to download the report in .{format} format to your device?",
-                refreshWarningTitle: "Reload Page",
-                refreshWarningMsg: "Are you sure you want to reload the page?",
+                exportTitle: "Print Order Note",
+                saveFileTitle: "Confirm Note Download",
+                saveFileConfirm: "Are you sure you want to download the order note in .{format} format to your device?",
+                refreshWarningTitle: "Main Counter",
+                refreshWarningMsg: "Are you sure you want to return to the main counter?",
                 footer: "© 2026 Scheduly PWA • Created with ☕ & Code by Zvanka & Gemini ✨"
             }
         };
+
+        // Sidebar Menu Interaktif Sudut Kiri
+        const sidebarMenuBtn = document.getElementById('sidebarMenuBtn');
+        const sidebarDropdown = document.getElementById('sidebarDropdown');
+
+        function toggleSidebar() {
+            sidebarDropdown.classList.toggle('hidden');
+        }
+
+        sidebarMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleSidebar();
+        });
+
+        window.addEventListener('click', () => {
+            if (!sidebarDropdown.classList.contains('hidden')) {
+                sidebarDropdown.classList.add('hidden');
+            }
+        });
+
+        sidebarDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Fungsi Navigasi dari Beranda
+        function navigateToApp(target) {
+            document.getElementById('landingPageView').classList.add('hidden');
+            let exportArea = document.getElementById('exportArea');
+            exportArea.classList.remove('hidden');
+            exportArea.classList.add('flex');
+            renderTable();
+
+            if (target === 'draft') {
+                document.getElementById('openDraftModalBtn').click();
+            } else if (target === 'game') {
+                let startBtn = document.getElementById('startRpgBtn');
+                if (startBtn && document.getElementById('rpgArena').classList.contains('hidden')) {
+                    startBtn.click();
+                }
+                document.getElementById('rpgSectionAnchor').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function returnToHome() {
+            document.getElementById('exportArea').classList.add('hidden');
+            document.getElementById('exportArea').classList.remove('flex');
+            document.getElementById('landingPageView').classList.remove('hidden');
+        }
 
         function updateLanguageUI() {
             langToggleBtn.innerText = currentLang === 'id' ? '🇮🇩 ID' : '🇬🇧 ENG';
@@ -521,6 +718,167 @@
             }
         });
 
+        // Tombol Clear Lembar Kerja (Menghapus seluruh isi jadwal & staff ke Trash Bin)
+        document.getElementById('clearWorksheetBtn').addEventListener('click', () => {
+            showConfirm(
+                "Bersihkan Meja Kerja",
+                "Apakah Anda yakin ingin mengosongkan seluruh meja kerja (memindahkan semua staff dan jadwal ke Keranjang Daur Ulang)?",
+                () => {
+                    saveStateToHistory();
+                    if (staffList.length > 0) {
+                        let trashBin = getSavedTrashBin();
+                        let trashId = 'trash_' + Date.now();
+                        trashBin[trashId] = {
+                            name: `Meja Kerja - ${new Date().toLocaleDateString('id-ID')}`,
+                            deletedAt: Date.now(),
+                            staff: JSON.parse(JSON.stringify(staffList)),
+                            schedules: JSON.parse(JSON.stringify(schedules))
+                        };
+                        saveTrashBinToStorage(trashBin);
+                    }
+                    staffList = [];
+                    schedules = {};
+                    globalNotes = {};
+                    triggerAutoSave();
+                    renderTable();
+                    alert("🧹 Meja kerja dibersihkan dan diarsipkan ke Keranjang Daur Ulang!");
+                }
+            );
+        });
+
+        // ======================================================= //
+        // FITUR KERANJANG DAUR ULANG (TRASH BIN DENGAN RETENSI 30 HARI & RESTORE)
+        // ======================================================= //
+        const trashModal = document.getElementById('trashModal');
+        document.querySelectorAll('#openTrashModalBtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                cleanupExpiredTrash();
+                renderTrashList();
+                trashModal.classList.remove('hidden');
+            });
+        });
+        document.getElementById('closeTrashModalBtn').addEventListener('click', () => trashModal.classList.add('hidden'));
+
+        function getSavedTrashBin() {
+            return JSON.parse(localStorage.getItem('scheduly_trash_bin_v1')) || {};
+        }
+
+        function saveTrashBinToStorage(trash) {
+            localStorage.setItem('scheduly_trash_bin_v1', JSON.stringify(trash));
+        }
+
+        // Fungsi membersihkan item yang sudah lebih dari 30 hari
+        function cleanupExpiredTrash() {
+            let trashBin = getSavedTrashBin();
+            let now = Date.now();
+            let thirtyDaysMs = 30 * 24 * 60 * 60 * 1000;
+            let updated = false;
+
+            for (let id in trashBin) {
+                if (now - trashBin[id].deletedAt > thirtyDaysMs) {
+                    delete trashBin[id];
+                    updated = true;
+                }
+            }
+            if (updated) {
+                saveTrashBinToStorage(trashBin);
+            }
+        }
+
+        function renderTrashList() {
+            cleanupExpiredTrash();
+            let container = document.getElementById('trashListContainer');
+            let trashBin = getSavedTrashBin();
+            let trashIds = Object.keys(trashBin);
+            
+            document.getElementById('trashCountDisplay').innerText = trashIds.length;
+            container.innerHTML = "";
+
+            if (trashIds.length === 0) {
+                container.innerHTML = `<p class="text-slate-400 italic text-xs text-center py-4">Keranjang daur ulang kosong. Item yang dihapus akan tersimpan di sini selama 30 hari.</p>`;
+                return;
+            }
+
+            trashIds.reverse().forEach(id => {
+                let item = trashBin[id];
+                let deletedDate = new Date(item.deletedAt);
+                let expiryDate = new Date(item.deletedAt + (30 * 24 * 60 * 60 * 1000));
+                let formattedDeleted = deletedDate.toLocaleDateString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
+                let formattedExpiry = expiryDate.toLocaleDateString('id-ID', { dateStyle: 'medium' });
+                
+                let card = document.createElement('div');
+                card.className = "bg-slate-50 border border-rose-200/80 p-3 rounded-2xl flex justify-between items-center gap-2 shadow-sm hover:bg-rose-50/40 transition";
+                card.innerHTML = `
+                    <div class="flex flex-col gap-0.5 overflow-hidden">
+                        <div class="font-bold text-slate-800 text-xs truncate">👤 ${item.name}</div>
+                        <div class="text-[10px] text-slate-400">🕒 Dihapus: ${formattedDeleted}</div>
+                        <div class="text-[10px] text-rose-600 font-medium">⏳ Hapus permanen: ${formattedExpiry}</div>
+                    </div>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button onclick="restoreTrash('${id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-xl font-bold text-[11px] transition shadow-sm">Pulihkan</button>
+                        <button onclick="deleteTrashPermanent('${id}')" class="bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-600 px-2.5 py-1.5 rounded-xl border border-slate-200 font-bold text-[11px] transition shadow-sm" title="Hapus Permanen">🗑️</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        window.restoreTrash = function(id) {
+            let trashBin = getSavedTrashBin();
+            if (trashBin[id]) {
+                showConfirm(
+                    "Pulihkan Data",
+                    `Apakah Anda ingin memulihkan "${trashBin[id].name}" kembali ke meja kerja?`,
+                    () => {
+                        saveStateToHistory();
+                        let item = trashBin[id];
+                        if (item.isStaff && !staffList.includes(item.name)) {
+                            staffList.push(item.name);
+                            if (item.staffSchedule) {
+                                schedules[item.name] = item.staffSchedule;
+                            }
+                        } else if (item.staff && item.schedules) {
+                            item.staff.forEach(s => {
+                                if (!staffList.includes(s)) staffList.push(s);
+                            });
+                            for (let s in item.schedules) {
+                                schedules[s] = item.schedules[s];
+                            }
+                        }
+                        delete trashBin[id];
+                        saveTrashBinToStorage(trashBin);
+                        renderTrashList();
+                        renderTable();
+                        alert("✨ Data berhasil dipulihkan ke meja kerja!");
+                    }
+                );
+            }
+        }
+
+        window.deleteTrashPermanent = function(id) {
+            let trashBin = getSavedTrashBin();
+            showConfirm(
+                "Hapus Permanen",
+                "Apakah Anda yakin ingin menghapus item ini secara permanen sekarang?",
+                () => {
+                    delete trashBin[id];
+                    saveTrashBinToStorage(trashBin);
+                    renderTrashList();
+                }
+            );
+        }
+
+        window.emptyTrashBin = function() {
+            showConfirm(
+                "Kosongkan Keranjang",
+                "Apakah Anda yakin ingin menghapus seluruh isi keranjang daur ulang secara permanen?",
+                () => {
+                    saveTrashBinToStorage({});
+                    renderTrashList();
+                }
+            );
+        }
+
         // Undo & Redo System
         let undoStack = [];
         let redoStack = [];
@@ -540,46 +898,50 @@
         }
 
         function updateUndoRedoButtons() {
-            document.getElementById('undoBtn').disabled = undoStack.length === 0;
-            document.getElementById('redoBtn').disabled = redoStack.length === 0;
+            document.querySelectorAll('#undoBtn').forEach(btn => btn.disabled = undoStack.length === 0);
+            document.querySelectorAll('#redoBtn').forEach(btn => btn.disabled = redoStack.length === 0);
         }
 
-        document.getElementById('undoBtn').addEventListener('click', () => {
-            if (undoStack.length === 0) return;
-            isPerformingHistoryAction = true;
-            let currentState = {
-                staff: JSON.parse(JSON.stringify(staffList)),
-                schedules: JSON.parse(JSON.stringify(schedules)),
-                notes: JSON.parse(JSON.stringify(globalNotes))
-            };
-            redoStack.push(currentState);
-            let previousState = undoStack.pop();
-            staffList = previousState.staff;
-            schedules = previousState.schedules;
-            globalNotes = previousState.notes;
-            isPerformingHistoryAction = false;
-            updateUndoRedoButtons();
-            triggerAutoSave();
-            renderTable();
+        document.querySelectorAll('#undoBtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (undoStack.length === 0) return;
+                isPerformingHistoryAction = true;
+                let currentState = {
+                    staff: JSON.parse(JSON.stringify(staffList)),
+                    schedules: JSON.parse(JSON.stringify(schedules)),
+                    notes: JSON.parse(JSON.stringify(globalNotes))
+                };
+                redoStack.push(currentState);
+                let previousState = undoStack.pop();
+                staffList = previousState.staff;
+                schedules = previousState.schedules;
+                globalNotes = previousState.notes;
+                isPerformingHistoryAction = false;
+                updateUndoRedoButtons();
+                triggerAutoSave();
+                renderTable();
+            });
         });
 
-        document.getElementById('redoBtn').addEventListener('click', () => {
-            if (redoStack.length === 0) return;
-            isPerformingHistoryAction = true;
-            let currentState = {
-                staff: JSON.parse(JSON.stringify(staffList)),
-                schedules: JSON.parse(JSON.stringify(schedules)),
-                notes: JSON.parse(JSON.stringify(globalNotes))
-            };
-            undoStack.push(currentState);
-            let nextState = redoStack.pop();
-            staffList = nextState.staff;
-            schedules = nextState.schedules;
-            globalNotes = nextState.notes;
-            isPerformingHistoryAction = false;
-            updateUndoRedoButtons();
-            triggerAutoSave();
-            renderTable();
+        document.querySelectorAll('#redoBtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (redoStack.length === 0) return;
+                isPerformingHistoryAction = true;
+                let currentState = {
+                    staff: JSON.parse(JSON.stringify(staffList)),
+                    schedules: JSON.parse(JSON.stringify(schedules)),
+                    notes: JSON.parse(JSON.stringify(globalNotes))
+                };
+                undoStack.push(currentState);
+                let nextState = redoStack.pop();
+                staffList = nextState.staff;
+                schedules = nextState.schedules;
+                globalNotes = nextState.notes;
+                isPerformingHistoryAction = false;
+                updateUndoRedoButtons();
+                triggerAutoSave();
+                renderTable();
+            });
         });
 
         const saveStatusText = document.getElementById('saveStatusText');
@@ -592,12 +954,135 @@
         }
 
         document.getElementById('webBrandRefresh').addEventListener('click', () => {
+            returnToHome();
+        });
+
+        // ======================================================= //
+        // FITUR BUKU RESEP & ARSIP (UNLIMITED SLOTS)
+        // ======================================================= //
+        const draftModal = document.getElementById('draftModal');
+        document.querySelectorAll('#openDraftModalBtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                renderDraftList();
+                draftModal.classList.remove('hidden');
+            });
+        });
+        document.getElementById('closeDraftModalBtn').addEventListener('click', () => draftModal.classList.add('hidden'));
+
+        function getSavedDrafts() {
+            return JSON.parse(localStorage.getItem('scheduly_unlimited_drafts_v1')) || {};
+        }
+
+        function saveDraftsToStorage(drafts) {
+            localStorage.setItem('scheduly_unlimited_drafts_v1', JSON.stringify(drafts));
+        }
+
+        // Tombol Meja Kosong Baru (Reset Bersih)
+        document.getElementById('newProjectBtn').addEventListener('click', () => {
             showConfirm(
-                translations[currentLang].refreshWarningTitle,
-                translations[currentLang].refreshWarningMsg,
-                () => { window.location.reload(); }
+                "Meja Kosong Baru",
+                "Apakah Anda yakin ingin memulai meja kosong baru? Data jadwal saat ini akan direset menjadi bersih.",
+                () => {
+                    saveStateToHistory();
+                    staffList = [];
+                    schedules = {};
+                    globalNotes = {};
+                    triggerAutoSave();
+                    renderTable();
+                    draftModal.classList.add('hidden');
+                    alert("✨ Meja kosong baru berhasil disiapkan!");
+                }
             );
         });
+
+        // Tombol Simpan Resep Baru
+        document.getElementById('saveCurrentDraftBtn').addEventListener('click', () => {
+            let defaultName = `Resep Jadwal - ${new Date().toLocaleDateString('id-ID')} ${new Date().toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'})}`;
+            let draftName = prompt("Masukkan nama untuk resep jadwal ini:", defaultName);
+            if (!draftName) return;
+
+            let drafts = getSavedDrafts();
+            let draftId = 'draft_' + Date.now();
+            
+            drafts[draftId] = {
+                name: draftName,
+                date: new Date().toISOString(),
+                staff: JSON.parse(JSON.stringify(staffList)),
+                schedules: JSON.parse(JSON.stringify(schedules)),
+                notes: JSON.parse(JSON.stringify(globalNotes))
+            };
+
+            saveDraftsToStorage(drafts);
+            renderDraftList();
+            alert(`💾 Resep "${draftName}" berhasil disimpan ke buku resep!`);
+        });
+
+        function renderDraftList() {
+            let container = document.getElementById('draftListContainer');
+            let drafts = getSavedDrafts();
+            let draftIds = Object.keys(drafts);
+            
+            document.getElementById('draftCountDisplay').innerText = draftIds.length;
+            container.innerHTML = "";
+
+            if (draftIds.length === 0) {
+                container.innerHTML = `<p class="text-slate-400 italic text-xs text-center py-4">Buku resep masih kosong. Klik "Simpan Resep Baru" untuk mulai mencatat.</p>`;
+                return;
+            }
+
+            draftIds.reverse().forEach(id => {
+                let d = drafts[id];
+                let formattedDate = new Date(d.date).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
+                
+                let card = document.createElement('div');
+                card.className = "bg-slate-50 border border-purple-200/80 p-3 rounded-2xl flex justify-between items-center gap-2 shadow-sm hover:bg-purple-50/40 transition";
+                card.innerHTML = `
+                    <div class="flex flex-col gap-0.5 overflow-hidden">
+                        <div class="font-bold text-slate-800 text-xs truncate">${d.name}</div>
+                        <div class="text-[10px] text-slate-400">🕒 Disimpan: ${formattedDate} | 👥 Barista: ${d.staff.length} orang</div>
+                    </div>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button onclick="loadDraft('${id}')" class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1.5 rounded-xl font-bold text-[11px] transition shadow-sm">Buka Resep</button>
+                        <button onclick="deleteDraft('${id}')" class="bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-600 px-2.5 py-1.5 rounded-xl border border-slate-200 font-bold text-[11px] transition shadow-sm" title="Hapus Resep">🗑️</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        window.loadDraft = function(id) {
+            let drafts = getSavedDrafts();
+            if (drafts[id]) {
+                showConfirm(
+                    "Buka Resep",
+                    `Apakah Anda ingin membuka resep "${drafts[id].name}"? Data jadwal saat ini akan digantikan dengan resep ini.`,
+                    () => {
+                        saveStateToHistory();
+                        staffList = JSON.parse(JSON.stringify(drafts[id].staff));
+                        schedules = JSON.parse(JSON.stringify(drafts[id].schedules));
+                        globalNotes = JSON.parse(JSON.stringify(drafts[id].notes));
+                        triggerAutoSave();
+                        renderTable();
+                        draftModal.classList.add('hidden');
+                        alert(`📂 Resep "${drafts[id].name}" berhasil dimuat ke meja!`);
+                    }
+                );
+            }
+        }
+
+        window.deleteDraft = function(id) {
+            let drafts = getSavedDrafts();
+            let name = drafts[id] ? drafts[id].name : 'Resep';
+            showConfirm(
+                "Hapus Resep",
+                `Apakah Anda yakin ingin menghapus resep "${name}" secara permanen?`,
+                () => {
+                    delete drafts[id];
+                    saveDraftsToStorage(drafts);
+                    renderDraftList();
+                }
+            );
+        }
 
         const manifestData = {
             "name": "Scheduly",
@@ -659,7 +1144,9 @@
         const shiftInstantBtns = document.querySelectorAll('.shift-instant-btn');
 
         const exportModal = document.getElementById('exportModal');
-        document.getElementById('openExportModalBtn').addEventListener('click', () => exportModal.classList.remove('hidden'));
+        document.querySelectorAll('#openExportModalBtn').forEach(btn => {
+            btn.addEventListener('click', () => exportModal.classList.remove('hidden'));
+        });
         document.getElementById('closeExportModalBtn').addEventListener('click', () => exportModal.classList.add('hidden'));
 
         const confirmModal = document.getElementById('confirmModal');
@@ -711,7 +1198,7 @@
 
                     if (format === 'csv') {
                         let daysShort = currentLang === 'id' ? daysShortID : daysShortENG;
-                        content = `# ${headerInfoText}\nStaff,Date,Day,Shift\n`;
+                        content = `# ${headerInfoText}\nBarista,Date,Day,Shift\n`;
                         let totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
                         for (let staff of staffList) {
                             for (let d = 1; d <= totalDays; d++) {
@@ -730,7 +1217,7 @@
                         mimeType = "text/csv;charset=utf-8";
                     } else if (format === 'xlsx') {
                         let daysShort = currentLang === 'id' ? daysShortID : daysShortENG;
-                        content = `${headerInfoText}\nStaff\tDate\tDay\tShift\n`;
+                        content = `${headerInfoText}\nBarista\tDate\tDay\tShift\n`;
                         let totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
                         for (let staff of staffList) {
                             for (let d = 1; d <= totalDays; d++) {
@@ -790,8 +1277,8 @@
                             .holiday-text-colored { color: #991b1b; font-weight: bold; background-color: #fee2e2; padding: 1px 4px; border-radius: 3px; display: inline-block; margin-bottom: 2px; }
                             .web-footer { text-align: center; font-size: 9px; color: #64748b; border-top: 1px solid #fde68a; padding-top: 4px; margin-top: auto; page-break-inside: avoid; }
                         </style></head><body>
-                            <div class="web-header">☕ Scheduly – Team Schedule & Notes (${monthsName[currentMonth]} ${currentYear})</div>
-                            <table><thead><tr><th class="name-col">Nama / Name</th>`;
+                            <div class="web-header">☕ Scheduly – Nota Pesanan Barista (${monthsName[currentMonth]} ${currentYear})</div>
+                            <table><thead><tr><th class="name-col">Barista</th>`;
                         
                         for (let d = 1; d <= totalDays; d++) {
                             let dateKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
@@ -838,7 +1325,7 @@
                         });
                         htmlContent += `</tbody></table>`;
 
-                        htmlContent += `<div class="notes-section"><h3>📝 Catatan & Hari Peringatan</h3><ul>`;
+                        htmlContent += `<div class="notes-section"><h3>📝 Catatan Resepsionis & Hari Peringatan</h3><ul>`;
                         holidayNotes.forEach(h => { htmlContent += `<li><span class="holiday-text-colored">🚨 ${h}</span></li>`; });
                         userNotesList.forEach(n => { htmlContent += `<li>💬 ${n}</li>`; });
                         htmlContent += `</ul></div>`;
@@ -874,7 +1361,7 @@
 
             let thead = scheduleTable.querySelector('thead');
             let headerHTML = `<tr class="bg-amber-100/50 text-slate-700 border-b border-amber-200/60 font-playful">
-                <th class="p-3.5 sticky left-0 bg-amber-100/90 backdrop-blur-md z-10 font-bold min-w-[150px] shadow-sm">Nama / Name</th>`;
+                <th class="p-3.5 sticky left-0 bg-amber-100/90 backdrop-blur-md z-10 font-bold min-w-[150px] shadow-sm">Barista / Staff</th>`;
             
             for (let day = 1; day <= totalDays; day++) {
                 let dateObj = new Date(currentYear, currentMonth, day);
@@ -1088,7 +1575,7 @@
                 
                 let textarea = document.createElement('textarea');
                 textarea.rows = 1;
-                textarea.placeholder = currentLang === 'id' ? 'Tulis catatan di sini...' : 'Type note here...';
+                textarea.placeholder = currentLang === 'id' ? 'Tulis catatan resepsionis di sini...' : 'Type note here...';
                 textarea.className = "w-full bg-transparent focus:bg-amber-50/50 focus:outline-none focus:ring-1 focus:ring-amber-400 p-1.5 rounded-xl text-xs text-slate-700 resize-none overflow-hidden transition";
                 textarea.value = noteText;
 
@@ -1129,7 +1616,7 @@
             if (autoHolidayNotes.length === 0 && userNotesList.length === 0) {
                 let emptyMsg = document.createElement('p');
                 emptyMsg.className = "text-slate-400 italic text-xs";
-                emptyMsg.innerText = currentLang === 'id' ? 'Belum ada catatan atau tanggal merah untuk bulan ini. Klik "+ Tambah Catatan" di atas.' : 'No notes or red dates for this month. Click "+ Add Note" above.';
+                emptyMsg.innerText = currentLang === 'id' ? 'Belum ada catatan atau tanggal merah untuk bulan ini. Klik "+ Catatan Baru" di atas.' : 'No notes or red dates for this month. Click "+ New Note" above.';
                 globalNotesContainer.appendChild(emptyMsg);
             }
         }
@@ -1148,6 +1635,18 @@
         window.deleteStaff = function(staffName) {
             showConfirm(translations[currentLang].deleteStaffTitle, translations[currentLang].deleteStaffConfirm.replace('{name}', staffName), () => {
                 saveStateToHistory();
+                
+                // Arsipkan ke Trash Bin dengan masa retensi 30 hari
+                let trashBin = getSavedTrashBin();
+                let trashId = 'trash_' + Date.now();
+                trashBin[trashId] = {
+                    isStaff: true,
+                    name: staffName,
+                    deletedAt: Date.now(),
+                    staffSchedule: schedules[staffName] || {}
+                };
+                saveTrashBinToStorage(trashBin);
+
                 delete schedules[staffName];
                 staffList = staffList.filter(s => s !== staffName);
                 triggerAutoSave();
@@ -1185,7 +1684,6 @@
         document.getElementById('nextMonth').addEventListener('click', () => { currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } renderTable(); });
 
         updateLanguageUI();
-        renderTable();
     </script>
 
     <!-- Script Mini Game RPG & Ambient Chill BGM Icon & Inventory System -->
@@ -1773,7 +2271,7 @@
                     rpgState.playerHp = Math.min(rpgState.playerMaxHp, rpgState.playerHp + heal);
                     appendRpgLog(`🧪 Menggunakan Health Potion! HP pulih sebesar +${heal}.`);
                 } else {
-                    appendRpgLog(`❌ Potion habis! Racik potion di tab Alchemy Lab.`);
+                    appendRpgLog(`❌ Potion habis! Racik potion di tab Bar Racikan.`);
                     controls.style.pointerEvents = 'auto';
                     return;
                 }

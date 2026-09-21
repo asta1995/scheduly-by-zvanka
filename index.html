@@ -44,9 +44,12 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <body class="min-h-screen flex flex-col selection:bg-rose-200 theme-pinky"> 
 
 <!-- MODAL AUTH / LOGIN KONTER & PIN --> 
-<div id="authModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4"> 
+<div id="authModal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4"> 
   <div class="standard-card p-6 md:p-8 w-full max-w-md bg-white shadow-2xl relative"> 
-    <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3"> 
+    <button id="closeAuthModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition" title="Tutup">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3 pr-8"> 
       <div class="flex items-center gap-2.5"> 
         <div class="w-10 h-10 rounded-xl bg-[#ff3399] text-white flex items-center justify-center shadow-md shrink-0 logo-handwriting text-xl">C's</div> 
         <div> 
@@ -80,7 +83,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </div> 
       <div> 
         <label class="block font-semibold text-slate-700 mb-1" data-i18n="auth_label_pin">PIN Server Konter (Misal: sususu):</label> 
-        <input type="password" id="authPinInput" placeholder="••••••" maxlength="20" class="w-full p-2.5 border border-slate-300 rounded-lg bg-slate-50 focus:bg-white focus:ring-1 focus:ring-rose-600 tracking-widest font-mono text-center text-sm font-bold"> 
+        <input type="password" id="authPinInput" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" maxlength="20" class="w-full p-2.5 border border-slate-300 rounded-lg bg-slate-50 focus:bg-white focus:ring-1 focus:ring-rose-600 tracking-widest font-mono text-center text-sm font-bold"> 
         <p class="text-[10px] text-slate-400 mt-1" data-i18n="auth_pin_hint">*Nama akun Anda akan otomatis terdaftar ke dalam tabel staf konter & PIN khusus ini.</p> 
       </div> 
     </div> 
@@ -462,7 +465,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <button id="openSidebarBtn" class="w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition" title="Buka Menu">
         <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button> 
-      <div id="webBrandRefresh" class="flex items-center gap-2.5 cursor-pointer group" title="Ketuk untuk muat ulang halaman"> 
+      <div id="webBrandRefresh" class="flex items-center gap-2.5 cursor-pointer group" title="Kembali ke Beranda Utama"> 
         <div id="brandLogoBox" class="w-9 h-9 rounded-lg bg-[#ff3399] text-white flex items-center justify-center shadow-sm shrink-0 logo-handwriting text-base">C's</div> 
         <div> 
           <div class="flex items-center gap-1.5"><h1 id="appTitleHeader" class="text-sm font-bold text-slate-900 tracking-tight">Scheduly – Jadwal Tim Clandy's</h1><span id="unofficialBadgeHeader" class="text-[9px] bg-rose-100 text-rose-700 px-1.5 py-0.2 rounded font-semibold">*unofficial</span></div> 
@@ -623,7 +626,7 @@ const authLangToggle = document.getElementById('authLangToggle');
 
 const translations = { 
   id: { 
-    titleTeam: "Scheduly – Jadwal & Catatan Tim Clandy's", titleGeneral: "Scheduly – Jadwal Umum", 
+    titleTeam: "Scheduly – Jadwal & Catatan Tim Clandy's", titleGeneral: "Jadwal Umum", 
     home_title: "Scheduly – Beranda Utama", menu_team_title: "Jadwal & Catatan Tim Clandy's", 
     menu_team_desc: "(Khusus Pramuniaga dan Kasir Clandy's)", menu_general_title: "Jadwal Umum", 
     menu_general_desc: "Pengelolaan shift operasional umum secara komprehensif", 
@@ -659,7 +662,7 @@ const translations = {
     btn_picker_staff: "Pilih Staff", picker_title: "Pilih Staff Terdaftar Konter", picker_desc: "Pilih nama staff dari daftar server konter aktif:", btn_add_new_staff: "+ Tambah Staff Baru Manual"
   }, 
   en: { 
-    titleTeam: "Scheduly – Clandy's Team Schedule & Notes", titleGeneral: "Scheduly – General Schedule", 
+    titleTeam: "Scheduly – Clandy's Team Schedule & Notes", titleGeneral: "General Schedule", 
     home_title: "Scheduly – Main Dashboard", menu_team_title: "Clandy's Team Schedule & Notes", 
     menu_team_desc: "(Dedicated for Clandy's Cashiers and Floor Staff)", menu_general_title: "General Schedule", 
     menu_general_desc: "Comprehensive operational shift management", menu_folder_title: "Folder & Storage", 
@@ -702,7 +705,7 @@ function updateLanguageUI() {
   homeLangToggleBtn.innerText = langLabel; 
   authLangToggle.innerText = langLabel;
   document.title = currentActivePage === 'team' ? translations[currentLang].titleTeam : translations[currentLang].titleGeneral; 
-  document.getElementById('appTitleHeader').innerText = currentActivePage === 'team' ? (currentLang === 'id' ? "Scheduly – Jadwal Tim Clandy's" : "Scheduly – Clandy's Team Schedule") : (currentLang === 'id' ? "Scheduly – Jadwal Umum" : "Scheduly – General Schedule"); 
+  document.getElementById('appTitleHeader').innerText = currentActivePage === 'team' ? (currentLang === 'id' ? "Scheduly – Jadwal Tim Clandy's" : "Scheduly – Clandy's Team Schedule") : (currentLang === 'id' ? "Jadwal Umum" : "General Schedule"); 
   document.getElementById('notesHeadingText').innerText = translations[currentLang].notes_heading; 
   document.getElementById('addGlobalNoteBtn').innerText = translations[currentLang].btn_add_note; 
   document.getElementById('clearSheetText').innerText = translations[currentLang].btn_clear_sheet; 
@@ -791,6 +794,17 @@ const sidebarLogoutBtn = document.getElementById('sidebarLogoutBtn');
 const openStaffPickerTopBtn = document.getElementById('openStaffPickerTopBtn');
 const sidebarClandysAuthBox = document.getElementById('sidebarClandysAuthBox');
 const settingsProfileSection = document.getElementById('settingsProfileSection');
+const closeAuthModalBtn = document.getElementById('closeAuthModalBtn');
+
+closeAuthModalBtn.addEventListener('click', () => {
+  authModal.classList.add('hidden');
+  welcomePage.classList.remove('hidden');
+});
+
+// Fungsi klik logo/ikon web untuk kembali ke beranda utama
+document.getElementById('webBrandRefresh').addEventListener('click', () => {
+  welcomePage.classList.remove('hidden');
+});
 
 function checkAuthSession() {
   if (currentActivePage === 'team') {

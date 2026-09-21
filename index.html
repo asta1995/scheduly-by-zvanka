@@ -3,7 +3,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<title class="lang-title">Scheduly – Jadwal & Catatan Tim Clandy's</title> 
+<title class="lang-title">Scheduly � Jadwal & Catatan Tim Clandy's</title> 
 <!-- Tailwind CSS --> 
 <script src="https://cdn.tailwindcss.com"></script> 
 <!-- Google Font Inter & Pacifico (Handwriting) --> 
@@ -46,7 +46,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <!-- MODAL AUTH / LOGIN KONTER & PIN --> 
 <div id="authModal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4"> 
   <div class="standard-card p-6 md:p-8 w-full max-w-md bg-white shadow-2xl relative"> 
-    <button id="closeAuthModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition" title="Tutup">✕</button>
+    <button id="closeAuthModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition" title="Tutup"></button>
     <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3 pr-8"> 
       <div class="flex items-center gap-2.5"> 
         <div class="w-10 h-10 rounded-xl bg-[#ff3399] text-white flex items-center justify-center shadow-md shrink-0 logo-handwriting text-xl">C's</div> 
@@ -97,7 +97,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 md:p-8 w-full max-w-xl bg-white shadow-2xl relative max-h-[90vh] overflow-y-auto"> 
     <div class="flex items-center justify-between mb-5 border-b border-slate-200 pb-4"> 
       <div class="flex items-center gap-3"> 
-        <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md shrink-0 font-bold text-lg">[📅]</div> 
+        <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md shrink-0 font-bold text-lg">[]</div> 
         <div> 
           <h1 class="text-xl font-bold text-slate-900" data-i18n="home_title">Scheduly</h1> 
           <p class="text-xs text-slate-500" data-i18n="home_subtitle">Pilih menu atau navigasi lembar kerja di bawah ini:</p> 
@@ -121,7 +121,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </button> 
       <button id="homeMenuGeneralBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 flex items-center justify-between transition group"> 
         <div class="flex items-center gap-3"> 
-          <span class="p-2 rounded-lg bg-blue-100 text-blue-600 group-hover:scale-110 transition flex items-center justify-center font-bold">[📊]</span> 
+          <span class="p-2 rounded-lg bg-blue-100 text-blue-600 group-hover:scale-110 transition flex items-center justify-center font-bold">[]</span> 
           <div> 
             <div class="font-bold text-slate-900 text-sm" data-i18n="menu_general_title">Jadwal Umum</div> 
             <div class="text-slate-500 text-[11px]" data-i18n="menu_general_desc">Pengelolaan shift operasional umum secara komprehensif</div> 
@@ -131,7 +131,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </button> 
       <button id="homeMenuRootFolderBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 flex items-center justify-between transition group"> 
         <div class="flex items-center gap-3"> 
-          <span class="p-2 rounded-lg bg-amber-100 text-amber-600 group-hover:scale-110 transition flex items-center justify-center font-bold">[📁]</span> 
+          <span class="p-2 rounded-lg bg-amber-100 text-amber-600 group-hover:scale-110 transition flex items-center justify-center font-bold">[]</span> 
           <div> 
             <div class="font-bold text-slate-900 text-sm" data-i18n="menu_folder_title">Folder & Penyimpanan</div> 
             <div class="text-slate-500 text-[11px]" data-i18n="menu_folder_desc">Kelola direktori multi-folder dan arsip draft lembar kerja</div> 
@@ -142,7 +142,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     </div> 
     <div class="flex gap-2"> 
       <button id="openSettingsModalFromHome" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-lg font-medium text-xs transition flex items-center justify-center gap-1.5 border border-slate-300"> 
-        <span>[⚙️]</span> <span data-i18n="btn_settings">Pengaturan</span> 
+        <span>[]</span> <span data-i18n="btn_settings">Pengaturan</span> 
       </button> 
       <button id="openHelpModalFromHome" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-lg font-medium text-xs transition flex items-center justify-center gap-1.5 border border-slate-300"> 
         <span>[?]</span> <span data-i18n="btn_help_center">Pusat Bantuan</span> 
@@ -163,7 +163,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
         </div> 
       </div> 
     </div> 
-    <button id="closeHelpModalBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
+    <button id="closeHelpModalBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup"></button> 
     <div class="p-6 flex-grow overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed"> 
       <div class="bg-rose-50 border border-rose-200 rounded-lg p-3.5"> 
         <div class="font-bold text-rose-800 text-sm mb-1 flex items-center gap-1.5"><span data-i18n="manual_sec1_title">1. Portal Konter, Login, & Hak Akses (Khusus Tim Clandy's)</span></div> 
@@ -194,7 +194,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm bg-white shadow-2xl relative border-2 border-rose-500"> 
     <div class="flex items-center justify-between mb-2 border-b border-slate-200 pb-2"> 
       <div class="font-bold text-rose-600 text-xs flex items-center gap-1.5"><span id="hintStepTitle">Panduan Cepat (1/4)</span></div> 
-      <button id="closeHintTourBtn" class="text-slate-400 hover:text-slate-700 text-xs font-bold" data-i18n="hint_skip">✕ Lewati</button> 
+      <button id="closeHintTourBtn" class="text-slate-400 hover:text-slate-700 text-xs font-bold" data-i18n="hint_skip"> Lewati</button> 
     </div> 
     <p id="hintStepDesc" class="text-xs text-slate-700 mb-4 leading-relaxed">Selamat datang di Scheduly! Klik sel kalender untuk mengisi shift.</p> 
     <div class="flex justify-between items-center"> 
@@ -210,10 +210,10 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <!-- MODAL PENGATURAN & NOTIFIKASI --> 
 <div id="settingsModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4"> 
   <div class="bg-white rounded-xl shadow-2xl flex flex-col max-w-lg w-full mx-auto overflow-hidden border border-slate-200 relative"> 
-    <button id="closeSettingsModalBtn" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition z-10" title="Tutup">✕</button>
+    <button id="closeSettingsModalBtn" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition z-10" title="Tutup"></button>
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-12"> 
       <div class="flex items-center gap-3"> 
-        <span class="p-2 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center font-bold">[⚙️]</span> 
+        <span class="p-2 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center font-bold">[]</span> 
         <div> 
           <h2 class="text-base font-bold text-slate-900" data-i18n="settings_title">Pengaturan Akun & Personalisasi</h2> 
           <p class="text-xs text-slate-500" data-i18n="settings_subtitle">Kelola preferensi notifikasi dan akun Anda</p> 
@@ -254,7 +254,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white"> 
     <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-3 pr-6"> 
       <h3 class="font-bold text-slate-900 text-sm" data-i18n="req_modal_title">Request Perubahan Shift</h3> 
-      <button id="closeMemberReqModal" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeMemberReqModal" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <p class="text-xs text-slate-600 mb-3" id="reqModalSubtitle" data-i18n="req_modal_subtitle">Kirim permintaan perubahan shift kepada Admin Konter.</p> 
     <input type="hidden" id="reqStaffName"> 
@@ -280,7 +280,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-5 w-full max-w-sm bg-white shadow-2xl relative"> 
     <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-2 pr-6"> 
       <h3 class="font-bold text-slate-900 text-xs" data-i18n="picker_title">Pilih Staff Terdaftar Konter</h3> 
-      <button id="closeStaffPickerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeStaffPickerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <p class="text-[11px] text-slate-500 mb-3" data-i18n="picker_desc">Pilih nama staff dari daftar server konter aktif:</p> 
     <div id="staffPickerListContainer" class="space-y-1.5 max-h-48 overflow-y-auto mb-3"></div> 
@@ -293,9 +293,9 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="bg-white rounded-xl shadow-2xl flex flex-col flex-grow max-w-6xl w-full mx-auto overflow-hidden border border-slate-200 relative"> 
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-16"> 
       <div class="flex items-center gap-3"> 
-        <div class="w-10 h-10 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xl shadow-sm font-bold">[📁]</div> 
+        <div class="w-10 h-10 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xl shadow-sm font-bold">[]</div> 
         <div> 
-          <h2 class="text-base md:text-lg font-bold text-slate-900" data-i18n="folder_modal_main_title">Folder • Ruang Simpan Draft & Multi-Folder</h2> 
+          <h2 class="text-base md:text-lg font-bold text-slate-900" data-i18n="folder_modal_main_title">Folder � Ruang Simpan Draft & Multi-Folder</h2> 
           <p id="rootBreadcrumbPath" class="text-xs text-slate-500" data-i18n="root_breadcrumb">Direktori Utama /</p> 
         </div> 
       </div> 
@@ -304,11 +304,11 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
           <span>[+]</span> <span data-i18n="btn_new_folder">Buat Folder</span>
         </button> 
         <button id="rootSaveCurrentDraftBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-3.5 py-2 rounded-lg text-xs shadow-sm transition flex items-center gap-1.5">
-          <span>[💾]</span> <span data-i18n="btn_save_session">Simpan Sesi Aktif</span>
+          <span>[]</span> <span data-i18n="btn_save_session">Simpan Sesi Aktif</span>
         </button> 
       </div> 
     </div> 
-    <button id="closeFullScreenFolderBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
+    <button id="closeFullScreenFolderBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup"></button> 
     <div class="px-6 py-3 bg-white border-b border-slate-100 flex justify-between items-center"> 
       <div class="flex items-center gap-2">
         <button id="rootBackBtn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-1.5 rounded-lg font-medium transition">&larr; <span data-i18n="btn_back_parent">Kembali ke Folder Induk</span></button> 
@@ -325,7 +325,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-lg bg-white shadow-2xl relative flex flex-col max-h-[85vh]"> 
     <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-3 pr-6"> 
       <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2"><span id="explorerModalTitle" data-i18n="explorer_modal_title">Kelola Folder & Multi-Pilih Item</span></h3> 
-      <button id="closeFolderExplorerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeFolderExplorerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <p class="text-xs text-slate-500 mb-3" id="explorerModalSubtitle" data-i18n="explorer_modal_subtitle">Pilih item untuk dipindah, disalin, atau dihapus secara multi-pilih.</p> 
     
@@ -349,7 +349,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 class="font-bold text-slate-900 text-sm" data-i18n="save_modal_title">Simpan ke Folder</h3> 
-      <button id="closeSaveFolderModal" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeSaveFolderModal" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <div class="space-y-3 text-xs mb-4"> 
       <div><label class="block font-semibold text-slate-700 mb-1" data-i18n="label_filename">Nama File / Draft:</label><input type="text" id="saveFileNameInput" class="w-full p-2 border border-slate-300 rounded-lg bg-slate-50 text-xs"></div> 
@@ -369,7 +369,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <div id="sidebarBrandIcon" class="w-8 h-8 rounded-lg bg-[#ff3399] text-white flex items-center justify-center shadow-xs shrink-0 logo-handwriting text-sm">C's</div> 
       <span class="font-bold text-slate-900 text-sm" data-i18n="sidebar_title">Menu Scheduly</span> 
     </div> 
-    <button id="closeSidebarBtn" class="w-7 h-7 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+    <button id="closeSidebarBtn" class="w-7 h-7 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
   </div> 
   <div class="p-4 flex-grow space-y-4 text-xs overflow-y-auto"> 
     <div id="sidebarClandysAuthBox" class="bg-rose-50 border border-rose-200 rounded-lg p-3"> 
@@ -385,7 +385,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
           <span class="text-[10px] text-rose-600 font-normal pl-7" data-i18n="nav_team_subtitle">(Pramuniaga & Kasir)</span> 
         </button> 
         <button id="navPageGeneralBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-          <span class="font-bold">[📊]</span>
+          <span class="font-bold">[]</span>
           <span data-i18n="menu_general_title">Jadwal Umum</span>
         </button> 
       </div> 
@@ -393,11 +393,11 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <hr class="border-slate-200"> 
     <div class="space-y-1"> 
       <button id="menuHomeBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold">[🏠]</span>
+        <span class="font-bold">[]</span>
         <span data-i18n="sidebar_home">Beranda Utama</span>
       </button> 
       <button id="menuSettingsBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold">[⚙️]</span>
+        <span class="font-bold">[]</span>
         <span data-i18n="sidebar_settings">Pengaturan & Notifikasi</span>
       </button> 
       <button id="menuHelpModalBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
@@ -421,7 +421,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <div id="sidebarExplorerTree" class="space-y-1 max-h-56 overflow-y-auto border border-slate-200 rounded-lg p-2 bg-slate-50 font-mono text-[11px]"></div> 
     </div>  
   </div> 
-  <div class="p-3 border-t border-slate-200 text-center text-[10px] text-slate-400" data-i18n="sidebar_footer">Scheduly PWA • Konter Sync Server</div> 
+  <div class="p-3 border-t border-slate-200 text-center text-[10px] text-slate-400" data-i18n="sidebar_footer">Scheduly PWA � Konter Sync Server</div> 
 </div> 
 <div id="sidebarOverlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 hidden"></div> 
 
@@ -430,7 +430,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <header class="standard-card px-4 md:px-6 py-3.5 sticky top-0 z-30 flex justify-between items-center border-x-0 border-t-0 rounded-none bg-white"> 
     <div class="flex items-center gap-3"> 
       <button id="openSidebarBtn" class="w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition" title="Buka Menu">
-        <span class="font-bold text-base">[☰]</span>
+        <span class="font-bold text-base">[]</span>
       </button> 
       <div id="webBrandRefresh" class="flex items-center gap-2.5 cursor-pointer group" title="Kembali ke Beranda Utama"> 
         <div id="brandLogoBox" class="w-9 h-9 rounded-lg bg-[#ff3399] text-white flex items-center justify-center shadow-sm shrink-0 logo-handwriting text-base">C's</div> 
@@ -445,12 +445,12 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <button id="openStaffPickerTopBtn" class="hidden bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs px-3 py-2 rounded-lg font-medium border border-red-200 transition shadow-sm items-center gap-1"><span class="hidden sm:inline" data-i18n="btn_picker_staff">Pilih Staff</span></button> 
       
       <button id="copyLinkBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5">
-        <span>[🔗]</span>
+        <span>[]</span>
         <span class="hidden md:inline" data-i18n="btn_copylink">Salin Link</span>
       </button> 
 
       <button id="openExportModalBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3.5 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5">
-        <span>[📤]</span>
+        <span>[]</span>
         <span class="hidden md:inline" data-i18n="btn_export">Export</span>
       </button> 
 
@@ -468,11 +468,11 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <div class="flex flex-wrap items-center justify-between gap-2 mb-3 no-export px-1"> 
       <div class="flex items-center gap-1.5"> 
         <button id="undoBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5" disabled>
-          <span>[↩]</span>
+          <span>[]</span>
           <span class="hidden sm:inline" id="undoText" data-i18n="btn_undo">Undo</span>
         </button> 
         <button id="redoBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5" disabled>
-          <span>[↪]</span>
+          <span>[]</span>
           <span class="hidden sm:inline" id="redoText" data-i18n="btn_redo">Redo</span>
         </button> 
       </div> 
@@ -496,7 +496,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <div id="globalNotesContainer" class="flex flex-col gap-2.5 text-xs"></div> 
     </div> 
   </main>  
-  <footer class="text-center py-4 text-xs text-slate-500 font-medium bg-white border-t border-slate-200 mt-auto" id="footerText" data-i18n="footer_text">© 2026 Scheduly • Didesain untuk kemudahan & kenyamanan tim</footer> 
+  <footer class="text-center py-4 text-xs text-slate-500 font-medium bg-white border-t border-slate-200 mt-auto" id="footerText" data-i18n="footer_text">� 2026 Scheduly � Didesain untuk kemudahan & kenyamanan tim</footer> 
 </div> 
 
 <!-- Pop-Up Export --> 
@@ -504,7 +504,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 class="font-bold text-slate-900 text-sm" data-i18n="export_modal_title">Pilih Format Laporan</h3> 
-      <button id="closeExportModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeExportModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <div class="grid grid-cols-2 gap-2.5 mb-2"> 
       <button type="button" class="export-format-btn py-3 px-3 rounded-lg border font-medium text-xs transition bg-white text-slate-800 border-slate-300 hover:bg-slate-50 text-left flex items-center gap-2 shadow-xs" data-format="xlsx"><div><div>Excel (.xlsx)</div></div></button> 
@@ -520,7 +520,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 id="selectedDateTitle" class="font-bold text-slate-900 text-sm" data-i18n="modal_shift_title">Pilih Shift</h3> 
-      <button id="closeFormBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeFormBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <input type="hidden" id="activeStaffKey"><input type="hidden" id="activeDateKey"> 
     <div class="grid grid-cols-3 gap-2"> 
@@ -542,7 +542,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 id="selectedDateTitleGeneral" class="font-bold text-slate-900 text-sm" data-i18n="modal_gen_shift_title">Pilih Shift Umum</h3> 
-      <button id="closeFormGeneralBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeFormGeneralBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <input type="hidden" id="activeStaffKeyGen"><input type="hidden" id="activeDateKeyGen"> 
     <div class="grid grid-cols-3 gap-2"> 
@@ -584,7 +584,7 @@ const authLangToggle = document.getElementById('authLangToggle');
 
 const translations = { 
   id: { 
-    titleTeam: "Scheduly – Jadwal & Catatan Tim Clandy's", titleGeneral: "Jadwal Umum", 
+    titleTeam: "Scheduly � Jadwal & Catatan Tim Clandy's", titleGeneral: "Jadwal Umum", 
     home_title: "Scheduly", home_subtitle: "Pilih menu atau navigasi lembar kerja di bawah ini:",
     menu_team_title: "Jadwal & Catatan Tim Clandy's", 
     menu_team_desc: "(Khusus Pramuniaga dan Kasir Clandy's)", menu_general_title: "Jadwal Umum", 
@@ -598,12 +598,12 @@ const translations = {
     manual_sec3_title: "3. Ekspor Laporan & Cetak", manual_sec3_desc: "Unduh jadwal bulanan dalam berbagai format: Excel, Word, CSV, atau PDF.",
     manual_sec4_title: "4. Hijriah & Hari Libur", manual_sec4_desc: "Dilengkapi konversi otomatis penanggalan Hijriah serta hari libur nasional sepanjang masa.",
     btn_restart_hints: "Tampilkan Panduan Interaktif Lagi", btn_got_it: "Mengerti!", 
-    folder_modal_main_title: "Folder • Ruang Simpan Draft & Multi-Folder", btn_new_folder: "Buat Folder", btn_save_session: "Simpan Sesi Aktif", 
+    folder_modal_main_title: "Folder � Ruang Simpan Draft & Multi-Folder", btn_new_folder: "Buat Folder", btn_save_session: "Simpan Sesi Aktif", 
     save_modal_title: "Simpan ke Folder", label_filename: "Nama File / Draft:", label_target_folder: "Pilih Direktori / Folder Tujuan:", 
     option_root: "Direktori Utama (Root)", sidebar_title: "Menu Scheduly", sidebar_nav_pages: "Navigasi Halaman", 
     nav_team_subtitle: "(Pramuniaga & Kasir)", sidebar_home: "Beranda Utama", sidebar_settings: "Pengaturan & Notifikasi", sidebar_help: "Pusat Bantuan & Manual", 
     autosave_text: "Tersimpan Otomatis", btn_copylink: "Salin Link", btn_export: "Export", btn_save_draft: "Simpan Draft", btn_clear_sheet: "Kosongkan Lembar Kerja", 
-    notes_heading: "Catatan, Peringatan Nasional & Hari Besar Islam", btn_add_note: "+ Tambah Catatan", footer_text: "© 2026 Scheduly • Didesain untuk kemudahan & kenyamanan tim", 
+    notes_heading: "Catatan, Peringatan Nasional & Hari Besar Islam", btn_add_note: "+ Tambah Catatan", footer_text: "� 2026 Scheduly � Didesain untuk kemudahan & kenyamanan tim", 
     export_modal_title: "Pilih Format Laporan", modal_shift_title: "Pilih Shift", modal_gen_shift_title: "Pilih Shift Umum", btn_clear_shift: "Hapus Shift", 
     confirm_title: "Konfirmasi", confirm_msg: "Apakah kamu yakin?", btn_yes: "Ya", btn_no: "Tidak", copyLinkSuccess: "Link web berhasil disalin ke clipboard!", 
     deleteStaffTitle: "Hapus Staff", deleteStaffConfirm: "Apakah kamu yakin ingin menghapus staf ini beserta seluruh jadwalnya?", 
@@ -619,16 +619,16 @@ const translations = {
     set_sec2: "Push Notifikasi & Pengingat Shift", set_push_desc: "Aktifkan untuk menerima notifikasi pengingat jadwal shift harian.",
     btn_test_notif: "Tes Kirim Push Notifikasi Simulasi", btn_save_settings: "Simpan Pengaturan",
     btn_picker_staff: "Pilih Staff", picker_title: "Pilih Staff Terdaftar Konter", picker_desc: "Pilih nama staff dari daftar server konter aktif:", btn_add_new_staff: "+ Tambah Staff Baru Manual",
-    hint_skip: "[✕] Lewati", hint_prev: "Kembali", hint_next: "Lanjut →",
+    hint_skip: "[] Lewati", hint_prev: "Kembali", hint_next: "Lanjut ",
     sidebar_logout: "Logout / Ganti Akun", sidebar_folder: "Folder Penyimpanan", sidebar_open_window: "Buka Jendela",
-    sidebar_btn_save: "Simpan", sidebar_btn_folder: "+ Folder", sidebar_btn_move: "Pindah", sidebar_btn_copy: "Salin", sidebar_btn_delete: "Hapus Terpilih", sidebar_footer: "Scheduly PWA • Konter Sync Server",
+    sidebar_btn_save: "Simpan", sidebar_btn_folder: "+ Folder", sidebar_btn_move: "Pindah", sidebar_btn_copy: "Salin", sidebar_btn_delete: "Hapus Terpilih", sidebar_footer: "Scheduly PWA � Konter Sync Server",
     header_logout: "Logout", btn_undo: "Undo", btn_redo: "Redo",
     btn_back_parent: "Kembali ke Folder Induk", btn_multi_action: "Multi-Pilih Aksi", root_item_count: "0 Item ditemukan", root_breadcrumb: "Direktori Utama /",
     explorer_modal_title: "Kelola Folder & Multi-Pilih Item", explorer_modal_subtitle: "Pilih item untuk dipindah, disalin, atau dihapus secara multi-pilih.", explorer_label_target: "Pilih Folder Tujuan:", explorer_btn_execute: "Pilih Aksi", explorer_btn_close: "Tutup",
     btn_create_folder_short: "+ Folder Baru", btn_save: "Simpan", req_modal_title: "Request Perubahan Shift", req_modal_subtitle: "Kirim permintaan perubahan shift kepada Admin Konter.", req_label_shift: "Pilih Shift yang Diminta:", req_label_reason: "Alasan / Catatan Request:", req_placeholder_reason: "Tulis alasan singkat...", btn_send_request: "Kirim Request ke Admin"
   }, 
   en: { 
-    titleTeam: "Scheduly – Clandy's Team Schedule & Notes", titleGeneral: "General Schedule", 
+    titleTeam: "Scheduly � Clandy's Team Schedule & Notes", titleGeneral: "General Schedule", 
     home_title: "Scheduly", home_subtitle: "Select menu or worksheet navigation below:",
     menu_team_title: "Clandy's Team Schedule & Notes", 
     menu_team_desc: "(Dedicated for Clandy's Cashiers and Floor Staff)", menu_general_title: "General Schedule", 
@@ -642,12 +642,12 @@ const translations = {
     manual_sec3_title: "3. Exporting Reports & Printing", manual_sec3_desc: "Download your monthly schedule in multiple formats: Excel, Word, CSV, or PDF.",
     manual_sec4_title: "4. Hijriah & Holidays", manual_sec4_desc: "Includes automatic Hijriah calendar conversion and national holidays.",
     btn_restart_hints: "Show Interactive Hints Again", btn_got_it: "Got It!", 
-    folder_modal_main_title: "Folder • Draft Storage & Multi-Folder Directory", btn_new_folder: "New Folder", btn_save_session: "Save Active Session", 
+    folder_modal_main_title: "Folder � Draft Storage & Multi-Folder Directory", btn_new_folder: "New Folder", btn_save_session: "Save Active Session", 
     save_modal_title: "Save to Folder", label_filename: "File / Draft Name:", label_target_folder: "Select Target Directory / Folder:", 
     option_root: "Root Directory", sidebar_title: "Scheduly Menu", sidebar_nav_pages: "Page Navigation", 
     nav_team_subtitle: "(Floor Staff & Cashiers)", sidebar_home: "Main Dashboard", sidebar_settings: "Settings & Notifications", sidebar_help: "Help Center & Manual", 
     autosave_text: "Auto-saved", btn_copylink: "Copy Link", btn_export: "Export", btn_save_draft: "Save Draft", btn_clear_sheet: "Clear Workspace", 
-    notes_heading: "Notes, Holidays & Islamic Events", btn_add_note: "+ Add Note", footer_text: "© 2026 Scheduly • Designed for team ease and convenience", 
+    notes_heading: "Notes, Holidays & Islamic Events", btn_add_note: "+ Add Note", footer_text: "� 2026 Scheduly � Designed for team ease and convenience", 
     export_modal_title: "Select Report Format", modal_shift_title: "Select Shift", modal_gen_shift_title: "Select General Shift", btn_clear_shift: "Clear Shift", 
     confirm_title: "Confirmation", confirm_msg: "Are you sure?", btn_yes: "Yes", btn_no: "No", copyLinkSuccess: "Link successfully copied to clipboard!", 
     deleteStaffTitle: "Delete Staff", deleteStaffConfirm: "Are you sure you want to delete this staff and all associated schedules?", 
@@ -663,9 +663,9 @@ const translations = {
     set_sec2: "Push Notifications & Shift Reminders", set_push_desc: "Enable to receive daily shift reminder notifications.",
     btn_test_notif: "Test Simulated Push Notification", btn_save_settings: "Save Settings",
     btn_picker_staff: "Pick Staff", picker_title: "Pick Registered Counter Staff", picker_desc: "Select staff name from active counter server list:", btn_add_new_staff: "+ Add New Staff Manually",
-    hint_skip: "[✕] Skip", hint_prev: "Back", hint_next: "Next →",
+    hint_skip: "[] Skip", hint_prev: "Back", hint_next: "Next ",
     sidebar_logout: "Logout / Switch Account", sidebar_folder: "Storage Folders", sidebar_open_window: "Open Window",
-    sidebar_btn_save: "Save", sidebar_btn_folder: "+ Folder", sidebar_btn_move: "Move", sidebar_btn_copy: "Copy", sidebar_btn_delete: "Delete Selected", sidebar_footer: "Scheduly PWA • Counter Sync Server",
+    sidebar_btn_save: "Save", sidebar_btn_folder: "+ Folder", sidebar_btn_move: "Move", sidebar_btn_copy: "Copy", sidebar_btn_delete: "Delete Selected", sidebar_footer: "Scheduly PWA � Counter Sync Server",
     header_logout: "Logout", btn_undo: "Undo", btn_redo: "Redo",
     btn_back_parent: "Back to Parent Folder", btn_multi_action: "Multi-Select Action", root_item_count: "0 Items found", root_breadcrumb: "Root Directory /",
     explorer_modal_title: "Manage Folders & Multi-Select Items", explorer_modal_subtitle: "Select items to move, copy, or delete in bulk.", explorer_label_target: "Select Target Folder:", explorer_btn_execute: "Execute Action", explorer_btn_close: "Close",
@@ -736,7 +736,7 @@ function showHintStep(step) {
   hintStepDesc.innerText = data.desc; 
   hintProgressText.innerText = currentLang === 'id' ? `Langkah ${step} dari ${totalHintSteps}` : `Step ${step} of ${totalHintSteps}`; 
   hintPrevBtn.disabled = step === 1; 
-  hintNextBtn.innerText = step === totalHintSteps ? (currentLang === 'id' ? 'Selesai ✓' : 'Finish ✓') : (currentLang === 'id' ? 'Lanjut →' : 'Next →'); 
+  hintNextBtn.innerText = step === totalHintSteps ? (currentLang === 'id' ? 'Selesai ' : 'Finish ') : (currentLang === 'id' ? 'Lanjut ' : 'Next '); 
 } 
 
 function checkFirstVisitHints() { 
@@ -926,7 +926,7 @@ openStaffPickerTopBtn.addEventListener('click', () => {
 document.getElementById('closeStaffPickerBtn').addEventListener('click', () => staffPickerModal.classList.add('hidden'));
 document.getElementById('addNewStaffFromPickerBtn').addEventListener('click', () => {
   if (userSession && userSession.role !== 'admin') {
-    alert("⚠️ Hanya Admin yang memiliki akses untuk menambahkan staf baru ke dalam proyek konter ini!");
+    alert(" Hanya Admin yang memiliki akses untuk menambahkan staf baru ke dalam proyek konter ini!");
     return;
   }
   staffPickerModal.classList.add('hidden');
@@ -950,8 +950,8 @@ function applyTheme() {
     navPageGeneralBtn.className = "w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition"; 
   } else { 
     document.body.classList.remove('theme-pinky'); 
-    brandLogoBox.innerHTML = `<span class="font-bold text-xs">[📊]</span>`; 
-    sidebarBrandIcon.innerHTML = `<span class="font-bold text-xs">[📊]</span>`; 
+    brandLogoBox.innerHTML = `<span class="font-bold text-xs">[]</span>`; 
+    sidebarBrandIcon.innerHTML = `<span class="font-bold text-xs">[]</span>`; 
     unofficialBadgeHeader.classList.add('hidden'); 
     navPageGeneralBtn.className = "w-full text-left px-3 py-2.5 rounded-lg bg-blue-50 text-blue-700 font-semibold flex items-center gap-2 transition border border-blue-200"; 
     navPageTeamBtn.className = "w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex flex-col gap-0.5 transition"; 
@@ -1492,7 +1492,7 @@ function renderTable() {
     let tdName = document.createElement('td'); 
     tdName.className = "p-3 sticky left-0 bg-inherit z-10 font-bold border-r border-slate-300 flex justify-between items-center gap-2"; 
     
-    tdName.innerHTML = `<input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none px-1 py-0.5 rounded text-slate-900 font-medium truncate max-w-[110px] staff-name-input text-xs" data-old-name="${staff}" ${!isAdminOrGeneral ? 'disabled' : ''}> ${isAdminOrGeneral ? `<button class="no-export text-slate-400 hover:text-red-600 p-1 rounded transition flex items-center justify-center font-bold text-xs" onclick="deleteStaff('${staff}')" title="Hapus Staf">[✕]</button>` : ''}`; 
+    tdName.innerHTML = `<input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none px-1 py-0.5 rounded text-slate-900 font-medium truncate max-w-[110px] staff-name-input text-xs" data-old-name="${staff}" ${!isAdminOrGeneral ? 'disabled' : ''}> ${isAdminOrGeneral ? `<button class="no-export text-slate-400 hover:text-red-600 p-1 rounded transition flex items-center justify-center font-bold text-xs" onclick="deleteStaff('${staff}')" title="Hapus Staf">[]</button>` : ''}`; 
     tr.appendChild(tdName); 
 
     let counts = {}; shiftLabels.forEach(s => counts[s] = 0); counts.totalWork = 0; 
@@ -1543,7 +1543,7 @@ function renderTable() {
         if (e.key === 'Enter') { 
           let name = inp.value.trim(); if (!name) return; 
           if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
-            alert("⚠️ Hanya Admin yang memiliki akses untuk menambahkan staf baru ke dalam proyek konter ini!");
+            alert(" Hanya Admin yang memiliki akses untuk menambahkan staf baru ke dalam proyek konter ini!");
             return;
           }
           if (!currentStaffArr.includes(name)) { saveStateToHistory(); currentStaffArr.push(name); triggerAutoSave(); renderTable(); } 
@@ -1566,7 +1566,7 @@ function renderGlobalNotes() {
     let dObj = new Date(currentYear, currentMonth, day);
     let hijriStr = getHijriDate(dObj).string;
     let masehiStr = `${day} ${monthsNameID[currentMonth]} ${currentYear}`;
-    specialDaysInfo.push(`${masehiStr} — ${hijriStr} : ${currentMonthSpecialDays[day]}`);
+    specialDaysInfo.push(`${masehiStr} � ${hijriStr} : ${currentMonthSpecialDays[day]}`);
   }
 
   if (specialDaysInfo.length > 0) {
@@ -1580,7 +1580,7 @@ function renderGlobalNotes() {
     let item = document.createElement('div'); item.className = "bg-white border border-slate-300 rounded-lg p-2.5 flex gap-2 items-start w-full shadow-xs"; 
     let ta = document.createElement('textarea'); ta.rows = 1; ta.className = "w-full bg-transparent focus:outline-none p-1 rounded text-xs text-slate-800 resize-none"; ta.value = text; 
     ta.disabled = (currentActivePage === 'team' && userSession && userSession.role !== 'admin' && !text.includes('[REQUEST TIM]')); 
-    let del = document.createElement('button'); del.className = "no-export text-slate-400 hover:text-red-600 text-xs p-1 font-bold"; del.innerHTML = "[✕]"; 
+    let del = document.createElement('button'); del.className = "no-export text-slate-400 hover:text-red-600 text-xs p-1 font-bold"; del.innerHTML = "[]"; 
     del.onclick = () => { showConfirm("Hapus Catatan", "Yakin ingin menghapus catatan ini?", () => { saveStateToHistory(); notes.splice(idx, 1); globalNotes[monthKey] = notes; triggerAutoSave(); renderGlobalNotes(); }); }; 
     item.appendChild(ta); if (currentActivePage === 'general' || (userSession && userSession.role === 'admin')) item.appendChild(del); 
     globalNotesContainer.appendChild(item); 

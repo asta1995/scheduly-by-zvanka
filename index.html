@@ -113,6 +113,14 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </div> 
       <button id="homeLangToggleBtn" class="bg-white hover:bg-slate-50 text-slate-800 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm shrink-0">ID / EN</button> 
     </div> 
+    <!-- Quick Hints Banner -->
+    <div id="quickHintsBanner" class="bg-rose-50 border border-rose-200 rounded-lg p-3 mb-4 text-xs text-rose-800 flex items-start gap-2">
+      <span class="text-base">💡</span>
+      <div>
+        <span class="font-bold block mb-0.5" id="tr_quickHintTitle">Panduan Cepat (Quick Tips):</span>
+        <span id="tr_quickHintDesc">Pilih "Jadwal & Catatan Tim" untuk masuk ke konter Anda, atau buka "Pusat Bantuan" jika memerlukan panduan lengkap penggunaan aplikasi.</span>
+      </div>
+    </div>
     <div class="space-y-3 text-xs mb-4"> 
       <button id="homeMenuTeamBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-200 hover:border-rose-300 hover:bg-rose-50/50 flex items-center justify-between transition group cursor-pointer"> 
         <div class="flex items-center gap-3"> 
@@ -160,7 +168,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 </div> 
 
 <!-- PUSAT BANTUAN & MANUAL MODAL --> 
-<div id="helpModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 hidden flex flex-col p-4 md:p-8" onclick="this.classList.add('hidden')"> 
+<div id="helpModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 hidden flex flex-col p-4 md:p-8"> 
   <div class="bg-white rounded-xl shadow-2xl flex flex-col flex-grow max-w-4xl w-full mx-auto overflow-hidden border border-slate-200 relative" onclick="event.stopPropagation()"> 
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-16"> 
       <div class="flex items-center gap-3"> 
@@ -175,7 +183,23 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <div class="p-6 flex-grow overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed"> 
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
         <div id="tr_helpBox1Title" class="font-bold text-slate-900 text-sm mb-1">1. Portal Konter, Login, & Hak Akses (Khusus Tim)</div> 
-        <p id="tr_helpBox1Desc">Gunakan menu Login atau Daftar Anggota Baru dengan memasukkan PIN server konter yang sesuai. Fitur kontrol utama seperti simpan draft dan pengosongan lembar kerja dibatasi khusus untuk Admin.</p> 
+        <p id="tr_helpBox1Desc">Gunakan menu Login atau Daftar Anggota Baru dengan memasukkan PIN server konter yang sesuai. Fitur kontrol utama seperti simpan draft, tambah/hapus staf, dan pengosongan lembar kerja dibatasi khusus untuk Admin. Anggota tim dapat mengajukan request perubahan shift mandiri.</p> 
+      </div> 
+      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
+        <div id="tr_helpBox2Title" class="font-bold text-slate-900 text-sm mb-1">2. Navigasi Lembar Kerja & Riwayat (Undo/Redo)</div> 
+        <p id="tr_helpBox2Desc">Beralih antara Jadwal Tim dan Jadwal Umum melalui menu navigasi utama atau sidebar. Anda dapat menggunakan tombol Undo dan Redo untuk melacak atau mengembalikan perubahan data pada lembar kerja secara fleksibel.</p> 
+      </div> 
+      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
+        <div id="tr_helpBox3Title" class="font-bold text-slate-900 text-sm mb-1">3. Pengelolaan Folder & Penyimpanan Draft</div> 
+        <p id="tr_helpBox3Desc">Admin dapat mengakses menu Folder Penyimpanan untuk membuat direktori sub-folder, memindah, menyalin, atau menghapus file draft lembar kerja secara multi-pilih agar pengelolaan arsip bulanan lebih terstruktur.</p> 
+      </div> 
+      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
+        <div id="tr_helpBox4Title" class="font-bold text-slate-900 text-sm mb-1">4. Log Aktivitas & Hari Besar / Libur Nasional</div> 
+        <p id="tr_helpBox4Desc">Sistem secara otomatis mencatat setiap tindakan penting ke dalam Log Aktivitas & Request Jadwal. Kalender juga dilengkapi deteksi otomatis hari libur nasional serta hari besar Islam (Hijriah) beserta catatan penting bulanan.</p> 
+      </div> 
+      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
+        <div id="tr_helpBox5Title" class="font-bold text-slate-900 text-sm mb-1">5. Pengaturan Akun & Ekspor Laporan Bersih</div> 
+        <p id="tr_helpBox5Desc">Atur preferensi push notifikasi pengingat shift atau ubah nama profil sesi Anda melalui menu Pengaturan. Saat melakukan ekspor laporan ke format Excel, Word, atau PDF, sistem otomatis menyaring dokumen agar hanya menampilkan tabel jadwal dan catatan penting saja.</p> 
       </div> 
     </div> 
     <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center"> 
@@ -539,6 +563,8 @@ const translations = {
   id: { 
     appTitleTeam: "Jadwal Tim", appTitleGen: "Jadwal Umum",
     home_title: "Scheduly", home_subtitle: "Pilih menu atau navigasi lembar kerja di bawah ini:",
+    quickHintTitle: "Panduan Cepat (Quick Tips):",
+    quickHintDesc: "Pilih \"Jadwal & Catatan Tim\" untuk masuk ke konter Anda, atau buka \"Pusat Bantuan\" jika memerlukan panduan lengkap penggunaan aplikasi.",
     menu_team_title: "Jadwal & Catatan Tim", menu_team_desc: "(Khusus Pramuniaga dan Kasir)", 
     menu_general_title: "Jadwal Umum", menu_general_desc: "Pengelolaan shift operasional umum secara komprehensif", 
     menu_folder_title: "Folder & Penyimpanan", menu_folder_desc: "Kelola direktori multi-folder dan arsip draft lembar kerja", 
@@ -550,7 +576,11 @@ const translations = {
     authPinHintLogin: "*PIN server konter harus sudah terdaftar.", authPinHintReg: "*Masukkan PIN konter tempat Anda mendaftar.",
     authBtnLogin: "Masuk ke Scheduly Tim", authBtnReg: "Daftar Anggota Baru",
     helpTitle: "Pusat Bantuan & Panduan Lengkap", helpSubtitle: "Pelajari cara menguasai fitur Scheduly dengan cepat",
-    helpBox1Title: "1. Portal Konter, Login, & Hak Akses (Khusus Tim)", helpBox1Desc: "Gunakan menu Login atau Daftar Anggota Baru dengan memasukkan PIN server konter yang sesuai. Fitur kontrol utama seperti simpan draft dan pengosongan lembar kerja dibatasi khusus untuk Admin.",
+    helpBox1Title: "1. Portal Konter, Login, & Hak Akses (Khusus Tim)", helpBox1Desc: "Gunakan menu Login atau Daftar Anggota Baru dengan memasukkan PIN server konter yang sesuai. Fitur kontrol utama seperti simpan draft, tambah/hapus staf, dan pengosongan lembar kerja dibatasi khusus untuk Admin. Anggota tim dapat mengajukan request perubahan shift mandiri.",
+    helpBox2Title: "2. Navigasi Lembar Kerja & Riwayat (Undo/Redo)", helpBox2Desc: "Beralih antara Jadwal Tim dan Jadwal Umum melalui menu navigasi utama atau sidebar. Anda dapat menggunakan tombol Undo dan Redo untuk melacak atau mengembalikan perubahan data pada lembar kerja secara fleksibel.",
+    helpBox3Title: "3. Pengelolaan Folder & Penyimpanan Draft", helpBox3Desc: "Admin dapat mengakses menu Folder Penyimpanan untuk membuat direktori sub-folder, memindah, menyalin, atau menghapus file draft lembar kerja secara multi-pilih agar pengelolaan arsip bulanan lebih terstruktur.",
+    helpBox4Title: "4. Log Aktivitas & Hari Besar / Libur Nasional", helpBox4Desc: "Sistem secara otomatis mencatat setiap tindakan penting ke dalam Log Aktivitas & Request Jadwal. Kalender juga dilengkapi deteksi otomatis hari libur nasional serta hari besar Islam (Hijriah) beserta catatan penting bulanan.",
+    helpBox5Title: "5. Pengaturan Akun & Ekspor Laporan Bersih", helpBox5Desc: "Atur preferensi push notifikasi pengingat shift atau ubah nama profil sesi Anda melalui menu Pengaturan. Saat melakukan ekspor laporan ke format Excel, Word, atau PDF, sistem otomatis menyaring dokumen agar hanya menampilkan tabel jadwal dan catatan penting saja.",
     helpUnderstood: "Mengerti!",
     settingsTitle: "Pengaturan Akun & Personalisasi", settingsSubtitle: "Kelola preferensi notifikasi dan akun Anda",
     profileActive: "Profil Sesi Aktif", nameLabel: "Nama:", roleLabel: "Peran:", counterLabel: "Konter:", pinLabel: "PIN Server:",
@@ -610,6 +640,8 @@ const translations = {
   en: { 
     appTitleTeam: "Team Schedule", appTitleGen: "General Schedule",
     home_title: "Scheduly", home_subtitle: "Select menu or worksheet navigation below:",
+    quickHintTitle: "Quick Tips:",
+    quickHintDesc: "Select \"Team Schedule & Notes\" to access your counter, or open \"Help Center\" if you need a complete usage guide.",
     menu_team_title: "Team Schedule & Notes", menu_team_desc: "(Dedicated for Cashiers and Floor Staff)", 
     menu_general_title: "General Schedule", menu_general_desc: "Comprehensive operational shift management", 
     menu_folder_title: "Folder & Storage", menu_folder_desc: "Manage multi-folder directories and saved drafts", 
@@ -621,7 +653,11 @@ const translations = {
     authPinHintLogin: "*Counter server PIN must be registered.", authPinHintReg: "*Enter counter PIN where you want to register.",
     authBtnLogin: "Sign In to Scheduly Team", authBtnReg: "Register New Member",
     helpTitle: "Help Center & Full Guide", helpSubtitle: "Learn how to master Scheduly features quickly",
-    helpBox1Title: "1. Counter Portal, Login, & Access Rights (Team Only)", helpBox1Desc: "Use Login or Register New Member by entering the correct counter server PIN. Main control features such as saving drafts and clearing worksheets are restricted to Admins.",
+    helpBox1Title: "1. Counter Portal, Login, & Access Rights (Team Only)", helpBox1Desc: "Use Login or Register New Member by entering the correct counter server PIN. Main control features such as saving drafts, adding/deleting staff, and clearing worksheets are restricted to Admins. Team members can submit independent shift change requests.",
+    helpBox2Title: "2. Worksheet Navigation & History (Undo/Redo)", helpBox2Desc: "Switch between Team Schedule and General Schedule via the main navigation menu or sidebar. You can use Undo and Redo buttons to flexibly track or revert data changes on the worksheet.",
+    helpBox3Title: "3. Folder Management & Draft Storage", helpBox3Desc: "Admins can access Folder Storage to create sub-folder directories, move, copy, or delete worksheet draft files via multi-select for structured monthly archiving.",
+    helpBox4Title: "4. Activity Logs & National Holidays / Special Days", helpBox4Desc: "The system automatically logs every important action into Activity Logs & Schedule Requests. The calendar is also equipped with automatic national holiday and Islamic (Hijri) holiday detection along with monthly important notes.",
+    helpBox5Title: "5. Account Settings & Clean Report Export", helpBox5Desc: "Manage shift reminder push notification preferences or change your session profile name via Settings. When exporting reports to Excel, Word, or PDF, the system automatically filters documents to display only the schedule table and important notes.",
     helpUnderstood: "Understood!",
     settingsTitle: "Account Settings & Personalization", settingsSubtitle: "Manage your notification preferences and account",
     profileActive: "Active Session Profile", nameLabel: "Name:", roleLabel: "Role:", counterLabel: "Counter:", pinLabel: "Server PIN:",
@@ -689,6 +725,7 @@ function updateLanguageUI() {
 
   let t = translations[currentLang];
   document.getElementById('appTitleHeader').innerText = currentActivePage === 'team' ? t.appTitleTeam : t.appTitleGen; 
+  document.getElementById('saveStatusText').innerText = t.autosave_text;
   document.getElementById('notesHeadingText').innerText = t.notes_heading; 
   document.getElementById('addGlobalNoteBtn').innerText = t.btn_add_note; 
   document.getElementById('footerText').innerText = t.footer_text; 
@@ -706,6 +743,8 @@ function updateLanguageUI() {
 
   document.getElementById('tr_homeTitle').innerText = t.home_title;
   document.getElementById('tr_homeSubtitle').innerText = t.home_subtitle;
+  document.getElementById('tr_quickHintTitle').innerText = t.quickHintTitle;
+  document.getElementById('tr_quickHintDesc').innerText = t.quickHintDesc;
   document.getElementById('tr_homeTeamTitle').innerText = t.menu_team_title;
   document.getElementById('tr_homeTeamDesc').innerText = t.menu_team_desc;
   document.getElementById('tr_homeGenTitle').innerText = t.menu_general_title;
@@ -719,6 +758,14 @@ function updateLanguageUI() {
   document.getElementById('tr_helpSubtitle').innerText = t.helpSubtitle;
   document.getElementById('tr_helpBox1Title').innerText = t.helpBox1Title;
   document.getElementById('tr_helpBox1Desc').innerText = t.helpBox1Desc;
+  document.getElementById('tr_helpBox2Title').innerText = t.helpBox2Title;
+  document.getElementById('tr_helpBox2Desc').innerText = t.helpBox2Desc;
+  document.getElementById('tr_helpBox3Title').innerText = t.helpBox3Title;
+  document.getElementById('tr_helpBox3Desc').innerText = t.helpBox3Desc;
+  document.getElementById('tr_helpBox4Title').innerText = t.helpBox4Title;
+  document.getElementById('tr_helpBox4Desc').innerText = t.helpBox4Desc;
+  document.getElementById('tr_helpBox5Title').innerText = t.helpBox5Title;
+  document.getElementById('tr_helpBox5Desc').innerText = t.helpBox5Desc;
   document.getElementById('closeHelpModalFooterBtn').innerText = t.helpUnderstood;
 
   document.getElementById('tr_settingsTitle').innerText = t.settingsTitle;
@@ -1672,7 +1719,7 @@ const exportModal = document.getElementById('exportModal');
 document.getElementById('openExportModalBtn').addEventListener('click', () => exportModal.classList.remove('hidden')); 
 document.getElementById('closeExportModalBtn').addEventListener('click', () => exportModal.classList.add('hidden')); 
 
-// Fungsionalitas Export Dokumen
+// Fungsionalitas Export Dokumen (Hanya berisi Jadwal & Catatan Tim)
 document.querySelectorAll('.export-format-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     let format = btn.getAttribute('data-format');
@@ -1705,13 +1752,28 @@ document.querySelectorAll('.export-format-btn').forEach(btn => {
       a.click();
     } else if (format === 'xlsx' || format === 'docx' || format === 'pdf') {
       let tableHTML = scheduleTable.outerHTML;
+      let notesHTML = globalNotesContainer.outerHTML;
+      let cleanContent = `<div style="font-family:sans-serif; padding:20px;">
+        <h2>${titleText.replace('_', ' ')} - Periode: ${dateStr}</h2>
+        <h3>Tabel Jadwal:</h3>
+        ${tableHTML}
+        <br>
+        <h3>Catatan & Hari Penting:</h3>
+        ${notesHTML}
+      </div>`;
+
       let htmlContent = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
       <head><meta charset="utf-8"><title>${fileName}</title></head>
-      <body>${tableHTML}</body></html>`;
+      <body>${cleanContent}</body></html>`;
+
       let mimeType = format === 'xlsx' ? 'application/vnd.ms-excel' : (format === 'docx' ? 'application/msword' : 'application/pdf');
       let ext = format === 'xlsx' ? 'xls' : format;
       if(format === 'pdf') {
-        window.print();
+        let printWin = window.open('', '_blank');
+        printWin.document.write(htmlContent);
+        printWin.document.close();
+        printWin.focus();
+        setTimeout(() => { printWin.print(); printWin.close(); }, 500);
         return;
       }
       let blob = new Blob([htmlContent], { type: mimeType });
@@ -2131,10 +2193,32 @@ document.getElementById('prevMonth').addEventListener('click', () => { currentMo
 document.getElementById('nextMonth').addEventListener('click', () => { currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } renderTable(); }); 
 
 const helpModal = document.getElementById('helpModal');
-document.getElementById('openHelpModalFromHome').addEventListener('click', () => helpModal.classList.add('hidden')); 
-document.getElementById('menuHelpModalBtn').addEventListener('click', () => { closeSidebar(); helpModal.classList.add('hidden'); }); 
-document.getElementById('closeHelpModalBtn').addEventListener('click', () => helpModal.classList.add('hidden')); 
-document.getElementById('closeHelpModalFooterBtn').addEventListener('click', () => helpModal.classList.add('hidden'));
+const openHelpModalFromHome = document.getElementById('openHelpModalFromHome');
+const menuHelpModalBtn = document.getElementById('menuHelpModalBtn');
+const closeHelpModalBtn = document.getElementById('closeHelpModalBtn');
+const closeHelpModalFooterBtn = document.getElementById('closeHelpModalFooterBtn');
+
+if (openHelpModalFromHome) {
+  openHelpModalFromHome.addEventListener('click', (e) => {
+    e.stopPropagation();
+    helpModal.classList.remove('hidden');
+  });
+}
+
+if (menuHelpModalBtn) {
+  menuHelpModalBtn.addEventListener('click', () => {
+    closeSidebar();
+    helpModal.classList.remove('hidden');
+  });
+}
+
+if (closeHelpModalBtn) {
+  closeHelpModalBtn.addEventListener('click', () => helpModal.classList.add('hidden'));
+}
+
+if (closeHelpModalFooterBtn) {
+  closeHelpModalFooterBtn.addEventListener('click', () => helpModal.classList.add('hidden'));
+}
 
 applyTheme(); updateLanguageUI(); loadServerDataForCounter(); checkAuthSession(); 
 renderTable(); renderSidebarExplorerTree(); renderActivityLogs();

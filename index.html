@@ -42,7 +42,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 </head> 
 <body class="min-h-screen flex flex-col selection:bg-rose-200 theme-pinky"> 
 
-<!-- MODAL AUTH / LOGIN KONTER & PIN --> 
+<!-- MODAL AUTH / LOGIN & DAFTAR ANGGOTA BARU --> 
 <div id="authModal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4"> 
   <div class="standard-card p-6 md:p-8 w-full max-w-md bg-white shadow-2xl relative" onclick="event.stopPropagation()"> 
     <button id="closeAuthModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition"></button>
@@ -50,18 +50,24 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <div class="flex items-center gap-2.5"> 
         <div class="w-10 h-10 rounded-xl bg-[#ff3399] text-white flex items-center justify-center shadow-md shrink-0 logo-handwriting text-xl">C's</div> 
         <div> 
-          <h2 class="text-base font-bold text-slate-900">Portal Konter & Login Tim</h2> 
-          <p class="text-xs text-slate-500">Masukkan PIN & Konter Anda untuk Akses Sesi</p> 
+          <h2 class="text-base font-bold text-slate-900">Portal Konter & Akses Sesi</h2> 
+          <p class="text-xs text-slate-500">Pilih masuk atau daftar anggota baru</p> 
         </div> 
       </div> 
       <button id="authLangToggle" class="bg-white hover:bg-slate-50 text-slate-800 text-xs px-2.5 py-1.5 rounded font-medium border border-slate-300">ID / EN</button> 
     </div> 
 
+    <!-- Opsi Tab Mode: Masuk atau Daftar -->
+    <div class="flex bg-slate-100 p-1 rounded-lg mb-3 text-xs font-semibold">
+      <button type="button" id="authModeLoginTab" class="flex-1 py-2 rounded-md bg-white text-slate-900 shadow-xs transition">Masuk (Login)</button>
+      <button type="button" id="authModeRegisterTab" class="flex-1 py-2 rounded-md text-slate-600 transition">Daftar Anggota Baru</button>
+    </div>
+
     <div class="space-y-3 text-xs mb-5"> 
-      <div> 
+      <div id="authRoleWrapper"> 
         <label class="block font-semibold text-slate-700 mb-1">Masuk Sebagai:</label> 
         <select id="authRoleSelect" class="w-full p-2.5 border border-slate-300 rounded-lg bg-white focus:ring-1 focus:ring-rose-600 font-medium"> 
-          <option value="admin">Admin (Akses Penuh & Tambah Staf)</option> 
+          <option value="admin">Admin (Akses Penuh Konter)</option> 
           <option value="member">Anggota Tim (Request Jadwal)</option> 
         </select> 
       </div> 
@@ -79,14 +85,14 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
         <input type="text" id="authNameInput" placeholder="Contoh: Warjaya" class="w-full p-2.5 border border-slate-300 rounded-lg bg-slate-50 focus:bg-white focus:ring-1 focus:ring-rose-600"> 
       </div> 
       <div> 
-        <label class="block font-semibold text-slate-700 mb-1">PIN Server Konter (Misal: sususu):</label> 
+        <label class="block font-semibold text-slate-700 mb-1">PIN Server Konter:</label> 
         <input type="password" id="authPinInput" placeholder="******" maxlength="20" class="w-full p-2.5 border border-slate-300 rounded-lg bg-slate-50 focus:bg-white focus:ring-1 focus:ring-rose-600 tracking-widest font-mono text-center text-sm font-bold"> 
-        <p class="text-[10px] text-slate-400 mt-1">*Nama akaun akan otomatis terdaftar ke tabel staf & PIN server.</p> 
+        <p class="text-[10px] text-slate-400 mt-1" id="authPinHint">*Admin dapat membuat PIN baru atau memasukkan PIN konter yang sudah ada.</p> 
       </div> 
     </div> 
 
     <button id="authLoginBtn" class="w-full bg-[#ff3399] hover:bg-rose-700 text-white font-bold py-3 rounded-lg text-xs shadow-md transition flex items-center justify-center gap-2"> 
-      <span>Masuk ke Scheduly Tim</span> 
+      <span id="authSubmitBtnText">Masuk ke Scheduly Tim</span> 
     </button> 
   </div> 
 </div> 
@@ -166,11 +172,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <div class="p-6 flex-grow overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed"> 
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
         <div class="font-bold text-slate-900 text-sm mb-1">1. Portal Konter, Login, & Hak Akses (Khusus Tim)</div> 
-        <p>Saat masuk ke Jadwal Tim, Anda wajib memilih Peran (Admin / Anggota), Nama Lengkap, pilihan Konter, serta PIN Server unik. Nama akun Anda akan otomatis terdaftar sebagai baris staf pada server konter tersebut.</p> 
-      </div> 
-      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
-        <div class="font-bold text-slate-900 text-sm mb-1">2. Menyimpan Draft & Manajemen Folder</div> 
-        <p>Simpan lembar kerja aktif ke dalam direktori multi-folder atau direktori utama. Gunakan jendela penuh folder untuk kelola file secara massal.</p> 
+        <p>Gunakan menu Login atau Daftar Anggota Baru dengan memasukkan PIN server konter yang sesuai. Fitur kontrol utama seperti simpan draft dan pengosongan lembar kerja dibatasi khusus untuk Admin.</p> 
       </div> 
     </div> 
     <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center"> 
@@ -195,13 +197,22 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <div class="p-6 space-y-4 text-xs text-slate-700"> 
       <div id="settingsProfileSection" class="bg-slate-50 border border-slate-200 rounded-lg p-3.5 space-y-2 hidden"> 
         <div class="font-bold text-slate-900 text-sm">Profil Sesi Aktif</div> 
-        <div class="grid grid-cols-2 gap-2 text-slate-600"> 
+        <div class="grid grid-cols-2 gap-2 text-slate-600 mb-2"> 
           <div><strong>Nama:</strong> <span id="setProfileName" class="font-medium text-slate-900">-</span></div> 
           <div><strong>Peran:</strong> <span id="setProfileRole" class="font-medium text-slate-900">-</span></div> 
           <div><strong>Konter:</strong> <span id="setProfileCounter" class="font-medium text-slate-900">-</span></div> 
           <div><strong>PIN Server:</strong> <span id="setProfilePin" class="font-mono font-medium text-slate-900">-</span></div> 
         </div> 
-        <button id="logoutAuthBtn" class="mt-2 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-medium px-3 py-1.5 rounded transition">Keluar / Ganti Akun & Konter</button> 
+        <div class="pt-2 border-t border-slate-200 space-y-2">
+          <div class="flex gap-2 items-center">
+            <input type="text" id="changeAccountNameInput" placeholder="Ubah nama akun..." class="p-1.5 border border-slate-300 rounded bg-white text-xs flex-grow">
+            <button id="updateAccountNameBtn" class="bg-slate-800 hover:bg-slate-900 text-white px-3 py-1.5 rounded transition font-medium">Ubah Nama</button>
+          </div>
+          <div class="flex gap-2 pt-1">
+            <button id="logoutAuthBtn" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-medium px-3 py-1.5 rounded transition">Keluar</button>
+            <button id="deleteAccountBtn" class="flex-1 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 font-medium px-3 py-1.5 rounded transition">Hapus Akun</button>
+          </div>
+        </div>
       </div> 
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5 space-y-3"> 
         <div class="font-bold text-slate-900 text-sm flex items-center justify-between"> 
@@ -364,7 +375,6 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <button id="openSidebarBtn" class="w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition" title="Buka Menu">
         <span class="font-bold text-base"></span>
       </button> 
-      <!-- TOMBOL LOGO KEMBALI KE BERANDA -->
       <div id="webBrandRefresh" class="flex items-center gap-2.5 cursor-pointer group" title="Kembali ke Beranda Utama"> 
         <div id="brandLogoBox" class="w-9 h-9 rounded-lg bg-[#ff3399] text-white flex items-center justify-center shadow-sm shrink-0 logo-handwriting text-base">C's</div> 
         <div> 
@@ -417,6 +427,15 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </div> 
     </div> 
 
+    <!-- BAGIAN LOG AKTIVITAS (Hanya dapat dihapus oleh admin, ada multi pilih) -->
+    <div id="activityLogSection" class="standard-card p-5 mb-6 bg-white">
+      <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-3">
+        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2"><span> Log Aktivitas & Request Jadwal</span></h3>
+        <button id="deleteSelectedLogsBtn" class="no-export bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-3 py-1.5 rounded text-xs font-medium transition hidden">Hapus Log Terpilih</button>
+      </div>
+      <div id="activityLogContainer" class="space-y-2 text-xs max-h-48 overflow-y-auto"></div>
+    </div>
+
     <div class="standard-card p-5 mb-6 bg-white"> 
       <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-3"> 
         <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2"><span id="notesHeadingText">Catatan & Hari Penting</span></h3> 
@@ -452,7 +471,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <button id="closeFormBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <input type="hidden" id="activeStaffKey"><input type="hidden" id="activeDateKey"> 
-    <div class="grid grid-cols-3 gap-2"> 
+    <div class="grid grid-cols-3 gap-2" id="shiftActionButtonsContainer"> 
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="FULL">FULL</button> 
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-white text-slate-700 border-slate-300" data-value="P">P (Pagi)</button> 
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-white text-slate-700 border-slate-300" data-value="So">So (Sore)</button> 
@@ -506,6 +525,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 let currentLang = localStorage.getItem('scheduly_lang') || 'id'; 
 let currentActivePage = 'team'; 
 let userSession = JSON.parse(localStorage.getItem('scheduly_user_session_v1')) || null;
+let authMode = 'login'; // 'login' or 'register'
 
 const langToggleBtn = document.getElementById('langToggleBtn'); 
 const homeLangToggleBtn = document.getElementById('homeLangToggleBtn'); 
@@ -567,6 +587,29 @@ const sidebarLogoutBtn = document.getElementById('sidebarLogoutBtn');
 const sidebarClandysAuthBox = document.getElementById('sidebarClandysAuthBox');
 const settingsProfileSection = document.getElementById('settingsProfileSection');
 const closeAuthModalBtn = document.getElementById('closeAuthModalBtn');
+const authModeLoginTab = document.getElementById('authModeLoginTab');
+const authModeRegisterTab = document.getElementById('authModeRegisterTab');
+const authRoleWrapper = document.getElementById('authRoleWrapper');
+const authSubmitBtnText = document.getElementById('authSubmitBtnText');
+const authPinHint = document.getElementById('authPinHint');
+
+authModeLoginTab.addEventListener('click', () => {
+  authMode = 'login';
+  authModeLoginTab.className = "flex-1 py-2 rounded-md bg-white text-slate-900 shadow-xs transition";
+  authModeRegisterTab.className = "flex-1 py-2 rounded-md text-slate-600 transition";
+  authRoleWrapper.classList.remove('hidden');
+  authSubmitBtnText.innerText = "Masuk ke Scheduly Tim";
+  authPinHint.innerText = "*PIN server konter harus sudah terdaftar.";
+});
+
+authModeRegisterTab.addEventListener('click', () => {
+  authMode = 'register';
+  authModeRegisterTab.className = "flex-1 py-2 rounded-md bg-white text-slate-900 shadow-xs transition";
+  authModeLoginTab.className = "flex-1 py-2 rounded-md text-slate-600 transition";
+  authRoleWrapper.classList.add('hidden');
+  authSubmitBtnText.innerText = "Daftar Anggota Baru";
+  authPinHint.innerText = "*Masukkan PIN konter tempat Anda mendaftar.";
+});
 
 closeAuthModalBtn.addEventListener('click', () => {
   authModal.classList.add('hidden');
@@ -604,23 +647,51 @@ function applyUserSessionUI() {
   document.getElementById('setProfileRole').innerText = userSession.role.toUpperCase();
   document.getElementById('setProfileCounter').innerText = userSession.counter;
   document.getElementById('setProfilePin').innerText = userSession.pin;
+  let nameInputBox = document.getElementById('changeAccountNameInput');
+  if (nameInputBox) nameInputBox.value = userSession.name;
   document.getElementById('pushNotifToggle').checked = userSession.pushNotif || false;
 }
 
 authLoginBtn.addEventListener('click', () => {
-  let role = authRoleSelect.value;
   let counter = authCounterSelect.value;
   let name = authNameInput.value.trim();
   let pin = authPinInput.value.trim();
   if (!name || !pin) { alert("Harap masukkan Nama dan PIN Server Konter!"); return; }
-  
-  userSession = { role, counter, name, pin, pushNotif: true };
+
+  let existingServers = Object.keys(localStorage).filter(k => k.startsWith(`scheduly_${counter}_`));
+  let expectedKeyPrefix = `scheduly_${counter}_${pin}_`;
+  let isValidPin = existingServers.some(k => k.startsWith(expectedKeyPrefix));
+
+  if (authMode === 'login') {
+    if (existingServers.length > 0 && !isValidPin) {
+      alert("PIN atau Konter yang Anda pilih tidak valid / belum terdaftar!");
+      return;
+    }
+    let role = authRoleSelect.value;
+    userSession = { role, counter, name, pin, pushNotif: true };
+  } else {
+    // Daftar Anggota Baru
+    if (!isValidPin) {
+      alert("PIN Konter belum tersedia! Hubungi Admin konter terkait untuk mendapatkan PIN yang valid.");
+      return;
+    }
+    userSession = { role: 'member', counter, name, pin, pushNotif: true };
+  }
+
   localStorage.setItem('scheduly_user_session_v1', JSON.stringify(userSession));
   
   let currentStaffArr = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || [];
+  let currentRolesObj = JSON.parse(localStorage.getItem(getCounterServerKey('roles'))) || {};
+  
   if (!currentStaffArr.includes(name)) {
     currentStaffArr.push(name);
     localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(currentStaffArr));
+  }
+  if (!currentRolesObj[name]) {
+    currentRolesObj[name] = userSession.role;
+    localStorage.setItem(getCounterServerKey('roles'), JSON.stringify(currentRolesObj));
+  } else {
+    userSession.role = currentRolesObj[name];
   }
 
   loadServerDataForCounter();
@@ -641,6 +712,70 @@ function handleLogoutAction() {
 headerLogoutBtn.addEventListener('click', handleLogoutAction);
 sidebarLogoutBtn.addEventListener('click', handleLogoutAction);
 document.getElementById('logoutAuthBtn').addEventListener('click', handleLogoutAction);
+
+document.getElementById('updateAccountNameBtn').addEventListener('click', () => {
+  if (!userSession) return;
+  let newName = document.getElementById('changeAccountNameInput').value.trim();
+  if (!newName) { alert("Nama akun tidak boleh kosong!"); return; }
+  let oldName = userSession.name;
+  if (newName === oldName) return;
+
+  let currentStaffArr = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || [];
+  let currentRolesObj = JSON.parse(localStorage.getItem(getCounterServerKey('roles'))) || {};
+  
+  let idx = currentStaffArr.indexOf(oldName);
+  if (idx !== -1) {
+    currentStaffArr[idx] = newName;
+  } else {
+    currentStaffArr.push(newName);
+  }
+  localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(currentStaffArr));
+
+  if (currentRolesObj[oldName]) {
+    currentRolesObj[newName] = currentRolesObj[oldName];
+    delete currentRolesObj[oldName];
+    localStorage.setItem(getCounterServerKey('roles'), JSON.stringify(currentRolesObj));
+  }
+
+  if (schedules[oldName]) {
+    schedules[newName] = schedules[oldName];
+    delete schedules[oldName];
+  }
+
+  userSession.name = newName;
+  localStorage.setItem('scheduly_user_session_v1', JSON.stringify(userSession));
+  loadServerDataForCounter();
+  applyUserSessionUI();
+  renderTable();
+  alert("Nama akun berhasil diubah!");
+});
+
+document.getElementById('deleteAccountBtn').addEventListener('click', () => {
+  if (!userSession) return;
+  if (!confirm("Yakin ingin menghapus akun ini dari server konter? Data jadwal terkait akan ikut terhapus.")) return;
+  
+  let currentStaffArr = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || [];
+  let currentRolesObj = JSON.parse(localStorage.getItem(getCounterServerKey('roles'))) || {};
+  
+  let wasAdmin = (userSession.role === 'admin');
+  currentStaffArr = currentStaffArr.filter(s => s !== userSession.name);
+  delete currentRolesObj[userSession.name];
+  
+  if (wasAdmin && currentStaffArr.length > 0) {
+    let firstStaff = currentStaffArr[0];
+    currentRolesObj[firstStaff] = 'admin';
+  }
+
+  localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(currentStaffArr));
+  localStorage.setItem(getCounterServerKey('roles'), JSON.stringify(currentRolesObj));
+  
+  if (schedules[userSession.name]) {
+    delete schedules[userSession.name];
+  }
+  triggerAutoSave();
+  handleLogoutAction();
+  alert("Akun berhasil dihapus.");
+});
 
 const settingsModal = document.getElementById('settingsModal');
 document.getElementById('menuSettingsBtn').addEventListener('click', () => { closeSidebar(); settingsModal.classList.remove('hidden'); });
@@ -673,20 +808,8 @@ serverChannel.onmessage = (event) => {
   let activeCounter = userSession ? userSession.counter : 'KASIR';
   if (event.data && event.data.counter === activeCounter && currentActivePage === 'team') {
     loadServerDataForCounter(); renderTable();
-    checkAndTriggerLoggedInUserPushNotif(event.data.schedules);
   }
 };
-
-function checkAndTriggerLoggedInUserPushNotif(newSchedules) {
-  if (userSession && userSession.pushNotif) {
-    let myName = userSession.name;
-    let todayKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`;
-    let mySchedObj = newSchedules && newSchedules[myName] ? newSchedules[myName][todayKey] : null;
-    if (mySchedObj && mySchedObj.shift) {
-      console.log(`[Push Notif Aktif untuk ${myName}] Jadwal hari ini: ${mySchedObj.shift}`);
-    }
-  }
-}
 
 function getCounterServerKey(suffix) {
   let counter = userSession ? userSession.counter : 'KASIR';
@@ -694,13 +817,25 @@ function getCounterServerKey(suffix) {
   return `scheduly_${counter}_${pin}_${suffix}`;
 }
 
-let staffList = [], schedules = {}, staffListGen = [], schedulesGen = {}, globalNotes = {};
+let staffList = [], schedules = {}, staffListGen = [], schedulesGen = {}, globalNotes = {}, activityLogs = [];
+let staffRoles = {};
+
 function loadServerDataForCounter() {
   if (currentActivePage === 'team') {
     staffList = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || [];
-    if (userSession && userSession.name && !staffList.includes(userSession.name)) {
-      staffList.push(userSession.name);
-      localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(staffList));
+    staffRoles = JSON.parse(localStorage.getItem(getCounterServerKey('roles'))) || {};
+    activityLogs = JSON.parse(localStorage.getItem(getCounterServerKey('logs'))) || [];
+    
+    if (userSession && userSession.name) {
+      if (!staffList.includes(userSession.name)) {
+        staffList.push(userSession.name);
+        localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(staffList));
+      }
+      if (!staffRoles[userSession.name]) {
+        staffRoles[userSession.name] = staffList.length === 1 ? 'admin' : userSession.role;
+        localStorage.setItem(getCounterServerKey('roles'), JSON.stringify(staffRoles));
+      }
+      userSession.role = staffRoles[userSession.name];
     }
     schedules = JSON.parse(localStorage.getItem(getCounterServerKey('schedules'))) || {};
     globalNotes = JSON.parse(localStorage.getItem(getCounterServerKey('notes'))) || {};
@@ -708,21 +843,32 @@ function loadServerDataForCounter() {
     staffListGen = JSON.parse(localStorage.getItem('scheduly_general_staff')) || [];
     schedulesGen = JSON.parse(localStorage.getItem('scheduly_general_schedules')) || {};
     globalNotes = JSON.parse(localStorage.getItem('scheduly_general_notes')) || {};
+    activityLogs = JSON.parse(localStorage.getItem('scheduly_general_logs')) || [];
   }
 }
 
 function triggerAutoSave() {
   if (currentActivePage === 'team') {
     localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(staffList));
+    localStorage.setItem(getCounterServerKey('roles'), JSON.stringify(staffRoles));
     localStorage.setItem(getCounterServerKey('schedules'), JSON.stringify(schedules));
     localStorage.setItem(getCounterServerKey('notes'), JSON.stringify(globalNotes));
+    localStorage.setItem(getCounterServerKey('logs'), JSON.stringify(activityLogs));
     try { serverChannel.postMessage({ counter: userSession ? userSession.counter : 'KASIR', schedules: schedules }); } catch(e) {}
   } else {
     localStorage.setItem('scheduly_general_staff', JSON.stringify(staffListGen));
     localStorage.setItem('scheduly_general_schedules', JSON.stringify(schedulesGen));
     localStorage.setItem('scheduly_general_notes', JSON.stringify(globalNotes));
+    localStorage.setItem('scheduly_general_logs', JSON.stringify(activityLogs));
   }
   renderSidebarExplorerTree();
+  renderActivityLogs();
+}
+
+function addActivityLog(text) {
+  let timestamp = new Date().toLocaleString('id-ID');
+  activityLogs.unshift(`[${timestamp}] ${text}`);
+  triggerAutoSave();
 }
 
 const navPageTeamBtn = document.getElementById('navPageTeamBtn'); 
@@ -755,6 +901,10 @@ const welcomePage = document.getElementById('welcomePage');
 document.getElementById('homeMenuTeamBtn').addEventListener('click', () => { currentActivePage = 'team'; applyTheme(); updateLanguageUI(); loadServerDataForCounter(); checkAuthSession(); renderTable(); welcomePage.classList.add('hidden'); }); 
 document.getElementById('homeMenuGeneralBtn').addEventListener('click', () => { currentActivePage = 'general'; applyTheme(); updateLanguageUI(); loadServerDataForCounter(); checkAuthSession(); renderTable(); welcomePage.classList.add('hidden'); }); 
 document.getElementById('homeMenuRootFolderBtn').addEventListener('click', () => { 
+  if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
+    alert("Hanya Admin yang dapat mengakses penyimpanan folder dan draft!");
+    return;
+  }
   welcomePage.classList.add('hidden');
   currentRootFolderId = 'root'; folderBreadcrumbStack = [{ id: 'root', name: 'Direktori Utama' }]; 
   renderFullScreenStorage(); document.getElementById('fullScreenFolderModal').classList.remove('hidden'); 
@@ -803,6 +953,10 @@ let currentRootFolderId = 'root', folderBreadcrumbStack = [{ id: 'root', name: '
 
 const saveFolderModal = document.getElementById('saveFolderModal'); 
 function openSaveFolderModal() { 
+  if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
+    alert("Hanya Admin yang dapat menyimpan draft!");
+    return;
+  }
   let fileNameInput = document.getElementById('saveFileNameInput');
   if(fileNameInput) fileNameInput.value = `Draft_${currentActivePage}_${currentYear}-${String(currentMonth+1).padStart(2,'0')}`; 
   
@@ -846,6 +1000,10 @@ if(confirmSaveNewFolderBtn) confirmSaveNewFolderBtn.addEventListener('click', ()
 });
 
 document.getElementById('openRootStorageFromSidebar').addEventListener('click', () => { 
+  if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
+    alert("Hanya Admin yang dapat membuka penyimpanan folder!");
+    return;
+  }
   closeSidebar(); 
   currentRootFolderId = 'root'; 
   folderBreadcrumbStack = [{ id: 'root', name: 'Direktori Utama' }]; 
@@ -934,6 +1092,7 @@ function openFolderExplorer(actionType) {
 }
 
 document.getElementById('sidebarCreateFolderBtn').addEventListener('click', () => {
+  if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') { alert("Hanya Admin!"); return; }
   let folderName = prompt("Masukkan nama folder baru di root:");
   if (!folderName) return;
   let tree = getStorageTree();
@@ -942,9 +1101,9 @@ document.getElementById('sidebarCreateFolderBtn').addEventListener('click', () =
   alert(`Folder "${folderName}" berhasil dibuat di direktori utama!`);
 });
 
-document.getElementById('sidebarMoveSelectedBtn').addEventListener('click', () => openFolderExplorer('move'));
-document.getElementById('sidebarCopySelectedBtn').addEventListener('click', () => openFolderExplorer('copy'));
-document.getElementById('sidebarDeleteSelectedBtn').addEventListener('click', () => openFolderExplorer('delete'));
+document.getElementById('sidebarMoveSelectedBtn').addEventListener('click', () => { if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') { alert("Hanya Admin!"); return; } openFolderExplorer('move'); });
+document.getElementById('sidebarCopySelectedBtn').addEventListener('click', () => { if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') { alert("Hanya Admin!"); return; } openFolderExplorer('copy'); });
+document.getElementById('sidebarDeleteSelectedBtn').addEventListener('click', () => { if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') { alert("Hanya Admin!"); return; } openFolderExplorer('delete'); });
 
 let rootFolderMultiActionBtn = document.getElementById('rootFolderMultiActionBtn');
 if(rootFolderMultiActionBtn) rootFolderMultiActionBtn.addEventListener('click', () => openFolderExplorer('delete'));
@@ -1080,7 +1239,7 @@ window.sidebarOpenFolder = function(id, name) {
   currentRootFolderId = id;
   folderBreadcrumbStack.push({ id: id, name: name });
   renderFullScreenStorage();
-  fullScreenFolderModal.classList.remove('hidden');
+  fullScreenFolderModal.classList.add('hidden');
   closeSidebar();
 };
 
@@ -1102,18 +1261,6 @@ document.getElementById('sidebarDeleteSelectedBtn').addEventListener('click', ()
   saveStorageTree(tree);
   renderSidebarExplorerTree();
   alert("Item terpilih berhasil dihapus!");
-});
-
-document.getElementById('sidebarMoveSelectedBtn').addEventListener('click', () => {
-  let checked = Array.from(document.querySelectorAll('.sidebar-item-checkbox:checked')).map(c => c.value);
-  if(checked.length === 0) { alert("Pilih minimal satu item dari sidebar terlebih dahulu."); return; }
-  openFolderExplorer('move');
-});
-
-document.getElementById('sidebarCopySelectedBtn').addEventListener('click', () => {
-  let checked = Array.from(document.querySelectorAll('.sidebar-item-checkbox:checked')).map(c => c.value);
-  if(checked.length === 0) { alert("Pilih minimal satu item dari sidebar terlebih dahulu."); return; }
-  openFolderExplorer('copy');
 });
 
 const sidebarMenu = document.getElementById('sidebarMenu'), sidebarOverlay = document.getElementById('sidebarOverlay'); 
@@ -1192,7 +1339,7 @@ function getSpecialDaysForMonth(year, month) {
   return daysMap;
 }
 
-const monthYearDisplay = document.getElementById('monthYearDisplay'), scheduleTable = document.getElementById('scheduleTable'), globalNotesContainer = document.getElementById('globalNotesContainer'); 
+const monthYearDisplay = document.getElementById('monthYearDisplay'), scheduleTable = document.getElementById('scheduleTable'), globalNotesContainer = document.getElementById('globalNotesContainer'), activityLogContainer = document.getElementById('activityLogContainer'); 
 const formSection = document.getElementById('formSection'), formSectionGeneral = document.getElementById('formSectionGeneral'); 
 
 const exportModal = document.getElementById('exportModal'); 
@@ -1206,6 +1353,10 @@ confirmYesBtn.onclick = () => { confirmModal.classList.add('hidden'); if (pendin
 confirmNoBtn.onclick = () => { confirmModal.classList.add('hidden'); pendingAction = null; }; 
 
 document.getElementById('clearSheetBtn').addEventListener('click', () => {
+  if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
+    alert("Hanya Admin yang dapat mengosongkan lembar kerja!");
+    return;
+  }
   showConfirm(
     translations[currentLang].clearSheetTitle,
     translations[currentLang].clearSheetConfirm,
@@ -1218,11 +1369,56 @@ document.getElementById('clearSheetBtn').addEventListener('click', () => {
         staffListGen = [];
         schedulesGen = {};
       }
+      addActivityLog(`Admin mengosongkan lembar kerja.`);
       triggerAutoSave();
       renderTable();
     }
   );
 });
+
+function renderActivityLogs() {
+  activityLogContainer.innerHTML = "";
+  let isAdmin = (currentActivePage === 'general' || (userSession && userSession.role === 'admin'));
+  let deleteSelectedLogsBtn = document.getElementById('deleteSelectedLogsBtn');
+  if (deleteSelectedLogsBtn) {
+    deleteSelectedLogsBtn.classList.toggle('hidden', !isAdmin || activityLogs.length === 0);
+  }
+
+  if (activityLogs.length === 0) {
+    activityLogContainer.innerHTML = `<p class="text-slate-400 italic text-xs">Belum ada log aktivitas.</p>`;
+    return;
+  }
+
+  activityLogs.forEach((logText, idx) => {
+    let div = document.createElement('div');
+    div.className = "flex items-center justify-between p-2 bg-slate-50 border border-slate-200 rounded text-xs";
+    let checkboxHtml = isAdmin ? `<input type="checkbox" value="${idx}" class="log-item-checkbox rounded text-slate-700 w-3.5 h-3.5">` : '';
+    div.innerHTML = `<div class="flex items-center gap-2 truncate">${checkboxHtml}<span class="text-slate-700">${logText}</span></div>`;
+    activityLogContainer.appendChild(div);
+  });
+
+  document.querySelectorAll('.log-item-checkbox').forEach(chk => {
+    chk.addEventListener('change', () => {
+      let anyChecked = Array.from(document.querySelectorAll('.log-item-checkbox')).some(c => c.checked);
+      if (deleteSelectedLogsBtn) deleteSelectedLogsBtn.classList.toggle('hidden', !anyChecked);
+    });
+  });
+}
+
+let deleteSelectedLogsBtn = document.getElementById('deleteSelectedLogsBtn');
+if (deleteSelectedLogsBtn) {
+  deleteSelectedLogsBtn.addEventListener('click', () => {
+    let checkedIndices = Array.from(document.querySelectorAll('.log-item-checkbox:checked')).map(c => parseInt(c.value)).sort((a,b) => b-a);
+    if (checkedIndices.length === 0) return;
+    if (!confirm(`Yakin ingin menghapus ${checkedIndices.length} log terpilih?`)) return;
+    
+    checkedIndices.forEach(idx => {
+      activityLogs.splice(idx, 1);
+    });
+    triggerAutoSave();
+    renderActivityLogs();
+  });
+}
 
 function renderTable() { 
   let monthsName = currentLang === 'id' ? monthsNameID : monthsNameENG, daysShort = currentLang === 'id' ? daysShortID : daysShortENG; 
@@ -1251,7 +1447,10 @@ function renderTable() {
     let tdName = document.createElement('td'); 
     tdName.className = "p-3 sticky left-0 bg-inherit z-10 font-bold border-r border-slate-300 flex justify-between items-center gap-2"; 
     
-    tdName.innerHTML = `<input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-slate-400 focus:border-slate-600 focus:bg-white focus:outline-none px-1 py-0.5 rounded text-slate-900 font-medium truncate max-w-[110px] staff-name-input text-xs" data-old-name="${staff}" ${!isAdminOrGeneral ? 'disabled' : ''}> ${isAdminOrGeneral ? `<button class="no-export text-slate-400 hover:text-slate-700 p-1 rounded transition flex items-center justify-center font-bold text-xs" onclick="deleteStaff('${staff}')" title="Hapus Staf"></button>` : ''}`; 
+    let isStaffAdmin = (currentActivePage === 'team' && staffRoles[staff] === 'admin');
+    let roleBadgeHtml = (currentActivePage === 'team') ? `<div class="text-[9px] text-slate-500 flex items-center gap-1"><span>${isStaffAdmin ? ' Admin' : 'Anggota'}</span>${isAdminOrGeneral && !isStaffAdmin ? `<button onclick="promoteToAdmin('${staff}')" class="text-[8px] text-blue-600 hover:underline">Jadikan Admin</button>` : ''}</div>` : '';
+
+    tdName.innerHTML = `<div class="flex flex-col"><input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-slate-400 focus:border-slate-600 focus:bg-white focus:outline-none px-1 py-0.5 rounded text-slate-900 font-medium truncate max-w-[110px] staff-name-input text-xs" data-old-name="${staff}" ${!isAdminOrGeneral ? 'disabled' : ''}>${roleBadgeHtml}</div> ${isAdminOrGeneral ? `<button class="no-export text-slate-400 hover:text-slate-700 p-1 rounded transition flex items-center justify-center font-bold text-xs" onclick="deleteStaff('${staff}')" title="Hapus Staf"></button>` : ''}`; 
     tr.appendChild(tdName); 
 
     let counts = {}; shiftLabels.forEach(s => counts[s] = 0); counts.totalWork = 0; 
@@ -1269,12 +1468,29 @@ function renderTable() {
       } else { td.innerHTML = `<span class="text-slate-300">-</span>`; } 
 
       td.addEventListener('click', () => { 
-        if (isAdminOrGeneral) { 
-          saveStateToHistory(); 
-          if (currentActivePage === 'team') { document.getElementById('activeStaffKey').value = staff; document.getElementById('activeDateKey').value = dKey; formSection.classList.remove('hidden'); } 
-          else { document.getElementById('activeStaffKeyGen').value = staff; document.getElementById('activeDateKeyGen').value = dKey; formSectionGeneral.classList.remove('hidden'); } 
+        saveStateToHistory(); 
+        if (currentActivePage === 'team') { 
+          document.getElementById('activeStaffKey').value = staff; 
+          document.getElementById('activeDateKey').value = dKey; 
+          
+          // Jika member, arahkan ke mode Request Jadwal
+          let isMyRow = (userSession && userSession.name === staff);
+          let actionContainer = document.getElementById('shiftActionButtonsContainer');
+          
+          if (!isAdminOrGeneral && isMyRow) {
+            formSection.querySelector('h3').innerText = `Request Jadwal untuk Tgl ${day}`;
+          } else if (!isAdminOrGeneral && !isMyRow) {
+            alert("Anda hanya dapat mengajukan request untuk jadwal Anda sendiri.");
+            return;
+          } else {
+            formSection.querySelector('h3').innerText = `Pilih Shift`;
+          }
+
+          formSection.classList.remove('hidden'); 
         } else { 
-          alert("Mode Anggota Tim hanya dapat mengajukan request melalui admin konter.");
+          document.getElementById('activeStaffKeyGen').value = staff; 
+          document.getElementById('activeDateKeyGen').value = dKey; 
+          formSectionGeneral.classList.remove('hidden'); 
         } 
       }); 
       tr.appendChild(td); 
@@ -1305,7 +1521,8 @@ function renderTable() {
         let box = document.getElementById('addStaffContainerBox');
         let tabReg = document.getElementById('tabRegisteredStaffBtn');
         let tabMan = document.getElementById('tabManualStaffBtn');
-        let registeredStaffPool = ["Siti", "Budi", "Dewi", "Warjaya", "Ahmad", "Siti Nurhaliza", "Joko"];
+        
+        let registeredStaffPool = userSession && userSession.name ? [userSession.name] : [];
 
         function renderAddInput(mode) {
           if (!box) return;
@@ -1325,11 +1542,14 @@ function renderTable() {
               sel.addEventListener('change', (e) => {
                 let name = e.target.value;
                 if (!name) return;
-                if (userSession && userSession.role !== 'admin') {
-                  alert("Hanya Admin yang memiliki akses untuk menambahkan staf baru!");
-                  return;
+                if (!currentStaffArr.includes(name)) { 
+                  saveStateToHistory(); 
+                  currentStaffArr.push(name); 
+                  staffRoles[name] = 'member';
+                  addActivityLog(`Admin menambahkan staf baru: ${name}`);
+                  triggerAutoSave(); 
+                  renderTable(); 
                 }
-                if (!currentStaffArr.includes(name)) { saveStateToHistory(); currentStaffArr.push(name); triggerAutoSave(); renderTable(); }
               });
             }
           } else {
@@ -1341,11 +1561,14 @@ function renderTable() {
               inp.addEventListener('keypress', (e) => { 
                 if (e.key === 'Enter') { 
                   let name = inp.value.trim(); if (!name) return; 
-                  if (userSession && userSession.role !== 'admin') {
-                    alert("Hanya Admin yang memiliki akses untuk menambahkan staf baru!");
-                    return;
-                  }
-                  if (!currentStaffArr.includes(name)) { saveStateToHistory(); currentStaffArr.push(name); triggerAutoSave(); renderTable(); } 
+                  if (!currentStaffArr.includes(name)) { 
+                    saveStateToHistory(); 
+                    currentStaffArr.push(name); 
+                    staffRoles[name] = 'member';
+                    addActivityLog(`Admin menambahkan staf manual: ${name}`);
+                    triggerAutoSave(); 
+                    renderTable(); 
+                  } 
                 } 
               });
             }
@@ -1367,6 +1590,7 @@ function renderTable() {
               if (!currentStaffArr.includes(name)) {
                 saveStateToHistory();
                 currentStaffArr.push(name);
+                addActivityLog(`Menambahkan staf umum: ${name}`);
                 triggerAutoSave();
                 renderTable();
               }
@@ -1377,7 +1601,20 @@ function renderTable() {
     }, 50);
   } 
   renderGlobalNotes(); 
+  renderActivityLogs();
 } 
+
+window.promoteToAdmin = function(name) {
+  if (userSession && userSession.role !== 'admin') {
+    alert("Hanya Admin yang dapat memberikan hak akses Admin!");
+    return;
+  }
+  staffRoles[name] = 'admin';
+  addActivityLog(`Admin mengangkat ${name} sebagai Admin.`);
+  triggerAutoSave();
+  renderTable();
+  alert(`${name} sekarang menjadi Admin!`);
+};
 
 function renderGlobalNotes() { 
   globalNotesContainer.innerHTML = ""; 
@@ -1417,6 +1654,10 @@ function renderGlobalNotes() {
 } 
 
 document.getElementById('addGlobalNoteBtn').addEventListener('click', () => { 
+  if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
+    alert("Hanya Admin yang dapat menambah catatan!");
+    return;
+  }
   let monthKey = `${currentYear}-${currentMonth}`; if (!globalNotes[monthKey]) globalNotes[monthKey] = []; 
   saveStateToHistory(); globalNotes[monthKey].unshift(`Catatan baru ditambahkan.`); triggerAutoSave(); renderGlobalNotes(); 
 }); 
@@ -1429,7 +1670,17 @@ window.deleteStaff = function(name) {
   showConfirm("Hapus Staff", `Yakin ingin menghapus ${name}?`, () => { 
     saveStateToHistory(); 
     let sObj = currentActivePage === 'team' ? schedules : schedulesGen; delete sObj[name]; 
-    if (currentActivePage === 'team') staffList = staffList.filter(s => s !== name); else staffListGen = staffListGen.filter(s => s !== name); 
+    if (currentActivePage === 'team') {
+      staffList = staffList.filter(s => s !== name);
+      let wasAdmin = (staffRoles[name] === 'admin');
+      delete staffRoles[name];
+      if (wasAdmin && staffList.length > 0) {
+        staffRoles[staffList[0]] = 'admin';
+      }
+    } else {
+      staffListGen = staffListGen.filter(s => s !== name);
+    } 
+    addActivityLog(`Menghapus staf: ${name}`);
     triggerAutoSave(); renderTable(); 
   }); 
 }; 
@@ -1437,8 +1688,24 @@ window.deleteStaff = function(name) {
 document.querySelectorAll('.shift-instant-btn').forEach(btn => { 
   btn.addEventListener('click', () => { 
     let staff = document.getElementById('activeStaffKey').value, key = document.getElementById('activeDateKey').value, val = btn.getAttribute('data-value'); 
+    let isAdmin = (userSession && userSession.role === 'admin');
+
+    if (!isAdmin) {
+      // Anggota melakukan request jadwal
+      addActivityLog(`Anggota (${staff}) mengajukan request jadwal tgl ${key} menjadi shift [${val}]`);
+      alert("Request jadwal berhasil diajukan ke Admin!");
+      formSection.classList.add('hidden');
+      return;
+    }
+
     if (!schedules[staff]) schedules[staff] = {}; 
-    if (val === "CLEAR") delete schedules[staff][key]; else schedules[staff][key] = { shift: val, initial: val }; 
+    if (val === "CLEAR") {
+      delete schedules[staff][key];
+      addActivityLog(`Admin menghapus shift ${staff} pada tgl ${key}`);
+    } else {
+      schedules[staff][key] = { shift: val, initial: val }; 
+      addActivityLog(`Admin mengubah shift ${staff} pada tgl ${key} menjadi [${val}]`);
+    }
     triggerAutoSave(); formSection.classList.add('hidden'); renderTable(); 
   }); 
 }); 
@@ -1447,7 +1714,13 @@ document.querySelectorAll('.shift-gen-btn').forEach(btn => {
   btn.addEventListener('click', () => { 
     let staff = document.getElementById('activeStaffKeyGen').value, key = document.getElementById('activeDateKeyGen').value, val = btn.getAttribute('data-value'), init = btn.getAttribute('data-initial'); 
     if (!schedulesGen[staff]) schedulesGen[staff] = {}; 
-    if (val === "CLEAR") delete schedulesGen[staff][key]; else schedulesGen[staff][key] = { shift: val, initial: init }; 
+    if (val === "CLEAR") {
+      delete schedulesGen[staff][key];
+      addActivityLog(`Admin menghapus shift umum ${staff} pada tgl ${key}`);
+    } else {
+      schedulesGen[staff][key] = { shift: val, initial: init }; 
+      addActivityLog(`Admin mengubah shift umum ${staff} pada tgl ${key} menjadi [${val}]`);
+    }
     triggerAutoSave(); formSectionGeneral.classList.add('hidden'); renderTable(); 
   }); 
 }); 
@@ -1465,7 +1738,7 @@ document.getElementById('closeHelpModalBtn').addEventListener('click', () => hel
 document.getElementById('closeHelpModalFooterBtn').addEventListener('click', () => helpModal.classList.add('hidden'));
 
 applyTheme(); updateLanguageUI(); loadServerDataForCounter(); checkAuthSession(); 
-renderTable(); renderSidebarExplorerTree();
+renderTable(); renderSidebarExplorerTree(); renderActivityLogs();
 </script> 
 </body> 
 </html>

@@ -182,8 +182,8 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <button id="closeHelpModalBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-white text-black border border-black hover:bg-slate-100 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
     <div class="p-6 flex-grow overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed"> 
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
-        <div id="tr_helpBox1Title" class="font-bold text-slate-900 text-sm mb-1">1. Portal Konter, Login, & Hak Akses (Khusus Tim)</div> 
-        <p id="tr_helpBox1Desc">Gunakan menu Login atau Daftar Anggota Baru dengan memasukkan PIN server konter yang sesuai. Fitur kontrol utama seperti simpan draft, tambah/hapus staf, dan pengosongan lembar kerja dibatasi khusus untuk Admin. Anggota tim dapat mengajukan request perubahan shift mandiri.</p> 
+        <div id="tr_helpBox1Title" class="font-bold text-slate-900 text-sm mb-1">1. Panduan Pembuatan Akun Admin & Member</div> 
+        <p id="tr_helpBox1Desc"><strong>Cara Buat Akun Admin:</strong> Pilih tab "Masuk (Login)" atau "Daftar Anggota Baru", pilih peran "Admin", tentukan nama konter dan PIN rahasia konter Anda, lalu masukkan nama lengkap Anda. Admin memiliki hak akses penuh untuk mengatur jadwal, menambah/menghapus staf, dan menyimpan draft.<br><br><strong>Cara Buat Akun Member (Anggota Tim):</strong> Pilih tab "Daftar Anggota Baru", masukkan nama konter dan PIN server yang sama dengan Admin Anda, pilih proyek Admin yang sesuai, lalu masukkan nama lengkap Anda. Member dapat masuk untuk melihat jadwal dan mengajukan request perubahan shift secara mandiri.</p> 
       </div> 
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
         <div id="tr_helpBox2Title" class="font-bold text-slate-900 text-sm mb-1">2. Navigasi Lembar Kerja & Riwayat (Undo/Redo)</div> 
@@ -576,7 +576,7 @@ const translations = {
     authPinHintLogin: "*PIN server konter harus sudah terdaftar.", authPinHintReg: "*Masukkan PIN konter tempat Anda mendaftar.",
     authBtnLogin: "Masuk ke Scheduly Tim", authBtnReg: "Daftar Anggota Baru",
     helpTitle: "Pusat Bantuan & Panduan Lengkap", helpSubtitle: "Pelajari cara menguasai fitur Scheduly dengan cepat",
-    helpBox1Title: "1. Portal Konter, Login, & Hak Akses (Khusus Tim)", helpBox1Desc: "Gunakan menu Login atau Daftar Anggota Baru dengan memasukkan PIN server konter yang sesuai. Fitur kontrol utama seperti simpan draft, tambah/hapus staf, dan pengosongan lembar kerja dibatasi khusus untuk Admin. Anggota tim dapat mengajukan request perubahan shift mandiri.",
+    helpBox1Title: "1. Panduan Pembuatan Akun Admin & Member", helpBox1Desc: "Cara Buat Akun Admin: Pilih tab Masuk (Login) atau Daftar Anggota Baru, pilih peran Admin, tentukan nama konter dan PIN rahasia konter Anda, lalu masukkan nama lengkap Anda. Admin memiliki hak akses penuh untuk mengatur jadwal, menambah/menghapus staf, dan menyimpan draft. Cara Buat Akun Member (Anggota Tim): Pilih tab Daftar Anggota Baru, masukkan nama konter dan PIN server yang sama dengan Admin Anda, pilih proyek Admin yang sesuai, lalu masukkan nama lengkap Anda. Member dapat masuk untuk melihat jadwal dan mengajukan request perubahan shift secara mandiri.",
     helpBox2Title: "2. Navigasi Lembar Kerja & Riwayat (Undo/Redo)", helpBox2Desc: "Beralih antara Jadwal Tim dan Jadwal Umum melalui menu navigasi utama atau sidebar. Anda dapat menggunakan tombol Undo dan Redo untuk melacak atau mengembalikan perubahan data pada lembar kerja secara fleksibel.",
     helpBox3Title: "3. Pengelolaan Folder & Penyimpanan Draft", helpBox3Desc: "Admin dapat mengakses menu Folder Penyimpanan untuk membuat direktori sub-folder, memindah, menyalin, atau menghapus file draft lembar kerja secara multi-pilih agar pengelolaan arsip bulanan lebih terstruktur.",
     helpBox4Title: "4. Log Aktivitas & Hari Besar / Libur Nasional", helpBox4Desc: "Sistem secara otomatis mencatat setiap tindakan penting ke dalam Log Aktivitas & Request Jadwal. Kalender juga dilengkapi deteksi otomatis hari libur nasional serta hari besar Islam (Hijriah) beserta catatan penting bulanan.",
@@ -653,7 +653,7 @@ const translations = {
     authPinHintLogin: "*Counter server PIN must be registered.", authPinHintReg: "*Enter counter PIN where you want to register.",
     authBtnLogin: "Sign In to Scheduly Team", authBtnReg: "Register New Member",
     helpTitle: "Help Center & Full Guide", helpSubtitle: "Learn how to master Scheduly features quickly",
-    helpBox1Title: "1. Counter Portal, Login, & Access Rights (Team Only)", helpBox1Desc: "Use Login or Register New Member by entering the correct counter server PIN. Main control features such as saving drafts, adding/deleting staff, and clearing worksheets are restricted to Admins. Team members can submit independent shift change requests.",
+    helpBox1Title: "1. Admin & Member Account Creation Guide", helpBox1Desc: "How to Create Admin Account: Select 'Sign In (Login)' or 'Register New Member', choose role 'Admin', set counter name and secret counter PIN, then enter your full name. Admin has full access rights to manage schedules, add/delete staff, and save drafts. How to Create Member Account: Select 'Register New Member', enter the same counter name and server PIN as your Admin, select the corresponding Admin project, then enter your full name. Members can sign in to view schedules and independently submit shift change requests.",
     helpBox2Title: "2. Worksheet Navigation & History (Undo/Redo)", helpBox2Desc: "Switch between Team Schedule and General Schedule via the main navigation menu or sidebar. You can use Undo and Redo buttons to flexibly track or revert data changes on the worksheet.",
     helpBox3Title: "3. Folder Management & Draft Storage", helpBox3Desc: "Admins can access Folder Storage to create sub-folder directories, move, copy, or delete worksheet draft files via multi-select for structured monthly archiving.",
     helpBox4Title: "4. Activity Logs & National Holidays / Special Days", helpBox4Desc: "The system automatically logs every important action into Activity Logs & Schedule Requests. The calendar is also equipped with automatic national holiday and Islamic (Hijri) holiday detection along with monthly important notes.",
@@ -1755,7 +1755,6 @@ document.querySelectorAll('.export-format-btn').forEach(btn => {
       a.download = fileName + '.csv';
       a.click();
     } else if (format === 'xlsx' || format === 'docx' || format === 'pdf') {
-      // Inline styling untuk mempertahankan warna kalender dan badge shift pada hasil ekspor
       let inlineStyleContent = `<style>
         table { border-collapse: collapse; width: 100%; font-family: 'Inter', sans-serif; font-size: 11px; }
         th, td { border: 1px solid #cbd5e1; padding: 6px; text-align: center; }
@@ -1776,7 +1775,6 @@ document.querySelectorAll('.export-format-btn').forEach(btn => {
         .badge-gen-Pagi, .badge-gen-Siang, .badge-gen-Mid, .badge-gen-Sore, .badge-gen-Malam { background-color: #ffffff; color: #1e293b; border: 1px solid #cbd5e1; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; }
       </style>`;
 
-      // Konversi input teks nama di kolom pertama menjadi teks biasa agar rapi saat diekspor
       clonedTable.querySelectorAll('tr').forEach((tr, rIdx) => {
         let firstCell = tr.querySelector('td, th');
         if (firstCell) {

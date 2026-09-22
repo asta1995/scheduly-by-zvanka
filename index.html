@@ -1672,6 +1672,58 @@ const exportModal = document.getElementById('exportModal');
 document.getElementById('openExportModalBtn').addEventListener('click', () => exportModal.classList.remove('hidden')); 
 document.getElementById('closeExportModalBtn').addEventListener('click', () => exportModal.classList.add('hidden')); 
 
+// Fungsionalitas Export Dokumen
+document.querySelectorAll('.export-format-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    let format = btn.getAttribute('data-format');
+    exportModal.classList.add('hidden');
+    let titleText = currentActivePage === 'team' ? "Jadwal_Tim" : "Jadwal_Umum";
+    let dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}`;
+    let fileName = `${titleText}_${dateStr}`;
+
+    if (format === 'csv') {
+      let csvContent = "";
+      let rows = scheduleTable.querySelectorAll('tr');
+      rows.forEach(row => {
+        let cols = row.querySelectorAll('th, td');
+        let data = [];
+        cols.forEach((col, idx) => {
+          if (idx === 0) {
+            let input = col.querySelector('input');
+            data.push('"' + (input ? input.value : col.innerText.trim()) + '"');
+          } else {
+            data.push('"' + col.innerText.trim().replace(/\n/g, ' ') + '"');
+          }
+        });
+        csvContent += data.join(",") + "\n";
+      });
+      let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      let url = URL.createObjectURL(blob);
+      let a = document.createElement('a');
+      a.href = url;
+      a.download = fileName + '.csv';
+      a.click();
+    } else if (format === 'xlsx' || format === 'docx' || format === 'pdf') {
+      let tableHTML = scheduleTable.outerHTML;
+      let htmlContent = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+      <head><meta charset="utf-8"><title>${fileName}</title></head>
+      <body>${tableHTML}</body></html>`;
+      let mimeType = format === 'xlsx' ? 'application/vnd.ms-excel' : (format === 'docx' ? 'application/msword' : 'application/pdf');
+      let ext = format === 'xlsx' ? 'xls' : format;
+      if(format === 'pdf') {
+        window.print();
+        return;
+      }
+      let blob = new Blob([htmlContent], { type: mimeType });
+      let url = URL.createObjectURL(blob);
+      let a = document.createElement('a');
+      a.href = url;
+      a.download = fileName + '.' + ext;
+      a.click();
+    }
+  });
+});
+
 const confirmModal = document.getElementById('confirmModal'), confirmTitle = document.getElementById('confirmTitle'), confirmMessage = document.getElementById('confirmMessage'), confirmYesBtn = document.getElementById('confirmYesBtn'), confirmNoBtn = document.getElementById('confirmNoBtn'); 
 let pendingAction = null; 
 function showConfirm(title, msg, onYes) { confirmTitle.innerText = title; confirmMessage.innerText = msg; confirmModal.classList.remove('hidden'); pendingAction = onYes; } 
@@ -1756,12 +1808,17 @@ function renderTable() {
   let currentStaffArr = currentActivePage === 'team' ? staffList : staffListGen; 
   let currentSchedObj = currentActivePage === 'team' ? schedules : schedulesGen; 
   
+  let specialDaysMap = getSpecialDaysForMonth(currentYear, currentMonth);
+
   let thead = scheduleTable.querySelector('thead'); 
   let headerHTML = `<tr class="bg-slate-100 text-slate-800 border-b border-slate-300"><th class="p-3 sticky left-0 bg-slate-100 z-10 font-bold min-w-[150px] border-r border-slate-300">${t.tableColName}</th>`; 
   for (let day = 1; day <= totalDays; day++) { 
     let dObj = new Date(currentYear, currentMonth, day); 
-    let isRed = (dObj.getDay() === 0 || dObj.getDay() === 6); 
-    headerHTML += `<th class="p-2 text-center min-w-[44px] border-r border-slate-300 text-xs ${isRed ? 'bg-red-50 text-red-700 font-bold' : ''}"><div>${day}</div><div class="text-[10px] text-slate-500">${daysShort[dObj.getDay()]}</div></th>`; 
+    let isWeekend = (dObj.getDay() === 0 || dObj.getDay() === 6); 
+    let isHoliday = specialDaysMap[day] !== undefined;
+    let headerClass = (isHoliday || isWeekend) ? 'bg-red-50 text-red-700 font-bold' : '';
+    let holidayTitle = isHoliday ? `title="${specialDaysMap[day]}"` : '';
+    headerHTML += `<th class="p-2 text-center min-w-[44px] border-r border-slate-300 text-xs ${headerClass}" ${holidayTitle}><div>${day}</div><div class="text-[10px] ${isHoliday ? 'text-red-600 font-bold underline' : 'text-slate-500'}">${daysShort[dObj.getDay()]}</div></th>`; 
   } 
   headerHTML += `<th class="min-w-[16px] bg-transparent border-none p-0"></th>`; 
   let shiftLabels = currentActivePage === 'team' ? ["FULL", "P", "So", "P(s)", "Pc", "PS", "OFF", "C", "Total"] : ["Pagi", "Siang", "Mid", "Sore", "Malam", "Split", "FULL", "OFF", "CUTI", "Total"]; 
@@ -1785,8 +1842,15 @@ function renderTable() {
     let counts = {}; shiftLabels.forEach(s => counts[s] = 0); counts.totalWork = 0; 
     for (let day = 1; day <= totalDays; day++) { 
       let dKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`; 
-      let dObj = new Date(currentYear, currentMonth, day), isRed = (dObj.getDay() === 0 || dObj.getDay() === 6); 
-      let td = document.createElement('td'); td.className = `p-1 text-center border-r border-b border-slate-300 cursor-pointer align-middle text-xs ${isRed ? 'bg-red-50/30' : ''}`; 
+      let dObj = new Date(currentYear, currentMonth, day);
+      let isWeekend = (dObj.getDay() === 0 || dObj.getDay() === 6);
+      let isHoliday = specialDaysMap[day] !== undefined;
+      let tdClass = (isHoliday || isWeekend) ? 'bg-red-50/30' : '';
+
+      let td = document.createElement('td'); td.className = `p-1 text-center border-r border-b border-slate-300 cursor-pointer align-middle text-xs ${tdClass}`; 
+      if (isHoliday) {
+        td.title = specialDaysMap[day];
+      }
       
       let shiftRecord = (currentSchedObj[staff] && currentSchedObj[staff][dKey]) ? currentSchedObj[staff][dKey] : null; 
       let shift = shiftRecord ? shiftRecord.shift : "", initial = shiftRecord ? shiftRecord.initial : ""; 

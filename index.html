@@ -9,6 +9,11 @@
 <!-- Google Font Inter & Pacifico --> 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet"> 
 <link rel="manifest" id="my-manifest"> 
+
+<!-- Firebase SDK (Compat v9) untuk Sinkronisasi Cloud Antar Perangkat -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
 <style> 
 body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; color: #1e293b; } 
 body:not(.theme-pinky) { background-image: radial-gradient(#cbd5e1 1px, transparent 1px), radial-gradient(#cbd5e1 1px, #f1f5f9 1px); background-size: 40px 40px; background-position: 0 0, 20px 20px; background-attachment: fixed; } 
@@ -117,8 +122,8 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <div id="quickHintsBanner" class="bg-rose-50 border border-rose-200 rounded-lg p-3 mb-4 text-xs text-rose-800 flex items-start gap-2">
       <span class="text-base">💡</span>
       <div>
-        <span class="font-bold block mb-0.5" id="tr_quickHintTitle">Panduan Cepat (Quick Tips):</span>
-        <span id="tr_quickHintDesc">Pilih "Jadwal & Catatan Tim" untuk masuk ke konter Anda, atau buka "Pusat Bantuan" jika memerlukan panduan lengkap penggunaan aplikasi.</span>
+        <span class="font-bold block mb-0.5" id="tr_homeQuickHintTitle">Panduan Cepat (Quick Tips):</span>
+        <span id="tr_homeQuickHintDesc">Pilih "Jadwal & Catatan Tim" untuk masuk ke konter Anda, atau buka "Pusat Bantuan" jika memerlukan panduan lengkap penggunaan aplikasi.</span>
       </div>
     </div>
     <div class="space-y-3 text-xs mb-4"> 
@@ -548,8 +553,25 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   </div> 
 </div> 
 
-<!-- Script Utama --> 
+<!-- Script Utama (Terhubung Firebase Realtime Database Anda) --> 
 <script> 
+// KONFIGURASI FIREBASE CLOUD ANDA
+const firebaseConfig = {
+  apiKey: "AIzaSyC1Zq_ibBJgHOeD20MHKd_ic6FChDcLkhc",
+  authDomain: "scheduly-eebf5.firebaseapp.com",
+  databaseURL: "https://scheduly-eebf5-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "scheduly-eebf5",
+  storageBucket: "scheduly-eebf5.firebasestorage.app",
+  messagingSenderId: "278563884001",
+  appId: "1:278563884001:web:910f292ff760e63d2ee0a0"
+};
+
+// Inisialisasi Firebase
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+const db = firebase.database();
+
 let currentLang = localStorage.getItem('scheduly_lang') || 'id'; 
 let currentActivePage = 'team'; 
 let userSession = JSON.parse(localStorage.getItem('scheduly_user_session_v1')) || null;
@@ -568,7 +590,7 @@ const translations = {
     menu_team_title: "Jadwal & Catatan Tim", menu_team_desc: "(Khusus Pramuniaga dan Kasir)", 
     menu_general_title: "Jadwal Umum", menu_general_desc: "Pengelolaan shift operasional umum secara komprehensif", 
     menu_folder_title: "Folder & Penyimpanan", menu_folder_desc: "Kelola direktori multi-folder dan arsip draft lembar kerja", 
-    autosave_text: "Tersimpan Otomatis", notes_heading: "Catatan & Hari Penting", btn_add_note: "+ Tambah Catatan", footer_text: "© 2026 Scheduly • Didesain untuk kemudahan & kenyamanan tim",
+    autosave_text: "Tersimpan di Cloud", notes_heading: "Catatan & Hari Penting", btn_add_note: "+ Tambah Catatan", footer_text: "© 2026 Scheduly • Terhubung Cloud Server Real-time",
     clearSheetTitle: "Kosongkan Lembar Kerja", clearSheetConfirm: "Apakah kamu yakin ingin mengosongkan seluruh data staff dan jadwal pada lembar kerja ini?",
     authTitle: "Portal Konter & Akses Sesi", authSubtitle: "Pilih masuk atau daftar anggota baru",
     authLoginTab: "Masuk (Login)", authRegisterTab: "Daftar Anggota Baru",
@@ -601,7 +623,6 @@ const translations = {
     tableColName: "Nama / Name", selectRegisteredName: "-- Pilih Nama Terdaftar --", staffRegisteredBtn: "Staff Terdaftar", staffManualBtn: "Input Nama Manual", manualPlaceholder: "Ketik nama manual...",
     addStaffTitle: "Tambah Staf:",
     
-    // Popup & Alert Messages (ID)
     alertEnterNamePin: "Harap masukkan Nama dan PIN Server Konter!",
     alertNoAdminCounterPin: "Belum ada Admin terdaftar untuk Konter dan PIN ini! Silakan buat proyek baru sebagai Admin terlebih dahulu.",
     alertAlreadyRegistered: "Nama tersebut sudah terdaftar pada konter, PIN, dan admin ini! Silakan gunakan menu Masuk (Login) jika Anda sudah pernah terdaftar.",
@@ -645,7 +666,7 @@ const translations = {
     menu_team_title: "Team Schedule & Notes", menu_team_desc: "(Dedicated for Cashiers and Floor Staff)", 
     menu_general_title: "General Schedule", menu_general_desc: "Comprehensive operational shift management", 
     menu_folder_title: "Folder & Storage", menu_folder_desc: "Manage multi-folder directories and saved drafts", 
-    autosave_text: "Auto-saved", notes_heading: "Notes & Important Days", btn_add_note: "+ Add Note", footer_text: "© 2026 Scheduly • Designed for team ease and convenience",
+    autosave_text: "Cloud Saved", notes_heading: "Notes & Important Days", btn_add_note: "+ Add Note", footer_text: "© 2026 Scheduly • Connected to Real-time Cloud Server",
     clearSheetTitle: "Clear Workspace", clearSheetConfirm: "Are you sure you want to clear all staff and schedule data on this worksheet?",
     authTitle: "Counter Portal & Session Access", authSubtitle: "Choose login or register new member",
     authLoginTab: "Sign In (Login)", authRegisterTab: "Register New Member",
@@ -678,7 +699,6 @@ const translations = {
     tableColName: "Name / Name", selectRegisteredName: "-- Select Registered Name --", staffRegisteredBtn: "Registered Staff", staffManualBtn: "Manual Name Input", manualPlaceholder: "Type manual name...",
     addStaffTitle: "Add Staff:",
     
-    // Popup & Alert Messages (EN)
     alertEnterNamePin: "Please enter your Name and Counter Server PIN!",
     alertNoAdminCounterPin: "No Admin registered for this Counter and PIN yet! Please create a new project as Admin first.",
     alertAlreadyRegistered: "This name is already registered for this counter, PIN, and admin! Please use the Sign In (Login) menu if you are already registered.",
@@ -743,8 +763,8 @@ function updateLanguageUI() {
 
   document.getElementById('tr_homeTitle').innerText = t.home_title;
   document.getElementById('tr_homeSubtitle').innerText = t.home_subtitle;
-  document.getElementById('tr_quickHintTitle').innerText = t.quickHintTitle;
-  document.getElementById('tr_quickHintDesc').innerText = t.quickHintDesc;
+  document.getElementById('tr_homeQuickHintTitle').innerText = t.quickHintTitle;
+  document.getElementById('tr_homeQuickHintDesc').innerText = t.quickHintDesc;
   document.getElementById('tr_homeTeamTitle').innerText = t.menu_team_title;
   document.getElementById('tr_homeTeamDesc').innerText = t.menu_team_desc;
   document.getElementById('tr_homeGenTitle').innerText = t.menu_general_title;
@@ -881,9 +901,13 @@ authModeRegisterTab.addEventListener('click', () => {
   updateLanguageUI();
 });
 
-function getRegisteredAdminsForCounterPin(counter, pin) {
-  let registryKey = `scheduly_registry_${counter}_${pin}`;
-  return JSON.parse(localStorage.getItem(registryKey)) || [];
+function getRegisteredAdminsForCounterPin(counter, pin, callback) {
+  let safePin = pin.replace(/[.#$\/\[\]]/g, '_');
+  let refPath = `registries/${counter}_${safePin}`;
+  db.ref(refPath).once('value', (snapshot) => {
+    let data = snapshot.val() || [];
+    callback(Array.isArray(data) ? data : Object.values(data));
+  });
 }
 
 function updateAdminTargetDropdown() {
@@ -891,20 +915,26 @@ function updateAdminTargetDropdown() {
   let pin = authPinInput.value.trim();
   let role = authRoleSelect.value;
   
+  if (!pin) {
+    authAdminTargetWrapper.classList.add('hidden');
+    return;
+  }
+
   if (authMode === 'register' || role === 'member') {
-    let admins = getRegisteredAdminsForCounterPin(counter, pin);
-    if (admins.length > 0) {
-      authAdminTargetWrapper.classList.remove('hidden');
-      authAdminTargetSelect.innerHTML = "";
-      admins.forEach(adm => {
-        let opt = document.createElement('option');
-        opt.value = adm;
-        opt.innerText = `Admin Proyek: ${adm}`;
-        authAdminTargetSelect.appendChild(opt);
-      });
-    } else {
-      authAdminTargetWrapper.classList.add('hidden');
-    }
+    getRegisteredAdminsForCounterPin(counter, pin, (admins) => {
+      if (admins.length > 0) {
+        authAdminTargetWrapper.classList.remove('hidden');
+        authAdminTargetSelect.innerHTML = "";
+        admins.forEach(adm => {
+          let opt = document.createElement('option');
+          opt.value = adm;
+          opt.innerText = `Admin Proyek: ${adm}`;
+          authAdminTargetSelect.appendChild(opt);
+        });
+      } else {
+        authAdminTargetWrapper.classList.add('hidden');
+      }
+    });
   } else {
     authAdminTargetWrapper.classList.add('hidden');
   }
@@ -934,12 +964,14 @@ function checkAuthSession() {
     } else {
       authModal.classList.add('hidden');
       applyUserSessionUI();
+      loadServerDataForCounter();
     }
   } else {
     headerLogoutBtn.classList.add('hidden');
     sidebarClandysAuthBox.classList.add('hidden');
     settingsProfileSection.classList.add('hidden');
     authModal.classList.add('hidden');
+    loadServerDataForCounter();
   }
 }
 
@@ -965,71 +997,94 @@ authLoginBtn.addEventListener('click', () => {
 
   let role = authMode === 'register' ? 'member' : authRoleSelect.value;
   let adminNameTarget = name;
+  let safePin = pin.replace(/[.#$\/\[\]]/g, '_');
 
   if (role === 'member' || authMode === 'register') {
-    let admins = getRegisteredAdminsForCounterPin(counter, pin);
-    if (admins.length === 0) {
-      alert(t.alertNoAdminCounterPin);
+    getRegisteredAdminsForCounterPin(counter, pin, (admins) => {
+      if (admins.length === 0) {
+        alert(t.alertNoAdminCounterPin);
+        return;
+      }
+      adminNameTarget = authAdminTargetSelect.value || admins[0];
+      proceedLoginValidation(counter, pin, safePin, name, role, adminNameTarget);
+    });
+  } else {
+    proceedLoginValidation(counter, pin, safePin, name, role, name);
+  }
+});
+
+function proceedLoginValidation(counter, pin, safePin, name, role, adminNameTarget) {
+  let t = translations[currentLang];
+  let registryRef = db.ref(`registries/${counter}_${safePin}`);
+  let memberPoolRef = db.ref(`member_pools/${counter}_${safePin}_${adminNameTarget}`);
+
+  registryRef.once('value', (regSnap) => {
+    let admins = regSnap.val() || [];
+    if (!Array.isArray(admins)) admins = Object.values(admins);
+
+    if (role === 'admin' && authMode === 'register' && admins.includes(name)) {
+      alert(t.alertAlreadyRegistered);
       return;
     }
-    adminNameTarget = authAdminTargetSelect.value || admins[0];
-  } else {
-    let registryKey = `scheduly_registry_${counter}_${pin}`;
-    let admins = JSON.parse(localStorage.getItem(registryKey)) || [];
-    if (!admins.includes(name)) {
-      admins.push(name);
-      localStorage.setItem(registryKey, JSON.stringify(admins));
-    }
-    adminNameTarget = name;
-  }
 
-  let globalMemberPoolKey = `scheduly_member_pool_${counter}_${pin}_${adminNameTarget}`;
-  let globalMembers = JSON.parse(localStorage.getItem(globalMemberPoolKey)) || [];
-  
-  if (authMode === 'register' && globalMembers.includes(name)) {
-    alert(t.alertAlreadyRegistered);
-    return;
-  }
+    memberPoolRef.once('value', (memSnap) => {
+      let members = memSnap.val() || [];
+      if (!Array.isArray(members)) members = Object.values(members);
 
-  if (authMode === 'login' && role === 'member' && !globalMembers.includes(name)) {
-    alert(t.alertNotRegisteredLoginFirst);
-    return;
-  }
+      if (authMode === 'register' && members.includes(name)) {
+        alert(t.alertAlreadyRegistered);
+        return;
+      }
 
-  userSession = { role, counter, name, pin, adminName: adminNameTarget, pushNotif: true };
-  localStorage.setItem('scheduly_user_session_v1', JSON.stringify(userSession));
+      if (authMode === 'login' && role === 'member' && !members.includes(name) && !admins.includes(name)) {
+        alert(t.alertNotRegisteredLoginFirst);
+        return;
+      }
 
-  let registryKey = `scheduly_registry_${counter}_${pin}`;
-  let admins = JSON.parse(localStorage.getItem(registryKey)) || [];
-  if (!admins.includes(userSession.adminName)) {
-    admins.push(userSession.adminName);
-    localStorage.setItem(registryKey, JSON.stringify(admins));
-  }
+      // Simpan session
+      userSession = { role, counter, name, pin, adminName: adminNameTarget, pushNotif: true };
+      localStorage.setItem('scheduly_user_session_v1', JSON.stringify(userSession));
 
-  if (!globalMembers.includes(name)) {
-    globalMembers.push(name);
-    localStorage.setItem(globalMemberPoolKey, JSON.stringify(globalMembers));
-  }
+      if (!admins.includes(adminNameTarget)) {
+        admins.push(adminNameTarget);
+        registryRef.set(admins);
+      }
 
-  let currentStaffArr = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || [];
-  let currentRolesObj = JSON.parse(localStorage.getItem(getCounterServerKey('roles'))) || {};
-  
-  if (!currentStaffArr.includes(name)) {
-    currentStaffArr.push(name);
-    localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(currentStaffArr));
-  }
-  if (!currentRolesObj[name]) {
-    currentRolesObj[name] = (name === userSession.adminName) ? 'admin' : role;
-    localStorage.setItem(getCounterServerKey('roles'), JSON.stringify(currentRolesObj));
-  } else {
-    userSession.role = currentRolesObj[name];
-  }
+      if (!members.includes(name)) {
+        members.push(name);
+        memberPoolRef.set(members);
+      }
 
-  loadServerDataForCounter();
-  authModal.classList.add('hidden');
-  applyUserSessionUI();
-  renderTable();
-});
+      let staffRef = db.ref(`counters/${counter}_${safePin}_${adminNameTarget}/staff`);
+      let rolesRef = db.ref(`counters/${counter}_${safePin}_${adminNameTarget}/roles`);
+
+      staffRef.once('value', (staffSnap) => {
+        let staffArr = staffSnap.val() || [];
+        if (!Array.isArray(staffArr)) staffArr = Object.values(staffArr);
+
+        rolesRef.once('value', (rolesSnap) => {
+          let rolesObj = rolesSnap.val() || {};
+
+          if (!staffArr.includes(name)) {
+            staffArr.push(name);
+            staffRef.set(staffArr);
+          }
+
+          if (!rolesObj[name]) {
+            rolesObj[name] = (name === adminNameTarget) ? 'admin' : role;
+            rolesRef.set(rolesObj);
+          } else {
+            userSession.role = rolesObj[name];
+          }
+
+          authModal.classList.add('hidden');
+          applyUserSessionUI();
+          initCloudListener();
+        });
+      });
+    });
+  });
+}
 
 function handleLogoutAction() {
   localStorage.removeItem('scheduly_user_session_v1');
@@ -1053,34 +1108,39 @@ document.getElementById('updateAccountNameBtn').addEventListener('click', () => 
   let oldName = userSession.name;
   if (newName === oldName) return;
 
-  let currentStaffArr = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || [];
-  let currentRolesObj = JSON.parse(localStorage.getItem(getCounterServerKey('roles'))) || {};
-  
-  let idx = currentStaffArr.indexOf(oldName);
-  if (idx !== -1) {
-    currentStaffArr[idx] = newName;
-  } else {
-    currentStaffArr.push(newName);
-  }
-  localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(currentStaffArr));
+  let safePin = userSession.pin.replace(/[.#$\/\[\]]/g, '_');
+  let basePath = `counters/${userSession.counter}_${safePin}_${userSession.adminName}`;
 
-  if (currentRolesObj[oldName]) {
-    currentRolesObj[newName] = currentRolesObj[oldName];
-    delete currentRolesObj[oldName];
-    localStorage.setItem(getCounterServerKey('roles'), JSON.stringify(currentRolesObj));
-  }
+  db.ref(`${basePath}/staff`).once('value', (snap) => {
+    let staffArr = snap.val() || [];
+    if(!Array.isArray(staffArr)) staffArr = Object.values(staffArr);
+    let idx = staffArr.indexOf(oldName);
+    if (idx !== -1) staffArr[idx] = newName;
+    else staffArr.push(newName);
+    db.ref(`${basePath}/staff`).set(staffArr);
 
-  if (schedules[oldName]) {
-    schedules[newName] = schedules[oldName];
-    delete schedules[oldName];
-  }
+    db.ref(`${basePath}/roles`).once('value', (rSnap) => {
+      let rolesObj = rSnap.val() || {};
+      if (rolesObj[oldName]) {
+        rolesObj[newName] = rolesObj[oldName];
+        delete rolesObj[oldName];
+        db.ref(`${basePath}/roles`).set(rolesObj);
+      }
 
-  userSession.name = newName;
-  localStorage.setItem('scheduly_user_session_v1', JSON.stringify(userSession));
-  loadServerDataForCounter();
-  applyUserSessionUI();
-  renderTable();
-  alert(t.alertNameChanged);
+      db.ref(`${basePath}/schedules/${oldName}`).once('value', (schSnap) => {
+        let schData = schSnap.val();
+        if (schData) {
+          db.ref(`${basePath}/schedules/${newName}`).set(schData);
+          db.ref(`${basePath}/schedules/${oldName}`).remove();
+        }
+
+        userSession.name = newName;
+        localStorage.setItem('scheduly_user_session_v1', JSON.stringify(userSession));
+        applyUserSessionUI();
+        alert(t.alertNameChanged);
+      });
+    });
+  });
 });
 
 document.getElementById('deleteAccountBtn').addEventListener('click', () => {
@@ -1090,35 +1150,42 @@ document.getElementById('deleteAccountBtn').addEventListener('click', () => {
   
   let counter = userSession.counter;
   let pin = userSession.pin;
+  let safePin = pin.replace(/[.#$\/\[\]]/g, '_');
   let adminName = userSession.adminName;
   let userName = userSession.name;
 
-  let globalMemberPoolKey = `scheduly_member_pool_${counter}_${pin}_${adminName}`;
-  let globalMembers = JSON.parse(localStorage.getItem(globalMemberPoolKey)) || [];
-  globalMembers = globalMembers.filter(m => m !== userName);
-  localStorage.setItem(globalMemberPoolKey, JSON.stringify(globalMembers));
+  let memberPoolRef = db.ref(`member_pools/${counter}_${safePin}_${adminName}`);
+  memberPoolRef.once('value', (snap) => {
+    let members = snap.val() || [];
+    if(!Array.isArray(members)) members = Object.values(members);
+    members = members.filter(m => m !== userName);
+    memberPoolRef.set(members);
+  });
   
-  let currentStaffArr = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || [];
-  let currentRolesObj = JSON.parse(localStorage.getItem(getCounterServerKey('roles'))) || {};
-  
-  let wasAdmin = (userSession.role === 'admin');
-  currentStaffArr = currentStaffArr.filter(s => s !== userName);
-  delete currentRolesObj[userName];
-  
-  if (wasAdmin && currentStaffArr.length > 0) {
-    let firstStaff = currentStaffArr[0];
-    currentRolesObj[firstStaff] = 'admin';
-  }
+  let basePath = `counters/${counter}_${safePin}_${adminName}`;
+  db.ref(`${basePath}/staff`).once('value', (snap) => {
+    let staffArr = snap.val() || [];
+    if(!Array.isArray(staffArr)) staffArr = Object.values(staffArr);
+    db.ref(`${basePath}/roles`).once('value', (rSnap) => {
+      let rolesObj = rSnap.val() || {};
+      let wasAdmin = (userSession.role === 'admin');
 
-  localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(currentStaffArr));
-  localStorage.setItem(getCounterServerKey('roles'), JSON.stringify(currentRolesObj));
-  
-  if (schedules[userName]) {
-    delete schedules[userName];
-  }
-  triggerAutoSave();
-  handleLogoutAction();
-  alert(t.alertAccountDeleted);
+      staffArr = staffArr.filter(s => s !== userName);
+      delete rolesObj[userName];
+
+      if (wasAdmin && staffArr.length > 0) {
+        let firstStaff = staffArr[0];
+        rolesObj[firstStaff] = 'admin';
+      }
+
+      db.ref(`${basePath}/staff`).set(staffArr);
+      db.ref(`${basePath}/roles`).set(rolesObj);
+      db.ref(`${basePath}/schedules/${userName}`).remove();
+
+      handleLogoutAction();
+      alert(t.alertAccountDeleted);
+    });
+  });
 });
 
 const settingsModal = document.getElementById('settingsModal');
@@ -1149,20 +1216,12 @@ document.getElementById('testPushNotifBtn').addEventListener('click', () => {
   alert(t.simulatedPushMsg(targetName));
 });
 
-const serverChannel = new BroadcastChannel('scheduly_clandys_sync_v1');
-serverChannel.onmessage = (event) => {
-  let activeCounter = userSession ? userSession.counter : 'KASIR';
-  let activeAdmin = userSession ? userSession.adminName : '';
-  if (event.data && event.data.counter === activeCounter && event.data.adminName === activeAdmin && currentActivePage === 'team') {
-    loadServerDataForCounter(); renderTable();
-  }
-};
-
 function getCounterServerKey(suffix) {
   let counter = userSession ? userSession.counter : 'KASIR';
   let pin = userSession ? userSession.pin : '123456';
+  let safePin = pin.replace(/[.#$\/\[\]]/g, '_');
   let adminName = userSession ? userSession.adminName : 'default';
-  return `scheduly_${counter}_${pin}_${adminName}_${suffix}`;
+  return `counters/${counter}_${safePin}_${adminName}/${suffix}`;
 }
 
 let staffList = [], schedules = {}, staffListGen = [], schedulesGen = {}, globalNotes = {}, activityLogs = [];
@@ -1170,53 +1229,88 @@ let staffRoles = {};
 
 function loadServerDataForCounter() {
   if (currentActivePage === 'team') {
-    staffList = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || [];
-    staffRoles = JSON.parse(localStorage.getItem(getCounterServerKey('roles'))) || {};
-    activityLogs = JSON.parse(localStorage.getItem(getCounterServerKey('logs'))) || [];
-    
+    if (!userSession) return;
+    initCloudListener();
+  } else {
+    initCloudListenerGeneral();
+  }
+}
+
+let activeCloudRef = null;
+function initCloudListener() {
+  if (activeCloudRef) {
+    activeCloudRef.off();
+  }
+  if (!userSession) return;
+  let basePath = `counters/${userSession.counter}_${userSession.pin.replace(/[.#$\/\[\]]/g, '_')}_${userSession.adminName}`;
+  activeCloudRef = db.ref(basePath);
+
+  activeCloudRef.on('value', (snapshot) => {
+    let data = snapshot.val() || {};
+    staffList = data.staff || [];
+    if (!Array.isArray(staffList)) staffList = Object.values(staffList);
+    staffRoles = data.roles || {};
+    schedules = data.schedules || {};
+    globalNotes = data.notes || {};
+    activityLogs = data.logs || {};
+    if (!Array.isArray(activityLogs)) activityLogs = Object.values(activityLogs);
+
     if (userSession && userSession.name) {
       if (!staffList.includes(userSession.name)) {
         staffList.push(userSession.name);
-        localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(staffList));
+        db.ref(`${basePath}/staff`).set(staffList);
       }
       if (!staffRoles[userSession.name]) {
         staffRoles[userSession.name] = (userSession.name === userSession.adminName) ? 'admin' : userSession.role;
-        localStorage.setItem(getCounterServerKey('roles'), JSON.stringify(staffRoles));
+        db.ref(`${basePath}/roles`).set(staffRoles);
       }
       userSession.role = staffRoles[userSession.name];
     }
-    schedules = JSON.parse(localStorage.getItem(getCounterServerKey('schedules'))) || {};
-    globalNotes = JSON.parse(localStorage.getItem(getCounterServerKey('notes'))) || {};
-  } else {
-    staffListGen = JSON.parse(localStorage.getItem('scheduly_general_staff')) || [];
-    schedulesGen = JSON.parse(localStorage.getItem('scheduly_general_schedules')) || {};
-    globalNotes = JSON.parse(localStorage.getItem('scheduly_general_notes')) || {};
-    activityLogs = JSON.parse(localStorage.getItem('scheduly_general_logs')) || [];
+    renderTable();
+    renderSidebarExplorerTree();
+    renderActivityLogs();
+  });
+}
+
+let activeGeneralRef = null;
+function initCloudListenerGeneral() {
+  if (activeGeneralRef) {
+    activeGeneralRef.off();
   }
+  activeGeneralRef = db.ref('general_schedule');
+  activeGeneralRef.on('value', (snapshot) => {
+    let data = snapshot.val() || {};
+    staffListGen = data.staff || [];
+    if (!Array.isArray(staffListGen)) staffListGen = Object.values(staffListGen);
+    schedulesGen = data.schedules || {};
+    globalNotes = data.notes || {};
+    activityLogs = data.logs || {};
+    if (!Array.isArray(activityLogs)) activityLogs = Object.values(activityLogs);
+    renderTable();
+    renderSidebarExplorerTree();
+    renderActivityLogs();
+  });
 }
 
 function triggerAutoSave() {
   if (currentActivePage === 'team') {
-    localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(staffList));
-    localStorage.setItem(getCounterServerKey('roles'), JSON.stringify(staffRoles));
-    localStorage.setItem(getCounterServerKey('schedules'), JSON.stringify(schedules));
-    localStorage.setItem(getCounterServerKey('notes'), JSON.stringify(globalNotes));
-    localStorage.setItem(getCounterServerKey('logs'), JSON.stringify(activityLogs));
-    try { 
-      serverChannel.postMessage({ 
-        counter: userSession ? userSession.counter : 'KASIR', 
-        adminName: userSession ? userSession.adminName : '',
-        schedules: schedules 
-      }); 
-    } catch(e) {}
+    if (!userSession) return;
+    let basePath = `counters/${userSession.counter}_${userSession.pin.replace(/[.#$\/\[\]]/g, '_')}_${userSession.adminName}`;
+    db.ref(basePath).set({
+      staff: staffList,
+      roles: staffRoles,
+      schedules: schedules,
+      notes: globalNotes,
+      logs: activityLogs
+    });
   } else {
-    localStorage.setItem('scheduly_general_staff', JSON.stringify(staffListGen));
-    localStorage.setItem('scheduly_general_schedules', JSON.stringify(schedulesGen));
-    localStorage.setItem('scheduly_general_notes', JSON.stringify(globalNotes));
-    localStorage.setItem('scheduly_general_logs', JSON.stringify(activityLogs));
+    db.ref('general_schedule').set({
+      staff: staffListGen,
+      schedules: schedulesGen,
+      notes: globalNotes,
+      logs: activityLogs
+    });
   }
-  renderSidebarExplorerTree();
-  renderActivityLogs();
 }
 
 function addActivityLog(text) {
@@ -1248,12 +1342,12 @@ function applyTheme() {
   } 
 } 
 
-navPageTeamBtn.addEventListener('click', () => { currentActivePage = 'team'; applyTheme(); closeSidebar(); updateLanguageUI(); loadServerDataForCounter(); checkAuthSession(); renderTable(); }); 
-navPageGeneralBtn.addEventListener('click', () => { currentActivePage = 'general'; applyTheme(); closeSidebar(); updateLanguageUI(); loadServerDataForCounter(); checkAuthSession(); renderTable(); }); 
+navPageTeamBtn.addEventListener('click', () => { currentActivePage = 'team'; applyTheme(); closeSidebar(); updateLanguageUI(); checkAuthSession(); }); 
+navPageGeneralBtn.addEventListener('click', () => { currentActivePage = 'general'; applyTheme(); closeSidebar(); updateLanguageUI(); checkAuthSession(); }); 
 
 const welcomePage = document.getElementById('welcomePage'); 
-document.getElementById('homeMenuTeamBtn').addEventListener('click', () => { currentActivePage = 'team'; applyTheme(); updateLanguageUI(); loadServerDataForCounter(); checkAuthSession(); renderTable(); welcomePage.classList.add('hidden'); }); 
-document.getElementById('homeMenuGeneralBtn').addEventListener('click', () => { currentActivePage = 'general'; applyTheme(); updateLanguageUI(); loadServerDataForCounter(); checkAuthSession(); renderTable(); welcomePage.classList.add('hidden'); }); 
+document.getElementById('homeMenuTeamBtn').addEventListener('click', () => { currentActivePage = 'team'; applyTheme(); updateLanguageUI(); checkAuthSession(); welcomePage.classList.add('hidden'); }); 
+document.getElementById('homeMenuGeneralBtn').addEventListener('click', () => { currentActivePage = 'general'; applyTheme(); updateLanguageUI(); checkAuthSession(); welcomePage.classList.add('hidden'); }); 
 document.getElementById('homeMenuRootFolderBtn').addEventListener('click', () => { 
   let t = translations[currentLang];
   if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
@@ -1719,7 +1813,6 @@ const exportModal = document.getElementById('exportModal');
 document.getElementById('openExportModalBtn').addEventListener('click', () => exportModal.classList.remove('hidden')); 
 document.getElementById('closeExportModalBtn').addEventListener('click', () => exportModal.classList.add('hidden')); 
 
-// Fungsionalitas Export Dokumen (Termasuk Warna Kalender & Shift)
 document.querySelectorAll('.export-format-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     let format = btn.getAttribute('data-format');
@@ -1779,9 +1872,7 @@ document.querySelectorAll('.export-format-btn').forEach(btn => {
         let firstCell = tr.querySelector('td, th');
         if (firstCell) {
           let input = firstCell.querySelector('input');
-          if (input) {
-            firstCell.innerText = input.value;
-          }
+          if (input) firstCell.innerText = input.value;
         }
       });
 
@@ -1944,9 +2035,7 @@ function renderTable() {
       let tdClass = (isHoliday || isWeekend) ? 'bg-red-50/30 bg-red-custom' : '';
 
       let td = document.createElement('td'); td.className = `p-1 text-center border-r border-b border-slate-300 cursor-pointer align-middle text-xs ${tdClass}`; 
-      if (isHoliday) {
-        td.title = specialDaysMap[day];
-      }
+      if (isHoliday) td.title = specialDaysMap[day];
       
       let shiftRecord = (currentSchedObj[staff] && currentSchedObj[staff][dKey]) ? currentSchedObj[staff][dKey] : null; 
       let shift = shiftRecord ? shiftRecord.shift : "", initial = shiftRecord ? shiftRecord.initial : ""; 
@@ -2009,69 +2098,72 @@ function renderTable() {
         let tabReg = document.getElementById('tabRegisteredStaffBtn');
         let tabMan = document.getElementById('tabManualStaffBtn');
         
-        let globalMemberPoolKey = `scheduly_member_pool_${userSession ? userSession.counter : 'KASIR'}_${userSession ? userSession.pin : '123456'}_${userSession ? userSession.adminName : 'default'}`;
-        let globalMembers = JSON.parse(localStorage.getItem(globalMemberPoolKey)) || [];
-        let registeredStaffPool = [...new Set([...staffList, ...globalMembers, ...Object.keys(staffRoles)])];
-        if (userSession && userSession.name && !registeredStaffPool.includes(userSession.name)) {
-          registeredStaffPool.push(userSession.name);
-        }
+        let safePin = userSession ? userSession.pin.replace(/[.#$\/\[\]]/g, '_') : '123456';
+        let memberPoolRefPath = `member_pools/${userSession ? userSession.counter : 'KASIR'}_${safePin}_${userSession ? userSession.adminName : 'default'}`;
+        
+        db.ref(memberPoolRefPath).once('value', (snap) => {
+          let globalMembers = snap.val() || [];
+          if(!Array.isArray(globalMembers)) globalMembers = Object.values(globalMembers);
+          let registeredStaffPool = [...new Set([...staffList, ...globalMembers, ...Object.keys(staffRoles)])];
+          if (userSession && userSession.name && !registeredStaffPool.includes(userSession.name)) {
+            registeredStaffPool.push(userSession.name);
+          }
 
-        function renderAddInput(mode) {
-          if (!box) return;
-          if (mode === 'registered') {
-            tabReg.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-800 text-white transition";
-            tabMan.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-100 text-slate-700 transition";
-            let html = `<select id="inlineStaffSelect" class="bg-transparent text-xs w-full text-slate-800 focus:outline-none cursor-pointer"><option value="">${t.selectRegisteredName}</option>`;
-            registeredStaffPool.forEach(s => {
-              if (!currentStaffArr.includes(s)) {
-                html += `<option value="${s}">${s}</option>`;
-              }
-            });
-            html += `</select>`;
-            box.innerHTML = html;
-            let sel = document.getElementById('inlineStaffSelect');
-            if (sel) {
-              sel.addEventListener('change', (e) => {
-                let name = e.target.value;
-                if (!name) return;
-                if (!currentStaffArr.includes(name)) { 
-                  saveStateToHistory(); 
-                  currentStaffArr.push(name); 
-                  if (!staffRoles[name]) staffRoles[name] = 'member';
-                  addActivityLog(currentLang === 'id' ? `Admin menambahkan staf baru: ${name}` : `Admin added new staff: ${name}`);
-                  triggerAutoSave(); 
-                  renderTable(); 
+          function renderAddInput(mode) {
+            if (!box) return;
+            if (mode === 'registered') {
+              tabReg.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-800 text-white transition";
+              tabMan.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-100 text-slate-700 transition";
+              let html = `<select id="inlineStaffSelect" class="bg-transparent text-xs w-full text-slate-800 focus:outline-none cursor-pointer"><option value="">${t.selectRegisteredName}</option>`;
+              registeredStaffPool.forEach(s => {
+                if (!currentStaffArr.includes(s)) {
+                  html += `<option value="${s}">${s}</option>`;
                 }
               });
-            }
-          } else {
-            tabMan.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-800 text-white transition";
-            tabReg.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-100 text-slate-700 transition";
-            box.innerHTML = `<input type="text" id="inlineStaffInput" placeholder="${t.manualPlaceholder}" class="bg-transparent text-xs w-full text-slate-800 focus:outline-none">`;
-            let inp = document.getElementById('inlineStaffInput');
-            if (inp) {
-              inp.addEventListener('keypress', (e) => { 
-                if (e.key === 'Enter') { 
-                  let name = inp.value.trim(); if (!name) return; 
+              html += `</select>`;
+              box.innerHTML = html;
+              let sel = document.getElementById('inlineStaffSelect');
+              if (sel) {
+                sel.addEventListener('change', (e) => {
+                  let name = e.target.value;
+                  if (!name) return;
                   if (!currentStaffArr.includes(name)) { 
                     saveStateToHistory(); 
                     currentStaffArr.push(name); 
-                    staffRoles[name] = 'member';
-                    addActivityLog(currentLang === 'id' ? `Admin menambahkan staf manual: ${name}` : `Admin added manual staff: ${name}`);
+                    if (!staffRoles[name]) staffRoles[name] = 'member';
+                    addActivityLog(currentLang === 'id' ? `Admin menambahkan staf baru: ${name}` : `Admin added new staff: ${name}`);
                     triggerAutoSave(); 
-                    renderTable(); 
+                  }
+                });
+              }
+            } else {
+              tabMan.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-800 text-white transition";
+              tabReg.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-100 text-slate-700 transition";
+              box.innerHTML = `<input type="text" id="inlineStaffInput" placeholder="${t.manualPlaceholder}" class="bg-transparent text-xs w-full text-slate-800 focus:outline-none">`;
+              let inp = document.getElementById('inlineStaffInput');
+              if (inp) {
+                inp.addEventListener('keypress', (e) => { 
+                  if (e.key === 'Enter') { 
+                    let name = inp.value.trim(); if (!name) return; 
+                    if (!currentStaffArr.includes(name)) { 
+                      saveStateToHistory(); 
+                      currentStaffArr.push(name); 
+                      staffRoles[name] = 'member';
+                      addActivityLog(currentLang === 'id' ? `Admin menambahkan staf manual: ${name}` : `Admin added manual staff: ${name}`);
+                      triggerAutoSave(); 
+                    } 
                   } 
-                } 
-              });
+                });
+              }
             }
           }
-        }
 
-        if (tabReg && tabMan) {
-          tabReg.addEventListener('click', () => renderAddInput('registered'));
-          tabMan.addEventListener('click', () => renderAddInput('manual'));
-          renderAddInput('registered');
-        }
+          if (tabReg && tabMan) {
+            tabReg.addEventListener('click', () => renderAddInput('registered'));
+            tabMan.addEventListener('click', () => renderAddInput('manual'));
+            renderAddInput('registered');
+          }
+        });
       } else {
         let inpGen = document.getElementById('inlineStaffInputGen');
         if (inpGen) {
@@ -2084,7 +2176,6 @@ function renderTable() {
                 currentStaffArr.push(name);
                 addActivityLog(currentLang === 'id' ? `Menambahkan staf umum: ${name}` : `Added general staff: ${name}`);
                 triggerAutoSave();
-                renderTable();
               }
             }
           });
@@ -2105,7 +2196,6 @@ window.promoteToAdmin = function(name) {
   staffRoles[name] = 'admin';
   addActivityLog(currentLang === 'id' ? `Admin mengangkat ${name} sebagai Admin.` : `Admin promoted ${name} to Admin.`);
   triggerAutoSave();
-  renderTable();
   alert(t.alertMadeAdmin(name));
 };
 
@@ -2176,7 +2266,7 @@ window.deleteStaff = function(name) {
       staffListGen = staffListGen.filter(s => s !== name);
     } 
     addActivityLog(currentLang === 'id' ? `Menghapus staf: ${name}` : `Deleted staff: ${name}`);
-    triggerAutoSave(); renderTable(); 
+    triggerAutoSave(); 
   }); 
 }; 
 
@@ -2201,7 +2291,7 @@ document.querySelectorAll('.shift-instant-btn').forEach(btn => {
       schedules[staff][key] = { shift: val, initial: val }; 
       addActivityLog(currentLang === 'id' ? `Admin mengubah shift ${staff} pada tgl ${key} menjadi [${val}]` : `Admin changed shift for ${staff} on date ${key} to [${val}]`);
     }
-    triggerAutoSave(); formSection.classList.add('hidden'); renderTable(); 
+    triggerAutoSave(); formSection.classList.add('hidden'); 
   }); 
 }); 
 
@@ -2216,7 +2306,7 @@ document.querySelectorAll('.shift-gen-btn').forEach(btn => {
       schedulesGen[staff][key] = { shift: val, initial: init }; 
       addActivityLog(currentLang === 'id' ? `Admin mengubah shift umum ${staff} pada tgl ${key} menjadi [${val}]` : `Admin changed general shift for ${staff} on date ${key} to [${val}]`);
     }
-    triggerAutoSave(); formSectionGeneral.classList.add('hidden'); renderTable(); 
+    triggerAutoSave(); formSectionGeneral.classList.add('hidden'); 
   }); 
 }); 
 
@@ -2254,8 +2344,8 @@ if (closeHelpModalFooterBtn) {
   closeHelpModalFooterBtn.addEventListener('click', () => helpModal.classList.add('hidden'));
 }
 
-applyTheme(); updateLanguageUI(); loadServerDataForCounter(); checkAuthSession(); 
-renderTable(); renderSidebarExplorerTree(); renderActivityLogs();
+applyTheme(); updateLanguageUI(); checkAuthSession(); 
+renderSidebarExplorerTree();
 </script> 
 </body> 
 </html>

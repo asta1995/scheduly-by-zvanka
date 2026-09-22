@@ -47,6 +47,41 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 </head> 
 <body class="min-h-screen flex flex-col selection:bg-rose-200 theme-pinky"> 
 
+<!-- MODAL TUTORIAL / INTERACTIVE WELCOME HINTS WALKTHROUGH -->
+<div id="interactiveTutorialModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+  <div class="standard-card p-6 md:p-8 w-full max-w-lg bg-white shadow-2xl relative" onclick="event.stopPropagation()">
+    <button type="button" id="skipTutorialBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center transition cursor-pointer" title="Lewati / Skip">✕</button>
+    <div class="flex items-center gap-2 mb-4 border-b border-slate-200 pb-3 pr-8">
+      <div class="w-8 h-8 rounded-lg bg-[#ff3399] text-white flex items-center justify-center font-bold text-sm shadow-xs">💡</div>
+      <div>
+        <h3 id="tutorialStepTitle" class="font-bold text-slate-900 text-sm">Panduan Video & Tips Interaktif</h3>
+        <p class="text-[11px] text-slate-500" id="tutorialStepCounter">Langkah 1 dari 4</p>
+      </div>
+    </div>
+
+    <!-- Simulative Video / Illustration Screen Box -->
+    <div class="bg-slate-900 rounded-lg p-4 mb-4 text-white relative flex flex-col items-center justify-center min-h-[160px] shadow-inner text-center">
+      <div id="tutorialVideoIcon" class="text-3xl mb-2">🎬</div>
+      <div id="tutorialVideoHeadline" class="font-bold text-sm mb-1 text-rose-300">Cara Buat Akun Admin</div>
+      <p id="tutorialVideoDesc" class="text-xs text-slate-300 px-2 leading-relaxed">Pilih peran Admin pada portal login, masukkan nama konter dan PIN rahasia Anda untuk mulai mengelola jadwal.</p>
+      
+      <!-- Video Play/Pause Status Indicator -->
+      <div id="tutorialPlayStatusBadge" class="absolute top-2 left-2 bg-emerald-600/80 text-white text-[9px] px-2 py-0.5 rounded font-mono">▶ Memutar Otomatis</div>
+    </div>
+
+    <!-- Controls: Play/Pause, Prev, Next, Skip -->
+    <div class="flex items-center justify-between gap-2 text-xs">
+      <div class="flex items-center gap-1.5">
+        <button type="button" id="tutPrevBtn" class="bg-white text-slate-700 hover:bg-slate-100 border border-slate-300 px-3 py-2 rounded-lg font-medium transition cursor-pointer">&larr; Sebelumnya</button>
+        <button type="button" id="tutPlayPauseBtn" class="bg-slate-100 text-slate-800 hover:bg-slate-200 border border-slate-300 px-3 py-2 rounded-lg font-medium transition flex items-center gap-1 cursor-pointer"><span id="tutPlayPauseIcon">⏸</span> <span id="tutPlayPauseText">Jeda</span></button>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <button type="button" id="tutNextBtn" class="bg-[#ff3399] hover:bg-rose-700 text-white font-semibold px-4 py-2 rounded-lg shadow-sm transition cursor-pointer">Berikutnya &rarr;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL AUTH / LOGIN & DAFTAR ANGGOTA BARU --> 
 <div id="authModal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4"> 
   <div class="standard-card p-6 md:p-8 w-full max-w-md bg-white shadow-2xl relative" onclick="event.stopPropagation()"> 
@@ -106,7 +141,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 </div> 
 
 <!-- BERANDA UTAMA --> 
-<div id="welcomePage" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"> 
+<div id="welcomePage" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 hidden flex items-center justify-center p-4"> 
   <div class="standard-card p-6 md:p-8 w-full max-w-xl bg-white shadow-2xl relative max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()"> 
     <div class="flex items-center justify-between mb-5 border-b border-slate-200 pb-4"> 
       <div class="flex items-center gap-3"> 
@@ -183,6 +218,10 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
           <p id="tr_helpSubtitle" class="text-xs text-slate-500">Pelajari cara menguasai fitur Scheduly dengan cepat</p> 
         </div> 
       </div> 
+      <!-- Tombol Buka Ulang Tutorial Video -->
+      <button type="button" id="reopenTutorialFromHelpBtn" class="bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs px-3 py-1.5 rounded-lg font-semibold transition shadow-xs flex items-center gap-1.5 cursor-pointer">
+        <span>🎬</span> <span>Putar Video Tutorial Interaktif</span>
+      </button>
     </div> 
     <button id="closeHelpModalBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-white text-black border border-black hover:bg-slate-100 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
     <div class="p-6 flex-grow overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed"> 
@@ -284,7 +323,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
         </button> 
       </div> 
     </div> 
-    <button id="closeFullScreenFolderBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-white hover:bg-slate-100 text-black border border-black font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
+    <button id="closeFullScreenFolderBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-white text-black border border-black font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
     <div class="px-6 py-3 bg-white border-b border-slate-100 flex justify-between items-center"> 
       <div class="flex items-center gap-2">
         <button id="rootBackBtn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-1.5 rounded-lg font-medium transition">&larr; <span id="tr_folderBackBtn">Kembali ke Folder Induk</span></button> 
@@ -864,6 +903,142 @@ langToggleBtn.addEventListener('click', toggleLanguage);
 homeLangToggleBtn.addEventListener('click', toggleLanguage); 
 authLangToggle.addEventListener('click', toggleLanguage);
 
+// INTERACTIVE TUTORIAL / WELCOME HINTS WALKTHROUGH LOGIC
+const interactiveTutorialModal = document.getElementById('interactiveTutorialModal');
+const tutorialStepTitle = document.getElementById('tutorialStepTitle');
+const tutorialStepCounter = document.getElementById('tutorialStepCounter');
+const tutorialVideoIcon = document.getElementById('tutorialVideoIcon');
+const tutorialVideoHeadline = document.getElementById('tutorialVideoHeadline');
+const tutorialVideoDesc = document.getElementById('tutorialVideoDesc');
+const tutorialPlayStatusBadge = document.getElementById('tutorialPlayStatusBadge');
+const tutPrevBtn = document.getElementById('tutPrevBtn');
+const tutNextBtn = document.getElementById('tutNextBtn');
+const tutPlayPauseBtn = document.getElementById('tutPlayPauseBtn');
+const tutPlayPauseIcon = document.getElementById('tutPlayPauseIcon');
+const tutPlayPauseText = document.getElementById('tutPlayPauseText');
+const skipTutorialBtn = document.getElementById('skipTutorialBtn');
+const reopenTutorialFromHelpBtn = document.getElementById('reopenTutorialFromHelpBtn');
+
+let tutorialSteps = [
+  {
+    icon: "👑",
+    headline: "1. Cara Buat Akun Admin",
+    desc: "Pilih peran 'Admin' pada portal login, tentukan nama konter dan PIN rahasia Anda, lalu masukkan nama lengkap. Admin memiliki kendali penuh atas lembar kerja dan persetujuan request."
+  },
+  {
+    icon: "👥",
+    headline: "2. Cara Buat Akun Member (Anggota)",
+    desc: "Pilih tab 'Daftar Anggota Baru', masukkan Nama Konter dan PIN Server yang sama dengan Admin Anda, pilih proyek Admin yang sesuai, lalu masukkan nama lengkap Anda."
+  },
+  {
+    icon: "📅",
+    headline: "3. Pengajuan & Persetujuan Request Shift",
+    desc: "Anggota dapat mengklik tanggal pada baris nama mereka untuk mengajukan request shift. Admin dapat langsung melihat request tersebut di Log Aktivitas dan menekan tombol '✔ Terima' atau '✕ Tolak'."
+  },
+  {
+    icon: "💾",
+    headline: "4. Sinkronisasi & Arsip Cloud",
+    desc: "Semua perubahan tersimpan otomatis secara real-time ke server cloud pusat. Anda juga dapat menggunakan menu Folder Penyimpanan untuk mencadangkan draft bulanan."
+  }
+];
+
+let currentTutIndex = 0;
+let isTutorialPlaying = true;
+let tutAutoPlayInterval = null;
+
+function renderTutorialStep() {
+  let step = tutorialSteps[currentTutIndex];
+  tutorialStepTitle.innerText = currentLang === 'id' ? `Panduan Video & Tips Interaktif` : `Interactive Video & Tips Guide`;
+  tutorialStepCounter.innerText = currentLang === 'id' ? `Langkah ${currentTutIndex + 1} dari ${tutorialSteps.length}` : `Step ${currentTutIndex + 1} of ${tutorialSteps.length}`;
+  tutorialVideoIcon.innerText = step.icon;
+  tutorialVideoHeadline.innerText = step.headline;
+  tutorialVideoDesc.innerText = step.desc;
+
+  tutPrevBtn.disabled = currentTutIndex === 0;
+  tutNextBtn.innerText = currentLang === 'id' ? (currentTutIndex === tutorialSteps.length - 1 ? "Selesai ✓" : "Berikutnya →") : (currentTutIndex === tutorialSteps.length - 1 ? "Finish ✓" : "Next →");
+}
+
+function startTutorialAutoPlay() {
+  if (tutAutoPlayInterval) clearInterval(tutAutoPlayInterval);
+  isTutorialPlaying = true;
+  tutPlayPauseIcon.innerText = "⏸";
+  tutPlayPauseText.innerText = currentLang === 'id' ? "Jeda" : "Pause";
+  tutorialPlayStatusBadge.innerText = currentLang === 'id' ? "▶ Memutar Otomatis" : "▶ Autoplaying";
+  tutorialPlayStatusBadge.className = "absolute top-2 left-2 bg-emerald-600/80 text-white text-[9px] px-2 py-0.5 rounded font-mono";
+
+  tutAutoPlayInterval = setInterval(() => {
+    currentTutIndex++;
+    if (currentTutIndex >= tutorialSteps.length) {
+      currentTutIndex = 0;
+    }
+    renderTutorialStep();
+  }, 4500);
+}
+
+function pauseTutorialAutoPlay() {
+  if (tutAutoPlayInterval) clearInterval(tutAutoPlayInterval);
+  isTutorialPlaying = false;
+  tutPlayPauseIcon.innerText = "▶";
+  tutPlayPauseText.innerText = currentLang === 'id' ? "Putar" : "Play";
+  tutorialPlayStatusBadge.innerText = currentLang === 'id' ? "⏸ Dijeda" : "⏸ Paused";
+  tutorialPlayStatusBadge.className = "absolute top-2 left-2 bg-amber-600/80 text-white text-[9px] px-2 py-0.5 rounded font-mono";
+}
+
+if (tutPlayPauseBtn) {
+  tutPlayPauseBtn.onclick = () => {
+    if (isTutorialPlaying) {
+      pauseTutorialAutoPlay();
+    } else {
+      startTutorialAutoPlay();
+    }
+  };
+}
+
+if (tutPrevBtn) {
+  tutPrevBtn.onclick = () => {
+    if (currentTutIndex > 0) {
+      currentTutIndex--;
+      renderTutorialStep();
+    }
+  };
+}
+
+if (tutNextBtn) {
+  tutNextBtn.onclick = () => {
+    if (currentTutIndex < tutorialSteps.length - 1) {
+      currentTutIndex++;
+      renderTutorialStep();
+    } else {
+      closeTutorialModal();
+    }
+  };
+}
+
+if (skipTutorialBtn) {
+  skipTutorialBtn.onclick = () => {
+    closeTutorialModal();
+  };
+}
+
+function closeTutorialModal() {
+  if (tutAutoPlayInterval) clearInterval(tutAutoPlayInterval);
+  interactiveTutorialModal.classList.add('hidden');
+}
+
+if (reopenTutorialFromHelpBtn) {
+  reopenTutorialFromHelpBtn.onclick = () => {
+    helpModal.classList.add('hidden');
+    currentTutIndex = 0;
+    interactiveTutorialModal.classList.remove('hidden');
+    startTutorialAutoPlay();
+  };
+}
+
+// Munculkan modal tutorial secara otomatis saat file dibuka
+interactiveTutorialModal.classList.remove('hidden');
+renderTutorialStep();
+startTutorialAutoPlay();
+
 const authModal = document.getElementById('authModal');
 const authRoleSelect = document.getElementById('authRoleSelect');
 const authCounterSelect = document.getElementById('authCounterSelect');
@@ -1308,12 +1483,11 @@ function addActivityLog(text, metaData = null) {
   let timestamp = new Date().toLocaleString('id-ID');
   let logItem = {
     text: `[${timestamp}] ${text}`,
-    meta: metaData // Menyimpan data request (staff, date, shift) jika ada
+    meta: metaData
   };
   activityLogs.unshift(logItem);
   triggerAutoSave();
   
-  // Kirim simulasi push notifikasi jika ada perubahan jadwal / request
   if (metaData && metaData.targetStaff) {
     console.log(`[Push Notification Simulation] Terkirim ke ${metaData.targetStaff}: ${text}`);
   }
@@ -1465,7 +1639,6 @@ document.getElementById('openRootStorageFromSidebar').addEventListener('click', 
 
 let rootCreateFolderBtn = document.getElementById('rootCreateFolderBtn');
 if(rootCreateFolderBtn) rootCreateFolderBtn.addEventListener('click', () => {
-  let t = translations[currentLang];
   let fName = prompt(currentLang === 'id' ? "Masukkan nama folder baru di direktori ini:" : "Enter new folder name in this directory:");
   if(!fName) return;
   let tree = getStorageTree();
@@ -1965,7 +2138,6 @@ function renderActivityLogs() {
     let checkboxHtml = isAdmin ? `<input type="checkbox" value="${idx}" class="log-item-checkbox rounded text-slate-700 w-3.5 h-3.5 mt-0.5 sm:mt-0 shrink-0">` : '';
     
     let actionButtonsHtml = '';
-    // Jika ada meta request dan akun ini admin, tampilkan tombol Terima / Tolak
     if (isAdmin && meta && meta.isRequest && !meta.processed) {
       actionButtonsHtml = `<div class="flex gap-1.5 shrink-0 ml-auto sm:ml-0">
         <button onclick="approveRequest(${idx})" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-2 py-1 rounded text-[10px] shadow-xs transition" title="Terima Request">✔ Terima</button>
@@ -1988,7 +2160,6 @@ function renderActivityLogs() {
   });
 }
 
-// Fungsi Admin Menerima Request Jadwal
 window.approveRequest = function(index) {
   let entry = activityLogs[index];
   if (!entry || typeof entry !== 'object' || !entry.meta) return;
@@ -2016,7 +2187,6 @@ window.approveRequest = function(index) {
   renderTable();
 };
 
-// Fungsi Admin Menolak Request Jadwal
 window.rejectRequest = function(index) {
   let entry = activityLogs[index];
   if (!entry || typeof entry !== 'object' || !entry.meta) return;

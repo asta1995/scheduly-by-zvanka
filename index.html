@@ -474,7 +474,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
         <h3 id="tr_activityLogHeading" class="font-bold text-slate-900 text-sm flex items-center gap-2"><span>📋 Log Aktivitas & Request Jadwal</span></h3>
         <button id="deleteSelectedLogsBtn" class="no-export bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-3 py-1.5 rounded text-xs font-medium transition hidden">Hapus Log Terpilih</button>
       </div>
-      <div id="activityLogContainer" class="space-y-2 text-xs max-h-48 overflow-y-auto"></div>
+      <div id="activityLogContainer" class="space-y-2 text-xs max-h-60 overflow-y-auto"></div>
     </div>
   </main>  
   <footer class="text-center py-4 text-xs text-slate-500 font-medium bg-white border-t border-slate-200 mt-auto" id="footerText">© 2026 Scheduly • Didesain untuk kemudahan & kenyamanan tim</footer> 
@@ -637,7 +637,7 @@ const translations = {
     alertAdminOnlyAccessFolder: "Hanya Admin yang dapat mengakses penyimpanan folder dan draft!",
     alertAdminOnlySaveDraft: "Hanya Admin yang dapat menyimpan draft!",
     alertDraftSaved: "Draft berhasil disimpan ke folder!",
-    alertAdminOnlyFolderStorage: "Hanya Admin yang dapat membuka penyimpanan folder!",
+    alertAdminOnlyFolderStorage: "Only Admins can open folder storage!",
     alertNoSavedItemsFolder: "Belum ada file atau folder yang tersimpan.",
     alertAdminOnlyCreateFolder: "Hanya Admin!",
     successFolderCreated: (name) => `Folder "${name}" berhasil dibuat di direktori utama!`,
@@ -1041,7 +1041,6 @@ function proceedLoginValidation(counter, pin, safePin, name, role, adminNameTarg
         return;
       }
 
-      // Simpan session
       userSession = { role, counter, name, pin, adminName: adminNameTarget, pushNotif: true };
       localStorage.setItem('scheduly_user_session_v1', JSON.stringify(userSession));
 
@@ -1216,14 +1215,6 @@ document.getElementById('testPushNotifBtn').addEventListener('click', () => {
   alert(t.simulatedPushMsg(targetName));
 });
 
-function getCounterServerKey(suffix) {
-  let counter = userSession ? userSession.counter : 'KASIR';
-  let pin = userSession ? userSession.pin : '123456';
-  let safePin = pin.replace(/[.#$\/\[\]]/g, '_');
-  let adminName = userSession ? userSession.adminName : 'default';
-  return `counters/${counter}_${safePin}_${adminName}/${suffix}`;
-}
-
 let staffList = [], schedules = {}, staffListGen = [], schedulesGen = {}, globalNotes = {}, activityLogs = [];
 let staffRoles = {};
 
@@ -1313,10 +1304,19 @@ function triggerAutoSave() {
   }
 }
 
-function addActivityLog(text) {
+function addActivityLog(text, metaData = null) {
   let timestamp = new Date().toLocaleString('id-ID');
-  activityLogs.unshift(`[${timestamp}] ${text}`);
+  let logItem = {
+    text: `[${timestamp}] ${text}`,
+    meta: metaData // Menyimpan data request (staff, date, shift) jika ada
+  };
+  activityLogs.unshift(logItem);
   triggerAutoSave();
+  
+  // Kirim simulasi push notifikasi jika ada perubahan jadwal / request
+  if (metaData && metaData.targetStaff) {
+    console.log(`[Push Notification Simulation] Terkirim ke ${metaData.targetStaff}: ${text}`);
+  }
 }
 
 const navPageTeamBtn = document.getElementById('navPageTeamBtn'); 
@@ -1955,11 +1955,28 @@ function renderActivityLogs() {
     return;
   }
 
-  activityLogs.forEach((logText, idx) => {
+  activityLogs.forEach((logEntry, idx) => {
+    let logText = typeof logEntry === 'string' ? logEntry : logEntry.text;
+    let meta = typeof logEntry === 'object' && logEntry !== null ? logEntry.meta : null;
+
     let div = document.createElement('div');
-    div.className = "flex items-center justify-between p-2 bg-slate-50 border border-slate-200 rounded text-xs";
-    let checkboxHtml = isAdmin ? `<input type="checkbox" value="${idx}" class="log-item-checkbox rounded text-slate-700 w-3.5 h-3.5">` : '';
-    div.innerHTML = `<div class="flex items-center gap-2 truncate">${checkboxHtml}<span class="text-slate-700">${logText}</span></div>`;
+    div.className = "flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 p-2.5 bg-slate-50 border border-slate-200 rounded text-xs";
+    
+    let checkboxHtml = isAdmin ? `<input type="checkbox" value="${idx}" class="log-item-checkbox rounded text-slate-700 w-3.5 h-3.5 mt-0.5 sm:mt-0 shrink-0">` : '';
+    
+    let actionButtonsHtml = '';
+    // Jika ada meta request dan akun ini admin, tampilkan tombol Terima / Tolak
+    if (isAdmin && meta && meta.isRequest && !meta.processed) {
+      actionButtonsHtml = `<div class="flex gap-1.5 shrink-0 ml-auto sm:ml-0">
+        <button onclick="approveRequest(${idx})" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-2 py-1 rounded text-[10px] shadow-xs transition" title="Terima Request">✔ Terima</button>
+        <button onclick="rejectRequest(${idx})" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-2 py-1 rounded text-[10px] shadow-xs transition" title="Tolak Request">✕ Tolak</button>
+      </div>`;
+    } else if (meta && meta.isRequest && meta.processed) {
+      let statusBadge = meta.approved ? `<span class="text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 text-[10px]">✔ Diterima</span>` : `<span class="text-red-700 font-bold bg-red-50 px-1.5 py-0.5 rounded border border-red-200 text-[10px]">✕ Ditolak</span>`;
+      actionButtonsHtml = `<div class="shrink-0 ml-auto sm:ml-0">${statusBadge}</div>`;
+    }
+
+    div.innerHTML = `<div class="flex items-start gap-2 w-full"><div class="flex items-center h-full">${checkboxHtml}</div><span class="text-slate-700 whitespace-normal break-words leading-relaxed flex-grow">${logText}</span>${actionButtonsHtml}</div>`;
     activityLogContainer.appendChild(div);
   });
 
@@ -1970,6 +1987,53 @@ function renderActivityLogs() {
     });
   });
 }
+
+// Fungsi Admin Menerima Request Jadwal
+window.approveRequest = function(index) {
+  let entry = activityLogs[index];
+  if (!entry || typeof entry !== 'object' || !entry.meta) return;
+  let meta = entry.meta;
+
+  saveStateToHistory();
+  let staff = meta.staff;
+  let dateKey = meta.dateKey;
+  let shiftVal = meta.shiftVal;
+
+  if (currentActivePage === 'team') {
+    if (!schedules[staff]) schedules[staff] = {};
+    schedules[staff][dateKey] = { shift: shiftVal, initial: shiftVal };
+  } else {
+    if (!schedulesGen[staff]) schedulesGen[staff] = {};
+    schedulesGen[staff][dateKey] = { shift: shiftVal, initial: shiftVal };
+  }
+
+  entry.text = entry.text.replace("[Request Pending]", "[Diterima Admin]");
+  entry.meta.processed = true;
+  entry.meta.approved = true;
+
+  addActivityLog(currentLang === 'id' ? `Admin menyetujui request jadwal ${staff} pada tgl ${dateKey} menjadi [${shiftVal}]` : `Admin approved schedule request for ${staff} on date ${dateKey}`);
+  triggerAutoSave();
+  renderTable();
+};
+
+// Fungsi Admin Menolak Request Jadwal
+window.rejectRequest = function(index) {
+  let entry = activityLogs[index];
+  if (!entry || typeof entry !== 'object' || !entry.meta) return;
+  let meta = entry.meta;
+
+  saveStateToHistory();
+  let staff = meta.staff;
+  let dateKey = meta.dateKey;
+
+  entry.text = entry.text.replace("[Request Pending]", "[Ditolak Admin]");
+  entry.meta.processed = true;
+  entry.meta.approved = false;
+
+  addActivityLog(currentLang === 'id' ? `Admin menolak request jadwal ${staff} pada tgl ${dateKey}` : `Admin rejected schedule request for ${staff} on date ${dateKey}`);
+  triggerAutoSave();
+  renderActivityLogs();
+};
 
 let deleteSelectedLogsBtn = document.getElementById('deleteSelectedLogsBtn');
 if (deleteSelectedLogsBtn) {
@@ -2277,7 +2341,8 @@ document.querySelectorAll('.shift-instant-btn').forEach(btn => {
     let isAdmin = (userSession && userSession.role === 'admin');
 
     if (!isAdmin) {
-      addActivityLog(currentLang === 'id' ? `Anggota (${staff}) mengajukan request jadwal tgl ${key} menjadi shift [${val}]` : `Member (${staff}) requested schedule for date ${key} to be shift [${val}]`);
+      let reqText = currentLang === 'id' ? `[Request Pending] Anggota (${staff}) mengajukan request jadwal tgl ${key} menjadi shift [${val}]` : `[Request Pending] Member (${staff}) requested schedule for date ${key} to be shift [${val}]`;
+      addActivityLog(reqText, { isRequest: true, processed: false, staff: staff, dateKey: key, shiftVal: val, targetStaff: staff });
       alert(t.alertScheduleRequested);
       formSection.classList.add('hidden');
       return;
@@ -2286,10 +2351,10 @@ document.querySelectorAll('.shift-instant-btn').forEach(btn => {
     if (!schedules[staff]) schedules[staff] = {}; 
     if (val === "CLEAR") {
       delete schedules[staff][key];
-      addActivityLog(currentLang === 'id' ? `Admin menghapus shift ${staff} pada tgl ${key}` : `Admin cleared shift for ${staff} on date ${key}`);
+      addActivityLog(currentLang === 'id' ? `Admin menghapus shift ${staff} pada tgl ${key}` : `Admin cleared shift for ${staff} on date ${key}`, { targetStaff: staff });
     } else {
       schedules[staff][key] = { shift: val, initial: val }; 
-      addActivityLog(currentLang === 'id' ? `Admin mengubah shift ${staff} pada tgl ${key} menjadi [${val}]` : `Admin changed shift for ${staff} on date ${key} to [${val}]`);
+      addActivityLog(currentLang === 'id' ? `Admin mengubah shift ${staff} pada tgl ${key} menjadi [${val}]` : `Admin changed shift for ${staff} on date ${key} to [${val}]`, { targetStaff: staff });
     }
     triggerAutoSave(); formSection.classList.add('hidden'); 
   }); 
@@ -2301,10 +2366,10 @@ document.querySelectorAll('.shift-gen-btn').forEach(btn => {
     if (!schedulesGen[staff]) schedulesGen[staff] = {}; 
     if (val === "CLEAR") {
       delete schedulesGen[staff][key];
-      addActivityLog(currentLang === 'id' ? `Admin menghapus shift umum ${staff} pada tgl ${key}` : `Admin cleared general shift for ${staff} on date ${key}`);
+      addActivityLog(currentLang === 'id' ? `Admin menghapus shift umum ${staff} pada tgl ${key}` : `Admin cleared general shift for ${staff} on date ${key}`, { targetStaff: staff });
     } else {
       schedulesGen[staff][key] = { shift: val, initial: init }; 
-      addActivityLog(currentLang === 'id' ? `Admin mengubah shift umum ${staff} pada tgl ${key} menjadi [${val}]` : `Admin changed general shift for ${staff} on date ${key} to [${val}]`);
+      addActivityLog(currentLang === 'id' ? `Admin mengubah shift umum ${staff} pada tgl ${key} menjadi [${val}]` : `Admin changed general shift for ${staff} on date ${key} to [${val}]`, { targetStaff: staff });
     }
     triggerAutoSave(); formSectionGeneral.classList.add('hidden'); 
   }); 

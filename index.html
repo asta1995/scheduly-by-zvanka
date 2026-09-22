@@ -1719,7 +1719,7 @@ const exportModal = document.getElementById('exportModal');
 document.getElementById('openExportModalBtn').addEventListener('click', () => exportModal.classList.remove('hidden')); 
 document.getElementById('closeExportModalBtn').addEventListener('click', () => exportModal.classList.add('hidden')); 
 
-// Fungsionalitas Export Dokumen (Hanya berisi Jadwal & Catatan Tim)
+// Fungsionalitas Export Dokumen (Termasuk Tabel Rekapitulasi)
 document.querySelectorAll('.export-format-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     let format = btn.getAttribute('data-format');
@@ -1728,9 +1728,13 @@ document.querySelectorAll('.export-format-btn').forEach(btn => {
     let dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}`;
     let fileName = `${titleText}_${dateStr}`;
 
+    let clonedTable = scheduleTable.cloneNode(true);
+    let addRow = clonedTable.querySelector('tr.no-export');
+    if (addRow) addRow.remove();
+
     if (format === 'csv') {
       let csvContent = "";
-      let rows = scheduleTable.querySelectorAll('tr');
+      let rows = clonedTable.querySelectorAll('tr');
       rows.forEach(row => {
         let cols = row.querySelectorAll('th, td');
         let data = [];
@@ -1751,11 +1755,11 @@ document.querySelectorAll('.export-format-btn').forEach(btn => {
       a.download = fileName + '.csv';
       a.click();
     } else if (format === 'xlsx' || format === 'docx' || format === 'pdf') {
-      let tableHTML = scheduleTable.outerHTML;
+      let tableHTML = clonedTable.outerHTML;
       let notesHTML = globalNotesContainer.outerHTML;
       let cleanContent = `<div style="font-family:sans-serif; padding:20px;">
         <h2>${titleText.replace('_', ' ')} - Periode: ${dateStr}</h2>
-        <h3>Tabel Jadwal:</h3>
+        <h3>Tabel Jadwal & Rekapitulasi:</h3>
         ${tableHTML}
         <br>
         <h3>Catatan & Hari Penting:</h3>

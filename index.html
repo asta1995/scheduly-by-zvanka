@@ -45,7 +45,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <!-- MODAL AUTH / LOGIN KONTER & PIN --> 
 <div id="authModal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4"> 
   <div class="standard-card p-6 md:p-8 w-full max-w-md bg-white shadow-2xl relative" onclick="event.stopPropagation()"> 
-    <button id="closeAuthModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition">✕</button>
+    <button id="closeAuthModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition"></button>
     <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3 pr-8"> 
       <div class="flex items-center gap-2.5"> 
         <div class="w-10 h-10 rounded-xl bg-[#ff3399] text-white flex items-center justify-center shadow-md shrink-0 logo-handwriting text-xl">C's</div> 
@@ -81,7 +81,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <div> 
         <label class="block font-semibold text-slate-700 mb-1">PIN Server Konter (Misal: sususu):</label> 
         <input type="password" id="authPinInput" placeholder="******" maxlength="20" class="w-full p-2.5 border border-slate-300 rounded-lg bg-slate-50 focus:bg-white focus:ring-1 focus:ring-rose-600 tracking-widest font-mono text-center text-sm font-bold"> 
-        <p class="text-[10px] text-slate-400 mt-1">*Nama akun akan otomatis terdaftar ke tabel staf & PIN server.</p> 
+        <p class="text-[10px] text-slate-400 mt-1">*Nama akaun akan otomatis terdaftar ke tabel staf & PIN server.</p> 
       </div> 
     </div> 
 
@@ -96,7 +96,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 md:p-8 w-full max-w-xl bg-white shadow-2xl relative max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()"> 
     <div class="flex items-center justify-between mb-5 border-b border-slate-200 pb-4"> 
       <div class="flex items-center gap-3"> 
-        <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 border border-slate-300 flex items-center justify-center shadow-sm shrink-0 font-bold text-lg">📅</div> 
+        <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 border border-slate-300 flex items-center justify-center shadow-sm shrink-0 font-bold text-lg"></div> 
         <div> 
           <h1 class="text-xl font-bold text-slate-900">Scheduly</h1> 
           <p class="text-xs text-slate-500">Pilih menu atau navigasi lembar kerja di bawah ini:</p> 
@@ -120,7 +120,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </button> 
       <button id="homeMenuGeneralBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-200 hover:border-slate-400 hover:bg-slate-50 flex items-center justify-between transition group cursor-pointer"> 
         <div class="flex items-center gap-3"> 
-          <span class="w-9 h-9 rounded-lg bg-slate-100 text-slate-700 border border-slate-300 group-hover:scale-110 transition flex items-center justify-center font-bold text-sm">📊</span> 
+          <span class="w-9 h-9 rounded-lg bg-slate-100 text-slate-700 border border-slate-300 group-hover:scale-110 transition flex items-center justify-center font-bold text-sm"></span> 
           <div> 
             <div class="font-bold text-slate-900 text-sm">Jadwal Umum</div> 
             <div class="text-slate-500 text-[11px]">Pengelolaan shift operasional umum secara komprehensif</div> 
@@ -130,7 +130,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </button> 
       <button id="homeMenuRootFolderBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-200 hover:border-slate-400 hover:bg-slate-50 flex items-center justify-between transition group cursor-pointer"> 
         <div class="flex items-center gap-3"> 
-          <span class="w-9 h-9 rounded-lg bg-slate-100 text-slate-700 border border-slate-300 group-hover:scale-110 transition flex items-center justify-center font-bold text-sm">📁</span> 
+          <span class="w-9 h-9 rounded-lg bg-slate-100 text-slate-700 border border-slate-300 group-hover:scale-110 transition flex items-center justify-center font-bold text-sm"></span> 
           <div> 
             <div class="font-bold text-slate-900 text-sm">Folder & Penyimpanan</div> 
             <div class="text-slate-500 text-[11px]">Kelola direktori multi-folder dan arsip draft lembar kerja</div> 
@@ -141,10 +141,10 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     </div> 
     <div class="flex gap-2"> 
       <button id="openSettingsModalFromHome" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-lg font-medium text-xs transition flex items-center justify-center gap-1.5 border border-slate-300 cursor-pointer"> 
-        <span>⚙️</span> <span>Pengaturan</span> 
+        <span></span> <span>Pengaturan</span> 
       </button> 
       <button id="openHelpModalFromHome" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-lg font-medium text-xs transition flex items-center justify-center gap-1.5 border border-slate-300 cursor-pointer"> 
-        <span>❓</span> <span>Pusat Bantuan</span> 
+        <span></span> <span>Pusat Bantuan</span> 
       </button> 
     </div> 
   </div> 
@@ -155,14 +155,14 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="bg-white rounded-xl shadow-2xl flex flex-col flex-grow max-w-4xl w-full mx-auto overflow-hidden border border-slate-200 relative" onclick="event.stopPropagation()"> 
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-16"> 
       <div class="flex items-center gap-3"> 
-        <span class="w-8 h-8 rounded-lg bg-slate-200 text-slate-700 border border-slate-300 flex items-center justify-center font-bold text-xs">❓</span> 
+        <span class="w-8 h-8 rounded-lg bg-slate-200 text-slate-700 border border-slate-300 flex items-center justify-center font-bold text-xs"></span> 
         <div> 
           <h2 class="text-base md:text-lg font-bold text-slate-900">Pusat Bantuan & Panduan Lengkap</h2> 
           <p class="text-xs text-slate-500">Pelajari cara menguasai fitur Scheduly dengan cepat</p> 
         </div> 
       </div> 
     </div> 
-    <button id="closeHelpModalBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
+    <button id="closeHelpModalBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup"></button> 
     <div class="p-6 flex-grow overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed"> 
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
         <div class="font-bold text-slate-900 text-sm mb-1">1. Portal Konter, Login, & Hak Akses (Khusus Tim)</div> 
@@ -182,10 +182,10 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <!-- MODAL PENGATURAN & NOTIFIKASI --> 
 <div id="settingsModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="this.classList.add('hidden')"> 
   <div class="bg-white rounded-xl shadow-2xl flex flex-col max-w-lg w-full mx-auto overflow-hidden border border-slate-200 relative" onclick="event.stopPropagation()"> 
-    <button id="closeSettingsModalBtn" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition z-10" title="Tutup">✕</button>
+    <button id="closeSettingsModalBtn" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition z-10" title="Tutup"></button>
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-12"> 
       <div class="flex items-center gap-3"> 
-        <span class="w-8 h-8 rounded-lg bg-slate-200 text-slate-700 border border-slate-300 flex items-center justify-center font-bold text-xs">⚙️</span> 
+        <span class="w-8 h-8 rounded-lg bg-slate-200 text-slate-700 border border-slate-300 flex items-center justify-center font-bold text-xs"></span> 
         <div> 
           <h2 class="text-base font-bold text-slate-900">Pengaturan Akun & Personalisasi</h2> 
           <p class="text-xs text-slate-500">Kelola preferensi notifikasi dan akun Anda</p> 
@@ -226,9 +226,9 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="bg-white rounded-xl shadow-2xl flex flex-col flex-grow max-w-6xl w-full mx-auto overflow-hidden border border-slate-200 relative" onclick="event.stopPropagation()"> 
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-16"> 
       <div class="flex items-center gap-3"> 
-        <div class="w-10 h-10 rounded-lg bg-slate-800 text-white flex items-center justify-center text-xl shadow-sm font-bold">📁</div> 
+        <div class="w-10 h-10 rounded-lg bg-slate-800 text-white flex items-center justify-center text-xl shadow-sm font-bold"></div> 
         <div> 
-          <h2 class="text-base md:text-lg font-bold text-slate-900">Folder • Ruang Simpan Draft & Multi-Folder</h2> 
+          <h2 class="text-base md:text-lg font-bold text-slate-900">Folder � Ruang Simpan Draft & Multi-Folder</h2> 
           <p id="rootBreadcrumbPath" class="text-xs text-slate-500">Direktori Utama /</p> 
         </div> 
       </div> 
@@ -237,11 +237,11 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
           <span>+</span> <span>Buat Folder</span>
         </button> 
         <button id="rootSaveCurrentDraftBtn" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-medium px-3.5 py-2 rounded-lg text-xs shadow-sm transition flex items-center gap-1.5">
-          <span>💾</span> <span>Simpan Sesi Aktif</span>
+          <span></span> <span>Simpan Sesi Aktif</span>
         </button> 
       </div> 
     </div> 
-    <button id="closeFullScreenFolderBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
+    <button id="closeFullScreenFolderBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup"></button> 
     <div class="px-6 py-3 bg-white border-b border-slate-100 flex justify-between items-center"> 
       <div class="flex items-center gap-2">
         <button id="rootBackBtn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-1.5 rounded-lg font-medium transition">&larr; Kembali ke Folder Induk</button> 
@@ -258,7 +258,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-lg bg-white shadow-2xl relative flex flex-col max-h-[85vh]" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-3 pr-6"> 
       <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2"><span id="explorerModalTitle">Kelola Folder & Multi-Pilih Item</span></h3> 
-      <button id="closeFolderExplorerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeFolderExplorerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <p class="text-xs text-slate-500 mb-3" id="explorerModalSubtitle">Pilih item untuk dipindah, disalin, atau dihapus secara multi-pilih.</p> 
     
@@ -282,7 +282,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 class="font-bold text-slate-900 text-sm">Simpan ke Folder</h3> 
-      <button id="closeSaveFolderModal" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeSaveFolderModal" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <div class="space-y-3 text-xs mb-4"> 
       <div><label class="block font-semibold text-slate-700 mb-1">Nama File / Draft:</label><input type="text" id="saveFileNameInput" class="w-full p-2 border border-slate-300 rounded-lg bg-slate-50 text-xs"></div> 
@@ -302,7 +302,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <div id="sidebarBrandIcon" class="w-8 h-8 rounded-lg bg-[#ff3399] text-white flex items-center justify-center shadow-xs shrink-0 logo-handwriting text-sm">C's</div> 
       <span class="font-bold text-slate-900 text-sm">Menu Scheduly</span> 
     </div> 
-    <button id="closeSidebarBtn" class="w-7 h-7 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+    <button id="closeSidebarBtn" class="w-7 h-7 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
   </div> 
   <div class="p-4 flex-grow space-y-4 text-xs overflow-y-auto"> 
     <div id="sidebarClandysAuthBox" class="bg-slate-50 border border-slate-200 rounded-lg p-3 hidden"> 
@@ -318,7 +318,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
           <span class="text-[10px] text-slate-500 font-normal pl-7">(Pramuniaga & Kasir)</span> 
         </button> 
         <button id="navPageGeneralBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-          <span class="font-bold">📊</span>
+          <span class="font-bold"></span>
           <span>Jadwal Umum</span>
         </button> 
       </div> 
@@ -326,15 +326,15 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <hr class="border-slate-200"> 
     <div class="space-y-1"> 
       <button id="menuHomeBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold">🏠</span>
+        <span class="font-bold"></span>
         <span>Beranda Utama</span>
       </button> 
       <button id="menuSettingsBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold">⚙️</span>
+        <span class="font-bold"></span>
         <span>Pengaturan & Notifikasi</span>
       </button> 
       <button id="menuHelpModalBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold">❓</span>
+        <span class="font-bold"></span>
         <span>Pusat Bantuan & Manual</span>
       </button> 
     </div> 
@@ -362,7 +362,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <header class="standard-card px-4 md:px-6 py-3.5 sticky top-0 z-30 flex justify-between items-center border-x-0 border-t-0 rounded-none bg-white"> 
     <div class="flex items-center gap-3"> 
       <button id="openSidebarBtn" class="w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition" title="Buka Menu">
-        <span class="font-bold text-base">☰</span>
+        <span class="font-bold text-base"></span>
       </button> 
       <!-- TOMBOL LOGO KEMBALI KE BERANDA -->
       <div id="webBrandRefresh" class="flex items-center gap-2.5 cursor-pointer group" title="Kembali ke Beranda Utama"> 
@@ -374,14 +374,13 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </div> 
     </div> 
     <div class="flex items-center gap-1.5 md:gap-2 no-export"> 
-      <button id="headerLogoutBtn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm items-center gap-1" title="Keluar"><span class="hidden sm:inline">Logout</span></button> 
-      <button id="openStaffPickerTopBtn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm items-center gap-1"><span class="hidden sm:inline">Pilih Staff</span></button> 
+      <button id="headerLogoutBtn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm items-center gap-1.5" title="Keluar"><span></span><span class="hidden sm:inline">Logout</span></button> 
       <button id="copyLinkBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5">
-        <span>🔗</span>
+        <span></span>
         <span class="hidden md:inline">Salin Link</span>
       </button> 
       <button id="openExportModalBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3.5 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5">
-        <span>📤</span>
+        <span></span>
         <span class="hidden md:inline">Export</span>
       </button> 
       <button id="langToggleBtn" class="bg-white hover:bg-slate-50 text-slate-800 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm">ID / EN</button>  
@@ -398,11 +397,11 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <div class="flex flex-wrap items-center justify-between gap-2 mb-3 no-export px-1"> 
       <div class="flex items-center gap-1.5"> 
         <button id="undoBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5" disabled>
-          <span>↩</span>
+          <span></span>
           <span class="hidden sm:inline" id="undoText">Undo</span>
         </button> 
         <button id="redoBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5" disabled>
-          <span>🔁</span>
+          <span></span>
           <span class="hidden sm:inline" id="redoText">Redo</span>
         </button> 
       </div> 
@@ -426,7 +425,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <div id="globalNotesContainer" class="flex flex-col gap-2.5 text-xs"></div> 
     </div> 
   </main>  
-  <footer class="text-center py-4 text-xs text-slate-500 font-medium bg-white border-t border-slate-200 mt-auto" id="footerText">© 2026 Scheduly • Didesain untuk kemudahan & kenyamanan tim</footer> 
+  <footer class="text-center py-4 text-xs text-slate-500 font-medium bg-white border-t border-slate-200 mt-auto" id="footerText">� 2026 Scheduly � Didesain untuk kemudahan & kenyamanan tim</footer> 
 </div> 
 
 <!-- Pop-Up Export --> 
@@ -434,7 +433,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 class="font-bold text-slate-900 text-sm">Pilih Format Laporan</h3> 
-      <button id="closeExportModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeExportModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <div class="grid grid-cols-2 gap-2.5 mb-2"> 
       <button type="button" class="export-format-btn py-3 px-3 rounded-lg border font-medium text-xs transition bg-white text-slate-800 border-slate-300 hover:bg-slate-50 text-left flex items-center gap-2 shadow-xs" data-format="xlsx"><div><div>Excel (.xlsx)</div></div></button> 
@@ -450,7 +449,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 id="selectedDateTitle" class="font-bold text-slate-900 text-sm">Pilih Shift</h3> 
-      <button id="closeFormBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeFormBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <input type="hidden" id="activeStaffKey"><input type="hidden" id="activeDateKey"> 
     <div class="grid grid-cols-3 gap-2"> 
@@ -472,7 +471,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 id="selectedDateTitleGeneral" class="font-bold text-slate-900 text-sm">Pilih Shift Umum</h3> 
-      <button id="closeFormGeneralBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeFormGeneralBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <input type="hidden" id="activeStaffKeyGen"><input type="hidden" id="activeDateKeyGen"> 
     <div class="grid grid-cols-3 gap-2"> 
@@ -502,19 +501,6 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   </div> 
 </div> 
 
-<!-- MODAL PILIH STAFF --> 
-<div id="staffPickerModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4" onclick="this.classList.add('hidden')"> 
-  <div class="standard-card p-5 w-full max-w-sm bg-white shadow-2xl relative" onclick="event.stopPropagation()"> 
-    <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-2 pr-6"> 
-      <h3 class="font-bold text-slate-900 text-xs">Pilih Staff Terdaftar Konter</h3> 
-      <button id="closeStaffPickerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
-    </div> 
-    <p class="text-[11px] text-slate-500 mb-3">Pilih nama staff dari daftar server konter aktif:</p> 
-    <div id="staffPickerListContainer" class="space-y-1.5 max-h-48 overflow-y-auto mb-3"></div> 
-    <button id="addNewStaffFromPickerBtn" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 rounded-lg font-medium text-xs transition border border-slate-300">+ Tambah Staff Baru Manual</button> 
-  </div> 
-</div> 
-
 <!-- Script Utama --> 
 <script> 
 let currentLang = localStorage.getItem('scheduly_lang') || 'id'; 
@@ -533,7 +519,7 @@ const translations = {
     menu_team_desc: "(Khusus Pramuniaga dan Kasir)", menu_general_title: "Jadwal Umum", 
     menu_general_desc: "Pengelolaan shift operasional umum secara komprehensif", 
     menu_folder_title: "Folder & Penyimpanan", menu_folder_desc: "Kelola direktori multi-folder dan arsip draft lembar kerja", 
-    autosave_text: "Tersimpan Otomatis", notes_heading: "Catatan & Hari Penting", btn_add_note: "+ Tambah Catatan", footer_text: "© 2026 Scheduly • Didesain untuk kemudahan & kenyamanan tim",
+    autosave_text: "Tersimpan Otomatis", notes_heading: "Catatan & Hari Penting", btn_add_note: "+ Tambah Catatan", footer_text: "� 2026 Scheduly � Didesain untuk kemudahan & kenyamanan tim",
     clearSheetTitle: "Kosongkan Lembar Kerja", clearSheetConfirm: "Apakah kamu yakin ingin mengosongkan seluruh data staff dan jadwal pada lembar kerja ini?"
   }, 
   en: { 
@@ -543,7 +529,7 @@ const translations = {
     menu_team_desc: "(Dedicated for Cashiers and Floor Staff)", menu_general_title: "General Schedule", 
     menu_general_desc: "Comprehensive operational shift management", menu_folder_title: "Folder & Storage", 
     menu_folder_desc: "Manage multi-folder directories and saved drafts", 
-    autosave_text: "Auto-saved", notes_heading: "Notes & Important Days", btn_add_note: "+ Add Note", footer_text: "© 2026 Scheduly • Designed for team ease and convenience",
+    autosave_text: "Auto-saved", notes_heading: "Notes & Important Days", btn_add_note: "+ Add Note", footer_text: "� 2026 Scheduly � Designed for team ease and convenience",
     clearSheetTitle: "Clear Workspace", clearSheetConfirm: "Are you sure you want to clear all staff and schedule data on this worksheet?"
   } 
 }; 
@@ -578,7 +564,6 @@ const authPinInput = document.getElementById('authPinInput');
 const authLoginBtn = document.getElementById('authLoginBtn');
 const headerLogoutBtn = document.getElementById('headerLogoutBtn');
 const sidebarLogoutBtn = document.getElementById('sidebarLogoutBtn');
-const openStaffPickerTopBtn = document.getElementById('openStaffPickerTopBtn');
 const sidebarClandysAuthBox = document.getElementById('sidebarClandysAuthBox');
 const settingsProfileSection = document.getElementById('settingsProfileSection');
 const closeAuthModalBtn = document.getElementById('closeAuthModalBtn');
@@ -595,7 +580,6 @@ document.getElementById('webBrandRefresh').addEventListener('click', () => {
 function checkAuthSession() {
   if (currentActivePage === 'team') {
     headerLogoutBtn.classList.remove('hidden');
-    openStaffPickerTopBtn.classList.remove('hidden');
     sidebarClandysAuthBox.classList.remove('hidden');
     settingsProfileSection.classList.remove('hidden');
     if (!userSession) {
@@ -606,7 +590,6 @@ function checkAuthSession() {
     }
   } else {
     headerLogoutBtn.classList.add('hidden');
-    openStaffPickerTopBtn.classList.add('hidden');
     sidebarClandysAuthBox.classList.add('hidden');
     settingsProfileSection.classList.add('hidden');
     authModal.classList.add('hidden');
@@ -634,7 +617,7 @@ authLoginBtn.addEventListener('click', () => {
   userSession = { role, counter, name, pin, pushNotif: true };
   localStorage.setItem('scheduly_user_session_v1', JSON.stringify(userSession));
   
-  let currentStaffArr = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || ["Siti", "Budi", "Dewi"];
+  let currentStaffArr = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || [];
   if (!currentStaffArr.includes(name)) {
     currentStaffArr.push(name);
     localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(currentStaffArr));
@@ -667,12 +650,22 @@ document.getElementById('openSettingsModalFromHome').addEventListener('click', (
 });
 document.getElementById('closeSettingsModalBtn').addEventListener('click', () => settingsModal.classList.add('hidden'));
 document.getElementById('saveSettingsBtn').addEventListener('click', () => {
-  if (userSession && currentActivePage === 'team') { userSession.pushNotif = document.getElementById('pushNotifToggle').checked; localStorage.setItem('scheduly_user_session_v1', JSON.stringify(userSession)); }
+  if (userSession && currentActivePage === 'team') { 
+    userSession.pushNotif = document.getElementById('pushNotifToggle').checked; 
+    localStorage.setItem('scheduly_user_session_v1', JSON.stringify(userSession)); 
+  }
   settingsModal.classList.add('hidden'); alert("Pengaturan berhasil disimpan!");
 });
 document.getElementById('testPushNotifBtn').addEventListener('click', () => {
-  if (!document.getElementById('pushNotifToggle').checked) { alert("Aktifkan toggle Push Notifikasi terlebih dahulu!"); return; }
-  alert("[Simulasi Push Notifikasi]: Pengingat Shift harian berhasil dikirim.");
+  let activePushEnabled = false;
+  if (currentActivePage === 'team' && userSession) {
+    activePushEnabled = userSession.pushNotif;
+  } else {
+    activePushEnabled = document.getElementById('pushNotifToggle').checked;
+  }
+  if (!activePushEnabled) { alert("Aktifkan toggle Push Notifikasi terlebih dahulu!"); return; }
+  let targetName = (currentActivePage === 'team' && userSession) ? userSession.name : "Pengguna";
+  alert(`[Simulasi Push Notifikasi untuk ${targetName}]: Pengingat Shift harian berhasil dikirim ke perangkat ini.`);
 });
 
 const serverChannel = new BroadcastChannel('scheduly_clandys_sync_v1');
@@ -680,8 +673,20 @@ serverChannel.onmessage = (event) => {
   let activeCounter = userSession ? userSession.counter : 'KASIR';
   if (event.data && event.data.counter === activeCounter && currentActivePage === 'team') {
     loadServerDataForCounter(); renderTable();
+    checkAndTriggerLoggedInUserPushNotif(event.data.schedules);
   }
 };
+
+function checkAndTriggerLoggedInUserPushNotif(newSchedules) {
+  if (userSession && userSession.pushNotif) {
+    let myName = userSession.name;
+    let todayKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`;
+    let mySchedObj = newSchedules && newSchedules[myName] ? newSchedules[myName][todayKey] : null;
+    if (mySchedObj && mySchedObj.shift) {
+      console.log(`[Push Notif Aktif untuk ${myName}] Jadwal hari ini: ${mySchedObj.shift}`);
+    }
+  }
+}
 
 function getCounterServerKey(suffix) {
   let counter = userSession ? userSession.counter : 'KASIR';
@@ -692,7 +697,7 @@ function getCounterServerKey(suffix) {
 let staffList = [], schedules = {}, staffListGen = [], schedulesGen = {}, globalNotes = {};
 function loadServerDataForCounter() {
   if (currentActivePage === 'team') {
-    staffList = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || ["Siti", "Budi", "Dewi"];
+    staffList = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || [];
     if (userSession && userSession.name && !staffList.includes(userSession.name)) {
       staffList.push(userSession.name);
       localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(staffList));
@@ -700,7 +705,7 @@ function loadServerDataForCounter() {
     schedules = JSON.parse(localStorage.getItem(getCounterServerKey('schedules'))) || {};
     globalNotes = JSON.parse(localStorage.getItem(getCounterServerKey('notes'))) || {};
   } else {
-    staffListGen = JSON.parse(localStorage.getItem('scheduly_general_staff')) || ["Staff Umum 1", "Staff Umum 2"];
+    staffListGen = JSON.parse(localStorage.getItem('scheduly_general_staff')) || [];
     schedulesGen = JSON.parse(localStorage.getItem('scheduly_general_schedules')) || {};
     globalNotes = JSON.parse(localStorage.getItem('scheduly_general_notes')) || {};
   }
@@ -711,7 +716,7 @@ function triggerAutoSave() {
     localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(staffList));
     localStorage.setItem(getCounterServerKey('schedules'), JSON.stringify(schedules));
     localStorage.setItem(getCounterServerKey('notes'), JSON.stringify(globalNotes));
-    try { serverChannel.postMessage({ counter: userSession ? userSession.counter : 'KASIR' }); } catch(e) {}
+    try { serverChannel.postMessage({ counter: userSession ? userSession.counter : 'KASIR', schedules: schedules }); } catch(e) {}
   } else {
     localStorage.setItem('scheduly_general_staff', JSON.stringify(staffListGen));
     localStorage.setItem('scheduly_general_schedules', JSON.stringify(schedulesGen));
@@ -719,32 +724,6 @@ function triggerAutoSave() {
   }
   renderSidebarExplorerTree();
 }
-
-const staffPickerModal = document.getElementById('staffPickerModal');
-const staffPickerListContainer = document.getElementById('staffPickerListContainer');
-openStaffPickerTopBtn.addEventListener('click', () => {
-  if (currentActivePage !== 'team') return;
-  staffPickerListContainer.innerHTML = "";
-  staffList.forEach(s => {
-    let b = document.createElement('button');
-    b.className = "w-full text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-800 font-medium text-xs border border-slate-200 flex items-center justify-between";
-    b.innerHTML = `<span>${s}</span>`;
-    b.onclick = () => { staffPickerModal.classList.add('hidden'); alert(`Staff terpilih: ${s}`); };
-    staffPickerListContainer.appendChild(b);
-  });
-  staffPickerModal.classList.remove('hidden');
-});
-document.getElementById('closeStaffPickerBtn').addEventListener('click', () => staffPickerModal.classList.add('hidden'));
-document.getElementById('addNewStaffFromPickerBtn').addEventListener('click', () => {
-  if (userSession && userSession.role !== 'admin') {
-    alert("Hanya Admin yang memiliki akses untuk menambahkan staf baru!");
-    return;
-  }
-  staffPickerModal.classList.add('hidden');
-  let name = prompt("Masukkan nama staf baru:");
-  if (!name) return;
-  if (currentActivePage === 'team' && !staffList.includes(name)) { saveStateToHistory(); staffList.push(name); triggerAutoSave(); renderTable(); }
-});
 
 const navPageTeamBtn = document.getElementById('navPageTeamBtn'); 
 const navPageGeneralBtn = document.getElementById('navPageGeneralBtn'); 
@@ -761,8 +740,8 @@ function applyTheme() {
     navPageGeneralBtn.className = "w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition"; 
   } else { 
     document.body.classList.remove('theme-pinky'); 
-    brandLogoBox.innerHTML = `<span class="font-bold text-xs">📊</span>`; 
-    sidebarBrandIcon.innerHTML = `<span class="font-bold text-xs">📊</span>`; 
+    brandLogoBox.innerHTML = `<span class="font-bold text-xs"></span>`; 
+    sidebarBrandIcon.innerHTML = `<span class="font-bold text-xs"></span>`; 
     unofficialBadgeHeader.classList.add('hidden'); 
     navPageGeneralBtn.className = "w-full text-left px-3 py-2.5 rounded-lg bg-slate-100 text-slate-900 font-semibold flex items-center gap-2 transition border border-slate-300"; 
     navPageTeamBtn.className = "w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex flex-col gap-0.5 transition"; 
@@ -1272,7 +1251,7 @@ function renderTable() {
     let tdName = document.createElement('td'); 
     tdName.className = "p-3 sticky left-0 bg-inherit z-10 font-bold border-r border-slate-300 flex justify-between items-center gap-2"; 
     
-    tdName.innerHTML = `<input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-slate-400 focus:border-slate-600 focus:bg-white focus:outline-none px-1 py-0.5 rounded text-slate-900 font-medium truncate max-w-[110px] staff-name-input text-xs" data-old-name="${staff}" ${!isAdminOrGeneral ? 'disabled' : ''}> ${isAdminOrGeneral ? `<button class="no-export text-slate-400 hover:text-slate-700 p-1 rounded transition flex items-center justify-center font-bold text-xs" onclick="deleteStaff('${staff}')" title="Hapus Staf">✕</button>` : ''}`; 
+    tdName.innerHTML = `<input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-slate-400 focus:border-slate-600 focus:bg-white focus:outline-none px-1 py-0.5 rounded text-slate-900 font-medium truncate max-w-[110px] staff-name-input text-xs" data-old-name="${staff}" ${!isAdminOrGeneral ? 'disabled' : ''}> ${isAdminOrGeneral ? `<button class="no-export text-slate-400 hover:text-slate-700 p-1 rounded transition flex items-center justify-center font-bold text-xs" onclick="deleteStaff('${staff}')" title="Hapus Staf"></button>` : ''}`; 
     tr.appendChild(tdName); 
 
     let counts = {}; shiftLabels.forEach(s => counts[s] = 0); counts.totalWork = 0; 
@@ -1313,20 +1292,88 @@ function renderTable() {
 
   if (isAdminOrGeneral) { 
     let addTr = document.createElement('tr'); addTr.className = "no-export bg-slate-50"; 
-    addTr.innerHTML = `<td class="p-3 sticky left-0 bg-slate-50 z-10 border-r border-b border-slate-300"><div class="flex items-center gap-1.5 p-1 border border-dashed border-slate-400 rounded bg-white"><span class="font-bold text-xs">+</span><input type="text" id="inlineStaffInput" placeholder="Ketik nama baru..." class="bg-transparent text-xs w-full text-slate-800 focus:outline-none"></div></td><td colspan="${totalDays + 12}" class="border-b border-slate-300 bg-slate-50"></td>`; 
+    
+    if (currentActivePage === 'team') {
+      addTr.innerHTML = `<td class="p-3 sticky left-0 bg-slate-50 z-10 border-r border-b border-slate-300"><div class="flex flex-col gap-1.5 p-1.5 border border-dashed border-slate-400 rounded bg-white"><div class="flex items-center justify-between"><span class="text-[10px] font-bold text-slate-500 uppercase">Tambah Staf:</span><div class="flex gap-1"><button type="button" id="tabRegisteredStaffBtn" class="text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-800 text-white transition">Staff Terdaftar</button><button type="button" id="tabManualStaffBtn" class="text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-100 text-slate-700 transition">Input Nama Manual</button></div></div><div id="addStaffContainerBox"></div></div></td><td colspan="${totalDays + 12}" class="border-b border-slate-300 bg-slate-50"></td>`;
+    } else {
+      addTr.innerHTML = `<td class="p-3 sticky left-0 bg-slate-50 z-10 border-r border-b border-slate-300"><div class="flex items-center gap-1.5 p-1 border border-dashed border-slate-400 rounded bg-white"><span class="font-bold text-xs">+</span><input type="text" id="inlineStaffInputGen" placeholder="Ketik nama staff baru..." class="bg-transparent text-xs w-full text-slate-800 focus:outline-none"></div></td><td colspan="${totalDays + 12}" class="border-b border-slate-300 bg-slate-50"></td>`;
+    }
+
     tbody.appendChild(addTr); 
     setTimeout(() => {
-      let inp = document.getElementById('inlineStaffInput');
-      if (inp) inp.addEventListener('keypress', (e) => { 
-        if (e.key === 'Enter') { 
-          let name = inp.value.trim(); if (!name) return; 
-          if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
-            alert("Hanya Admin yang memiliki akses untuk menambahkan staf baru!");
-            return;
+      if (currentActivePage === 'team') {
+        let box = document.getElementById('addStaffContainerBox');
+        let tabReg = document.getElementById('tabRegisteredStaffBtn');
+        let tabMan = document.getElementById('tabManualStaffBtn');
+        let registeredStaffPool = ["Siti", "Budi", "Dewi", "Warjaya", "Ahmad", "Siti Nurhaliza", "Joko"];
+
+        function renderAddInput(mode) {
+          if (!box) return;
+          if (mode === 'registered') {
+            tabReg.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-800 text-white transition";
+            tabMan.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-100 text-slate-700 transition";
+            let html = `<select id="inlineStaffSelect" class="bg-transparent text-xs w-full text-slate-800 focus:outline-none cursor-pointer"><option value="">-- Pilih Nama Terdaftar --</option>`;
+            registeredStaffPool.forEach(s => {
+              if (!currentStaffArr.includes(s)) {
+                html += `<option value="${s}">${s}</option>`;
+              }
+            });
+            html += `</select>`;
+            box.innerHTML = html;
+            let sel = document.getElementById('inlineStaffSelect');
+            if (sel) {
+              sel.addEventListener('change', (e) => {
+                let name = e.target.value;
+                if (!name) return;
+                if (userSession && userSession.role !== 'admin') {
+                  alert("Hanya Admin yang memiliki akses untuk menambahkan staf baru!");
+                  return;
+                }
+                if (!currentStaffArr.includes(name)) { saveStateToHistory(); currentStaffArr.push(name); triggerAutoSave(); renderTable(); }
+              });
+            }
+          } else {
+            tabMan.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-800 text-white transition";
+            tabReg.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-100 text-slate-700 transition";
+            box.innerHTML = `<input type="text" id="inlineStaffInput" placeholder="Ketik nama manual..." class="bg-transparent text-xs w-full text-slate-800 focus:outline-none">`;
+            let inp = document.getElementById('inlineStaffInput');
+            if (inp) {
+              inp.addEventListener('keypress', (e) => { 
+                if (e.key === 'Enter') { 
+                  let name = inp.value.trim(); if (!name) return; 
+                  if (userSession && userSession.role !== 'admin') {
+                    alert("Hanya Admin yang memiliki akses untuk menambahkan staf baru!");
+                    return;
+                  }
+                  if (!currentStaffArr.includes(name)) { saveStateToHistory(); currentStaffArr.push(name); triggerAutoSave(); renderTable(); } 
+                } 
+              });
+            }
           }
-          if (!currentStaffArr.includes(name)) { saveStateToHistory(); currentStaffArr.push(name); triggerAutoSave(); renderTable(); } 
-        } 
-      });
+        }
+
+        if (tabReg && tabMan) {
+          tabReg.addEventListener('click', () => renderAddInput('registered'));
+          tabMan.addEventListener('click', () => renderAddInput('manual'));
+          renderAddInput('registered');
+        }
+      } else {
+        let inpGen = document.getElementById('inlineStaffInputGen');
+        if (inpGen) {
+          inpGen.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+              let name = inpGen.value.trim();
+              if (!name) return;
+              if (!currentStaffArr.includes(name)) {
+                saveStateToHistory();
+                currentStaffArr.push(name);
+                triggerAutoSave();
+                renderTable();
+              }
+            }
+          });
+        }
+      }
     }, 50);
   } 
   renderGlobalNotes(); 
@@ -1344,7 +1391,7 @@ function renderGlobalNotes() {
     let dObj = new Date(currentYear, currentMonth, day);
     let hijriStr = getHijriDate(dObj).string;
     let masehiStr = `${day} ${monthsNameID[currentMonth]} ${currentYear}`;
-    specialDaysInfo.push(`${masehiStr} — ${hijriStr} : ${currentMonthSpecialDays[day]}`);
+    specialDaysInfo.push(`${masehiStr} � ${hijriStr} : ${currentMonthSpecialDays[day]}`);
   }
 
   if (specialDaysInfo.length > 0) {
@@ -1358,7 +1405,7 @@ function renderGlobalNotes() {
     let item = document.createElement('div'); item.className = "bg-white border border-slate-300 rounded-lg p-2.5 flex gap-2 items-start w-full shadow-xs"; 
     let ta = document.createElement('textarea'); ta.rows = 1; ta.className = "w-full bg-transparent focus:outline-none p-1 rounded text-xs text-slate-800 resize-none"; ta.value = text; 
     ta.disabled = (currentActivePage === 'team' && userSession && userSession.role !== 'admin'); 
-    let del = document.createElement('button'); del.className = "no-export text-slate-400 hover:text-slate-700 text-xs p-1 font-bold"; del.innerHTML = "✕"; 
+    let del = document.createElement('button'); del.className = "no-export text-slate-400 hover:text-slate-700 text-xs p-1 font-bold"; del.innerHTML = ""; 
     del.onclick = () => { showConfirm("Hapus Catatan", "Yakin ingin menghapus catatan ini?", () => { saveStateToHistory(); notes.splice(idx, 1); globalNotes[monthKey] = notes; triggerAutoSave(); renderGlobalNotes(); }); }; 
     item.appendChild(ta); if (currentActivePage === 'general' || (userSession && userSession.role === 'admin')) item.appendChild(del); 
     globalNotesContainer.appendChild(item); 
@@ -1412,8 +1459,8 @@ document.getElementById('prevMonth').addEventListener('click', () => { currentMo
 document.getElementById('nextMonth').addEventListener('click', () => { currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } renderTable(); }); 
 
 const helpModal = document.getElementById('helpModal');
-document.getElementById('openHelpModalFromHome').addEventListener('click', () => helpModal.classList.remove('hidden')); 
-document.getElementById('menuHelpModalBtn').addEventListener('click', () => { closeSidebar(); helpModal.classList.remove('hidden'); }); 
+document.getElementById('openHelpModalFromHome').addEventListener('click', () => helpModal.classList.add('hidden')); 
+document.getElementById('menuHelpModalBtn').addEventListener('click', () => { closeSidebar(); helpModal.classList.add('hidden'); }); 
 document.getElementById('closeHelpModalBtn').addEventListener('click', () => helpModal.classList.add('hidden')); 
 document.getElementById('closeHelpModalFooterBtn').addEventListener('click', () => helpModal.classList.add('hidden'));
 

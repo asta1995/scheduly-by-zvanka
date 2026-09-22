@@ -45,7 +45,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <!-- MODAL AUTH / LOGIN KONTER & PIN --> 
 <div id="authModal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4"> 
   <div class="standard-card p-6 md:p-8 w-full max-w-md bg-white shadow-2xl relative" onclick="event.stopPropagation()"> 
-    <button id="closeAuthModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition"></button>
+    <button id="closeAuthModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition">✕</button>
     <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3 pr-8"> 
       <div class="flex items-center gap-2.5"> 
         <div class="w-10 h-10 rounded-xl bg-[#ff3399] text-white flex items-center justify-center shadow-md shrink-0 logo-handwriting text-xl">C's</div> 
@@ -96,7 +96,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 md:p-8 w-full max-w-xl bg-white shadow-2xl relative max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()"> 
     <div class="flex items-center justify-between mb-5 border-b border-slate-200 pb-4"> 
       <div class="flex items-center gap-3"> 
-        <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md shrink-0 font-bold text-lg">[]</div> 
+        <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 border border-slate-300 flex items-center justify-center shadow-sm shrink-0 font-bold text-lg">📅</div> 
         <div> 
           <h1 class="text-xl font-bold text-slate-900">Scheduly</h1> 
           <p class="text-xs text-slate-500">Pilih menu atau navigasi lembar kerja di bawah ini:</p> 
@@ -118,9 +118,9 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
         </div> 
         <span class="text-slate-400 group-hover:translate-x-1 transition">&rarr;</span> 
       </button> 
-      <button id="homeMenuGeneralBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 flex items-center justify-between transition group cursor-pointer"> 
+      <button id="homeMenuGeneralBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-200 hover:border-slate-400 hover:bg-slate-50 flex items-center justify-between transition group cursor-pointer"> 
         <div class="flex items-center gap-3"> 
-          <span class="p-2 rounded-lg bg-blue-100 text-blue-600 group-hover:scale-110 transition flex items-center justify-center font-bold">[]</span> 
+          <span class="w-9 h-9 rounded-lg bg-slate-100 text-slate-700 border border-slate-300 group-hover:scale-110 transition flex items-center justify-center font-bold text-sm">📊</span> 
           <div> 
             <div class="font-bold text-slate-900 text-sm">Jadwal Umum</div> 
             <div class="text-slate-500 text-[11px]">Pengelolaan shift operasional umum secara komprehensif</div> 
@@ -128,9 +128,9 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
         </div> 
         <span class="text-slate-400 group-hover:translate-x-1 transition">&rarr;</span> 
       </button> 
-      <button id="homeMenuRootFolderBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 flex items-center justify-between transition group cursor-pointer"> 
+      <button id="homeMenuRootFolderBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-200 hover:border-slate-400 hover:bg-slate-50 flex items-center justify-between transition group cursor-pointer"> 
         <div class="flex items-center gap-3"> 
-          <span class="p-2 rounded-lg bg-amber-100 text-amber-600 group-hover:scale-110 transition flex items-center justify-center font-bold">[]</span> 
+          <span class="w-9 h-9 rounded-lg bg-slate-100 text-slate-700 border border-slate-300 group-hover:scale-110 transition flex items-center justify-center font-bold text-sm">📁</span> 
           <div> 
             <div class="font-bold text-slate-900 text-sm">Folder & Penyimpanan</div> 
             <div class="text-slate-500 text-[11px]">Kelola direktori multi-folder dan arsip draft lembar kerja</div> 
@@ -141,10 +141,10 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     </div> 
     <div class="flex gap-2"> 
       <button id="openSettingsModalFromHome" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-lg font-medium text-xs transition flex items-center justify-center gap-1.5 border border-slate-300 cursor-pointer"> 
-        <span>[]</span> <span>Pengaturan</span> 
+        <span>⚙️</span> <span>Pengaturan</span> 
       </button> 
       <button id="openHelpModalFromHome" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-lg font-medium text-xs transition flex items-center justify-center gap-1.5 border border-slate-300 cursor-pointer"> 
-        <span>[?]</span> <span>Pusat Bantuan</span> 
+        <span>❓</span> <span>Pusat Bantuan</span> 
       </button> 
     </div> 
   </div> 
@@ -155,26 +155,26 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="bg-white rounded-xl shadow-2xl flex flex-col flex-grow max-w-4xl w-full mx-auto overflow-hidden border border-slate-200 relative" onclick="event.stopPropagation()"> 
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-16"> 
       <div class="flex items-center gap-3"> 
-        <span class="p-2 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold">[?]</span> 
+        <span class="w-8 h-8 rounded-lg bg-slate-200 text-slate-700 border border-slate-300 flex items-center justify-center font-bold text-xs">❓</span> 
         <div> 
           <h2 class="text-base md:text-lg font-bold text-slate-900">Pusat Bantuan & Panduan Lengkap</h2> 
           <p class="text-xs text-slate-500">Pelajari cara menguasai fitur Scheduly dengan cepat</p> 
         </div> 
       </div> 
     </div> 
-    <button id="closeHelpModalBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup"></button> 
+    <button id="closeHelpModalBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
     <div class="p-6 flex-grow overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed"> 
-      <div class="bg-rose-50 border border-rose-200 rounded-lg p-3.5"> 
-        <div class="font-bold text-rose-800 text-sm mb-1">1. Portal Konter, Login, & Hak Akses (Khusus Tim)</div> 
+      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
+        <div class="font-bold text-slate-900 text-sm mb-1">1. Portal Konter, Login, & Hak Akses (Khusus Tim)</div> 
         <p>Saat masuk ke Jadwal Tim, Anda wajib memilih Peran (Admin / Anggota), Nama Lengkap, pilihan Konter, serta PIN Server unik. Nama akun Anda akan otomatis terdaftar sebagai baris staf pada server konter tersebut.</p> 
       </div> 
-      <div class="bg-blue-50 border border-blue-200 rounded-lg p-3.5"> 
-        <div class="font-bold text-blue-800 text-sm mb-1">2. Menyimpan Draft & Manajemen Folder</div> 
+      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
+        <div class="font-bold text-slate-900 text-sm mb-1">2. Menyimpan Draft & Manajemen Folder</div> 
         <p>Simpan lembar kerja aktif ke dalam direktori multi-folder atau direktori utama. Gunakan jendela penuh folder untuk kelola file secara massal.</p> 
       </div> 
     </div> 
     <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center"> 
-      <button id="closeHelpModalFooterBtn" class="ml-auto bg-rose-600 hover:bg-rose-700 text-white font-medium px-4 py-2 rounded-lg text-xs transition">Mengerti!</button> 
+      <button id="closeHelpModalFooterBtn" class="ml-auto bg-slate-800 hover:bg-slate-900 text-white font-medium px-4 py-2 rounded-lg text-xs transition">Mengerti!</button> 
     </div> 
   </div> 
 </div> 
@@ -182,10 +182,10 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <!-- MODAL PENGATURAN & NOTIFIKASI --> 
 <div id="settingsModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="this.classList.add('hidden')"> 
   <div class="bg-white rounded-xl shadow-2xl flex flex-col max-w-lg w-full mx-auto overflow-hidden border border-slate-200 relative" onclick="event.stopPropagation()"> 
-    <button id="closeSettingsModalBtn" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition z-10" title="Tutup"></button>
+    <button id="closeSettingsModalBtn" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition z-10" title="Tutup">✕</button>
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-12"> 
       <div class="flex items-center gap-3"> 
-        <span class="p-2 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center font-bold">[]</span> 
+        <span class="w-8 h-8 rounded-lg bg-slate-200 text-slate-700 border border-slate-300 flex items-center justify-center font-bold text-xs">⚙️</span> 
         <div> 
           <h2 class="text-base font-bold text-slate-900">Pengaturan Akun & Personalisasi</h2> 
           <p class="text-xs text-slate-500">Kelola preferensi notifikasi dan akun Anda</p> 
@@ -198,25 +198,25 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
         <div class="grid grid-cols-2 gap-2 text-slate-600"> 
           <div><strong>Nama:</strong> <span id="setProfileName" class="font-medium text-slate-900">-</span></div> 
           <div><strong>Peran:</strong> <span id="setProfileRole" class="font-medium text-slate-900">-</span></div> 
-          <div><strong>Konter:</strong> <span id="setProfileCounter" class="font-medium text-rose-600">-</span></div> 
+          <div><strong>Konter:</strong> <span id="setProfileCounter" class="font-medium text-slate-900">-</span></div> 
           <div><strong>PIN Server:</strong> <span id="setProfilePin" class="font-mono font-medium text-slate-900">-</span></div> 
         </div> 
-        <button id="logoutAuthBtn" class="mt-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 font-medium px-3 py-1.5 rounded transition">Keluar / Ganti Akun & Konter</button> 
+        <button id="logoutAuthBtn" class="mt-2 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-medium px-3 py-1.5 rounded transition">Keluar / Ganti Akun & Konter</button> 
       </div> 
-      <div class="bg-rose-50 border border-rose-200 rounded-lg p-3.5 space-y-3"> 
-        <div class="font-bold text-rose-900 text-sm flex items-center justify-between"> 
+      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5 space-y-3"> 
+        <div class="font-bold text-slate-900 text-sm flex items-center justify-between"> 
           <span>Push Notifikasi & Pengingat Shift</span> 
           <label class="relative inline-flex items-center cursor-pointer"> 
             <input type="checkbox" id="pushNotifToggle" class="sr-only peer"> 
-            <div class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-rose-600"></div> 
+            <div class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-slate-800"></div> 
           </label> 
         </div> 
-        <p class="text-[11px] text-rose-700">Aktifkan untuk menerima notifikasi pengingat jadwal shift harian.</p> 
-        <button id="testPushNotifBtn" class="bg-white hover:bg-rose-100 text-rose-800 border border-rose-300 font-medium px-3 py-1.5 rounded transition shadow-xs">Tes Kirim Push Notifikasi Simulasi</button> 
+        <p class="text-[11px] text-slate-500">Aktifkan untuk menerima notifikasi pengingat jadwal shift harian.</p> 
+        <button id="testPushNotifBtn" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-medium px-3 py-1.5 rounded transition shadow-xs">Tes Kirim Push Notifikasi Simulasi</button> 
       </div> 
     </div>  
     <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-end"> 
-      <button id="saveSettingsBtn" class="bg-rose-600 hover:bg-rose-700 text-white font-medium px-4 py-2 rounded-lg text-xs transition">Simpan Pengaturan</button> 
+      <button id="saveSettingsBtn" class="bg-slate-800 hover:bg-slate-900 text-white font-medium px-4 py-2 rounded-lg text-xs transition">Simpan Pengaturan</button> 
     </div> 
   </div> 
 </div> 
@@ -226,26 +226,26 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="bg-white rounded-xl shadow-2xl flex flex-col flex-grow max-w-6xl w-full mx-auto overflow-hidden border border-slate-200 relative" onclick="event.stopPropagation()"> 
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-16"> 
       <div class="flex items-center gap-3"> 
-        <div class="w-10 h-10 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xl shadow-sm font-bold">[]</div> 
+        <div class="w-10 h-10 rounded-lg bg-slate-800 text-white flex items-center justify-center text-xl shadow-sm font-bold">📁</div> 
         <div> 
-          <h2 class="text-base md:text-lg font-bold text-slate-900">Folder � Ruang Simpan Draft & Multi-Folder</h2> 
+          <h2 class="text-base md:text-lg font-bold text-slate-900">Folder • Ruang Simpan Draft & Multi-Folder</h2> 
           <p id="rootBreadcrumbPath" class="text-xs text-slate-500">Direktori Utama /</p> 
         </div> 
       </div> 
       <div class="flex items-center gap-2"> 
-        <button id="rootCreateFolderBtn" class="bg-amber-600 hover:bg-amber-700 text-white font-medium px-3.5 py-2 rounded-lg text-xs shadow-sm transition flex items-center gap-1.5">
-          <span>[+]</span> <span>Buat Folder</span>
+        <button id="rootCreateFolderBtn" class="bg-slate-800 hover:bg-slate-900 text-white font-medium px-3.5 py-2 rounded-lg text-xs shadow-sm transition flex items-center gap-1.5">
+          <span>+</span> <span>Buat Folder</span>
         </button> 
-        <button id="rootSaveCurrentDraftBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-3.5 py-2 rounded-lg text-xs shadow-sm transition flex items-center gap-1.5">
-          <span>[]</span> <span>Simpan Sesi Aktif</span>
+        <button id="rootSaveCurrentDraftBtn" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-medium px-3.5 py-2 rounded-lg text-xs shadow-sm transition flex items-center gap-1.5">
+          <span>💾</span> <span>Simpan Sesi Aktif</span>
         </button> 
       </div> 
     </div> 
-    <button id="closeFullScreenFolderBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup"></button> 
+    <button id="closeFullScreenFolderBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
     <div class="px-6 py-3 bg-white border-b border-slate-100 flex justify-between items-center"> 
       <div class="flex items-center gap-2">
         <button id="rootBackBtn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-1.5 rounded-lg font-medium transition">&larr; Kembali ke Folder Induk</button> 
-        <button id="rootFolderMultiActionBtn" class="bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs px-3 py-1.5 rounded-lg font-medium transition">Multi-Pilih Hapus</button>
+        <button id="rootFolderMultiActionBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs px-3 py-1.5 rounded-lg font-medium transition">Multi-Pilih Hapus</button>
       </div>
       <div class="text-xs text-slate-400 font-medium ml-auto" id="rootItemCountInfo">0 Item ditemukan</div> 
     </div> 
@@ -258,7 +258,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-lg bg-white shadow-2xl relative flex flex-col max-h-[85vh]" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-3 pr-6"> 
       <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2"><span id="explorerModalTitle">Kelola Folder & Multi-Pilih Item</span></h3> 
-      <button id="closeFolderExplorerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
+      <button id="closeFolderExplorerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
     </div> 
     <p class="text-xs text-slate-500 mb-3" id="explorerModalSubtitle">Pilih item untuk dipindah, disalin, atau dihapus secara multi-pilih.</p> 
     
@@ -270,7 +270,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
         <select id="explorerTargetFolderSelect" class="w-full p-2 border border-slate-300 rounded-lg bg-white text-xs mb-2"></select>
       </div>
       <div class="flex gap-2">
-        <button id="explorerActionExecuteBtn" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-medium py-2.5 rounded-lg transition shadow-sm" disabled>Pilih Aksi</button>
+        <button id="explorerActionExecuteBtn" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white font-medium py-2.5 rounded-lg transition shadow-sm" disabled>Pilih Aksi</button>
         <button id="explorerCancelBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-4 py-2.5 rounded-lg transition border border-slate-300">Tutup</button>
       </div>
     </div> 
@@ -282,15 +282,15 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 class="font-bold text-slate-900 text-sm">Simpan ke Folder</h3> 
-      <button id="closeSaveFolderModal" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
+      <button id="closeSaveFolderModal" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
     </div> 
     <div class="space-y-3 text-xs mb-4"> 
       <div><label class="block font-semibold text-slate-700 mb-1">Nama File / Draft:</label><input type="text" id="saveFileNameInput" class="w-full p-2 border border-slate-300 rounded-lg bg-slate-50 text-xs"></div> 
       <div><label class="block font-semibold text-slate-700 mb-1">Pilih Direktori / Folder Tujuan:</label><select id="saveFolderSelect" class="w-full p-2 border border-slate-300 rounded-lg bg-white text-xs"><option value="root">Direktori Utama (Root)</option></select></div> 
     </div> 
     <div class="flex gap-2"> 
-      <button id="confirmSaveNewFolderBtn" class="flex-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 py-2 rounded-lg font-medium transition text-xs">+ Folder Baru</button> 
-      <button id="confirmSaveFileBtn" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white py-2 rounded-lg font-medium transition text-xs shadow-sm">Simpan</button> 
+      <button id="confirmSaveNewFolderBtn" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 py-2 rounded-lg font-medium transition text-xs">+ Folder Baru</button> 
+      <button id="confirmSaveFileBtn" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white py-2 rounded-lg font-medium transition text-xs shadow-sm">Simpan</button> 
     </div> 
   </div> 
 </div> 
@@ -302,23 +302,23 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <div id="sidebarBrandIcon" class="w-8 h-8 rounded-lg bg-[#ff3399] text-white flex items-center justify-center shadow-xs shrink-0 logo-handwriting text-sm">C's</div> 
       <span class="font-bold text-slate-900 text-sm">Menu Scheduly</span> 
     </div> 
-    <button id="closeSidebarBtn" class="w-7 h-7 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
+    <button id="closeSidebarBtn" class="w-7 h-7 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
   </div> 
   <div class="p-4 flex-grow space-y-4 text-xs overflow-y-auto"> 
-    <div id="sidebarClandysAuthBox" class="bg-rose-50 border border-rose-200 rounded-lg p-3 hidden"> 
-      <div class="font-bold text-rose-900 text-xs mb-1" id="sidebarCounterTitle">Konter: KASIR</div> 
-      <div class="text-[11px] text-rose-700" id="sidebarUserRoleTitle">Login: Admin</div> 
-      <button id="sidebarLogoutBtn" class="mt-2.5 w-full bg-red-100 hover:bg-red-200 text-red-800 font-medium py-1.5 rounded transition border border-red-300 text-[11px]">Logout / Ganti Akun</button> 
+    <div id="sidebarClandysAuthBox" class="bg-slate-50 border border-slate-200 rounded-lg p-3 hidden"> 
+      <div class="font-bold text-slate-900 text-xs mb-1" id="sidebarCounterTitle">Konter: KASIR</div> 
+      <div class="text-[11px] text-slate-600" id="sidebarUserRoleTitle">Login: Admin</div> 
+      <button id="sidebarLogoutBtn" class="mt-2.5 w-full bg-slate-200 hover:bg-slate-300 text-slate-800 font-medium py-1.5 rounded transition border border-slate-300 text-[11px]">Logout / Ganti Akun</button> 
     </div> 
     <div> 
       <div class="font-bold text-slate-400 uppercase text-[10px] tracking-wider mb-2">Navigasi Halaman</div> 
       <div class="space-y-1"> 
         <button id="navPageTeamBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex flex-col gap-0.5 transition"> 
-          <div class="flex items-center gap-2"><div class="w-5 h-5 rounded bg-[#ff3399] text-white flex items-center justify-center shrink-0 logo-handwriting text-[10px]">C's</div><span>Jadwal & Catatan Tim</span><span class="text-[9px] bg-rose-100 text-rose-700 px-1.5 py-0.2 rounded font-semibold">*unofficial</span></div> 
-          <span class="text-[10px] text-rose-600 font-normal pl-7">(Pramuniaga & Kasir)</span> 
+          <div class="flex items-center gap-2"><div class="w-5 h-5 rounded bg-[#ff3399] text-white flex items-center justify-center shrink-0 logo-handwriting text-[10px]">C's</div><span>Jadwal & Catatan Tim</span><span class="text-[9px] bg-slate-100 text-slate-700 px-1.5 py-0.2 rounded font-semibold border border-slate-200">*unofficial</span></div> 
+          <span class="text-[10px] text-slate-500 font-normal pl-7">(Pramuniaga & Kasir)</span> 
         </button> 
         <button id="navPageGeneralBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-          <span class="font-bold">[]</span>
+          <span class="font-bold">📊</span>
           <span>Jadwal Umum</span>
         </button> 
       </div> 
@@ -326,15 +326,15 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <hr class="border-slate-200"> 
     <div class="space-y-1"> 
       <button id="menuHomeBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold">[]</span>
+        <span class="font-bold">🏠</span>
         <span>Beranda Utama</span>
       </button> 
       <button id="menuSettingsBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold">[]</span>
+        <span class="font-bold">⚙️</span>
         <span>Pengaturan & Notifikasi</span>
       </button> 
       <button id="menuHelpModalBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold">[?]</span>
+        <span class="font-bold">❓</span>
         <span>Pusat Bantuan & Manual</span>
       </button> 
     </div> 
@@ -342,15 +342,15 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <div> 
       <div class="font-bold text-slate-700 mb-2 flex items-center justify-between">
         <span>Folder Penyimpanan</span>
-        <button id="openRootStorageFromSidebar" class="text-[10px] text-rose-600 hover:underline font-semibold">Buka Jendela</button>
+        <button id="openRootStorageFromSidebar" class="text-[10px] text-slate-600 hover:underline font-semibold">Buka Jendela</button>
       </div> 
       <div class="grid grid-cols-4 gap-1 mb-2"> 
-        <button id="sidebarSaveDraftBtn" class="bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium py-1 px-1 rounded border border-blue-200 text-[10px]">Simpan</button> 
-        <button id="sidebarCreateFolderBtn" class="bg-amber-50 hover:bg-amber-100 text-amber-700 font-medium py-1 px-1 rounded border border-amber-200 text-[10px]">+ Folder</button> 
+        <button id="sidebarSaveDraftBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px]">Simpan</button> 
+        <button id="sidebarCreateFolderBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px]">+ Folder</button> 
         <button id="sidebarMoveSelectedBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px]">Pindah</button> 
         <button id="sidebarCopySelectedBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px]">Salin</button> 
       </div> 
-      <button id="sidebarDeleteSelectedBtn" class="w-full bg-red-50 hover:bg-red-100 text-red-700 font-medium py-1 px-1 rounded border border-red-200 text-[10px] mb-2">Hapus Terpilih</button> 
+      <button id="sidebarDeleteSelectedBtn" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px] mb-2">Hapus Terpilih</button> 
       <div id="sidebarExplorerTree" class="space-y-1 max-h-56 overflow-y-auto border border-slate-200 rounded-lg p-2 bg-slate-50 font-mono text-[11px]"></div> 
     </div>  
   </div>  
@@ -362,26 +362,26 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <header class="standard-card px-4 md:px-6 py-3.5 sticky top-0 z-30 flex justify-between items-center border-x-0 border-t-0 rounded-none bg-white"> 
     <div class="flex items-center gap-3"> 
       <button id="openSidebarBtn" class="w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition" title="Buka Menu">
-        <span class="font-bold text-base">[]</span>
+        <span class="font-bold text-base">☰</span>
       </button> 
-      <!-- TOMBOL LOGO KEMBALI KE BERANDA (Tanpa tulisan C's di judul web, sesuai permintaan) -->
+      <!-- TOMBOL LOGO KEMBALI KE BERANDA -->
       <div id="webBrandRefresh" class="flex items-center gap-2.5 cursor-pointer group" title="Kembali ke Beranda Utama"> 
         <div id="brandLogoBox" class="w-9 h-9 rounded-lg bg-[#ff3399] text-white flex items-center justify-center shadow-sm shrink-0 logo-handwriting text-base">C's</div> 
         <div> 
-          <div class="flex items-center gap-1.5"><h1 id="appTitleHeader" class="text-sm font-bold text-slate-900 tracking-tight">Jadwal Tim</h1><span id="unofficialBadgeHeader" class="text-[9px] bg-rose-100 text-rose-700 px-1.5 py-0.2 rounded font-semibold">*unofficial</span></div> 
-          <p id="saveStatusText" class="text-[11px] text-rose-600 font-medium">Tersimpan Otomatis</p> 
+          <div class="flex items-center gap-1.5"><h1 id="appTitleHeader" class="text-sm font-bold text-slate-900 tracking-tight">Jadwal Tim</h1><span id="unofficialBadgeHeader" class="text-[9px] bg-slate-100 text-slate-700 px-1.5 py-0.2 rounded font-semibold border border-slate-200">*unofficial</span></div> 
+          <p id="saveStatusText" class="text-[11px] text-slate-500 font-medium">Tersimpan Otomatis</p> 
         </div> 
       </div> 
     </div> 
     <div class="flex items-center gap-1.5 md:gap-2 no-export"> 
-      <button id="headerLogoutBtn" class="hidden bg-red-50 hover:bg-red-100 text-red-700 text-xs px-3 py-2 rounded-lg font-medium border border-red-200 transition shadow-sm items-center gap-1" title="Keluar"><span class="hidden sm:inline">Logout</span></button> 
-      <button id="openStaffPickerTopBtn" class="hidden bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs px-3 py-2 rounded-lg font-medium border border-red-200 transition shadow-sm items-center gap-1"><span class="hidden sm:inline">Pilih Staff</span></button> 
+      <button id="headerLogoutBtn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm items-center gap-1" title="Keluar"><span class="hidden sm:inline">Logout</span></button> 
+      <button id="openStaffPickerTopBtn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm items-center gap-1"><span class="hidden sm:inline">Pilih Staff</span></button> 
       <button id="copyLinkBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5">
-        <span>[]</span>
+        <span>🔗</span>
         <span class="hidden md:inline">Salin Link</span>
       </button> 
       <button id="openExportModalBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3.5 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5">
-        <span>[]</span>
+        <span>📤</span>
         <span class="hidden md:inline">Export</span>
       </button> 
       <button id="langToggleBtn" class="bg-white hover:bg-slate-50 text-slate-800 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm">ID / EN</button>  
@@ -398,17 +398,17 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <div class="flex flex-wrap items-center justify-between gap-2 mb-3 no-export px-1"> 
       <div class="flex items-center gap-1.5"> 
         <button id="undoBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5" disabled>
-          <span>[]</span>
+          <span>↩</span>
           <span class="hidden sm:inline" id="undoText">Undo</span>
         </button> 
         <button id="redoBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5" disabled>
-          <span>[]</span>
+          <span>🔁</span>
           <span class="hidden sm:inline" id="redoText">Redo</span>
         </button> 
       </div> 
       <div class="flex items-center gap-1.5"> 
         <button id="quickSaveDraftBtn" class="bg-white text-xs px-3 py-2 rounded-lg font-medium border transition shadow-sm flex items-center gap-1.5">Simpan Draft</button> 
-        <button id="clearSheetBtn" class="bg-white hover:bg-red-50 text-red-600 text-xs px-3 py-2 rounded-lg font-medium border border-red-200 transition shadow-sm flex items-center gap-1.5"><span id="clearSheetText">Kosongkan Lembar Kerja</span></button> 
+        <button id="clearSheetBtn" class="bg-white hover:bg-slate-100 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5"><span id="clearSheetText">Kosongkan Lembar Kerja</span></button> 
       </div> 
     </div> 
 
@@ -421,12 +421,12 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <div class="standard-card p-5 mb-6 bg-white"> 
       <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-3"> 
         <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2"><span id="notesHeadingText">Catatan & Hari Penting</span></h3> 
-        <button id="addGlobalNoteBtn" class="no-export text-white px-3.5 py-2 rounded-lg font-medium text-xs shadow-sm transition">+ Tambah Catatan</button> 
+        <button id="addGlobalNoteBtn" class="no-export bg-slate-800 text-white px-3.5 py-2 rounded-lg font-medium text-xs shadow-sm transition">+ Tambah Catatan</button> 
       </div> 
       <div id="globalNotesContainer" class="flex flex-col gap-2.5 text-xs"></div> 
     </div> 
   </main>  
-  <footer class="text-center py-4 text-xs text-slate-500 font-medium bg-white border-t border-slate-200 mt-auto" id="footerText">� 2026 Scheduly � Didesain untuk kemudahan & kenyamanan tim</footer> 
+  <footer class="text-center py-4 text-xs text-slate-500 font-medium bg-white border-t border-slate-200 mt-auto" id="footerText">© 2026 Scheduly • Didesain untuk kemudahan & kenyamanan tim</footer> 
 </div> 
 
 <!-- Pop-Up Export --> 
@@ -434,7 +434,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 class="font-bold text-slate-900 text-sm">Pilih Format Laporan</h3> 
-      <button id="closeExportModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
+      <button id="closeExportModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
     </div> 
     <div class="grid grid-cols-2 gap-2.5 mb-2"> 
       <button type="button" class="export-format-btn py-3 px-3 rounded-lg border font-medium text-xs transition bg-white text-slate-800 border-slate-300 hover:bg-slate-50 text-left flex items-center gap-2 shadow-xs" data-format="xlsx"><div><div>Excel (.xlsx)</div></div></button> 
@@ -450,19 +450,19 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 id="selectedDateTitle" class="font-bold text-slate-900 text-sm">Pilih Shift</h3> 
-      <button id="closeFormBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
+      <button id="closeFormBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
     </div> 
     <input type="hidden" id="activeStaffKey"><input type="hidden" id="activeDateKey"> 
     <div class="grid grid-cols-3 gap-2"> 
-      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-emerald-50 text-emerald-800 border-emerald-300" data-value="FULL">FULL</button> 
+      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="FULL">FULL</button> 
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-white text-slate-700 border-slate-300" data-value="P">P (Pagi)</button> 
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-white text-slate-700 border-slate-300" data-value="So">So (Sore)</button> 
-      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-cyan-50 text-cyan-800 border-cyan-300" data-value="P(s)">P(s)</button> 
-      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-fuchsia-50 text-fuchsia-800 border-fuchsia-300" data-value="Pc">Pc</button> 
-      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-indigo-50 text-indigo-800 border-indigo-300" data-value="PS">PS</button> 
-      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-rose-50 text-rose-800 border-rose-300" data-value="OFF">OFF</button> 
+      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="P(s)">P(s)</button> 
+      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="Pc">Pc</button> 
+      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="PS">PS</button> 
+      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="OFF">OFF</button> 
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-100 text-slate-700 border-slate-300" data-value="C">C (Cuti)</button> 
-      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-red-50 text-red-700 border-red-300 col-span-3 flex items-center justify-center gap-1" data-value="CLEAR">Hapus Shift</button> 
+      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-100 text-slate-700 border-slate-300 col-span-3 flex items-center justify-center gap-1" data-value="CLEAR">Hapus Shift</button> 
     </div> 
   </div> 
 </div> 
@@ -472,7 +472,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 id="selectedDateTitleGeneral" class="font-bold text-slate-900 text-sm">Pilih Shift Umum</h3> 
-      <button id="closeFormGeneralBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
+      <button id="closeFormGeneralBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
     </div> 
     <input type="hidden" id="activeStaffKeyGen"><input type="hidden" id="activeDateKeyGen"> 
     <div class="grid grid-cols-3 gap-2"> 
@@ -481,11 +481,11 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-white text-slate-700 border-slate-300" data-value="Mid" data-initial="Md">Mid</button> 
       <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-white text-slate-700 border-slate-300" data-value="Sore" data-initial="Sr">Sore</button> 
       <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-white text-slate-700 border-slate-300" data-value="Malam" data-initial="Ml">Malam</button> 
-      <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-orange-50 text-orange-800 border-orange-300" data-value="Split" data-initial="Sp">Split</button> 
-      <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-emerald-50 text-emerald-800 border-emerald-300" data-value="FULL" data-initial="FL">FULL</button> 
-      <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-rose-50 text-rose-800 border-rose-300" data-value="OFF" data-initial="OFF">OFF</button> 
+      <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="Split" data-initial="Sp">Split</button> 
+      <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="FULL" data-initial="FL">FULL</button> 
+      <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="OFF" data-initial="OFF">OFF</button> 
       <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-slate-100 text-slate-700 border-slate-300" data-value="CUTI" data-initial="CT">CUTI</button> 
-      <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-red-50 text-red-700 border-red-300 col-span-3 flex items-center justify-center gap-1" data-value="CLEAR">Hapus Shift</button> 
+      <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-slate-100 text-slate-700 border-slate-300 col-span-3 flex items-center justify-center gap-1" data-value="CLEAR">Hapus Shift</button> 
     </div> 
   </div> 
 </div> 
@@ -497,7 +497,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <p id="confirmMessage" class="text-xs text-slate-600 mb-5 leading-relaxed">Apakah kamu yakin?</p> 
     <div class="flex gap-2"> 
       <button id="confirmNoBtn" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 rounded-lg font-medium transition text-xs border border-slate-300">Tidak</button> 
-      <button id="confirmYesBtn" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white py-2 rounded-lg font-medium transition text-xs shadow-sm">Ya</button> 
+      <button id="confirmYesBtn" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white py-2 rounded-lg font-medium transition text-xs shadow-sm">Ya</button> 
     </div> 
   </div> 
 </div> 
@@ -507,7 +507,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-5 w-full max-w-sm bg-white shadow-2xl relative" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-2 pr-6"> 
       <h3 class="font-bold text-slate-900 text-xs">Pilih Staff Terdaftar Konter</h3> 
-      <button id="closeStaffPickerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
+      <button id="closeStaffPickerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
     </div> 
     <p class="text-[11px] text-slate-500 mb-3">Pilih nama staff dari daftar server konter aktif:</p> 
     <div id="staffPickerListContainer" class="space-y-1.5 max-h-48 overflow-y-auto mb-3"></div> 
@@ -533,7 +533,7 @@ const translations = {
     menu_team_desc: "(Khusus Pramuniaga dan Kasir)", menu_general_title: "Jadwal Umum", 
     menu_general_desc: "Pengelolaan shift operasional umum secara komprehensif", 
     menu_folder_title: "Folder & Penyimpanan", menu_folder_desc: "Kelola direktori multi-folder dan arsip draft lembar kerja", 
-    autosave_text: "Tersimpan Otomatis", notes_heading: "Catatan & Hari Penting", btn_add_note: "+ Tambah Catatan", footer_text: "� 2026 Scheduly � Didesain untuk kemudahan & kenyamanan tim",
+    autosave_text: "Tersimpan Otomatis", notes_heading: "Catatan & Hari Penting", btn_add_note: "+ Tambah Catatan", footer_text: "© 2026 Scheduly • Didesain untuk kemudahan & kenyamanan tim",
     clearSheetTitle: "Kosongkan Lembar Kerja", clearSheetConfirm: "Apakah kamu yakin ingin mengosongkan seluruh data staff dan jadwal pada lembar kerja ini?"
   }, 
   en: { 
@@ -543,7 +543,7 @@ const translations = {
     menu_team_desc: "(Dedicated for Cashiers and Floor Staff)", menu_general_title: "General Schedule", 
     menu_general_desc: "Comprehensive operational shift management", menu_folder_title: "Folder & Storage", 
     menu_folder_desc: "Manage multi-folder directories and saved drafts", 
-    autosave_text: "Auto-saved", notes_heading: "Notes & Important Days", btn_add_note: "+ Add Note", footer_text: "� 2026 Scheduly � Designed for team ease and convenience",
+    autosave_text: "Auto-saved", notes_heading: "Notes & Important Days", btn_add_note: "+ Add Note", footer_text: "© 2026 Scheduly • Designed for team ease and convenience",
     clearSheetTitle: "Clear Workspace", clearSheetConfirm: "Are you sure you want to clear all staff and schedule data on this worksheet?"
   } 
 }; 
@@ -553,7 +553,6 @@ function updateLanguageUI() {
   langToggleBtn.innerText = langLabel; 
   homeLangToggleBtn.innerText = langLabel; 
   authLangToggle.innerText = langLabel;
-  // Memastikan judul web / tab browser hanya menampilkan nama laman yang dipilih (tanpa title web tambahan yang panjang)
   document.title = "Scheduly"; 
   document.getElementById('appTitleHeader').innerText = currentActivePage === 'team' ? (currentLang === 'id' ? "Jadwal Tim" : "Team Schedule") : (currentLang === 'id' ? "Jadwal Umum" : "General Schedule"); 
   document.getElementById('notesHeadingText').innerText = translations[currentLang].notes_heading; 
@@ -589,7 +588,6 @@ closeAuthModalBtn.addEventListener('click', () => {
   welcomePage.classList.remove('hidden');
 });
 
-// Tombol logo mengembalikan pengguna ke beranda utama
 document.getElementById('webBrandRefresh').addEventListener('click', () => {
   welcomePage.classList.remove('hidden');
 });
@@ -729,7 +727,7 @@ openStaffPickerTopBtn.addEventListener('click', () => {
   staffPickerListContainer.innerHTML = "";
   staffList.forEach(s => {
     let b = document.createElement('button');
-    b.className = "w-full text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-rose-50 text-slate-800 font-medium text-xs border flex items-center justify-between";
+    b.className = "w-full text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-800 font-medium text-xs border border-slate-200 flex items-center justify-between";
     b.innerHTML = `<span>${s}</span>`;
     b.onclick = () => { staffPickerModal.classList.add('hidden'); alert(`Staff terpilih: ${s}`); };
     staffPickerListContainer.appendChild(b);
@@ -763,10 +761,10 @@ function applyTheme() {
     navPageGeneralBtn.className = "w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition"; 
   } else { 
     document.body.classList.remove('theme-pinky'); 
-    brandLogoBox.innerHTML = `<span class="font-bold text-xs">[]</span>`; 
-    sidebarBrandIcon.innerHTML = `<span class="font-bold text-xs">[]</span>`; 
+    brandLogoBox.innerHTML = `<span class="font-bold text-xs">📊</span>`; 
+    sidebarBrandIcon.innerHTML = `<span class="font-bold text-xs">📊</span>`; 
     unofficialBadgeHeader.classList.add('hidden'); 
-    navPageGeneralBtn.className = "w-full text-left px-3 py-2.5 rounded-lg bg-blue-50 text-blue-700 font-semibold flex items-center gap-2 transition border border-blue-200"; 
+    navPageGeneralBtn.className = "w-full text-left px-3 py-2.5 rounded-lg bg-slate-100 text-slate-900 font-semibold flex items-center gap-2 transition border border-slate-300"; 
     navPageTeamBtn.className = "w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex flex-col gap-0.5 transition"; 
   } 
 } 
@@ -941,7 +939,7 @@ function openFolderExplorer(actionType) {
   tree.forEach((item) => {
     let div = document.createElement('label');
     div.className = "flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 cursor-pointer hover:bg-slate-100 text-xs";
-    div.innerHTML = `<input type="checkbox" value="${item.id}" class="explorer-item-checkbox rounded text-rose-600 focus:ring-rose-500 w-4 h-4"><span>${item.name} <span class="text-[10px] text-slate-400">(${item.date || '-'})</span></span>`;
+    div.innerHTML = `<input type="checkbox" value="${item.id}" class="explorer-item-checkbox rounded text-slate-700 focus:ring-slate-500 w-4 h-4"><span>${item.name} <span class="text-[10px] text-slate-400">(${item.date || '-'})</span></span>`;
     folderExplorerList.appendChild(div);
   });
 
@@ -1024,7 +1022,7 @@ function renderFullScreenStorage() {
   grid.innerHTML = items.length === 0 ? `<div class="col-span-full text-center py-12 text-slate-400 italic text-xs">Direktori kosong.</div>` : ""; 
   items.forEach(item => { 
     let card = document.createElement('div'); 
-    card.className = "standard-card p-4 bg-white flex flex-col justify-between gap-3 cursor-pointer hover:border-rose-400 transition"; 
+    card.className = "standard-card p-4 bg-white flex flex-col justify-between gap-3 cursor-pointer hover:border-slate-400 transition"; 
     
     card.onclick = (e) => {
       e.stopPropagation();
@@ -1035,7 +1033,7 @@ function renderFullScreenStorage() {
       }
     };
 
-    let actionLabel = item.type === 'folder' ? `<span class="text-xs text-amber-600 font-semibold">&rarr; Buka Folder</span>` : `<span class="text-xs text-blue-600 font-semibold">&rarr; Muat Sesi</span>`;
+    let actionLabel = item.type === 'folder' ? `<span class="text-xs text-slate-600 font-semibold">&rarr; Buka Folder</span>` : `<span class="text-xs text-slate-700 font-semibold">&rarr; Muat Sesi</span>`;
     card.innerHTML = `<div class="font-bold text-slate-900 text-xs truncate">${item.name}</div>${actionLabel}`; 
     grid.appendChild(card); 
   }); 
@@ -1062,7 +1060,7 @@ function renderSidebarExplorerTree() {
 
   let html = `<div class="flex items-center justify-between mb-1.5 pb-1 border-b border-slate-200">
     <span class="font-bold text-slate-700">Direktori Utama (Root)</span>
-    <button onclick="sidebarCreateSubFolder('root')" class="text-[10px] bg-amber-100 hover:bg-amber-200 text-amber-800 px-1.5 py-0.5 rounded font-medium">+ Sub-Folder</button>
+    <button onclick="sidebarCreateSubFolder('root')" class="text-[10px] bg-slate-100 hover:bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded font-medium border border-slate-300">+ Sub-Folder</button>
   </div>`;
 
   function buildSubTree(parentId, depth) {
@@ -1074,17 +1072,17 @@ function renderSidebarExplorerTree() {
       res += `<div class="py-1 px-1 hover:bg-slate-100 rounded text-[11px]" style="margin-left: ${indent}px;">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-1.5 truncate max-w-[140px]">
-            <input type="checkbox" value="${item.id}" class="sidebar-item-checkbox rounded text-rose-600 w-3.5 h-3.5 shrink-0">`;
+            <input type="checkbox" value="${item.id}" class="sidebar-item-checkbox rounded text-slate-700 w-3.5 h-3.5 shrink-0">`;
       
       if(item.type === 'folder') {
         res += `<span onclick="sidebarOpenFolder('${item.id}', '${item.name}')" class="font-semibold text-slate-800 cursor-pointer truncate hover:underline" title="Klik untuk Buka">${item.name}</span>`;
       } else {
-        res += `<span onclick="loadDraftItem('${item.id}')" class="text-blue-700 cursor-pointer truncate hover:underline" title="Klik untuk Muat">${item.name}</span>`;
+        res += `<span onclick="loadDraftItem('${item.id}')" class="text-slate-700 cursor-pointer truncate hover:underline" title="Klik untuk Muat">${item.name}</span>`;
       }
 
       res += `</div><div class="flex items-center gap-1 shrink-0">`;
       if(item.type === 'folder') {
-        res += `<button onclick="sidebarCreateSubFolder('${item.id}')" class="text-[9px] text-amber-700 bg-amber-50 px-1 rounded border border-amber-200" title="Tambah Sub-Folder">+ Sub</button>`;
+        res += `<button onclick="sidebarCreateSubFolder('${item.id}')" class="text-[9px] text-slate-700 bg-slate-100 px-1 rounded border border-slate-300" title="Tambah Sub-Folder">+ Sub</button>`;
       }
       res += `</div></div></div>`;
 
@@ -1274,7 +1272,7 @@ function renderTable() {
     let tdName = document.createElement('td'); 
     tdName.className = "p-3 sticky left-0 bg-inherit z-10 font-bold border-r border-slate-300 flex justify-between items-center gap-2"; 
     
-    tdName.innerHTML = `<input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none px-1 py-0.5 rounded text-slate-900 font-medium truncate max-w-[110px] staff-name-input text-xs" data-old-name="${staff}" ${!isAdminOrGeneral ? 'disabled' : ''}> ${isAdminOrGeneral ? `<button class="no-export text-slate-400 hover:text-red-600 p-1 rounded transition flex items-center justify-center font-bold text-xs" onclick="deleteStaff('${staff}')" title="Hapus Staf">[]</button>` : ''}`; 
+    tdName.innerHTML = `<input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-slate-400 focus:border-slate-600 focus:bg-white focus:outline-none px-1 py-0.5 rounded text-slate-900 font-medium truncate max-w-[110px] staff-name-input text-xs" data-old-name="${staff}" ${!isAdminOrGeneral ? 'disabled' : ''}> ${isAdminOrGeneral ? `<button class="no-export text-slate-400 hover:text-slate-700 p-1 rounded transition flex items-center justify-center font-bold text-xs" onclick="deleteStaff('${staff}')" title="Hapus Staf">✕</button>` : ''}`; 
     tr.appendChild(tdName); 
 
     let counts = {}; shiftLabels.forEach(s => counts[s] = 0); counts.totalWork = 0; 
@@ -1315,7 +1313,7 @@ function renderTable() {
 
   if (isAdminOrGeneral) { 
     let addTr = document.createElement('tr'); addTr.className = "no-export bg-slate-50"; 
-    addTr.innerHTML = `<td class="p-3 sticky left-0 bg-slate-50 z-10 border-r border-b border-slate-300"><div class="flex items-center gap-1.5 p-1 border border-dashed border-slate-400 rounded bg-white"><span class="font-bold text-xs">[+]</span><input type="text" id="inlineStaffInput" placeholder="Ketik nama baru..." class="bg-transparent text-xs w-full text-slate-800 focus:outline-none"></div></td><td colspan="${totalDays + 12}" class="border-b border-slate-300 bg-slate-50"></td>`; 
+    addTr.innerHTML = `<td class="p-3 sticky left-0 bg-slate-50 z-10 border-r border-b border-slate-300"><div class="flex items-center gap-1.5 p-1 border border-dashed border-slate-400 rounded bg-white"><span class="font-bold text-xs">+</span><input type="text" id="inlineStaffInput" placeholder="Ketik nama baru..." class="bg-transparent text-xs w-full text-slate-800 focus:outline-none"></div></td><td colspan="${totalDays + 12}" class="border-b border-slate-300 bg-slate-50"></td>`; 
     tbody.appendChild(addTr); 
     setTimeout(() => {
       let inp = document.getElementById('inlineStaffInput');
@@ -1346,12 +1344,12 @@ function renderGlobalNotes() {
     let dObj = new Date(currentYear, currentMonth, day);
     let hijriStr = getHijriDate(dObj).string;
     let masehiStr = `${day} ${monthsNameID[currentMonth]} ${currentYear}`;
-    specialDaysInfo.push(`${masehiStr} � ${hijriStr} : ${currentMonthSpecialDays[day]}`);
+    specialDaysInfo.push(`${masehiStr} — ${hijriStr} : ${currentMonthSpecialDays[day]}`);
   }
 
   if (specialDaysInfo.length > 0) {
     let specDiv = document.createElement('div');
-    specDiv.className = "bg-rose-50/80 border border-rose-200 rounded-lg p-3 text-rose-900 text-xs font-medium space-y-1.5";
+    specDiv.className = "bg-slate-50 border border-slate-200 rounded-lg p-3 text-slate-900 text-xs font-medium space-y-1.5";
     specDiv.innerHTML = `<div class="font-bold text-sm mb-1">Hari Peringatan Nasional & Hari Besar Islam (${monthsNameID[currentMonth]} ${currentYear}):</div><ul class="list-disc pl-4 space-y-1">${specialDaysInfo.map(h => `<li>${h}</li>`).join('')}</ul>`;
     globalNotesContainer.appendChild(specDiv);
   }
@@ -1360,7 +1358,7 @@ function renderGlobalNotes() {
     let item = document.createElement('div'); item.className = "bg-white border border-slate-300 rounded-lg p-2.5 flex gap-2 items-start w-full shadow-xs"; 
     let ta = document.createElement('textarea'); ta.rows = 1; ta.className = "w-full bg-transparent focus:outline-none p-1 rounded text-xs text-slate-800 resize-none"; ta.value = text; 
     ta.disabled = (currentActivePage === 'team' && userSession && userSession.role !== 'admin'); 
-    let del = document.createElement('button'); del.className = "no-export text-slate-400 hover:text-red-600 text-xs p-1 font-bold"; del.innerHTML = "[]"; 
+    let del = document.createElement('button'); del.className = "no-export text-slate-400 hover:text-slate-700 text-xs p-1 font-bold"; del.innerHTML = "✕"; 
     del.onclick = () => { showConfirm("Hapus Catatan", "Yakin ingin menghapus catatan ini?", () => { saveStateToHistory(); notes.splice(idx, 1); globalNotes[monthKey] = notes; triggerAutoSave(); renderGlobalNotes(); }); }; 
     item.appendChild(ta); if (currentActivePage === 'general' || (userSession && userSession.role === 'admin')) item.appendChild(del); 
     globalNotesContainer.appendChild(item); 

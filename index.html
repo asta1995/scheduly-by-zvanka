@@ -45,19 +45,18 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <!-- MODAL AUTH / LOGIN & DAFTAR ANGGOTA BARU --> 
 <div id="authModal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4"> 
   <div class="standard-card p-6 md:p-8 w-full max-w-md bg-white shadow-2xl relative" onclick="event.stopPropagation()"> 
-    <button id="closeAuthModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition"></button>
+    <button id="closeAuthModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center transition">✕</button>
     <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3 pr-8"> 
       <div class="flex items-center gap-2.5"> 
         <div class="w-10 h-10 rounded-xl bg-[#ff3399] text-white flex items-center justify-center shadow-md shrink-0 logo-handwriting text-xl">C's</div> 
         <div> 
-          <h2 class="text-base font-bold text-slate-900">Portal Konter & Akses Sesi</h2> 
-          <p class="text-xs text-slate-500">Pilih masuk atau daftar anggota baru</p> 
+          <h2 id="tr_authTitle" class="text-base font-bold text-slate-900">Portal Konter & Akses Sesi</h2> 
+          <p id="tr_authSubtitle" class="text-xs text-slate-500">Pilih masuk atau daftar anggota baru</p> 
         </div> 
       </div> 
       <button id="authLangToggle" class="bg-white hover:bg-slate-50 text-slate-800 text-xs px-2.5 py-1.5 rounded font-medium border border-slate-300">ID / EN</button> 
     </div> 
 
-    <!-- Opsi Tab Mode: Masuk atau Daftar -->
     <div class="flex bg-slate-100 p-1 rounded-lg mb-3 text-xs font-semibold">
       <button type="button" id="authModeLoginTab" class="flex-1 py-2 rounded-md bg-white text-slate-900 shadow-xs transition">Masuk (Login)</button>
       <button type="button" id="authModeRegisterTab" class="flex-1 py-2 rounded-md text-slate-600 transition">Daftar Anggota Baru</button>
@@ -65,14 +64,14 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 
     <div class="space-y-3 text-xs mb-5"> 
       <div id="authRoleWrapper"> 
-        <label class="block font-semibold text-slate-700 mb-1">Masuk Sebagai:</label> 
+        <label id="tr_authLoginAs" class="block font-semibold text-slate-700 mb-1">Masuk Sebagai:</label> 
         <select id="authRoleSelect" class="w-full p-2.5 border border-slate-300 rounded-lg bg-white focus:ring-1 focus:ring-rose-600 font-medium"> 
           <option value="admin">Admin (Akses Penuh Konter)</option> 
           <option value="member">Anggota Tim (Request Jadwal)</option> 
         </select> 
       </div> 
       <div> 
-        <label class="block font-semibold text-slate-700 mb-1">Pilih Konter:</label> 
+        <label id="tr_authSelectCounter" class="block font-semibold text-slate-700 mb-1">Pilih Konter:</label> 
         <select id="authCounterSelect" class="w-full p-2.5 border border-slate-300 rounded-lg bg-white focus:ring-1 focus:ring-rose-600 font-medium"> 
           <option value="KASIR">KASIR</option> 
           <option value="Konter Susu">Konter Susu</option> 
@@ -81,13 +80,17 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
         </select> 
       </div> 
       <div> 
-        <label class="block font-semibold text-slate-700 mb-1">Nama Lengkap Anda:</label> 
-        <input type="text" id="authNameInput" placeholder="Contoh: Warjaya" class="w-full p-2.5 border border-slate-300 rounded-lg bg-slate-50 focus:bg-white focus:ring-1 focus:ring-rose-600"> 
-      </div> 
-      <div> 
-        <label class="block font-semibold text-slate-700 mb-1">PIN Server Konter:</label> 
+        <label id="tr_authServerPin" class="block font-semibold text-slate-700 mb-1">PIN Server Konter:</label> 
         <input type="password" id="authPinInput" placeholder="******" maxlength="20" class="w-full p-2.5 border border-slate-300 rounded-lg bg-slate-50 focus:bg-white focus:ring-1 focus:ring-rose-600 tracking-widest font-mono text-center text-sm font-bold"> 
         <p class="text-[10px] text-slate-400 mt-1" id="authPinHint">*Admin dapat membuat PIN baru atau memasukkan PIN konter yang sudah ada.</p> 
+      </div> 
+      <div id="authAdminTargetWrapper" class="hidden">
+        <label class="block font-semibold text-slate-700 mb-1">Pilih Admin / Proyek Konter:</label>
+        <select id="authAdminTargetSelect" class="w-full p-2.5 border border-slate-300 rounded-lg bg-white focus:ring-1 focus:ring-rose-600 font-medium"></select>
+      </div>
+      <div> 
+        <label id="tr_authFullName" class="block font-semibold text-slate-700 mb-1">Nama Lengkap Anda:</label> 
+        <input type="text" id="authNameInput" placeholder="Contoh: Warjaya" class="w-full p-2.5 border border-slate-300 rounded-lg bg-slate-50 focus:bg-white focus:ring-1 focus:ring-rose-600"> 
       </div> 
     </div> 
 
@@ -102,10 +105,10 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 md:p-8 w-full max-w-xl bg-white shadow-2xl relative max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()"> 
     <div class="flex items-center justify-between mb-5 border-b border-slate-200 pb-4"> 
       <div class="flex items-center gap-3"> 
-        <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 border border-slate-300 flex items-center justify-center shadow-sm shrink-0 font-bold text-lg"></div> 
+        <div class="w-12 h-12 rounded-xl bg-white text-black border border-black flex items-center justify-center shadow-sm shrink-0 font-bold text-lg">📅</div> 
         <div> 
-          <h1 class="text-xl font-bold text-slate-900">Scheduly</h1> 
-          <p class="text-xs text-slate-500">Pilih menu atau navigasi lembar kerja di bawah ini:</p> 
+          <h1 id="tr_homeTitle" class="text-xl font-bold text-slate-900">Scheduly</h1> 
+          <p id="tr_homeSubtitle" class="text-xs text-slate-500">Pilih menu atau navigasi lembar kerja di bawah ini:</p> 
         </div> 
       </div> 
       <button id="homeLangToggleBtn" class="bg-white hover:bg-slate-50 text-slate-800 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm shrink-0">ID / EN</button> 
@@ -116,41 +119,41 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
           <div class="w-9 h-9 rounded-lg bg-[#ff3399] text-white flex items-center justify-center shadow-xs shrink-0 logo-handwriting text-lg group-hover:scale-110 transition">C's</div> 
           <div> 
             <div class="font-bold text-slate-900 text-sm flex items-center gap-1.5"> 
-              <span>Jadwal & Catatan Tim</span> 
+              <span id="tr_homeTeamTitle">Jadwal & Catatan Tim</span> 
               <span class="text-[9px] bg-rose-100 text-rose-700 px-1.5 py-0.5 rounded font-semibold">*unofficial</span> 
             </div> 
-            <div class="text-slate-500 text-[11px]">(Khusus Pramuniaga dan Kasir)</div> 
+            <div id="tr_homeTeamDesc" class="text-slate-500 text-[11px]">(Khusus Pramuniaga dan Kasir)</div> 
           </div> 
         </div> 
         <span class="text-slate-400 group-hover:translate-x-1 transition">&rarr;</span> 
       </button> 
-      <button id="homeMenuGeneralBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-200 hover:border-slate-400 hover:bg-slate-50 flex items-center justify-between transition group cursor-pointer"> 
+      <button id="homeMenuGeneralBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-400 hover:bg-slate-50 flex items-center justify-between transition group cursor-pointer"> 
         <div class="flex items-center gap-3"> 
-          <span class="w-9 h-9 rounded-lg bg-slate-100 text-slate-700 border border-slate-300 group-hover:scale-110 transition flex items-center justify-center font-bold text-sm"></span> 
+          <span class="w-9 h-9 rounded-lg bg-white text-black border border-black group-hover:scale-110 transition flex items-center justify-center font-bold text-sm">📊</span> 
           <div> 
-            <div class="font-bold text-slate-900 text-sm">Jadwal Umum</div> 
-            <div class="text-slate-500 text-[11px]">Pengelolaan shift operasional umum secara komprehensif</div> 
+            <div id="tr_homeGenTitle" class="font-bold text-slate-900 text-sm">Jadwal Umum</div> 
+            <div id="tr_homeGenDesc" class="text-slate-500 text-[11px]">Pengelolaan shift operasional umum secara komprehensif</div> 
           </div> 
         </div> 
         <span class="text-slate-400 group-hover:translate-x-1 transition">&rarr;</span> 
       </button> 
-      <button id="homeMenuRootFolderBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-200 hover:border-slate-400 hover:bg-slate-50 flex items-center justify-between transition group cursor-pointer"> 
+      <button id="homeMenuRootFolderBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-400 hover:bg-slate-50 flex items-center justify-between transition group cursor-pointer"> 
         <div class="flex items-center gap-3"> 
-          <span class="w-9 h-9 rounded-lg bg-slate-100 text-slate-700 border border-slate-300 group-hover:scale-110 transition flex items-center justify-center font-bold text-sm"></span> 
+          <span class="w-9 h-9 rounded-lg bg-white text-black border border-black group-hover:scale-110 transition flex items-center justify-center font-bold text-sm">📁</span> 
           <div> 
-            <div class="font-bold text-slate-900 text-sm">Folder & Penyimpanan</div> 
-            <div class="text-slate-500 text-[11px]">Kelola direktori multi-folder dan arsip draft lembar kerja</div> 
+            <div id="tr_homeFolderTitle" class="font-bold text-slate-900 text-sm">Folder & Penyimpanan</div> 
+            <div id="tr_homeFolderDesc" class="text-slate-500 text-[11px]">Kelola direktori multi-folder dan arsip draft lembar kerja</div> 
           </div> 
         </div> 
         <span class="text-slate-400 group-hover:translate-x-1 transition">&rarr;</span> 
       </button> 
     </div> 
     <div class="flex gap-2"> 
-      <button id="openSettingsModalFromHome" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-lg font-medium text-xs transition flex items-center justify-center gap-1.5 border border-slate-300 cursor-pointer"> 
-        <span></span> <span>Pengaturan</span> 
+      <button id="openSettingsModalFromHome" class="flex-1 bg-white hover:bg-slate-50 text-black border border-black py-2.5 rounded-lg font-medium text-xs transition flex items-center justify-center gap-1.5 cursor-pointer"> 
+        <span>⚙️</span> <span id="tr_homeSettingsBtn">Pengaturan</span> 
       </button> 
-      <button id="openHelpModalFromHome" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-lg font-medium text-xs transition flex items-center justify-center gap-1.5 border border-slate-300 cursor-pointer"> 
-        <span></span> <span>Pusat Bantuan</span> 
+      <button id="openHelpModalFromHome" class="flex-1 bg-white hover:bg-slate-50 text-black border border-black py-2.5 rounded-lg font-medium text-xs transition flex items-center justify-center gap-1.5 cursor-pointer"> 
+        <span>❓</span> <span id="tr_homeHelpBtn">Pusat Bantuan</span> 
       </button> 
     </div> 
   </div> 
@@ -161,18 +164,18 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="bg-white rounded-xl shadow-2xl flex flex-col flex-grow max-w-4xl w-full mx-auto overflow-hidden border border-slate-200 relative" onclick="event.stopPropagation()"> 
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-16"> 
       <div class="flex items-center gap-3"> 
-        <span class="w-8 h-8 rounded-lg bg-slate-200 text-slate-700 border border-slate-300 flex items-center justify-center font-bold text-xs"></span> 
+        <span class="w-8 h-8 rounded-lg bg-white text-black border border-black flex items-center justify-center font-bold text-xs">❓</span> 
         <div> 
-          <h2 class="text-base md:text-lg font-bold text-slate-900">Pusat Bantuan & Panduan Lengkap</h2> 
-          <p class="text-xs text-slate-500">Pelajari cara menguasai fitur Scheduly dengan cepat</p> 
+          <h2 id="tr_helpTitle" class="text-base md:text-lg font-bold text-slate-900">Pusat Bantuan & Panduan Lengkap</h2> 
+          <p id="tr_helpSubtitle" class="text-xs text-slate-500">Pelajari cara menguasai fitur Scheduly dengan cepat</p> 
         </div> 
       </div> 
     </div> 
-    <button id="closeHelpModalBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup"></button> 
+    <button id="closeHelpModalBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-white text-black border border-black hover:bg-slate-100 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
     <div class="p-6 flex-grow overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed"> 
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
-        <div class="font-bold text-slate-900 text-sm mb-1">1. Portal Konter, Login, & Hak Akses (Khusus Tim)</div> 
-        <p>Gunakan menu Login atau Daftar Anggota Baru dengan memasukkan PIN server konter yang sesuai. Fitur kontrol utama seperti simpan draft dan pengosongan lembar kerja dibatasi khusus untuk Admin.</p> 
+        <div id="tr_helpBox1Title" class="font-bold text-slate-900 text-sm mb-1">1. Portal Konter, Login, & Hak Akses (Khusus Tim)</div> 
+        <p id="tr_helpBox1Desc">Gunakan menu Login atau Daftar Anggota Baru dengan memasukkan PIN server konter yang sesuai. Fitur kontrol utama seperti simpan draft dan pengosongan lembar kerja dibatasi khusus untuk Admin.</p> 
       </div> 
     </div> 
     <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center"> 
@@ -184,24 +187,24 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <!-- MODAL PENGATURAN & NOTIFIKASI --> 
 <div id="settingsModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="this.classList.add('hidden')"> 
   <div class="bg-white rounded-xl shadow-2xl flex flex-col max-w-lg w-full mx-auto overflow-hidden border border-slate-200 relative" onclick="event.stopPropagation()"> 
-    <button id="closeSettingsModalBtn" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition z-10" title="Tutup"></button>
+    <button id="closeSettingsModalBtn" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center transition z-10" title="Tutup">✕</button>
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-12"> 
       <div class="flex items-center gap-3"> 
-        <span class="w-8 h-8 rounded-lg bg-slate-200 text-slate-700 border border-slate-300 flex items-center justify-center font-bold text-xs"></span> 
+        <span class="w-8 h-8 rounded-lg bg-white text-black border border-black flex items-center justify-center font-bold text-xs">⚙️</span> 
         <div> 
-          <h2 class="text-base font-bold text-slate-900">Pengaturan Akun & Personalisasi</h2> 
-          <p class="text-xs text-slate-500">Kelola preferensi notifikasi dan akun Anda</p> 
+          <h2 id="tr_settingsTitle" class="text-base font-bold text-slate-900">Pengaturan Akun & Personalisasi</h2> 
+          <p id="tr_settingsSubtitle" class="text-xs text-slate-500">Kelola preferensi notifikasi dan akun Anda</p> 
         </div> 
       </div> 
     </div> 
     <div class="p-6 space-y-4 text-xs text-slate-700"> 
       <div id="settingsProfileSection" class="bg-slate-50 border border-slate-200 rounded-lg p-3.5 space-y-2 hidden"> 
-        <div class="font-bold text-slate-900 text-sm">Profil Sesi Aktif</div> 
+        <div id="tr_settingsProfileActive" class="font-bold text-slate-900 text-sm">Profil Sesi Aktif</div> 
         <div class="grid grid-cols-2 gap-2 text-slate-600 mb-2"> 
-          <div><strong>Nama:</strong> <span id="setProfileName" class="font-medium text-slate-900">-</span></div> 
-          <div><strong>Peran:</strong> <span id="setProfileRole" class="font-medium text-slate-900">-</span></div> 
-          <div><strong>Konter:</strong> <span id="setProfileCounter" class="font-medium text-slate-900">-</span></div> 
-          <div><strong>PIN Server:</strong> <span id="setProfilePin" class="font-mono font-medium text-slate-900">-</span></div> 
+          <div><span id="tr_profileNameLabel">Nama:</span> <span id="setProfileName" class="font-medium text-slate-900">-</span></div> 
+          <div><span id="tr_profileRoleLabel">Peran:</span> <span id="setProfileRole" class="font-medium text-slate-900">-</span></div> 
+          <div><span id="tr_profileCounterLabel">Konter:</span> <span id="setProfileCounter" class="font-medium text-slate-900">-</span></div> 
+          <div><span id="tr_profilePinLabel">PIN Server:</span> <span id="setProfilePin" class="font-mono font-medium text-slate-900">-</span></div> 
         </div> 
         <div class="pt-2 border-t border-slate-200 space-y-2">
           <div class="flex gap-2 items-center">
@@ -216,13 +219,13 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </div> 
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5 space-y-3"> 
         <div class="font-bold text-slate-900 text-sm flex items-center justify-between"> 
-          <span>Push Notifikasi & Pengingat Shift</span> 
+          <span id="tr_pushNotifTitle">Push Notifikasi & Pengingat Shift</span> 
           <label class="relative inline-flex items-center cursor-pointer"> 
             <input type="checkbox" id="pushNotifToggle" class="sr-only peer"> 
             <div class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-slate-800"></div> 
           </label> 
         </div> 
-        <p class="text-[11px] text-slate-500">Aktifkan untuk menerima notifikasi pengingat jadwal shift harian.</p> 
+        <p id="tr_pushNotifDesc" class="text-[11px] text-slate-500">Aktifkan untuk menerima notifikasi pengingat jadwal shift harian.</p> 
         <button id="testPushNotifBtn" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-medium px-3 py-1.5 rounded transition shadow-xs">Tes Kirim Push Notifikasi Simulasi</button> 
       </div> 
     </div>  
@@ -237,25 +240,25 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="bg-white rounded-xl shadow-2xl flex flex-col flex-grow max-w-6xl w-full mx-auto overflow-hidden border border-slate-200 relative" onclick="event.stopPropagation()"> 
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-16"> 
       <div class="flex items-center gap-3"> 
-        <div class="w-10 h-10 rounded-lg bg-slate-800 text-white flex items-center justify-center text-xl shadow-sm font-bold"></div> 
+        <div class="w-10 h-10 rounded-lg bg-white text-black border border-black flex items-center justify-center text-xl shadow-sm font-bold">📁</div> 
         <div> 
-          <h2 class="text-base md:text-lg font-bold text-slate-900">Folder � Ruang Simpan Draft & Multi-Folder</h2> 
+          <h2 id="tr_folderModalTitle" class="text-base md:text-lg font-bold text-slate-900">Folder • Ruang Simpan Draft & Multi-Folder</h2> 
           <p id="rootBreadcrumbPath" class="text-xs text-slate-500">Direktori Utama /</p> 
         </div> 
       </div> 
       <div class="flex items-center gap-2"> 
         <button id="rootCreateFolderBtn" class="bg-slate-800 hover:bg-slate-900 text-white font-medium px-3.5 py-2 rounded-lg text-xs shadow-sm transition flex items-center gap-1.5">
-          <span>+</span> <span>Buat Folder</span>
+          <span>+</span> <span id="tr_folderCreateBtn">Buat Folder</span>
         </button> 
         <button id="rootSaveCurrentDraftBtn" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-medium px-3.5 py-2 rounded-lg text-xs shadow-sm transition flex items-center gap-1.5">
-          <span></span> <span>Simpan Sesi Aktif</span>
+          <span>💾</span> <span id="tr_folderSaveSessionBtn">Simpan Sesi Aktif</span>
         </button> 
       </div> 
     </div> 
-    <button id="closeFullScreenFolderBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup"></button> 
+    <button id="closeFullScreenFolderBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-white hover:bg-slate-100 text-black border border-black font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
     <div class="px-6 py-3 bg-white border-b border-slate-100 flex justify-between items-center"> 
       <div class="flex items-center gap-2">
-        <button id="rootBackBtn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-1.5 rounded-lg font-medium transition">&larr; Kembali ke Folder Induk</button> 
+        <button id="rootBackBtn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-1.5 rounded-lg font-medium transition">&larr; <span id="tr_folderBackBtn">Kembali ke Folder Induk</span></button> 
         <button id="rootFolderMultiActionBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs px-3 py-1.5 rounded-lg font-medium transition">Multi-Pilih Hapus</button>
       </div>
       <div class="text-xs text-slate-400 font-medium ml-auto" id="rootItemCountInfo">0 Item ditemukan</div> 
@@ -269,7 +272,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-lg bg-white shadow-2xl relative flex flex-col max-h-[85vh]" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-3 pr-6"> 
       <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2"><span id="explorerModalTitle">Kelola Folder & Multi-Pilih Item</span></h3> 
-      <button id="closeFolderExplorerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
+      <button id="closeFolderExplorerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
     </div> 
     <p class="text-xs text-slate-500 mb-3" id="explorerModalSubtitle">Pilih item untuk dipindah, disalin, atau dihapus secara multi-pilih.</p> 
     
@@ -277,7 +280,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     
     <div class="space-y-2 pt-2 border-t border-slate-200 text-xs"> 
       <div id="folderTargetSelectWrapper" class="hidden">
-        <label class="block font-semibold text-slate-700 mb-1">Pilih Folder Tujuan:</label>
+        <label id="tr_targetFolderLabel" class="block font-semibold text-slate-700 mb-1">Pilih Folder Tujuan:</label>
         <select id="explorerTargetFolderSelect" class="w-full p-2 border border-slate-300 rounded-lg bg-white text-xs mb-2"></select>
       </div>
       <div class="flex gap-2">
@@ -292,16 +295,16 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <div id="saveFolderModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden" onclick="this.classList.add('hidden')"> 
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
-      <h3 class="font-bold text-slate-900 text-sm">Simpan ke Folder</h3> 
-      <button id="closeSaveFolderModal" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
+      <h3 id="tr_saveFolderModalTitle" class="font-bold text-slate-900 text-sm">Simpan ke Folder</h3> 
+      <button id="closeSaveFolderModal" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
     </div> 
     <div class="space-y-3 text-xs mb-4"> 
-      <div><label class="block font-semibold text-slate-700 mb-1">Nama File / Draft:</label><input type="text" id="saveFileNameInput" class="w-full p-2 border border-slate-300 rounded-lg bg-slate-50 text-xs"></div> 
-      <div><label class="block font-semibold text-slate-700 mb-1">Pilih Direktori / Folder Tujuan:</label><select id="saveFolderSelect" class="w-full p-2 border border-slate-300 rounded-lg bg-white text-xs"><option value="root">Direktori Utama (Root)</option></select></div> 
+      <div><label id="tr_fileNameLabel" class="block font-semibold text-slate-700 mb-1">Nama File / Draft:</label><input type="text" id="saveFileNameInput" class="w-full p-2 border border-slate-300 rounded-lg bg-slate-50 text-xs"></div> 
+      <div><label id="tr_destFolderLabel" class="block font-semibold text-slate-700 mb-1">Pilih Direktori / Folder Tujuan:</label><select id="saveFolderSelect" class="w-full p-2 border border-slate-300 rounded-lg bg-white text-xs"><option value="root">Direktori Utama (Root)</option></select></div> 
     </div> 
     <div class="flex gap-2"> 
-      <button id="confirmSaveNewFolderBtn" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 py-2 rounded-lg font-medium transition text-xs">+ Folder Baru</button> 
-      <button id="confirmSaveFileBtn" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white py-2 rounded-lg font-medium transition text-xs shadow-sm">Simpan</button> 
+      <button id="confirmSaveNewFolderBtn" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 py-2 rounded-lg font-medium transition text-xs">+ <span id="tr_newFolderBtnText">Folder Baru</span></button> 
+      <button id="confirmSaveFileBtn" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white py-2 rounded-lg font-medium transition text-xs shadow-sm"><span id="tr_saveFileBtnText">Simpan</span></button> 
     </div> 
   </div> 
 </div> 
@@ -311,9 +314,9 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="p-4 border-b border-slate-200 flex justify-between items-center bg-slate-50"> 
     <div class="flex items-center gap-2"> 
       <div id="sidebarBrandIcon" class="w-8 h-8 rounded-lg bg-[#ff3399] text-white flex items-center justify-center shadow-xs shrink-0 logo-handwriting text-sm">C's</div> 
-      <span class="font-bold text-slate-900 text-sm">Menu Scheduly</span> 
+      <span id="tr_sidebarMenuTitle" class="font-bold text-slate-900 text-sm">Menu Scheduly</span> 
     </div> 
-    <button id="closeSidebarBtn" class="w-7 h-7 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
+    <button id="closeSidebarBtn" class="w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
   </div> 
   <div class="p-4 flex-grow space-y-4 text-xs overflow-y-auto"> 
     <div id="sidebarClandysAuthBox" class="bg-slate-50 border border-slate-200 rounded-lg p-3 hidden"> 
@@ -322,46 +325,46 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <button id="sidebarLogoutBtn" class="mt-2.5 w-full bg-slate-200 hover:bg-slate-300 text-slate-800 font-medium py-1.5 rounded transition border border-slate-300 text-[11px]">Logout / Ganti Akun</button> 
     </div> 
     <div> 
-      <div class="font-bold text-slate-400 uppercase text-[10px] tracking-wider mb-2">Navigasi Halaman</div> 
+      <div id="tr_navSectionTitle" class="font-bold text-slate-400 uppercase text-[10px] tracking-wider mb-2">Navigasi Halaman</div> 
       <div class="space-y-1"> 
         <button id="navPageTeamBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex flex-col gap-0.5 transition"> 
-          <div class="flex items-center gap-2"><div class="w-5 h-5 rounded bg-[#ff3399] text-white flex items-center justify-center shrink-0 logo-handwriting text-[10px]">C's</div><span>Jadwal & Catatan Tim</span><span class="text-[9px] bg-slate-100 text-slate-700 px-1.5 py-0.2 rounded font-semibold border border-slate-200">*unofficial</span></div> 
-          <span class="text-[10px] text-slate-500 font-normal pl-7">(Pramuniaga & Kasir)</span> 
+          <div class="flex items-center gap-2"><div class="w-5 h-5 rounded bg-[#ff3399] text-white flex items-center justify-center shrink-0 logo-handwriting text-[10px]">C's</div><span id="tr_navTeamText">Jadwal & Catatan Tim</span><span class="text-[9px] bg-slate-100 text-slate-700 px-1.5 py-0.2 rounded font-semibold border border-slate-200">*unofficial</span></div> 
+          <span id="tr_navTeamSub" class="text-[10px] text-slate-500 font-normal pl-7">(Pramuniaga & Kasir)</span> 
         </button> 
         <button id="navPageGeneralBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-          <span class="font-bold"></span>
-          <span>Jadwal Umum</span>
+          <span class="font-bold">📊</span>
+          <span id="tr_navGenText">Jadwal Umum</span>
         </button> 
       </div> 
     </div> 
     <hr class="border-slate-200"> 
     <div class="space-y-1"> 
       <button id="menuHomeBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold"></span>
-        <span>Beranda Utama</span>
+        <span class="font-bold">🏠</span>
+        <span id="tr_menuHomeText">Beranda Utama</span>
       </button> 
       <button id="menuSettingsBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold"></span>
-        <span>Pengaturan & Notifikasi</span>
+        <span class="font-bold">⚙️</span>
+        <span id="tr_menuSettingsText">Pengaturan & Notifikasi</span>
       </button> 
       <button id="menuHelpModalBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold"></span>
-        <span>Pusat Bantuan & Manual</span>
+        <span class="font-bold">❓</span>
+        <span id="tr_menuHelpText">Pusat Bantuan & Manual</span>
       </button> 
     </div> 
     <hr class="border-slate-200"> 
     <div> 
       <div class="font-bold text-slate-700 mb-2 flex items-center justify-between">
-        <span>Folder Penyimpanan</span>
-        <button id="openRootStorageFromSidebar" class="text-[10px] text-slate-600 hover:underline font-semibold">Buka Jendela</button>
+        <span id="tr_folderStorageTitle">Folder Penyimpanan</span>
+        <button id="openRootStorageFromSidebar" class="text-[10px] text-slate-600 hover:underline font-semibold"><span id="tr_openWindowBtn">Buka Jendela</span></button>
       </div> 
       <div class="grid grid-cols-4 gap-1 mb-2"> 
-        <button id="sidebarSaveDraftBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px]">Simpan</button> 
-        <button id="sidebarCreateFolderBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px]">+ Folder</button> 
-        <button id="sidebarMoveSelectedBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px]">Pindah</button> 
-        <button id="sidebarCopySelectedBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px]">Salin</button> 
+        <button id="sidebarSaveDraftBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px]"><span id="tr_sbSaveBtn">Simpan</span></button> 
+        <button id="sidebarCreateFolderBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px]">+ <span id="tr_sbFolderBtn">Folder</span></button> 
+        <button id="sidebarMoveSelectedBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px]"><span id="tr_sbMoveBtn">Pindah</span></button> 
+        <button id="sidebarCopySelectedBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px]"><span id="tr_sbCopyBtn">Salin</span></button> 
       </div> 
-      <button id="sidebarDeleteSelectedBtn" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px] mb-2">Hapus Terpilih</button> 
+      <button id="sidebarDeleteSelectedBtn" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1 px-1 rounded border border-slate-300 text-[10px] mb-2"><span id="tr_sbDeleteBtn">Hapus Terpilih</span></button> 
       <div id="sidebarExplorerTree" class="space-y-1 max-h-56 overflow-y-auto border border-slate-200 rounded-lg p-2 bg-slate-50 font-mono text-[11px]"></div> 
     </div>  
   </div>  
@@ -372,8 +375,8 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <div id="exportArea" class="flex flex-col min-h-screen w-full"> 
   <header class="standard-card px-4 md:px-6 py-3.5 sticky top-0 z-30 flex justify-between items-center border-x-0 border-t-0 rounded-none bg-white"> 
     <div class="flex items-center gap-3"> 
-      <button id="openSidebarBtn" class="w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition" title="Buka Menu">
-        <span class="font-bold text-base"></span>
+      <button id="openSidebarBtn" class="w-9 h-9 rounded-lg bg-white hover:bg-slate-50 text-black border border-black flex items-center justify-center transition" title="Buka Menu">
+        <span class="font-bold text-base">☰</span>
       </button> 
       <div id="webBrandRefresh" class="flex items-center gap-2.5 cursor-pointer group" title="Kembali ke Beranda Utama"> 
         <div id="brandLogoBox" class="w-9 h-9 rounded-lg bg-[#ff3399] text-white flex items-center justify-center shadow-sm shrink-0 logo-handwriting text-base">C's</div> 
@@ -384,14 +387,14 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </div> 
     </div> 
     <div class="flex items-center gap-1.5 md:gap-2 no-export"> 
-      <button id="headerLogoutBtn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm items-center gap-1.5" title="Keluar"><span></span><span class="hidden sm:inline">Logout</span></button> 
-      <button id="copyLinkBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5">
-        <span></span>
-        <span class="hidden md:inline">Salin Link</span>
+      <button id="headerLogoutBtn" class="hidden bg-white hover:bg-slate-50 text-black border border-black text-xs px-3 py-2 rounded-lg font-medium transition shadow-sm items-center gap-1.5" title="Keluar"><span>🚪</span><span id="tr_headerLogoutText" class="hidden sm:inline">Logout</span></button> 
+      <button id="copyLinkBtn" class="bg-white hover:bg-slate-50 text-black border border-black text-xs px-3 py-2 rounded-lg font-medium transition shadow-sm flex items-center gap-1.5">
+        <span>🔗</span>
+        <span id="tr_copyLinkText" class="hidden md:inline">Salin Link</span>
       </button> 
-      <button id="openExportModalBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3.5 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5">
-        <span></span>
-        <span class="hidden md:inline">Export</span>
+      <button id="openExportModalBtn" class="bg-white hover:bg-slate-50 text-black border border-black text-xs px-3.5 py-2 rounded-lg font-medium transition shadow-sm flex items-center gap-1.5">
+        <span>📤</span>
+        <span id="tr_exportText" class="hidden md:inline">Export</span>
       </button> 
       <button id="langToggleBtn" class="bg-white hover:bg-slate-50 text-slate-800 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm">ID / EN</button>  
     </div> 
@@ -399,25 +402,25 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 
   <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 mb-16"> 
     <div class="standard-card p-3 mb-4 flex items-center justify-between max-w-sm mx-auto bg-white"> 
-      <button id="prevMonth" class="no-export w-9 h-9 flex items-center justify-center bg-white text-slate-700 rounded-lg hover:bg-slate-100 font-bold transition border border-slate-300">&larr;</button> 
+      <button id="prevMonth" class="no-export w-9 h-9 flex items-center justify-center bg-white text-black border border-black rounded-lg hover:bg-slate-50 font-bold transition">&larr;</button> 
       <h2 id="monthYearDisplay" class="font-bold text-sm text-slate-900 min-w-[160px] text-center"></h2> 
-      <button id="nextMonth" class="no-export w-9 h-9 flex items-center justify-center bg-white text-slate-700 rounded-lg hover:bg-slate-100 font-bold transition border border-slate-300">&rarr;</button> 
+      <button id="nextMonth" class="no-export w-9 h-9 flex items-center justify-center bg-white text-black border border-black rounded-lg hover:bg-slate-50 font-bold transition">&rarr;</button> 
     </div> 
 
     <div class="flex flex-wrap items-center justify-between gap-2 mb-3 no-export px-1"> 
       <div class="flex items-center gap-1.5"> 
-        <button id="undoBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5" disabled>
-          <span></span>
+        <button id="undoBtn" class="bg-white hover:bg-slate-50 text-black border border-black text-xs px-3 py-2 rounded-lg font-medium transition shadow-sm flex items-center gap-1.5" disabled>
+          <span>↩</span>
           <span class="hidden sm:inline" id="undoText">Undo</span>
         </button> 
-        <button id="redoBtn" class="bg-white hover:bg-slate-50 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5" disabled>
-          <span></span>
+        <button id="redoBtn" class="bg-white hover:bg-slate-50 text-black border border-black text-xs px-3 py-2 rounded-lg font-medium transition shadow-sm flex items-center gap-1.5" disabled>
+          <span>🔄</span>
           <span class="hidden sm:inline" id="redoText">Redo</span>
         </button> 
       </div> 
       <div class="flex items-center gap-1.5"> 
         <button id="quickSaveDraftBtn" class="bg-white text-xs px-3 py-2 rounded-lg font-medium border transition shadow-sm flex items-center gap-1.5">Simpan Draft</button> 
-        <button id="clearSheetBtn" class="bg-white hover:bg-slate-100 text-slate-700 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm flex items-center gap-1.5"><span id="clearSheetText">Kosongkan Lembar Kerja</span></button> 
+        <button id="clearSheetBtn" class="bg-white hover:bg-slate-50 text-black border border-black text-xs px-3 py-2 rounded-lg font-medium transition shadow-sm flex items-center gap-1.5"><span id="clearSheetText">Kosongkan Lembar Kerja</span></button> 
       </div> 
     </div> 
 
@@ -427,15 +430,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </div> 
     </div> 
 
-    <!-- BAGIAN LOG AKTIVITAS (Hanya dapat dihapus oleh admin, ada multi pilih) -->
-    <div id="activityLogSection" class="standard-card p-5 mb-6 bg-white">
-      <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-3">
-        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2"><span> Log Aktivitas & Request Jadwal</span></h3>
-        <button id="deleteSelectedLogsBtn" class="no-export bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-3 py-1.5 rounded text-xs font-medium transition hidden">Hapus Log Terpilih</button>
-      </div>
-      <div id="activityLogContainer" class="space-y-2 text-xs max-h-48 overflow-y-auto"></div>
-    </div>
-
+    <!-- CATATAN & HARI PENTING -->
     <div class="standard-card p-5 mb-6 bg-white"> 
       <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-3"> 
         <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2"><span id="notesHeadingText">Catatan & Hari Penting</span></h3> 
@@ -443,16 +438,25 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </div> 
       <div id="globalNotesContainer" class="flex flex-col gap-2.5 text-xs"></div> 
     </div> 
+
+    <!-- BAGIAN LOG AKTIVITAS -->
+    <div id="activityLogSection" class="standard-card p-5 mb-6 bg-white">
+      <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-3">
+        <h3 id="tr_activityLogHeading" class="font-bold text-slate-900 text-sm flex items-center gap-2"><span>📋 Log Aktivitas & Request Jadwal</span></h3>
+        <button id="deleteSelectedLogsBtn" class="no-export bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-3 py-1.5 rounded text-xs font-medium transition hidden">Hapus Log Terpilih</button>
+      </div>
+      <div id="activityLogContainer" class="space-y-2 text-xs max-h-48 overflow-y-auto"></div>
+    </div>
   </main>  
-  <footer class="text-center py-4 text-xs text-slate-500 font-medium bg-white border-t border-slate-200 mt-auto" id="footerText">� 2026 Scheduly � Didesain untuk kemudahan & kenyamanan tim</footer> 
+  <footer class="text-center py-4 text-xs text-slate-500 font-medium bg-white border-t border-slate-200 mt-auto" id="footerText">© 2026 Scheduly • Didesain untuk kemudahan & kenyamanan tim</footer> 
 </div> 
 
 <!-- Pop-Up Export --> 
 <div id="exportModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden" onclick="this.classList.add('hidden')"> 
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
-      <h3 class="font-bold text-slate-900 text-sm">Pilih Format Laporan</h3> 
-      <button id="closeExportModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
+      <h3 id="tr_exportModalTitle" class="font-bold text-slate-900 text-sm">Pilih Format Laporan</h3> 
+      <button id="closeExportModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
     </div> 
     <div class="grid grid-cols-2 gap-2.5 mb-2"> 
       <button type="button" class="export-format-btn py-3 px-3 rounded-lg border font-medium text-xs transition bg-white text-slate-800 border-slate-300 hover:bg-slate-50 text-left flex items-center gap-2 shadow-xs" data-format="xlsx"><div><div>Excel (.xlsx)</div></div></button> 
@@ -468,7 +472,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 id="selectedDateTitle" class="font-bold text-slate-900 text-sm">Pilih Shift</h3> 
-      <button id="closeFormBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
+      <button id="closeFormBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
     </div> 
     <input type="hidden" id="activeStaffKey"><input type="hidden" id="activeDateKey"> 
     <div class="grid grid-cols-3 gap-2" id="shiftActionButtonsContainer"> 
@@ -480,7 +484,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="PS">PS</button> 
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="OFF">OFF</button> 
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-100 text-slate-700 border-slate-300" data-value="C">C (Cuti)</button> 
-      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-100 text-slate-700 border-slate-300 col-span-3 flex items-center justify-center gap-1" data-value="CLEAR">Hapus Shift</button> 
+      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-100 text-slate-700 border-slate-300 col-span-3 flex items-center justify-center gap-1" data-value="CLEAR"><span id="tr_clearShiftText">Hapus Shift</span></button> 
     </div> 
   </div> 
 </div> 
@@ -490,7 +494,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 id="selectedDateTitleGeneral" class="font-bold text-slate-900 text-sm">Pilih Shift Umum</h3> 
-      <button id="closeFormGeneralBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
+      <button id="closeFormGeneralBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
     </div> 
     <input type="hidden" id="activeStaffKeyGen"><input type="hidden" id="activeDateKeyGen"> 
     <div class="grid grid-cols-3 gap-2"> 
@@ -503,7 +507,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="FULL" data-initial="FL">FULL</button> 
       <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="OFF" data-initial="OFF">OFF</button> 
       <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-slate-100 text-slate-700 border-slate-300" data-value="CUTI" data-initial="CT">CUTI</button> 
-      <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-slate-100 text-slate-700 border-slate-300 col-span-3 flex items-center justify-center gap-1" data-value="CLEAR">Hapus Shift</button> 
+      <button type="button" class="shift-gen-btn py-2 px-1 rounded-lg border font-medium text-xs transition bg-slate-100 text-slate-700 border-slate-300 col-span-3 flex items-center justify-center gap-1" data-value="CLEAR"><span id="tr_clearShiftTextGen">Hapus Shift</span></button> 
     </div> 
   </div> 
 </div> 
@@ -514,8 +518,8 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <div id="confirmTitle" class="font-bold text-slate-900 text-sm mb-1">Konfirmasi</div> 
     <p id="confirmMessage" class="text-xs text-slate-600 mb-5 leading-relaxed">Apakah kamu yakin?</p> 
     <div class="flex gap-2"> 
-      <button id="confirmNoBtn" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 rounded-lg font-medium transition text-xs border border-slate-300">Tidak</button> 
-      <button id="confirmYesBtn" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white py-2 rounded-lg font-medium transition text-xs shadow-sm">Ya</button> 
+      <button id="confirmNoBtn" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 rounded-lg font-medium transition text-xs border border-slate-300"><span id="tr_confirmNo">Tidak</span></button> 
+      <button id="confirmYesBtn" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white py-2 rounded-lg font-medium transition text-xs shadow-sm"><span id="tr_confirmYes">Ya</span></button> 
     </div> 
   </div> 
 </div> 
@@ -525,7 +529,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 let currentLang = localStorage.getItem('scheduly_lang') || 'id'; 
 let currentActivePage = 'team'; 
 let userSession = JSON.parse(localStorage.getItem('scheduly_user_session_v1')) || null;
-let authMode = 'login'; // 'login' or 'register'
+let authMode = 'login'; 
 
 const langToggleBtn = document.getElementById('langToggleBtn'); 
 const homeLangToggleBtn = document.getElementById('homeLangToggleBtn'); 
@@ -533,24 +537,146 @@ const authLangToggle = document.getElementById('authLangToggle');
 
 const translations = { 
   id: { 
-    titleTeam: "Scheduly", titleGeneral: "Scheduly", 
+    appTitleTeam: "Jadwal Tim", appTitleGen: "Jadwal Umum",
     home_title: "Scheduly", home_subtitle: "Pilih menu atau navigasi lembar kerja di bawah ini:",
-    menu_team_title: "Jadwal & Catatan Tim", 
-    menu_team_desc: "(Khusus Pramuniaga dan Kasir)", menu_general_title: "Jadwal Umum", 
-    menu_general_desc: "Pengelolaan shift operasional umum secara komprehensif", 
+    menu_team_title: "Jadwal & Catatan Tim", menu_team_desc: "(Khusus Pramuniaga dan Kasir)", 
+    menu_general_title: "Jadwal Umum", menu_general_desc: "Pengelolaan shift operasional umum secara komprehensif", 
     menu_folder_title: "Folder & Penyimpanan", menu_folder_desc: "Kelola direktori multi-folder dan arsip draft lembar kerja", 
-    autosave_text: "Tersimpan Otomatis", notes_heading: "Catatan & Hari Penting", btn_add_note: "+ Tambah Catatan", footer_text: "� 2026 Scheduly � Didesain untuk kemudahan & kenyamanan tim",
-    clearSheetTitle: "Kosongkan Lembar Kerja", clearSheetConfirm: "Apakah kamu yakin ingin mengosongkan seluruh data staff dan jadwal pada lembar kerja ini?"
+    autosave_text: "Tersimpan Otomatis", notes_heading: "Catatan & Hari Penting", btn_add_note: "+ Tambah Catatan", footer_text: "© 2026 Scheduly • Didesain untuk kemudahan & kenyamanan tim",
+    clearSheetTitle: "Kosongkan Lembar Kerja", clearSheetConfirm: "Apakah kamu yakin ingin mengosongkan seluruh data staff dan jadwal pada lembar kerja ini?",
+    authTitle: "Portal Konter & Akses Sesi", authSubtitle: "Pilih masuk atau daftar anggota baru",
+    authLoginTab: "Masuk (Login)", authRegisterTab: "Daftar Anggota Baru",
+    authLoginAs: "Masuk Sebagai:", authSelectCounter: "Pilih Konter:", authFullName: "Nama Lengkap Anda:", authServerPin: "PIN Server Konter:",
+    authPinHintLogin: "*PIN server konter harus sudah terdaftar.", authPinHintReg: "*Masukkan PIN konter tempat Anda mendaftar.",
+    authBtnLogin: "Masuk ke Scheduly Tim", authBtnReg: "Daftar Anggota Baru",
+    helpTitle: "Pusat Bantuan & Panduan Lengkap", helpSubtitle: "Pelajari cara menguasai fitur Scheduly dengan cepat",
+    helpBox1Title: "1. Portal Konter, Login, & Hak Akses (Khusus Tim)", helpBox1Desc: "Gunakan menu Login atau Daftar Anggota Baru dengan memasukkan PIN server konter yang sesuai. Fitur kontrol utama seperti simpan draft dan pengosongan lembar kerja dibatasi khusus untuk Admin.",
+    helpUnderstood: "Mengerti!",
+    settingsTitle: "Pengaturan Akun & Personalisasi", settingsSubtitle: "Kelola preferensi notifikasi dan akun Anda",
+    profileActive: "Profil Sesi Aktif", nameLabel: "Nama:", roleLabel: "Peran:", counterLabel: "Konter:", pinLabel: "PIN Server:",
+    changeNameBtn: "Ubah Nama", logoutBtn: "Keluar", deleteAccBtn: "Hapus Akun",
+    pushNotifTitle: "Push Notifikasi & Pengingat Shift", pushNotifDesc: "Aktifkan untuk menerima notifikasi pengingat jadwal shift harian.",
+    testPushBtn: "Tes Kirim Push Notifikasi Simulasi", saveSettingsBtn: "Simpan Pengaturan",
+    folderModalTitle: "Folder • Ruang Simpan Draft & Multi-Folder", folderCreateBtn: "Buat Folder", folderSaveSessionBtn: "Simpan Sesi Aktif",
+    folderBackBtn: "Kembali ke Folder Induk", folderMultiDel: "Multi-Pilih Hapus",
+    explorerTitle: "Kelola Folder & Multi-Pilih Item", explorerSub: "Pilih item untuk dipindah, disalin, atau dihapus secara multi-pilih.",
+    targetFolderLabel: "Pilih Folder Tujuan:", moveBtn: "Pindahkan Item", copyBtn: "Salin Item", delItemBtn: "Hapus Item Terpilih", closeBtn: "Tutup",
+    saveFolderTitle: "Simpan ke Folder", fileNameLabel: "Nama File / Draft:", destFolderLabel: "Pilih Direktori / Folder Tujuan:", newFolderBtn: "Folder Baru", saveBtn: "Simpan",
+    sidebarMenuTitle: "Menu Scheduly", navSectionTitle: "Navigasi Halaman", navTeamText: "Jadwal & Catatan Tim", navTeamSub: "(Pramuniaga & Kasir)",
+    navGenText: "Jadwal Umum", menuHomeText: "Beranda Utama", menuSettingsText: "Pengaturan & Notifikasi", menuHelpText: "Pusat Bantuan & Manual",
+    folderStorageTitle: "Folder Penyimpanan", openWinBtn: "Buka Jendela", sbSaveBtn: "Simpan", sbFolderBtn: "Folder", sbMoveBtn: "Pindah", sbCopyBtn: "Salin", sbDelBtn: "Hapus Terpilih",
+    logoutText: "Logout", copyLinkText: "Salin Link", exportText: "Export", undoText: "Undo", redoText: "Redo", clearSheetBtn: "Kosongkan Lembar Kerja",
+    activityLogHead: "📋 Log Aktivitas & Request Jadwal", deleteLogBtn: "Hapus Log Terpilih",
+    exportModalTitle: "Pilih Format Laporan", clearShiftText: "Hapus Shift", confirmTitle: "Konfirmasi", confirmMsg: "Apakah kamu yakin?", confirmNo: "Tidak", confirmYes: "Ya",
+    tableColName: "Nama / Name", selectRegisteredName: "-- Pilih Nama Terdaftar --", staffRegisteredBtn: "Staff Terdaftar", staffManualBtn: "Input Nama Manual", manualPlaceholder: "Ketik nama manual...",
+    addStaffTitle: "Tambah Staf:",
+    
+    // Popup & Alert Messages (ID)
+    alertEnterNamePin: "Harap masukkan Nama dan PIN Server Konter!",
+    alertNoAdminCounterPin: "Belum ada Admin terdaftar untuk Konter dan PIN ini! Silakan buat proyek baru sebagai Admin terlebih dahulu.",
+    alertAlreadyRegistered: "Nama tersebut sudah terdaftar pada konter, PIN, dan admin ini! Silakan gunakan menu Masuk (Login) jika Anda sudah pernah terdaftar.",
+    alertNotRegisteredLoginFirst: "Nama Anda belum terdaftar di konter, PIN, dan admin ini! Silakan lakukan 'Daftar Anggota Baru' terlebih dahulu.",
+    alertNameEmpty: "Nama akun tidak boleh kosong!",
+    alertNameChanged: "Nama akun berhasil diubah!",
+    confirmDeleteAccount: "Yakin ingin menghapus akun ini dari server konter? Data jadwal dan riwayat terkait akan ikut terhapus permanen.",
+    alertAccountDeleted: "Akun dan seluruh datanya telah dihapus permanen. Anda harus mendaftar kembali dari awal jika ingin masuk.",
+    alertSettingsSaved: "Pengaturan berhasil disimpan!",
+    alertEnablePushFirst: "Aktifkan toggle Push Notifikasi terlebih dahulu!",
+    simulatedPushMsg: (name) => `[Simulasi Push Notifikasi untuk ${name}]: Pengingat Shift harian berhasil dikirim ke perangkat ini.`,
+    alertAdminOnlyAccessFolder: "Hanya Admin yang dapat mengakses penyimpanan folder dan draft!",
+    alertAdminOnlySaveDraft: "Hanya Admin yang dapat menyimpan draft!",
+    alertDraftSaved: "Draft berhasil disimpan ke folder!",
+    alertAdminOnlyFolderStorage: "Hanya Admin yang dapat membuka penyimpanan folder!",
+    alertNoSavedItemsFolder: "Belum ada file atau folder yang tersimpan.",
+    alertAdminOnlyCreateFolder: "Hanya Admin!",
+    successFolderCreated: (name) => `Folder "${name}" berhasil dibuat di direktori utama!`,
+    confirmDeleteItems: (count) => `Yakin ingin menghapus ${count} item terpilih beserta isinya?`,
+    alertItemsDeleted: "Item terpilih berhasil dihapus!",
+    alertItemsMoved: "Item terpilih berhasil dipindahkan!",
+    alertItemsCopied: "Item terpilih berhasil disalin!",
+    loadedDraftSuccess: (name) => `Berhasil memuat "${name}"!`,
+    alertSelectSidebarItem: "Pilih minimal satu item dari daftar sidebar dengan mencentang kotaknya.",
+    confirmDeleteSidebarItems: (count) => `Yakin ingin menghapus ${count} item terpilih?`,
+    alertLinkCopied: "Link disalin!",
+    alertAdminOnlyClearSheet: "Hanya Admin yang dapat mengosongkan lembar kerja!",
+    confirmDeleteLogs: (count) => `Yakin ingin menghapus ${count} log terpilih?`,
+    alertOnlyAdminAccessAdminRole: "Hanya Admin yang dapat memberikan hak akses Admin!",
+    alertMadeAdmin: (name) => `${name} sekarang menjadi Admin!`,
+    alertAdminOnlyAddNote: "Hanya Admin yang dapat menambah catatan!",
+    alertAdminOnlyDeleteStaff: "Hanya Admin yang dapat menghapus staf!",
+    alertScheduleRequested: "Request jadwal berhasil diajukan ke Admin!",
+    alertAdminOnlyOpenStorage: "Hanya Admin yang dapat membuka penyimpanan folder dan draft!"
   }, 
   en: { 
-    titleTeam: "Scheduly", titleGeneral: "Scheduly", 
+    appTitleTeam: "Team Schedule", appTitleGen: "General Schedule",
     home_title: "Scheduly", home_subtitle: "Select menu or worksheet navigation below:",
-    menu_team_title: "Team Schedule & Notes", 
-    menu_team_desc: "(Dedicated for Cashiers and Floor Staff)", menu_general_title: "General Schedule", 
-    menu_general_desc: "Comprehensive operational shift management", menu_folder_title: "Folder & Storage", 
-    menu_folder_desc: "Manage multi-folder directories and saved drafts", 
-    autosave_text: "Auto-saved", notes_heading: "Notes & Important Days", btn_add_note: "+ Add Note", footer_text: "� 2026 Scheduly � Designed for team ease and convenience",
-    clearSheetTitle: "Clear Workspace", clearSheetConfirm: "Are you sure you want to clear all staff and schedule data on this worksheet?"
+    menu_team_title: "Team Schedule & Notes", menu_team_desc: "(Dedicated for Cashiers and Floor Staff)", 
+    menu_general_title: "General Schedule", menu_general_desc: "Comprehensive operational shift management", 
+    menu_folder_title: "Folder & Storage", menu_folder_desc: "Manage multi-folder directories and saved drafts", 
+    autosave_text: "Auto-saved", notes_heading: "Notes & Important Days", btn_add_note: "+ Add Note", footer_text: "© 2026 Scheduly • Designed for team ease and convenience",
+    clearSheetTitle: "Clear Workspace", clearSheetConfirm: "Are you sure you want to clear all staff and schedule data on this worksheet?",
+    authTitle: "Counter Portal & Session Access", authSubtitle: "Choose login or register new member",
+    authLoginTab: "Sign In (Login)", authRegisterTab: "Register New Member",
+    authLoginAs: "Sign In As:", authSelectCounter: "Select Counter:", authFullName: "Your Full Name:", authServerPin: "Counter Server PIN:",
+    authPinHintLogin: "*Counter server PIN must be registered.", authPinHintReg: "*Enter counter PIN where you want to register.",
+    authBtnLogin: "Sign In to Scheduly Team", authBtnReg: "Register New Member",
+    helpTitle: "Help Center & Full Guide", helpSubtitle: "Learn how to master Scheduly features quickly",
+    helpBox1Title: "1. Counter Portal, Login, & Access Rights (Team Only)", helpBox1Desc: "Use Login or Register New Member by entering the correct counter server PIN. Main control features such as saving drafts and clearing worksheets are restricted to Admins.",
+    helpUnderstood: "Understood!",
+    settingsTitle: "Account Settings & Personalization", settingsSubtitle: "Manage your notification preferences and account",
+    profileActive: "Active Session Profile", nameLabel: "Name:", roleLabel: "Role:", counterLabel: "Counter:", pinLabel: "Server PIN:",
+    changeNameBtn: "Change Name", logoutBtn: "Sign Out", deleteAccBtn: "Delete Account",
+    pushNotifTitle: "Push Notifications & Shift Reminder", pushNotifDesc: "Enable to receive daily shift reminder notifications.",
+    testPushBtn: "Test Simulated Push Notification", saveSettingsBtn: "Save Settings",
+    folderModalTitle: "Folder • Draft Storage & Multi-Folder", folderCreateBtn: "Create Folder", folderSaveSessionBtn: "Save Active Session",
+    folderBackBtn: "Back to Parent Folder", folderMultiDel: "Multi-Select Delete",
+    explorerTitle: "Manage Folders & Multi-Select Items", explorerSub: "Select items to move, copy, or delete via multi-select.",
+    targetFolderLabel: "Select Destination Folder:", moveBtn: "Move Items", copyBtn: "Copy Items", delItemBtn: "Delete Selected Items", closeBtn: "Close",
+    saveFolderTitle: "Save to Folder", fileNameLabel: "File / Draft Name:", destFolderLabel: "Select Destination Directory / Folder:", newFolderBtn: "New Folder", saveBtn: "Save",
+    sidebarMenuTitle: "Scheduly Menu", navSectionTitle: "Page Navigation", navTeamText: "Team Schedule & Notes", navTeamSub: "(Cashier & Floor Staff)",
+    navGenText: "General Schedule", menuHomeText: "Main Home", menuSettingsText: "Settings & Notifications", menuHelpText: "Help Center & Manual",
+    folderStorageTitle: "Storage Folders", openWinBtn: "Open Window", sbSaveBtn: "Save", sbFolderBtn: "Folder", sbMoveBtn: "Move", sbCopyBtn: "Copy", sbDelBtn: "Delete Selected",
+    logoutText: "Sign Out", copyLinkText: "Copy Link", exportText: "Export", undoText: "Undo", redoText: "Redo", clearSheetBtn: "Clear Workspace",
+    activityLogHead: "📋 Activity Log & Schedule Requests", deleteLogBtn: "Delete Selected Logs",
+    exportModalTitle: "Select Report Format", clearShiftText: "Clear Shift", confirmTitle: "Confirmation", confirmMsg: "Are you sure?", confirmNo: "No", confirmYes: "Yes",
+    tableColName: "Name / Name", selectRegisteredName: "-- Select Registered Name --", staffRegisteredBtn: "Registered Staff", staffManualBtn: "Manual Name Input", manualPlaceholder: "Type manual name...",
+    addStaffTitle: "Add Staff:",
+    
+    // Popup & Alert Messages (EN)
+    alertEnterNamePin: "Please enter your Name and Counter Server PIN!",
+    alertNoAdminCounterPin: "No Admin registered for this Counter and PIN yet! Please create a new project as Admin first.",
+    alertAlreadyRegistered: "This name is already registered for this counter, PIN, and admin! Please use the Sign In (Login) menu if you are already registered.",
+    alertNotRegisteredLoginFirst: "Your name is not registered for this counter, PIN, and admin yet! Please register via 'Register New Member' first.",
+    alertNameEmpty: "Account name cannot be empty!",
+    alertNameChanged: "Account name successfully changed!",
+    confirmDeleteAccount: "Are you sure you want to delete this account from the counter server? Associated schedule and history data will be permanently deleted.",
+    alertAccountDeleted: "Account and all its data have been permanently deleted. You must register again from the beginning to sign in.",
+    alertSettingsSaved: "Settings successfully saved!",
+    alertEnablePushFirst: "Enable the Push Notifications toggle first!",
+    simulatedPushMsg: (name) => `[Simulated Push Notification for ${name}]: Daily shift reminder successfully sent to this device.`,
+    alertAdminOnlyAccessFolder: "Only Admins can access folder storage and drafts!",
+    alertAdminOnlySaveDraft: "Only Admins can save drafts!",
+    alertDraftSaved: "Draft successfully saved to folder!",
+    alertAdminOnlyFolderStorage: "Only Admins can open folder storage!",
+    alertNoSavedItemsFolder: "No files or folders stored yet.",
+    alertAdminOnlyCreateFolder: "Admin only!",
+    successFolderCreated: (name) => `Folder "${name}" successfully created in root directory!`,
+    confirmDeleteItems: (count) => `Are you sure you want to delete ${count} selected item(s) and their contents?`,
+    alertItemsDeleted: "Selected items successfully deleted!",
+    alertItemsMoved: "Selected items successfully moved!",
+    alertItemsCopied: "Selected items successfully copied!",
+    loadedDraftSuccess: (name) => `Successfully loaded "${name}"!`,
+    alertSelectSidebarItem: "Select at least one item from the sidebar list by checking its box.",
+    confirmDeleteSidebarItems: (count) => `Are you sure you want to delete ${count} selected item(s)?`,
+    alertLinkCopied: "Link copied!",
+    alertAdminOnlyClearSheet: "Only Admins can clear the worksheet!",
+    confirmDeleteLogs: (count) => `Are you sure you want to delete ${count} selected log(s)?`,
+    alertOnlyAdminAccessAdminRole: "Only Admins can grant Admin access rights!",
+    alertMadeAdmin: (name) => `${name} is now an Admin!`,
+    alertAdminOnlyAddNote: "Only Admins can add notes!",
+    alertAdminOnlyDeleteStaff: "Only Admins can delete staff!",
+    alertScheduleRequested: "Schedule request successfully submitted to Admin!",
+    alertAdminOnlyOpenStorage: "Only Admins can open folder and draft storage!"
   } 
 }; 
 
@@ -560,10 +686,105 @@ function updateLanguageUI() {
   homeLangToggleBtn.innerText = langLabel; 
   authLangToggle.innerText = langLabel;
   document.title = "Scheduly"; 
-  document.getElementById('appTitleHeader').innerText = currentActivePage === 'team' ? (currentLang === 'id' ? "Jadwal Tim" : "Team Schedule") : (currentLang === 'id' ? "Jadwal Umum" : "General Schedule"); 
-  document.getElementById('notesHeadingText').innerText = translations[currentLang].notes_heading; 
-  document.getElementById('addGlobalNoteBtn').innerText = translations[currentLang].btn_add_note; 
-  document.getElementById('footerText').innerText = translations[currentLang].footer_text; 
+
+  let t = translations[currentLang];
+  document.getElementById('appTitleHeader').innerText = currentActivePage === 'team' ? t.appTitleTeam : t.appTitleGen; 
+  document.getElementById('notesHeadingText').innerText = t.notes_heading; 
+  document.getElementById('addGlobalNoteBtn').innerText = t.btn_add_note; 
+  document.getElementById('footerText').innerText = t.footer_text; 
+
+  document.getElementById('tr_authTitle').innerText = t.authTitle;
+  document.getElementById('tr_authSubtitle').innerText = t.authSubtitle;
+  authModeLoginTab.innerText = t.authLoginTab;
+  authModeRegisterTab.innerText = t.authRegisterTab;
+  document.getElementById('tr_authLoginAs').innerText = t.authLoginAs;
+  document.getElementById('tr_authSelectCounter').innerText = t.authSelectCounter;
+  document.getElementById('tr_authFullName').innerText = t.authFullName;
+  document.getElementById('tr_authServerPin').innerText = t.authServerPin;
+  document.getElementById('authPinHint').innerText = authMode === 'login' ? t.authPinHintLogin : t.authPinHintReg;
+  document.getElementById('authSubmitBtnText').innerText = authMode === 'login' ? t.authBtnLogin : t.authBtnReg;
+
+  document.getElementById('tr_homeTitle').innerText = t.home_title;
+  document.getElementById('tr_homeSubtitle').innerText = t.home_subtitle;
+  document.getElementById('tr_homeTeamTitle').innerText = t.menu_team_title;
+  document.getElementById('tr_homeTeamDesc').innerText = t.menu_team_desc;
+  document.getElementById('tr_homeGenTitle').innerText = t.menu_general_title;
+  document.getElementById('tr_homeGenDesc').innerText = t.menu_general_desc;
+  document.getElementById('tr_homeFolderTitle').innerText = t.menu_folder_title;
+  document.getElementById('tr_homeFolderDesc').innerText = t.menu_folder_desc;
+  document.getElementById('tr_homeSettingsBtn').innerText = currentLang === 'id' ? "Pengaturan" : "Settings";
+  document.getElementById('tr_homeHelpBtn').innerText = currentLang === 'id' ? "Pusat Bantuan" : "Help Center";
+
+  document.getElementById('tr_helpTitle').innerText = t.helpTitle;
+  document.getElementById('tr_helpSubtitle').innerText = t.helpSubtitle;
+  document.getElementById('tr_helpBox1Title').innerText = t.helpBox1Title;
+  document.getElementById('tr_helpBox1Desc').innerText = t.helpBox1Desc;
+  document.getElementById('closeHelpModalFooterBtn').innerText = t.helpUnderstood;
+
+  document.getElementById('tr_settingsTitle').innerText = t.settingsTitle;
+  document.getElementById('tr_settingsSubtitle').innerText = t.settingsSubtitle;
+  document.getElementById('tr_settingsProfileActive').innerText = t.profileActive;
+  document.getElementById('tr_profileNameLabel').innerText = t.nameLabel;
+  document.getElementById('tr_profileRoleLabel').innerText = t.roleLabel;
+  document.getElementById('tr_profileCounterLabel').innerText = t.counterLabel;
+  document.getElementById('tr_profilePinLabel').innerText = t.pinLabel;
+  document.getElementById('updateAccountNameBtn').innerText = t.changeNameBtn;
+  document.getElementById('logoutAuthBtn').innerText = t.logoutBtn;
+  document.getElementById('deleteAccountBtn').innerText = t.deleteAccBtn;
+  document.getElementById('tr_pushNotifTitle').innerText = t.pushNotifTitle;
+  document.getElementById('tr_pushNotifDesc').innerText = t.pushNotifDesc;
+  document.getElementById('testPushNotifBtn').innerText = t.testPushBtn;
+  document.getElementById('saveSettingsBtn').innerText = t.saveSettingsBtn;
+
+  document.getElementById('tr_folderModalTitle').innerText = t.folderModalTitle;
+  document.getElementById('tr_folderCreateBtn').innerText = t.folderCreateBtn;
+  document.getElementById('tr_folderSaveSessionBtn').innerText = t.folderSaveSessionBtn;
+  document.getElementById('tr_folderBackBtn').innerText = t.folderBackBtn;
+  document.getElementById('rootFolderMultiActionBtn').innerText = t.folderMultiDel;
+
+  document.getElementById('explorerModalTitle').innerText = t.explorerTitle;
+  document.getElementById('explorerModalSubtitle').innerText = t.explorerSub;
+  document.getElementById('tr_targetFolderLabel').innerText = t.targetFolderLabel;
+  document.getElementById('explorerCancelBtn').innerText = t.closeBtn;
+
+  document.getElementById('tr_saveFolderModalTitle').innerText = t.saveFolderTitle;
+  document.getElementById('tr_fileNameLabel').innerText = t.fileNameLabel;
+  document.getElementById('tr_destFolderLabel').innerText = t.destFolderLabel;
+  document.getElementById('tr_newFolderBtnText').innerText = t.newFolderBtn;
+  document.getElementById('tr_saveFileBtnText').innerText = t.saveBtn;
+
+  document.getElementById('tr_sidebarMenuTitle').innerText = t.sidebarMenuTitle;
+  document.getElementById('tr_navSectionTitle').innerText = t.navSectionTitle;
+  document.getElementById('tr_navTeamText').innerText = t.navTeamText;
+  document.getElementById('tr_navTeamSub').innerText = t.navTeamSub;
+  document.getElementById('tr_navGenText').innerText = t.navGenText;
+  document.getElementById('tr_menuHomeText').innerText = t.menuHomeText;
+  document.getElementById('tr_menuSettingsText').innerText = t.menuSettingsText;
+  document.getElementById('tr_menuHelpText').innerText = t.menuHelpText;
+  document.getElementById('tr_folderStorageTitle').innerText = t.folderStorageTitle;
+  document.getElementById('tr_openWindowBtn').innerText = t.openWinBtn;
+  document.getElementById('tr_sbSaveBtn').innerText = t.sbSaveBtn;
+  document.getElementById('tr_sbFolderBtn').innerText = t.sbFolderBtn;
+  document.getElementById('tr_sbMoveBtn').innerText = t.sbMoveBtn;
+  document.getElementById('tr_sbCopyBtn').innerText = t.sbCopyBtn;
+  document.getElementById('tr_sbDeleteBtn').innerText = t.sbDelBtn;
+
+  document.getElementById('tr_headerLogoutText').innerText = t.logoutText;
+  document.getElementById('tr_copyLinkText').innerText = t.copyLinkText;
+  document.getElementById('tr_exportText').innerText = t.exportText;
+  document.getElementById('undoText').innerText = t.undoText;
+  document.getElementById('redoText').innerText = t.redoText;
+  document.getElementById('quickSaveDraftBtn').innerText = currentLang === 'id' ? "Simpan Draft" : "Save Draft";
+  document.getElementById('clearSheetText').innerText = t.clearSheetBtn;
+  document.getElementById('tr_activityLogHeading').innerHTML = `<span>${t.activityLogHead}</span>`;
+  document.getElementById('deleteSelectedLogsBtn').innerText = t.deleteLogBtn;
+  document.getElementById('tr_exportModalTitle').innerText = t.exportModalTitle;
+  document.getElementById('tr_clearShiftText').innerText = t.clearShiftText;
+  document.getElementById('tr_clearShiftTextGen').innerText = t.clearShiftText;
+  document.getElementById('confirmTitle').innerText = t.confirmTitle;
+  document.getElementById('confirmMessage').innerText = t.confirmMsg;
+  document.getElementById('tr_confirmNo').innerText = t.confirmNo;
+  document.getElementById('tr_confirmYes').innerText = t.confirmYes;
 } 
 
 function toggleLanguage() { 
@@ -592,14 +813,16 @@ const authModeRegisterTab = document.getElementById('authModeRegisterTab');
 const authRoleWrapper = document.getElementById('authRoleWrapper');
 const authSubmitBtnText = document.getElementById('authSubmitBtnText');
 const authPinHint = document.getElementById('authPinHint');
+const authAdminTargetWrapper = document.getElementById('authAdminTargetWrapper');
+const authAdminTargetSelect = document.getElementById('authAdminTargetSelect');
 
 authModeLoginTab.addEventListener('click', () => {
   authMode = 'login';
   authModeLoginTab.className = "flex-1 py-2 rounded-md bg-white text-slate-900 shadow-xs transition";
   authModeRegisterTab.className = "flex-1 py-2 rounded-md text-slate-600 transition";
   authRoleWrapper.classList.remove('hidden');
-  authSubmitBtnText.innerText = "Masuk ke Scheduly Tim";
-  authPinHint.innerText = "*PIN server konter harus sudah terdaftar.";
+  updateAdminTargetDropdown();
+  updateLanguageUI();
 });
 
 authModeRegisterTab.addEventListener('click', () => {
@@ -607,9 +830,42 @@ authModeRegisterTab.addEventListener('click', () => {
   authModeRegisterTab.className = "flex-1 py-2 rounded-md bg-white text-slate-900 shadow-xs transition";
   authModeLoginTab.className = "flex-1 py-2 rounded-md text-slate-600 transition";
   authRoleWrapper.classList.add('hidden');
-  authSubmitBtnText.innerText = "Daftar Anggota Baru";
-  authPinHint.innerText = "*Masukkan PIN konter tempat Anda mendaftar.";
+  updateAdminTargetDropdown();
+  updateLanguageUI();
 });
+
+function getRegisteredAdminsForCounterPin(counter, pin) {
+  let registryKey = `scheduly_registry_${counter}_${pin}`;
+  return JSON.parse(localStorage.getItem(registryKey)) || [];
+}
+
+function updateAdminTargetDropdown() {
+  let counter = authCounterSelect.value;
+  let pin = authPinInput.value.trim();
+  let role = authRoleSelect.value;
+  
+  if (authMode === 'register' || role === 'member') {
+    let admins = getRegisteredAdminsForCounterPin(counter, pin);
+    if (admins.length > 0) {
+      authAdminTargetWrapper.classList.remove('hidden');
+      authAdminTargetSelect.innerHTML = "";
+      admins.forEach(adm => {
+        let opt = document.createElement('option');
+        opt.value = adm;
+        opt.innerText = `Admin Proyek: ${adm}`;
+        authAdminTargetSelect.appendChild(opt);
+      });
+    } else {
+      authAdminTargetWrapper.classList.add('hidden');
+    }
+  } else {
+    authAdminTargetWrapper.classList.add('hidden');
+  }
+}
+
+authCounterSelect.addEventListener('change', updateAdminTargetDropdown);
+authPinInput.addEventListener('input', updateAdminTargetDropdown);
+authRoleSelect.addEventListener('change', updateAdminTargetDropdown);
 
 closeAuthModalBtn.addEventListener('click', () => {
   authModal.classList.add('hidden');
@@ -627,6 +883,7 @@ function checkAuthSession() {
     settingsProfileSection.classList.remove('hidden');
     if (!userSession) {
       authModal.classList.remove('hidden');
+      updateAdminTargetDropdown();
     } else {
       authModal.classList.add('hidden');
       applyUserSessionUI();
@@ -641,7 +898,7 @@ function checkAuthSession() {
 
 function applyUserSessionUI() {
   if (!userSession) return;
-  document.getElementById('sidebarCounterTitle').innerText = `Konter: ${userSession.counter} (PIN: ${userSession.pin})`;
+  document.getElementById('sidebarCounterTitle').innerText = `Konter: ${userSession.counter} (Admin: ${userSession.adminName})`;
   document.getElementById('sidebarUserRoleTitle').innerText = `Login: ${userSession.name} (${userSession.role.toUpperCase()})`;
   document.getElementById('setProfileName').innerText = userSession.name;
   document.getElementById('setProfileRole').innerText = userSession.role.toUpperCase();
@@ -653,33 +910,60 @@ function applyUserSessionUI() {
 }
 
 authLoginBtn.addEventListener('click', () => {
+  let t = translations[currentLang];
   let counter = authCounterSelect.value;
   let name = authNameInput.value.trim();
   let pin = authPinInput.value.trim();
-  if (!name || !pin) { alert("Harap masukkan Nama dan PIN Server Konter!"); return; }
+  if (!name || !pin) { alert(t.alertEnterNamePin); return; }
 
-  let existingServers = Object.keys(localStorage).filter(k => k.startsWith(`scheduly_${counter}_`));
-  let expectedKeyPrefix = `scheduly_${counter}_${pin}_`;
-  let isValidPin = existingServers.some(k => k.startsWith(expectedKeyPrefix));
+  let role = authMode === 'register' ? 'member' : authRoleSelect.value;
+  let adminNameTarget = name;
 
-  if (authMode === 'login') {
-    if (existingServers.length > 0 && !isValidPin) {
-      alert("PIN atau Konter yang Anda pilih tidak valid / belum terdaftar!");
+  if (role === 'member' || authMode === 'register') {
+    let admins = getRegisteredAdminsForCounterPin(counter, pin);
+    if (admins.length === 0) {
+      alert(t.alertNoAdminCounterPin);
       return;
     }
-    let role = authRoleSelect.value;
-    userSession = { role, counter, name, pin, pushNotif: true };
+    adminNameTarget = authAdminTargetSelect.value || admins[0];
   } else {
-    // Daftar Anggota Baru
-    if (!isValidPin) {
-      alert("PIN Konter belum tersedia! Hubungi Admin konter terkait untuk mendapatkan PIN yang valid.");
-      return;
+    let registryKey = `scheduly_registry_${counter}_${pin}`;
+    let admins = JSON.parse(localStorage.getItem(registryKey)) || [];
+    if (!admins.includes(name)) {
+      admins.push(name);
+      localStorage.setItem(registryKey, JSON.stringify(admins));
     }
-    userSession = { role: 'member', counter, name, pin, pushNotif: true };
+    adminNameTarget = name;
   }
 
-  localStorage.setItem('scheduly_user_session_v1', JSON.stringify(userSession));
+  let globalMemberPoolKey = `scheduly_member_pool_${counter}_${pin}_${adminNameTarget}`;
+  let globalMembers = JSON.parse(localStorage.getItem(globalMemberPoolKey)) || [];
   
+  if (authMode === 'register' && globalMembers.includes(name)) {
+    alert(t.alertAlreadyRegistered);
+    return;
+  }
+
+  if (authMode === 'login' && role === 'member' && !globalMembers.includes(name)) {
+    alert(t.alertNotRegisteredLoginFirst);
+    return;
+  }
+
+  userSession = { role, counter, name, pin, adminName: adminNameTarget, pushNotif: true };
+  localStorage.setItem('scheduly_user_session_v1', JSON.stringify(userSession));
+
+  let registryKey = `scheduly_registry_${counter}_${pin}`;
+  let admins = JSON.parse(localStorage.getItem(registryKey)) || [];
+  if (!admins.includes(userSession.adminName)) {
+    admins.push(userSession.adminName);
+    localStorage.setItem(registryKey, JSON.stringify(admins));
+  }
+
+  if (!globalMembers.includes(name)) {
+    globalMembers.push(name);
+    localStorage.setItem(globalMemberPoolKey, JSON.stringify(globalMembers));
+  }
+
   let currentStaffArr = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || [];
   let currentRolesObj = JSON.parse(localStorage.getItem(getCounterServerKey('roles'))) || {};
   
@@ -688,7 +972,7 @@ authLoginBtn.addEventListener('click', () => {
     localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(currentStaffArr));
   }
   if (!currentRolesObj[name]) {
-    currentRolesObj[name] = userSession.role;
+    currentRolesObj[name] = (name === userSession.adminName) ? 'admin' : role;
     localStorage.setItem(getCounterServerKey('roles'), JSON.stringify(currentRolesObj));
   } else {
     userSession.role = currentRolesObj[name];
@@ -706,6 +990,7 @@ function handleLogoutAction() {
   settingsModal.classList.add('hidden');
   if (currentActivePage === 'team') {
     authModal.classList.remove('hidden');
+    updateAdminTargetDropdown();
   }
 }
 
@@ -714,9 +999,10 @@ sidebarLogoutBtn.addEventListener('click', handleLogoutAction);
 document.getElementById('logoutAuthBtn').addEventListener('click', handleLogoutAction);
 
 document.getElementById('updateAccountNameBtn').addEventListener('click', () => {
+  let t = translations[currentLang];
   if (!userSession) return;
   let newName = document.getElementById('changeAccountNameInput').value.trim();
-  if (!newName) { alert("Nama akun tidak boleh kosong!"); return; }
+  if (!newName) { alert(t.alertNameEmpty); return; }
   let oldName = userSession.name;
   if (newName === oldName) return;
 
@@ -747,19 +1033,30 @@ document.getElementById('updateAccountNameBtn').addEventListener('click', () => 
   loadServerDataForCounter();
   applyUserSessionUI();
   renderTable();
-  alert("Nama akun berhasil diubah!");
+  alert(t.alertNameChanged);
 });
 
 document.getElementById('deleteAccountBtn').addEventListener('click', () => {
+  let t = translations[currentLang];
   if (!userSession) return;
-  if (!confirm("Yakin ingin menghapus akun ini dari server konter? Data jadwal terkait akan ikut terhapus.")) return;
+  if (!confirm(t.confirmDeleteAccount)) return;
+  
+  let counter = userSession.counter;
+  let pin = userSession.pin;
+  let adminName = userSession.adminName;
+  let userName = userSession.name;
+
+  let globalMemberPoolKey = `scheduly_member_pool_${counter}_${pin}_${adminName}`;
+  let globalMembers = JSON.parse(localStorage.getItem(globalMemberPoolKey)) || [];
+  globalMembers = globalMembers.filter(m => m !== userName);
+  localStorage.setItem(globalMemberPoolKey, JSON.stringify(globalMembers));
   
   let currentStaffArr = JSON.parse(localStorage.getItem(getCounterServerKey('staff'))) || [];
   let currentRolesObj = JSON.parse(localStorage.getItem(getCounterServerKey('roles'))) || {};
   
   let wasAdmin = (userSession.role === 'admin');
-  currentStaffArr = currentStaffArr.filter(s => s !== userSession.name);
-  delete currentRolesObj[userSession.name];
+  currentStaffArr = currentStaffArr.filter(s => s !== userName);
+  delete currentRolesObj[userName];
   
   if (wasAdmin && currentStaffArr.length > 0) {
     let firstStaff = currentStaffArr[0];
@@ -769,12 +1066,12 @@ document.getElementById('deleteAccountBtn').addEventListener('click', () => {
   localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(currentStaffArr));
   localStorage.setItem(getCounterServerKey('roles'), JSON.stringify(currentRolesObj));
   
-  if (schedules[userSession.name]) {
-    delete schedules[userSession.name];
+  if (schedules[userName]) {
+    delete schedules[userName];
   }
   triggerAutoSave();
   handleLogoutAction();
-  alert("Akun berhasil dihapus.");
+  alert(t.alertAccountDeleted);
 });
 
 const settingsModal = document.getElementById('settingsModal');
@@ -785,28 +1082,31 @@ document.getElementById('openSettingsModalFromHome').addEventListener('click', (
 });
 document.getElementById('closeSettingsModalBtn').addEventListener('click', () => settingsModal.classList.add('hidden'));
 document.getElementById('saveSettingsBtn').addEventListener('click', () => {
+  let t = translations[currentLang];
   if (userSession && currentActivePage === 'team') { 
     userSession.pushNotif = document.getElementById('pushNotifToggle').checked; 
     localStorage.setItem('scheduly_user_session_v1', JSON.stringify(userSession)); 
   }
-  settingsModal.classList.add('hidden'); alert("Pengaturan berhasil disimpan!");
+  settingsModal.classList.add('hidden'); alert(t.alertSettingsSaved);
 });
 document.getElementById('testPushNotifBtn').addEventListener('click', () => {
+  let t = translations[currentLang];
   let activePushEnabled = false;
   if (currentActivePage === 'team' && userSession) {
     activePushEnabled = userSession.pushNotif;
   } else {
     activePushEnabled = document.getElementById('pushNotifToggle').checked;
   }
-  if (!activePushEnabled) { alert("Aktifkan toggle Push Notifikasi terlebih dahulu!"); return; }
-  let targetName = (currentActivePage === 'team' && userSession) ? userSession.name : "Pengguna";
-  alert(`[Simulasi Push Notifikasi untuk ${targetName}]: Pengingat Shift harian berhasil dikirim ke perangkat ini.`);
+  if (!activePushEnabled) { alert(t.alertEnablePushFirst); return; }
+  let targetName = (currentActivePage === 'team' && userSession) ? userSession.name : (currentLang === 'id' ? "Pengguna" : "User");
+  alert(t.simulatedPushMsg(targetName));
 });
 
 const serverChannel = new BroadcastChannel('scheduly_clandys_sync_v1');
 serverChannel.onmessage = (event) => {
   let activeCounter = userSession ? userSession.counter : 'KASIR';
-  if (event.data && event.data.counter === activeCounter && currentActivePage === 'team') {
+  let activeAdmin = userSession ? userSession.adminName : '';
+  if (event.data && event.data.counter === activeCounter && event.data.adminName === activeAdmin && currentActivePage === 'team') {
     loadServerDataForCounter(); renderTable();
   }
 };
@@ -814,7 +1114,8 @@ serverChannel.onmessage = (event) => {
 function getCounterServerKey(suffix) {
   let counter = userSession ? userSession.counter : 'KASIR';
   let pin = userSession ? userSession.pin : '123456';
-  return `scheduly_${counter}_${pin}_${suffix}`;
+  let adminName = userSession ? userSession.adminName : 'default';
+  return `scheduly_${counter}_${pin}_${adminName}_${suffix}`;
 }
 
 let staffList = [], schedules = {}, staffListGen = [], schedulesGen = {}, globalNotes = {}, activityLogs = [];
@@ -832,7 +1133,7 @@ function loadServerDataForCounter() {
         localStorage.setItem(getCounterServerKey('staff'), JSON.stringify(staffList));
       }
       if (!staffRoles[userSession.name]) {
-        staffRoles[userSession.name] = staffList.length === 1 ? 'admin' : userSession.role;
+        staffRoles[userSession.name] = (userSession.name === userSession.adminName) ? 'admin' : userSession.role;
         localStorage.setItem(getCounterServerKey('roles'), JSON.stringify(staffRoles));
       }
       userSession.role = staffRoles[userSession.name];
@@ -854,7 +1155,13 @@ function triggerAutoSave() {
     localStorage.setItem(getCounterServerKey('schedules'), JSON.stringify(schedules));
     localStorage.setItem(getCounterServerKey('notes'), JSON.stringify(globalNotes));
     localStorage.setItem(getCounterServerKey('logs'), JSON.stringify(activityLogs));
-    try { serverChannel.postMessage({ counter: userSession ? userSession.counter : 'KASIR', schedules: schedules }); } catch(e) {}
+    try { 
+      serverChannel.postMessage({ 
+        counter: userSession ? userSession.counter : 'KASIR', 
+        adminName: userSession ? userSession.adminName : '',
+        schedules: schedules 
+      }); 
+    } catch(e) {}
   } else {
     localStorage.setItem('scheduly_general_staff', JSON.stringify(staffListGen));
     localStorage.setItem('scheduly_general_schedules', JSON.stringify(schedulesGen));
@@ -886,8 +1193,8 @@ function applyTheme() {
     navPageGeneralBtn.className = "w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition"; 
   } else { 
     document.body.classList.remove('theme-pinky'); 
-    brandLogoBox.innerHTML = `<span class="font-bold text-xs"></span>`; 
-    sidebarBrandIcon.innerHTML = `<span class="font-bold text-xs"></span>`; 
+    brandLogoBox.innerHTML = `<span class="font-bold text-xs">📊</span>`; 
+    sidebarBrandIcon.innerHTML = `<span class="font-bold text-xs">📊</span>`; 
     unofficialBadgeHeader.classList.add('hidden'); 
     navPageGeneralBtn.className = "w-full text-left px-3 py-2.5 rounded-lg bg-slate-100 text-slate-900 font-semibold flex items-center gap-2 transition border border-slate-300"; 
     navPageTeamBtn.className = "w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex flex-col gap-0.5 transition"; 
@@ -901,12 +1208,13 @@ const welcomePage = document.getElementById('welcomePage');
 document.getElementById('homeMenuTeamBtn').addEventListener('click', () => { currentActivePage = 'team'; applyTheme(); updateLanguageUI(); loadServerDataForCounter(); checkAuthSession(); renderTable(); welcomePage.classList.add('hidden'); }); 
 document.getElementById('homeMenuGeneralBtn').addEventListener('click', () => { currentActivePage = 'general'; applyTheme(); updateLanguageUI(); loadServerDataForCounter(); checkAuthSession(); renderTable(); welcomePage.classList.add('hidden'); }); 
 document.getElementById('homeMenuRootFolderBtn').addEventListener('click', () => { 
+  let t = translations[currentLang];
   if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
-    alert("Hanya Admin yang dapat mengakses penyimpanan folder dan draft!");
+    alert(t.alertAdminOnlyAccessFolder);
     return;
   }
   welcomePage.classList.add('hidden');
-  currentRootFolderId = 'root'; folderBreadcrumbStack = [{ id: 'root', name: 'Direktori Utama' }]; 
+  currentRootFolderId = 'root'; folderBreadcrumbStack = [{ id: 'root', name: currentLang === 'id' ? 'Direktori Utama' : 'Root Directory' }]; 
   renderFullScreenStorage(); document.getElementById('fullScreenFolderModal').classList.remove('hidden'); 
 }); 
 document.getElementById('menuHomeBtn').addEventListener('click', () => { closeSidebar(); welcomePage.classList.remove('hidden'); }); 
@@ -949,12 +1257,13 @@ document.getElementById('closeFullScreenFolderBtn').addEventListener('click', ()
 
 function getStorageTree() { return JSON.parse(localStorage.getItem('scheduly_multifolders_v4')) || []; } 
 function saveStorageTree(tree) { localStorage.setItem('scheduly_multifolders_v4', JSON.stringify(tree)); renderSidebarExplorerTree(); } 
-let currentRootFolderId = 'root', folderBreadcrumbStack = [{ id: 'root', name: 'Direktori Utama' }]; 
+let currentRootFolderId = 'root', folderBreadcrumbStack = [{ id: 'root', name: currentLang === 'id' ? 'Direktori Utama' : 'Root Directory' }]; 
 
 const saveFolderModal = document.getElementById('saveFolderModal'); 
 function openSaveFolderModal() { 
+  let t = translations[currentLang];
   if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
-    alert("Hanya Admin yang dapat menyimpan draft!");
+    alert(t.alertAdminOnlySaveDraft);
     return;
   }
   let fileNameInput = document.getElementById('saveFileNameInput');
@@ -962,7 +1271,7 @@ function openSaveFolderModal() {
   
   let folderSelect = document.getElementById('saveFolderSelect');
   if(folderSelect) {
-    folderSelect.innerHTML = `<option value="root">Direktori Utama (Root)</option>`;
+    folderSelect.innerHTML = `<option value="root">${currentLang === 'id' ? 'Direktori Utama (Root)' : 'Root Directory'}</option>`;
     let tree = getStorageTree();
     tree.filter(i => i.type === 'folder').forEach(f => {
       let opt = document.createElement('option');
@@ -980,17 +1289,18 @@ if(rootSaveCurrentDraftBtn) rootSaveCurrentDraftBtn.addEventListener('click', op
 
 document.getElementById('closeSaveFolderModal').addEventListener('click', () => saveFolderModal.classList.add('hidden')); 
 document.getElementById('confirmSaveFileBtn').addEventListener('click', () => { 
+  let t = translations[currentLang];
   let name = document.getElementById('saveFileNameInput').value.trim(); if (!name) return; 
   let targetFolder = document.getElementById('saveFolderSelect').value || currentRootFolderId;
   let tree = getStorageTree(); 
   tree.push({ id: 'draft_' + Date.now(), parentId: targetFolder, type: 'draft', name: name, pageType: currentActivePage, date: new Date().toLocaleDateString(), data: { staff: currentActivePage === 'team' ? staffList : staffListGen, schedules: currentActivePage === 'team' ? schedules : schedulesGen, notes: globalNotes } }); 
-  saveStorageTree(tree); saveFolderModal.classList.add('hidden'); alert("Draft berhasil disimpan ke folder!"); 
+  saveStorageTree(tree); saveFolderModal.classList.add('hidden'); alert(t.alertDraftSaved); 
   renderFullScreenStorage();
 }); 
 
 let confirmSaveNewFolderBtn = document.getElementById('confirmSaveNewFolderBtn');
 if(confirmSaveNewFolderBtn) confirmSaveNewFolderBtn.addEventListener('click', () => {
-  let fName = prompt("Masukkan nama sub-folder baru:");
+  let fName = prompt(currentLang === 'id' ? "Masukkan nama sub-folder baru:" : "Enter new sub-folder name:");
   if(!fName) return;
   let tree = getStorageTree();
   let targetFolder = document.getElementById('saveFolderSelect') ? document.getElementById('saveFolderSelect').value : currentRootFolderId;
@@ -1000,20 +1310,22 @@ if(confirmSaveNewFolderBtn) confirmSaveNewFolderBtn.addEventListener('click', ()
 });
 
 document.getElementById('openRootStorageFromSidebar').addEventListener('click', () => { 
+  let t = translations[currentLang];
   if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
-    alert("Hanya Admin yang dapat membuka penyimpanan folder!");
+    alert(t.alertAdminOnlyFolderStorage);
     return;
   }
   closeSidebar(); 
   currentRootFolderId = 'root'; 
-  folderBreadcrumbStack = [{ id: 'root', name: 'Direktori Utama' }]; 
+  folderBreadcrumbStack = [{ id: 'root', name: currentLang === 'id' ? 'Direktori Utama' : 'Root Directory' }]; 
   renderFullScreenStorage(); 
   fullScreenFolderModal.classList.remove('hidden'); 
 }); 
 
 let rootCreateFolderBtn = document.getElementById('rootCreateFolderBtn');
 if(rootCreateFolderBtn) rootCreateFolderBtn.addEventListener('click', () => {
-  let fName = prompt("Masukkan nama folder baru di direktori ini:");
+  let t = translations[currentLang];
+  let fName = prompt(currentLang === 'id' ? "Masukkan nama folder baru di direktori ini:" : "Enter new folder name in this directory:");
   if(!fName) return;
   let tree = getStorageTree();
   tree.push({ id: 'folder_' + Date.now(), parentId: currentRootFolderId, type: 'folder', name: fName.trim(), date: new Date().toLocaleDateString() });
@@ -1045,26 +1357,27 @@ let currentExplorerAction = null;
 function openFolderExplorer(actionType) {
   currentExplorerAction = actionType;
   let tree = getStorageTree();
-  if(tree.length === 0) { alert("Belum ada file atau folder yang tersimpan."); return; }
+  let t = translations[currentLang];
+  if(tree.length === 0) { alert(t.alertNoSavedItemsFolder); return; }
   
   if(actionType === 'move') {
-    explorerModalTitle.innerText = "Pindah Item (Multi-Pilih)";
-    explorerModalSubtitle.innerText = "Pilih item yang ingin dipindahkan dan tentukan folder tujuannya.";
+    explorerModalTitle.innerText = currentLang === 'id' ? "Pindah Item (Multi-Pilih)" : "Move Items (Multi-Select)";
+    explorerModalSubtitle.innerText = currentLang === 'id' ? "Pilih item yang ingin dipindahkan dan tentukan folder tujuannya." : "Select items to move and choose target folder.";
     folderTargetSelectWrapper.classList.remove('hidden');
-    explorerActionExecuteBtn.innerText = "Pindahkan Item";
+    explorerActionExecuteBtn.innerText = t.moveBtn;
   } else if(actionType === 'copy') {
-    explorerModalTitle.innerText = "Salin Item (Multi-Pilih)";
-    explorerModalSubtitle.innerText = "Pilih item yang ingin disalin dan tentukan folder tujuannya.";
+    explorerModalTitle.innerText = currentLang === 'id' ? "Salin Item (Multi-Pilih)" : "Copy Items (Multi-Select)";
+    explorerModalSubtitle.innerText = currentLang === 'id' ? "Pilih item yang ingin disalin dan tentukan folder tujuannya." : "Select items to copy and choose target folder.";
     folderTargetSelectWrapper.classList.remove('hidden');
-    explorerActionExecuteBtn.innerText = "Salin Item";
+    explorerActionExecuteBtn.innerText = t.copyBtn;
   } else if(actionType === 'delete') {
-    explorerModalTitle.innerText = "Hapus Item (Multi-Pilih)";
-    explorerModalSubtitle.innerText = "Pilih item yang ingin dihapus dari penyimpanan.";
+    explorerModalTitle.innerText = currentLang === 'id' ? "Hapus Item (Multi-Pilih)" : "Delete Items (Multi-Select)";
+    explorerModalSubtitle.innerText = currentLang === 'id' ? "Pilih item yang ingin dihapus dari penyimpanan." : "Select items to delete from storage.";
     folderTargetSelectWrapper.classList.add('hidden');
-    explorerActionExecuteBtn.innerText = "Hapus Item Terpilih";
+    explorerActionExecuteBtn.innerText = t.delItemBtn;
   }
 
-  explorerTargetFolderSelect.innerHTML = `<option value="root">Direktori Utama (Root)</option>`;
+  explorerTargetFolderSelect.innerHTML = `<option value="root">${currentLang === 'id' ? 'Direktori Utama (Root)' : 'Root Directory'}</option>`;
   tree.filter(i => i.type === 'folder').forEach(f => {
     let opt = document.createElement('option');
     opt.value = f.id;
@@ -1092,18 +1405,19 @@ function openFolderExplorer(actionType) {
 }
 
 document.getElementById('sidebarCreateFolderBtn').addEventListener('click', () => {
-  if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') { alert("Hanya Admin!"); return; }
-  let folderName = prompt("Masukkan nama folder baru di root:");
+  let t = translations[currentLang];
+  if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') { alert(t.alertAdminOnlyCreateFolder); return; }
+  let folderName = prompt(currentLang === 'id' ? "Masukkan nama folder baru di root:" : "Enter new folder name in root:");
   if (!folderName) return;
   let tree = getStorageTree();
   tree.push({ id: 'folder_' + Date.now(), parentId: 'root', type: 'folder', name: folderName.trim(), date: new Date().toLocaleDateString() });
   saveStorageTree(tree);
-  alert(`Folder "${folderName}" berhasil dibuat di direktori utama!`);
+  alert(t.successFolderCreated(folderName));
 });
 
-document.getElementById('sidebarMoveSelectedBtn').addEventListener('click', () => { if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') { alert("Hanya Admin!"); return; } openFolderExplorer('move'); });
-document.getElementById('sidebarCopySelectedBtn').addEventListener('click', () => { if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') { alert("Hanya Admin!"); return; } openFolderExplorer('copy'); });
-document.getElementById('sidebarDeleteSelectedBtn').addEventListener('click', () => { if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') { alert("Hanya Admin!"); return; } openFolderExplorer('delete'); });
+document.getElementById('sidebarMoveSelectedBtn').addEventListener('click', () => { let t = translations[currentLang]; if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') { alert(t.alertAdminOnlyCreateFolder); return; } openFolderExplorer('move'); });
+document.getElementById('sidebarCopySelectedBtn').addEventListener('click', () => { let t = translations[currentLang]; if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') { alert(t.alertAdminOnlyCreateFolder); return; } openFolderExplorer('copy'); });
+document.getElementById('sidebarDeleteSelectedBtn').addEventListener('click', () => { let t = translations[currentLang]; if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') { alert(t.alertAdminOnlyCreateFolder); return; } openFolderExplorer('delete'); });
 
 let rootFolderMultiActionBtn = document.getElementById('rootFolderMultiActionBtn');
 if(rootFolderMultiActionBtn) rootFolderMultiActionBtn.addEventListener('click', () => openFolderExplorer('delete'));
@@ -1112,22 +1426,23 @@ closeFolderExplorerBtn.addEventListener('click', () => folderExplorerModal.class
 explorerCancelBtn.addEventListener('click', () => folderExplorerModal.classList.add('hidden'));
 
 explorerActionExecuteBtn.addEventListener('click', () => {
+  let t = translations[currentLang];
   let checkedIds = Array.from(document.querySelectorAll('.explorer-item-checkbox:checked')).map(c => c.value);
   if(checkedIds.length === 0) return;
   
   let tree = getStorageTree();
   if(currentExplorerAction === 'delete') {
-    if(!confirm(`Yakin ingin menghapus ${checkedIds.length} item terpilih beserta isinya?`)) return;
+    if(!confirm(t.confirmDeleteItems(checkedIds.length))) return;
     tree = tree.filter(i => !checkedIds.includes(i.id));
     saveStorageTree(tree);
-    alert("Item terpilih berhasil dihapus!");
+    alert(t.alertItemsDeleted);
   } else if(currentExplorerAction === 'move') {
     let targetId = explorerTargetFolderSelect.value;
     tree.forEach(i => {
       if(checkedIds.includes(i.id)) { i.parentId = targetId; }
     });
     saveStorageTree(tree);
-    alert("Item terpilih berhasil dipindahkan!");
+    alert(t.alertItemsMoved);
   } else if(currentExplorerAction === 'copy') {
     let targetId = explorerTargetFolderSelect.value;
     let newItems = [];
@@ -1135,14 +1450,14 @@ explorerActionExecuteBtn.addEventListener('click', () => {
       if(checkedIds.includes(i.id)) {
         let copyItem = JSON.parse(JSON.stringify(i));
         copyItem.id = i.type + '_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
-        copyItem.name = i.name + ' (Salinan)';
+        copyItem.name = i.name + (currentLang === 'id' ? ' (Salinan)' : ' (Copy)');
         copyItem.parentId = targetId;
         newItems.push(copyItem);
       }
     });
     tree = tree.concat(newItems);
     saveStorageTree(tree);
-    alert("Item terpilih berhasil disalin!");
+    alert(t.alertItemsCopied);
   }
 
   folderExplorerModal.classList.add('hidden');
@@ -1153,11 +1468,13 @@ explorerActionExecuteBtn.addEventListener('click', () => {
 function renderFullScreenStorage() { 
   let grid = document.getElementById('rootStorageContentGrid'), tree = getStorageTree(); 
   let items = tree.filter(i => i.parentId === currentRootFolderId); 
-  document.getElementById('rootBreadcrumbPath').innerText = folderBreadcrumbStack.map(b => b.name).join(' / '); 
+  let rootName = currentLang === 'id' ? 'Direktori Utama' : 'Root Directory';
+  document.getElementById('rootBreadcrumbPath').innerText = folderBreadcrumbStack.map(b => b.id === 'root' ? rootName : b.name).join(' / '); 
   document.getElementById('rootBackBtn').classList.toggle('hidden', currentRootFolderId === 'root'); 
-  document.getElementById('rootItemCountInfo').innerText = `${items.length} Item ditemukan`;
+  let countText = currentLang === 'id' ? `${items.length} Item ditemukan` : `${items.length} Item(s) found`;
+  document.getElementById('rootItemCountInfo').innerText = countText;
   
-  grid.innerHTML = items.length === 0 ? `<div class="col-span-full text-center py-12 text-slate-400 italic text-xs">Direktori kosong.</div>` : ""; 
+  grid.innerHTML = items.length === 0 ? `<div class="col-span-full text-center py-12 text-slate-400 italic text-xs">${currentLang === 'id' ? 'Direktori kosong.' : 'Directory is empty.'}</div>` : ""; 
   items.forEach(item => { 
     let card = document.createElement('div'); 
     card.className = "standard-card p-4 bg-white flex flex-col justify-between gap-3 cursor-pointer hover:border-slate-400 transition"; 
@@ -1171,7 +1488,7 @@ function renderFullScreenStorage() {
       }
     };
 
-    let actionLabel = item.type === 'folder' ? `<span class="text-xs text-slate-600 font-semibold">&rarr; Buka Folder</span>` : `<span class="text-xs text-slate-700 font-semibold">&rarr; Muat Sesi</span>`;
+    let actionLabel = item.type === 'folder' ? `<span class="text-xs text-slate-600 font-semibold">&rarr; ${currentLang === 'id' ? 'Buka Folder' : 'Open Folder'}</span>` : `<span class="text-xs text-slate-700 font-semibold">&rarr; ${currentLang === 'id' ? 'Muat Sesi' : 'Load Session'}</span>`;
     card.innerHTML = `<div class="font-bold text-slate-900 text-xs truncate">${item.name}</div>${actionLabel}`; 
     grid.appendChild(card); 
   }); 
@@ -1184,20 +1501,22 @@ window.toggleFolderOpen = function(id, name) {
 };
 
 window.loadDraftItem = function(id) { 
+  let t = translations[currentLang];
   let tree = getStorageTree(), draft = tree.find(i => i.id === id); if (!draft) return; 
   saveStateToHistory(); currentActivePage = draft.pageType || 'team'; applyTheme(); 
   if (currentActivePage === 'team') { staffList = draft.data.staff || []; schedules = draft.data.schedules || {}; } 
   else { staffListGen = draft.data.staff || []; schedulesGen = draft.data.schedules || {}; } 
-  globalNotes = draft.data.notes || {}; triggerAutoSave(); renderTable(); fullScreenFolderModal.classList.add('hidden'); alert(`Berhasil memuat "${draft.name}"!`); 
+  globalNotes = draft.data.notes || {}; triggerAutoSave(); renderTable(); fullScreenFolderModal.classList.add('hidden'); alert(t.loadedDraftSuccess(draft.name)); 
 }; 
 
 function renderSidebarExplorerTree() {
   let treeBox = document.getElementById('sidebarExplorerTree');
   if(!treeBox) return;
   let tree = getStorageTree();
+  let rootName = currentLang === 'id' ? 'Direktori Utama (Root)' : 'Root Directory';
 
   let html = `<div class="flex items-center justify-between mb-1.5 pb-1 border-b border-slate-200">
-    <span class="font-bold text-slate-700">Direktori Utama (Root)</span>
+    <span class="font-bold text-slate-700">${rootName}</span>
     <button onclick="sidebarCreateSubFolder('root')" class="text-[10px] bg-slate-100 hover:bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded font-medium border border-slate-300">+ Sub-Folder</button>
   </div>`;
 
@@ -1212,10 +1531,12 @@ function renderSidebarExplorerTree() {
           <div class="flex items-center gap-1.5 truncate max-w-[140px]">
             <input type="checkbox" value="${item.id}" class="sidebar-item-checkbox rounded text-slate-700 w-3.5 h-3.5 shrink-0">`;
       
+      let titleAttr = currentLang === 'id' ? 'Klik untuk Buka' : 'Click to Open';
+      let titleDraft = currentLang === 'id' ? 'Klik untuk Muat' : 'Click to Load';
       if(item.type === 'folder') {
-        res += `<span onclick="sidebarOpenFolder('${item.id}', '${item.name}')" class="font-semibold text-slate-800 cursor-pointer truncate hover:underline" title="Klik untuk Buka">${item.name}</span>`;
+        res += `<span onclick="sidebarOpenFolder('${item.id}', '${item.name}')" class="font-semibold text-slate-800 cursor-pointer truncate hover:underline" title="${titleAttr}">${item.name}</span>`;
       } else {
-        res += `<span onclick="loadDraftItem('${item.id}')" class="text-slate-700 cursor-pointer truncate hover:underline" title="Klik untuk Muat">${item.name}</span>`;
+        res += `<span onclick="loadDraftItem('${item.id}')" class="text-slate-700 cursor-pointer truncate hover:underline" title="${titleDraft}">${item.name}</span>`;
       }
 
       res += `</div><div class="flex items-center gap-1 shrink-0">`;
@@ -1244,7 +1565,7 @@ window.sidebarOpenFolder = function(id, name) {
 };
 
 window.sidebarCreateSubFolder = function(parentId) {
-  let fName = prompt("Masukkan nama sub-folder baru:");
+  let fName = prompt(currentLang === 'id' ? "Masukkan nama sub-folder baru:" : "Enter new sub-folder name:");
   if(!fName) return;
   let tree = getStorageTree();
   tree.push({ id: 'folder_' + Date.now(), parentId: parentId, type: 'folder', name: fName.trim(), date: new Date().toLocaleDateString() });
@@ -1253,14 +1574,15 @@ window.sidebarCreateSubFolder = function(parentId) {
 };
 
 document.getElementById('sidebarDeleteSelectedBtn').addEventListener('click', () => {
+  let t = translations[currentLang];
   let checked = Array.from(document.querySelectorAll('.sidebar-item-checkbox:checked')).map(c => c.value);
-  if(checked.length === 0) { alert("Pilih minimal satu item dari daftar sidebar dengan mencentang kotaknya."); return; }
-  if(!confirm(`Yakin ingin menghapus ${checked.length} item terpilih?`)) return;
+  if(checked.length === 0) { alert(t.alertSelectSidebarItem); return; }
+  if(!confirm(t.confirmDeleteSidebarItems(checked.length))) return;
   let tree = getStorageTree();
   tree = tree.filter(i => !checked.includes(i.id));
   saveStorageTree(tree);
   renderSidebarExplorerTree();
-  alert("Item terpilih berhasil dihapus!");
+  alert(t.alertItemsDeleted);
 });
 
 const sidebarMenu = document.getElementById('sidebarMenu'), sidebarOverlay = document.getElementById('sidebarOverlay'); 
@@ -1276,7 +1598,11 @@ function closeSidebar() {
 document.getElementById('openSidebarBtn').addEventListener('click', openSidebar); 
 document.getElementById('closeSidebarBtn').addEventListener('click', closeSidebar); 
 
-document.getElementById('copyLinkBtn').addEventListener('click', () => { navigator.clipboard.writeText(window.location.href); alert("Link disalin!"); }); 
+document.getElementById('copyLinkBtn').addEventListener('click', () => { 
+  let t = translations[currentLang];
+  navigator.clipboard.writeText(window.location.href); 
+  alert(t.alertLinkCopied); 
+}); 
 
 let today = new Date(), currentMonth = today.getMonth(), currentYear = today.getFullYear(); 
 const monthsNameID = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]; 
@@ -1353,13 +1679,14 @@ confirmYesBtn.onclick = () => { confirmModal.classList.add('hidden'); if (pendin
 confirmNoBtn.onclick = () => { confirmModal.classList.add('hidden'); pendingAction = null; }; 
 
 document.getElementById('clearSheetBtn').addEventListener('click', () => {
+  let t = translations[currentLang];
   if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
-    alert("Hanya Admin yang dapat mengosongkan lembar kerja!");
+    alert(currentLang === 'id' ? "Hanya Admin yang dapat mengosongkan lembar kerja!" : "Only Admins can clear the worksheet!");
     return;
   }
   showConfirm(
-    translations[currentLang].clearSheetTitle,
-    translations[currentLang].clearSheetConfirm,
+    t.clearSheetTitle,
+    t.clearSheetConfirm,
     () => {
       saveStateToHistory();
       if (currentActivePage === 'team') {
@@ -1369,7 +1696,7 @@ document.getElementById('clearSheetBtn').addEventListener('click', () => {
         staffListGen = [];
         schedulesGen = {};
       }
-      addActivityLog(`Admin mengosongkan lembar kerja.`);
+      addActivityLog(currentLang === 'id' ? "Admin mengosongkan lembar kerja." : "Admin cleared the worksheet.");
       triggerAutoSave();
       renderTable();
     }
@@ -1385,7 +1712,7 @@ function renderActivityLogs() {
   }
 
   if (activityLogs.length === 0) {
-    activityLogContainer.innerHTML = `<p class="text-slate-400 italic text-xs">Belum ada log aktivitas.</p>`;
+    activityLogContainer.innerHTML = `<p class="text-slate-400 italic text-xs">${currentLang === 'id' ? 'Belum ada log aktivitas.' : 'No activity logs yet.'}</p>`;
     return;
   }
 
@@ -1408,9 +1735,10 @@ function renderActivityLogs() {
 let deleteSelectedLogsBtn = document.getElementById('deleteSelectedLogsBtn');
 if (deleteSelectedLogsBtn) {
   deleteSelectedLogsBtn.addEventListener('click', () => {
+    let t = translations[currentLang];
     let checkedIndices = Array.from(document.querySelectorAll('.log-item-checkbox:checked')).map(c => parseInt(c.value)).sort((a,b) => b-a);
     if (checkedIndices.length === 0) return;
-    if (!confirm(`Yakin ingin menghapus ${checkedIndices.length} log terpilih?`)) return;
+    if (!confirm(t.confirmDeleteLogs(checkedIndices.length))) return;
     
     checkedIndices.forEach(idx => {
       activityLogs.splice(idx, 1);
@@ -1422,13 +1750,14 @@ if (deleteSelectedLogsBtn) {
 
 function renderTable() { 
   let monthsName = currentLang === 'id' ? monthsNameID : monthsNameENG, daysShort = currentLang === 'id' ? daysShortID : daysShortENG; 
+  let t = translations[currentLang];
   monthYearDisplay.innerText = `${monthsName[currentMonth]} ${currentYear}`; 
   let totalDays = new Date(currentYear, currentMonth + 1, 0).getDate(); 
   let currentStaffArr = currentActivePage === 'team' ? staffList : staffListGen; 
   let currentSchedObj = currentActivePage === 'team' ? schedules : schedulesGen; 
   
   let thead = scheduleTable.querySelector('thead'); 
-  let headerHTML = `<tr class="bg-slate-100 text-slate-800 border-b border-slate-300"><th class="p-3 sticky left-0 bg-slate-100 z-10 font-bold min-w-[150px] border-r border-slate-300">Nama / Name</th>`; 
+  let headerHTML = `<tr class="bg-slate-100 text-slate-800 border-b border-slate-300"><th class="p-3 sticky left-0 bg-slate-100 z-10 font-bold min-w-[150px] border-r border-slate-300">${t.tableColName}</th>`; 
   for (let day = 1; day <= totalDays; day++) { 
     let dObj = new Date(currentYear, currentMonth, day); 
     let isRed = (dObj.getDay() === 0 || dObj.getDay() === 6); 
@@ -1448,9 +1777,9 @@ function renderTable() {
     tdName.className = "p-3 sticky left-0 bg-inherit z-10 font-bold border-r border-slate-300 flex justify-between items-center gap-2"; 
     
     let isStaffAdmin = (currentActivePage === 'team' && staffRoles[staff] === 'admin');
-    let roleBadgeHtml = (currentActivePage === 'team') ? `<div class="text-[9px] text-slate-500 flex items-center gap-1"><span>${isStaffAdmin ? ' Admin' : 'Anggota'}</span>${isAdminOrGeneral && !isStaffAdmin ? `<button onclick="promoteToAdmin('${staff}')" class="text-[8px] text-blue-600 hover:underline">Jadikan Admin</button>` : ''}</div>` : '';
+    let roleBadgeHtml = (currentActivePage === 'team') ? `<div class="text-[9px] text-slate-500 flex items-center gap-1"><span>${isStaffAdmin ? '👑 Admin' : (currentLang === 'id' ? 'Anggota' : 'Member')}</span>${isAdminOrGeneral && !isStaffAdmin ? `<button onclick="promoteToAdmin('${staff}')" class="text-[8px] text-blue-600 hover:underline">${currentLang === 'id' ? 'Jadikan Admin' : 'Make Admin'}</button>` : ''}</div>` : '';
 
-    tdName.innerHTML = `<div class="flex flex-col"><input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-slate-400 focus:border-slate-600 focus:bg-white focus:outline-none px-1 py-0.5 rounded text-slate-900 font-medium truncate max-w-[110px] staff-name-input text-xs" data-old-name="${staff}" ${!isAdminOrGeneral ? 'disabled' : ''}>${roleBadgeHtml}</div> ${isAdminOrGeneral ? `<button class="no-export text-slate-400 hover:text-slate-700 p-1 rounded transition flex items-center justify-center font-bold text-xs" onclick="deleteStaff('${staff}')" title="Hapus Staf"></button>` : ''}`; 
+    tdName.innerHTML = `<div class="flex flex-col"><input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-slate-400 focus:border-slate-600 focus:bg-white focus:outline-none px-1 py-0.5 rounded text-slate-900 font-medium truncate max-w-[110px] staff-name-input text-xs" data-old-name="${staff}" ${!isAdminOrGeneral ? 'disabled' : ''}>${roleBadgeHtml}</div> ${isAdminOrGeneral ? `<button class="no-export text-slate-400 hover:text-slate-700 p-1 rounded transition flex items-center justify-center font-bold text-xs" onclick="deleteStaff('${staff}')" title="${currentLang === 'id' ? 'Hapus Staf' : 'Delete Staff'}">✕</button>` : ''}`; 
     tr.appendChild(tdName); 
 
     let counts = {}; shiftLabels.forEach(s => counts[s] = 0); counts.totalWork = 0; 
@@ -1473,17 +1802,15 @@ function renderTable() {
           document.getElementById('activeStaffKey').value = staff; 
           document.getElementById('activeDateKey').value = dKey; 
           
-          // Jika member, arahkan ke mode Request Jadwal
           let isMyRow = (userSession && userSession.name === staff);
-          let actionContainer = document.getElementById('shiftActionButtonsContainer');
           
           if (!isAdminOrGeneral && isMyRow) {
-            formSection.querySelector('h3').innerText = `Request Jadwal untuk Tgl ${day}`;
+            formSection.querySelector('h3').innerText = currentLang === 'id' ? `Request Jadwal untuk Tgl ${day}` : `Schedule Request for Date ${day}`;
           } else if (!isAdminOrGeneral && !isMyRow) {
-            alert("Anda hanya dapat mengajukan request untuk jadwal Anda sendiri.");
+            alert(currentLang === 'id' ? "Anda hanya dapat mengajukan request untuk jadwal Anda sendiri." : "You can only request schedule for your own row.");
             return;
           } else {
-            formSection.querySelector('h3').innerText = `Pilih Shift`;
+            formSection.querySelector('h3').innerText = currentLang === 'id' ? `Pilih Shift` : `Select Shift`;
           }
 
           formSection.classList.remove('hidden'); 
@@ -1510,9 +1837,9 @@ function renderTable() {
     let addTr = document.createElement('tr'); addTr.className = "no-export bg-slate-50"; 
     
     if (currentActivePage === 'team') {
-      addTr.innerHTML = `<td class="p-3 sticky left-0 bg-slate-50 z-10 border-r border-b border-slate-300"><div class="flex flex-col gap-1.5 p-1.5 border border-dashed border-slate-400 rounded bg-white"><div class="flex items-center justify-between"><span class="text-[10px] font-bold text-slate-500 uppercase">Tambah Staf:</span><div class="flex gap-1"><button type="button" id="tabRegisteredStaffBtn" class="text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-800 text-white transition">Staff Terdaftar</button><button type="button" id="tabManualStaffBtn" class="text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-100 text-slate-700 transition">Input Nama Manual</button></div></div><div id="addStaffContainerBox"></div></div></td><td colspan="${totalDays + 12}" class="border-b border-slate-300 bg-slate-50"></td>`;
+      addTr.innerHTML = `<td class="p-3 sticky left-0 bg-slate-50 z-10 border-r border-b border-slate-300"><div class="flex flex-col gap-1.5 p-1.5 border border-dashed border-slate-400 rounded bg-white"><div class="flex items-center justify-between"><span class="text-[10px] font-bold text-slate-500 uppercase">${t.addStaffTitle}</span><div class="flex gap-1"><button type="button" id="tabRegisteredStaffBtn" class="text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-800 text-white transition">${t.staffRegisteredBtn}</button><button type="button" id="tabManualStaffBtn" class="text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-100 text-slate-700 transition">${t.staffManualBtn}</button></div></div><div id="addStaffContainerBox"></div></div></td><td colspan="${totalDays + 12}" class="border-b border-slate-300 bg-slate-50"></td>`;
     } else {
-      addTr.innerHTML = `<td class="p-3 sticky left-0 bg-slate-50 z-10 border-r border-b border-slate-300"><div class="flex items-center gap-1.5 p-1 border border-dashed border-slate-400 rounded bg-white"><span class="font-bold text-xs">+</span><input type="text" id="inlineStaffInputGen" placeholder="Ketik nama staff baru..." class="bg-transparent text-xs w-full text-slate-800 focus:outline-none"></div></td><td colspan="${totalDays + 12}" class="border-b border-slate-300 bg-slate-50"></td>`;
+      addTr.innerHTML = `<td class="p-3 sticky left-0 bg-slate-50 z-10 border-r border-b border-slate-300"><div class="flex items-center gap-1.5 p-1 border border-dashed border-slate-400 rounded bg-white"><span class="font-bold text-xs">+</span><input type="text" id="inlineStaffInputGen" placeholder="${t.manualPlaceholder}" class="bg-transparent text-xs w-full text-slate-800 focus:outline-none"></div></td><td colspan="${totalDays + 12}" class="border-b border-slate-300 bg-slate-50"></td>`;
     }
 
     tbody.appendChild(addTr); 
@@ -1522,14 +1849,19 @@ function renderTable() {
         let tabReg = document.getElementById('tabRegisteredStaffBtn');
         let tabMan = document.getElementById('tabManualStaffBtn');
         
-        let registeredStaffPool = userSession && userSession.name ? [userSession.name] : [];
+        let globalMemberPoolKey = `scheduly_member_pool_${userSession ? userSession.counter : 'KASIR'}_${userSession ? userSession.pin : '123456'}_${userSession ? userSession.adminName : 'default'}`;
+        let globalMembers = JSON.parse(localStorage.getItem(globalMemberPoolKey)) || [];
+        let registeredStaffPool = [...new Set([...staffList, ...globalMembers, ...Object.keys(staffRoles)])];
+        if (userSession && userSession.name && !registeredStaffPool.includes(userSession.name)) {
+          registeredStaffPool.push(userSession.name);
+        }
 
         function renderAddInput(mode) {
           if (!box) return;
           if (mode === 'registered') {
             tabReg.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-800 text-white transition";
             tabMan.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-100 text-slate-700 transition";
-            let html = `<select id="inlineStaffSelect" class="bg-transparent text-xs w-full text-slate-800 focus:outline-none cursor-pointer"><option value="">-- Pilih Nama Terdaftar --</option>`;
+            let html = `<select id="inlineStaffSelect" class="bg-transparent text-xs w-full text-slate-800 focus:outline-none cursor-pointer"><option value="">${t.selectRegisteredName}</option>`;
             registeredStaffPool.forEach(s => {
               if (!currentStaffArr.includes(s)) {
                 html += `<option value="${s}">${s}</option>`;
@@ -1545,8 +1877,8 @@ function renderTable() {
                 if (!currentStaffArr.includes(name)) { 
                   saveStateToHistory(); 
                   currentStaffArr.push(name); 
-                  staffRoles[name] = 'member';
-                  addActivityLog(`Admin menambahkan staf baru: ${name}`);
+                  if (!staffRoles[name]) staffRoles[name] = 'member';
+                  addActivityLog(currentLang === 'id' ? `Admin menambahkan staf baru: ${name}` : `Admin added new staff: ${name}`);
                   triggerAutoSave(); 
                   renderTable(); 
                 }
@@ -1555,7 +1887,7 @@ function renderTable() {
           } else {
             tabMan.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-800 text-white transition";
             tabReg.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-slate-100 text-slate-700 transition";
-            box.innerHTML = `<input type="text" id="inlineStaffInput" placeholder="Ketik nama manual..." class="bg-transparent text-xs w-full text-slate-800 focus:outline-none">`;
+            box.innerHTML = `<input type="text" id="inlineStaffInput" placeholder="${t.manualPlaceholder}" class="bg-transparent text-xs w-full text-slate-800 focus:outline-none">`;
             let inp = document.getElementById('inlineStaffInput');
             if (inp) {
               inp.addEventListener('keypress', (e) => { 
@@ -1565,7 +1897,7 @@ function renderTable() {
                     saveStateToHistory(); 
                     currentStaffArr.push(name); 
                     staffRoles[name] = 'member';
-                    addActivityLog(`Admin menambahkan staf manual: ${name}`);
+                    addActivityLog(currentLang === 'id' ? `Admin menambahkan staf manual: ${name}` : `Admin added manual staff: ${name}`);
                     triggerAutoSave(); 
                     renderTable(); 
                   } 
@@ -1590,7 +1922,7 @@ function renderTable() {
               if (!currentStaffArr.includes(name)) {
                 saveStateToHistory();
                 currentStaffArr.push(name);
-                addActivityLog(`Menambahkan staf umum: ${name}`);
+                addActivityLog(currentLang === 'id' ? `Menambahkan staf umum: ${name}` : `Added general staff: ${name}`);
                 triggerAutoSave();
                 renderTable();
               }
@@ -1605,15 +1937,16 @@ function renderTable() {
 } 
 
 window.promoteToAdmin = function(name) {
+  let t = translations[currentLang];
   if (userSession && userSession.role !== 'admin') {
-    alert("Hanya Admin yang dapat memberikan hak akses Admin!");
+    alert(t.alertOnlyAdminAccessAdminRole);
     return;
   }
   staffRoles[name] = 'admin';
-  addActivityLog(`Admin mengangkat ${name} sebagai Admin.`);
+  addActivityLog(currentLang === 'id' ? `Admin mengangkat ${name} sebagai Admin.` : `Admin promoted ${name} to Admin.`);
   triggerAutoSave();
   renderTable();
-  alert(`${name} sekarang menjadi Admin!`);
+  alert(t.alertMadeAdmin(name));
 };
 
 function renderGlobalNotes() { 
@@ -1628,13 +1961,13 @@ function renderGlobalNotes() {
     let dObj = new Date(currentYear, currentMonth, day);
     let hijriStr = getHijriDate(dObj).string;
     let masehiStr = `${day} ${monthsNameID[currentMonth]} ${currentYear}`;
-    specialDaysInfo.push(`${masehiStr} � ${hijriStr} : ${currentMonthSpecialDays[day]}`);
+    specialDaysInfo.push(`${masehiStr} — ${hijriStr} : ${currentMonthSpecialDays[day]}`);
   }
 
   if (specialDaysInfo.length > 0) {
     let specDiv = document.createElement('div');
     specDiv.className = "bg-slate-50 border border-slate-200 rounded-lg p-3 text-slate-900 text-xs font-medium space-y-1.5";
-    specDiv.innerHTML = `<div class="font-bold text-sm mb-1">Hari Peringatan Nasional & Hari Besar Islam (${monthsNameID[currentMonth]} ${currentYear}):</div><ul class="list-disc pl-4 space-y-1">${specialDaysInfo.map(h => `<li>${h}</li>`).join('')}</ul>`;
+    specDiv.innerHTML = `<div class="font-bold text-sm mb-1">${currentLang === 'id' ? 'Hari Peringatan Nasional & Hari Besar Islam' : 'National Holidays & Islamic Events'} (${monthsNameID[currentMonth]} ${currentYear}):</div><ul class="list-disc pl-4 space-y-1">${specialDaysInfo.map(h => `<li>${h}</li>`).join('')}</ul>`;
     globalNotesContainer.appendChild(specDiv);
   }
 
@@ -1642,32 +1975,34 @@ function renderGlobalNotes() {
     let item = document.createElement('div'); item.className = "bg-white border border-slate-300 rounded-lg p-2.5 flex gap-2 items-start w-full shadow-xs"; 
     let ta = document.createElement('textarea'); ta.rows = 1; ta.className = "w-full bg-transparent focus:outline-none p-1 rounded text-xs text-slate-800 resize-none"; ta.value = text; 
     ta.disabled = (currentActivePage === 'team' && userSession && userSession.role !== 'admin'); 
-    let del = document.createElement('button'); del.className = "no-export text-slate-400 hover:text-slate-700 text-xs p-1 font-bold"; del.innerHTML = ""; 
-    del.onclick = () => { showConfirm("Hapus Catatan", "Yakin ingin menghapus catatan ini?", () => { saveStateToHistory(); notes.splice(idx, 1); globalNotes[monthKey] = notes; triggerAutoSave(); renderGlobalNotes(); }); }; 
+    let del = document.createElement('button'); del.className = "no-export text-slate-400 hover:text-slate-700 text-xs p-1 font-bold"; del.innerHTML = "✕"; 
+    del.onclick = () => { showConfirm(currentLang === 'id' ? "Hapus Catatan" : "Delete Note", currentLang === 'id' ? "Yakin ingin menghapus catatan ini?" : "Are you sure you want to delete this note?", () => { saveStateToHistory(); notes.splice(idx, 1); globalNotes[monthKey] = notes; triggerAutoSave(); renderGlobalNotes(); }); }; 
     item.appendChild(ta); if (currentActivePage === 'general' || (userSession && userSession.role === 'admin')) item.appendChild(del); 
     globalNotesContainer.appendChild(item); 
   }); 
 
   if (notes.length === 0 && specialDaysInfo.length === 0) {
-    globalNotesContainer.innerHTML += `<p class="text-slate-400 italic text-xs">Belum ada catatan atau log untuk bulan ini.</p>`;
+    globalNotesContainer.innerHTML += `<p class="text-slate-400 italic text-xs">${currentLang === 'id' ? 'Belum ada catatan atau log untuk bulan ini.' : 'No notes or logs for this month yet.'}</p>`;
   }
 } 
 
 document.getElementById('addGlobalNoteBtn').addEventListener('click', () => { 
+  let t = translations[currentLang];
   if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
-    alert("Hanya Admin yang dapat menambah catatan!");
+    alert(t.alertAdminOnlyAddNote);
     return;
   }
   let monthKey = `${currentYear}-${currentMonth}`; if (!globalNotes[monthKey]) globalNotes[monthKey] = []; 
-  saveStateToHistory(); globalNotes[monthKey].unshift(`Catatan baru ditambahkan.`); triggerAutoSave(); renderGlobalNotes(); 
+  saveStateToHistory(); globalNotes[monthKey].unshift(currentLang === 'id' ? `Catatan baru ditambahkan.` : `New note added.`); triggerAutoSave(); renderGlobalNotes(); 
 }); 
 
 window.deleteStaff = function(name) { 
+  let t = translations[currentLang];
   if (currentActivePage === 'team' && userSession && userSession.role !== 'admin') {
-    alert("Hanya Admin yang dapat menghapus staf!");
+    alert(t.alertAdminOnlyDeleteStaff);
     return;
   }
-  showConfirm("Hapus Staff", `Yakin ingin menghapus ${name}?`, () => { 
+  showConfirm(currentLang === 'id' ? "Hapus Staff" : "Delete Staff", currentLang === 'id' ? `Yakin ingin menghapus ${name}?` : `Are you sure you want to delete ${name}?`, () => { 
     saveStateToHistory(); 
     let sObj = currentActivePage === 'team' ? schedules : schedulesGen; delete sObj[name]; 
     if (currentActivePage === 'team') {
@@ -1680,20 +2015,20 @@ window.deleteStaff = function(name) {
     } else {
       staffListGen = staffListGen.filter(s => s !== name);
     } 
-    addActivityLog(`Menghapus staf: ${name}`);
+    addActivityLog(currentLang === 'id' ? `Menghapus staf: ${name}` : `Deleted staff: ${name}`);
     triggerAutoSave(); renderTable(); 
   }); 
 }; 
 
 document.querySelectorAll('.shift-instant-btn').forEach(btn => { 
   btn.addEventListener('click', () => { 
+    let t = translations[currentLang];
     let staff = document.getElementById('activeStaffKey').value, key = document.getElementById('activeDateKey').value, val = btn.getAttribute('data-value'); 
     let isAdmin = (userSession && userSession.role === 'admin');
 
     if (!isAdmin) {
-      // Anggota melakukan request jadwal
-      addActivityLog(`Anggota (${staff}) mengajukan request jadwal tgl ${key} menjadi shift [${val}]`);
-      alert("Request jadwal berhasil diajukan ke Admin!");
+      addActivityLog(currentLang === 'id' ? `Anggota (${staff}) mengajukan request jadwal tgl ${key} menjadi shift [${val}]` : `Member (${staff}) requested schedule for date ${key} to be shift [${val}]`);
+      alert(t.alertScheduleRequested);
       formSection.classList.add('hidden');
       return;
     }
@@ -1701,10 +2036,10 @@ document.querySelectorAll('.shift-instant-btn').forEach(btn => {
     if (!schedules[staff]) schedules[staff] = {}; 
     if (val === "CLEAR") {
       delete schedules[staff][key];
-      addActivityLog(`Admin menghapus shift ${staff} pada tgl ${key}`);
+      addActivityLog(currentLang === 'id' ? `Admin menghapus shift ${staff} pada tgl ${key}` : `Admin cleared shift for ${staff} on date ${key}`);
     } else {
       schedules[staff][key] = { shift: val, initial: val }; 
-      addActivityLog(`Admin mengubah shift ${staff} pada tgl ${key} menjadi [${val}]`);
+      addActivityLog(currentLang === 'id' ? `Admin mengubah shift ${staff} pada tgl ${key} menjadi [${val}]` : `Admin changed shift for ${staff} on date ${key} to [${val}]`);
     }
     triggerAutoSave(); formSection.classList.add('hidden'); renderTable(); 
   }); 
@@ -1716,10 +2051,10 @@ document.querySelectorAll('.shift-gen-btn').forEach(btn => {
     if (!schedulesGen[staff]) schedulesGen[staff] = {}; 
     if (val === "CLEAR") {
       delete schedulesGen[staff][key];
-      addActivityLog(`Admin menghapus shift umum ${staff} pada tgl ${key}`);
+      addActivityLog(currentLang === 'id' ? `Admin menghapus shift umum ${staff} pada tgl ${key}` : `Admin cleared general shift for ${staff} on date ${key}`);
     } else {
       schedulesGen[staff][key] = { shift: val, initial: init }; 
-      addActivityLog(`Admin mengubah shift umum ${staff} pada tgl ${key} menjadi [${val}]`);
+      addActivityLog(currentLang === 'id' ? `Admin mengubah shift umum ${staff} pada tgl ${key} menjadi [${val}]` : `Admin changed general shift for ${staff} on date ${key} to [${val}]`);
     }
     triggerAutoSave(); formSectionGeneral.classList.add('hidden'); renderTable(); 
   }); 

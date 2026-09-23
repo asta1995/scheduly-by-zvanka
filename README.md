@@ -1,65 +1,40 @@
-# Scheduly – Jadwal & Catatan Tim Clandy's & Umum
+# 📅 Scheduly • Platform Penjadwalan & Catatan Tim
 
-**Scheduly** adalah aplikasi berbasis Progressive Web App (PWA) yang dirancang khusus untuk memudahkan pengelolaan shift operasional, rekap kehadiran, catatan penting, serta penanggalan Hijriah & Hari Libur Nasional. Aplikasi ini menyediakan dua lembar kerja utama: **Jadwal Tim Clandy's** (dengan fitur login berbasis konter & PIN server) dan **Jadwal Umum**.
-
----
-
-## ✨ Fitur Utama
-
-### 🛒 1. Portal Konter & Autentikasi Tim Clandy's *(Eksklusif)*
-* **Pilihan Konter Spesifik:** Mendukung pemisahan data berdasarkan unit konter (KASIR, Konter Susu, Konter Baby, Konter Market).
-* **Keamanan Berbasis PIN Server:** Setiap konter diamankan menggunakan PIN unik (misal: `sususu`), memastikan hanya anggota dalam satu tim/server yang dapat saling sinkronisasi.
-* **Hak Akses Admin & Anggota:**
-  * **👑 Admin:** Memiliki akses penuh untuk mengelola shift, menghapus baris staf, dan menambahkan nama staf baru ke dalam proyek konter.
-  * **👤 Anggota Tim:** Digunakan untuk melihat jadwal dan mengirimkan *request* perubahan shift secara instan kepada Admin.
-* **Pendaftaran Staf Otomatis:** Nama akun yang digunakan saat login pertama kali akan langsung terdaftar ke dalam tabel staf di server konter tersebut.
-
-### 📅 2. Manajemen Lembar Kerja & Shift Fleksibel
-* **Dua Mode Lembar Kerja:** Beralih dengan mudah antara Jadwal Tim Clandy's (dengan tema khas *pinky*) dan Jadwal Umum.
-* **Indikator Shift Lengkap:** Mendukung berbagai format shift (FULL, P, So, P(s), Pc, PS, OFF, C) dengan rekapitulasi jam kerja otomatis di ujung tabel.
-* **Undo & Redo Riwayat:** Memungkinkan pembatalan atau pengulangan tindakan penyuntingan secara instan.
-
-### 💾 3. Penyimpanan Multi-Folder & Ekspor
-* **Penyimpanan Draft Lokal:** Simpan sesi lembar kerja aktif ke dalam direktori utama atau buat folder kustom sendiri.
-* **Ekspor Laporan:** Unduh rekap bulanan dalam berbagai format file pilihan (Excel, Word, CSV, PDF).
-
-### 🌙 4. Penanggalan Ganda & Hari Besar
-* Konversi otomatis penanggalan Hijriah.
-* Informasi hari libur nasional dan hari besar Islam yang diperbarui secara dinamis sesuai bulan yang aktif.
+**Scheduly** adalah aplikasi web modern berbasis cloud yang dirancang khusus untuk memudahkan pengelolaan jadwal shift operasional konter, kasir, pramuniaga, hingga manajemen jadwal umum secara komprehensif, cepat, dan terstruktur.
 
 ---
 
-## 🚀 Cara Menjalankan
-1. Clone atau unduh repositori ini.
-2. Buka file `index.html` menggunakan browser modern apa pun (Chrome, Firefox, Edge, Safari).
-3. Pilih menu **Jadwal & Catatan Tim Clandy's**, lalu masukkan data login, konter, dan PIN server Anda untuk mulai bekerja.
-- **Ekspor Laporan & Cetak PDF:** Unduh jadwal bulanan dengan mudah ke format **Excel (`.xlsx`)**, **Word (`.docx`)**, **CSV (`.csv`)**, atau cetak langsung / **PDF (`.pdf`)** dengan orientasi *landscape*.
-- **Otomatisasi & Riwayat (Undo/Redo):** Setiap perubahan langsung tersimpan secara otomatis (*Auto-save*) ke *Local Storage* browser dengan fitur *Undo* dan *Redo* yang mulus.
-- **Hari Libur Nasional Otomatis:** Deteksi otomatis hari libur nasional Indonesia dan akhir pekan pada kalender.
-- **Multibahasa:** Tersedia dalam **Bahasa Indonesia** dan **English (Inggris)**.
+## 🚀 Fitur Utama
 
----
-
-## 🚀 Memulai (Cara Penggunaan)
-
-Karena Scheduly dibangun menggunakan pendekatan *Single-File HTML* berbasis web murni dengan CDN eksternal (Tailwind CSS), Anda tidak memerlukan instalasi *Node.js* yang rumit untuk menjalankannya:
-
-1. Unduh atau salin kode sumber (`index.html`) dari proyek ini.
-2. Simpan file dengan nama `index.html`.
-3. Buka file tersebut langsung menggunakan browser modern apa saja (Google Chrome, Mozilla Firefox, Microsoft Edge, dll).
+* **🔐 Portal Konter & Akses Sesi Multi-Peran:**
+  * **Admin:** Memiliki akses penuh untuk mengatur jadwal, menambah/menghapus staf, menyetujui/menolak *request* shift, serta mengelola penyimpanan folder.
+  * **Anggota (Member):** Dapat masuk menggunakan PIN server konter untuk melihat jadwal dan mengajukan *request* perubahan shift secara mandiri.
+* **☁️ Sinkronisasi Real-time Cloud (Firebase):** Terhubung langsung dengan Firebase Realtime Database agar perubahan data antar perangkat tersimpan secara otomatis dan sinkron seketika.
+* **📂 Manajemen Folder & Penyimpanan Draft:**
+  * Fitur direktori multi-folder (sub-folder) untuk mengarsipkan *draft* lembar kerja bulanan.
+  * Dilengkapi fitur multi-pilih untuk memindahkan, menyalin, atau menghapus file draft dan folder dengan mudah.
+* **🗓️ Deteksi Hari Libur & Kalender Otomatis:**
+  * Deteksi otomatis hari libur nasional Masehi serta hari besar Islam (Hijriah) langsung pada header tabel kalender bulanan.
+* **📋 Log Aktivitas & Request Jadwal:**
+  * Pencatatan riwayat aksi otomatis serta sistem *Approval* (Terima/Tolak) bagi Admin untuk menyetujui pengajuan shift dari anggota tim.
+* **↩️ / 🔄 Riwayat Perubahan (Undo & Redo):** Memungkinkan Anda melacak atau mengembalikan perubahan data pada lembar kerja secara fleksibel.
+* **💡 Catatan Dinamis & Hari Penting:** Kotak catatan manual dengan tombol **"Selesai ✓"** yang muncul secara dinamis saat diketik dan otomatis tersimpan.
+* **📤 Ekspor Laporan Bersih:** Mendukung ekspor lembar kerja dan catatan penting ke format **Excel (.xlsx)**, **Word (.docx)**, **PDF (.pdf)**, dan **CSV (.csv)** dengan filter dokumen bersih.
+* **🎬 Panduan & Pusat Bantuan:** Dilengkapi dengan modal tutorial interaktif (*autoplay*) serta panduan manual lengkap.
 
 ---
 
 ## 🛠️ Teknologi yang Digunakan
 
-- **HTML5 & CSS3** (Struktur dan Desain Antarmuka)
-- **Tailwind CSS** (Kerangka kerja CSS via CDN)
-- **Google Fonts** (Inter & Pacifico)
-- **JavaScript (Vanilla ES6+)** (Logika aplikasi, manajemen lokal, dan ekspor dokumen)
-- **Web App Manifest & Service Worker** (Dukungan PWA untuk instalasi aplikasi web)
+* **Frontend:** HTML5, Tailwind CSS (Styling & Responsif)
+* **Font:** Google Fonts (Inter & Pacifico)
+* **Backend / Database:** Firebase SDK (Compat v9) Realtime Database
+* **Penyimpanan Lokal:** LocalStorage (untuk preferensi bahasa, sesi, dan cache draft)
 
 ---
 
-## 📄 Lisensi
+## ⚙️ Cara Menjalankan
 
-Distribusi di bawah lisensi [MIT License](LICENSE).
+1. Clone atau unduh repositori ini ke komputer Anda.
+2. Buka file `index.html` menggunakan browser modern (Chrome, Edge, Firefox, Safari).
+3. Konfigurasi kredensial Firebase Anda pada bagian objek `firebaseConfig` di dalam tag `<script>` jika ingin menggunakan database cloud sendiri.

@@ -228,20 +228,20 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
         <p id="tr_helpBox1Desc"><strong>Cara Buat Akun Admin:</strong> Pilih tab "Masuk (Login)" atau "Daftar Anggota Baru", pilih peran "Admin", tentukan nama konter dan PIN rahasia konter Anda, lalu masukkan nama lengkap Anda. Admin memiliki hak akses penuh untuk mengatur jadwal, menambah/menghapus staf, dan menyimpan draft.<br><br><strong>Cara Buat Akun Member (Anggota Tim):</strong> Pilih tab "Daftar Anggota Baru", masukkan nama konter dan PIN server yang sama dengan Admin Anda, pilih proyek Admin yang sesuai, lalu masukkan nama lengkap Anda. Member dapat masuk untuk melihat jadwal dan mengajukan request perubahan shift secara mandiri.</p> 
       </div> 
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
-        <div id="tr_helpBox2Title" class="font-bold text-slate-900 text-sm mb-1">2. Navigasi Lembar Kerja & Riwayat (Undo/Redo)</div> 
-        <p id="tr_helpBox2Desc">Beralih antara Jadwal Tim dan Jadwal Umum melalui menu navigasi utama atau sidebar. Anda dapat menggunakan tombol Undo dan Redo untuk melacak atau mengembalikan perubahan data pada lembar kerja secara fleksibel.</p> 
+        <div id="tr_helpBox2Title" class="font-bold text-slate-900 text-sm mb-1">2. Pertukaran Shift Cepat (Drag and Drop)</div> 
+        <p id="tr_helpBox2Desc">Admin dapat langsung menukar atau memindahkan shift antar sel jadwal secara instan tanpa pop-up dengan cara menyeret (drag) sel shift asal dan melepaskannya (drop) ke sel tanggal/staf tujuan pada tabel jadwal.</p> 
       </div> 
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
-        <div id="tr_helpBox3Title" class="font-bold text-slate-900 text-sm mb-1">3. Pengelolaan Folder & Penyimpanan Draft</div> 
-        <p id="tr_helpBox3Desc">Admin dapat mengakses menu Folder Penyimpanan untuk membuat direktori sub-folder, memindah, menyalin, atau menghapus file draft lembar kerja secara multi-pilih agar pengelolaan arsip bulanan lebih terstruktur.</p> 
+        <div id="tr_helpBox3Title" class="font-bold text-slate-900 text-sm mb-1">3. Navigasi Lembar Kerja & Riwayat (Undo/Redo)</div> 
+        <p id="tr_helpBox3Desc">Beralih antara Jadwal Tim dan Jadwal Umum melalui menu navigasi utama atau sidebar. Anda dapat menggunakan tombol Undo dan Redo untuk melacak atau mengembalikan perubahan data pada lembar kerja secara fleksibel.</p> 
       </div> 
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
-        <div id="tr_helpBox4Title" class="font-bold text-slate-900 text-sm mb-1">4. Log Aktivitas & Hari Besar / Libur Nasional</div> 
-        <p id="tr_helpBox4Desc">Sistem secara otomatis mencatat setiap tindakan penting ke dalam Log Aktivitas & Request Jadwal. Kalender juga dilengkapi deteksi otomatis hari libur nasional serta hari besar Islam (Hijriah) beserta catatan penting bulanan.</p> 
+        <div id="tr_helpBox4Title" class="font-bold text-slate-900 text-sm mb-1">4. Pengelolaan Folder & Penyimpanan Draft</div> 
+        <p id="tr_helpBox4Desc">Admin dapat mengakses menu Folder Penyimpanan untuk membuat direktori sub-folder, memindah, menyalin, atau menghapus file draft lembar kerja secara multi-pilih agar pengelolaan arsip bulanan lebih terstruktur.</p> 
       </div> 
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
-        <div id="tr_helpBox5Title" class="font-bold text-slate-900 text-sm mb-1">5. Pengaturan Akun & Ekspor Laporan Bersih</div> 
-        <p id="tr_helpBox5Desc">Atur preferensi push notifikasi pengingat shift atau ubah nama profil sesi Anda melalui menu Pengaturan. Saat melakukan ekspor laporan ke format Excel, Word, atau PDF, sistem otomatis menyaring dokumen agar hanya menampilkan tabel jadwal dan catatan penting saja.</p> 
+        <div id="tr_helpBox5Title" class="font-bold text-slate-900 text-sm mb-1">5. Log Aktivitas & Hari Besar / Libur Nasional</div> 
+        <p id="tr_helpBox5Desc">Sistem secara otomatis mencatat setiap tindakan penting ke dalam Log Aktivitas & Request Jadwal. Kalender juga dilengkapi deteksi otomatis hari libur nasional serta hari besar Islam (Hijriah) beserta catatan penting bulanan.</p> 
       </div> 
     </div> 
     <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center"> 
@@ -637,10 +637,10 @@ const translations = {
     authBtnLogin: "Masuk ke Scheduly Tim", authBtnReg: "Daftar Anggota Baru",
     helpTitle: "Pusat Bantuan & Panduan Lengkap", helpSubtitle: "Pelajari cara menguasai fitur Scheduly dengan cepat",
     helpBox1Title: "1. Panduan Pembuatan Akun Admin & Member", helpBox1Desc: "Cara Buat Akun Admin: Pilih tab Masuk (Login) atau Daftar Anggota Baru, pilih peran Admin, tentukan nama konter dan PIN rahasia konter Anda, lalu masukkan nama lengkap Anda. Admin memiliki hak akses penuh untuk mengatur jadwal, menambah/menghapus staf, dan menyimpan draft. Cara Buat Akun Member (Anggota Tim): Pilih tab Daftar Anggota Baru, masukkan nama konter dan PIN server yang sama dengan Admin Anda, pilih proyek Admin yang sesuai, lalu masukkan nama lengkap Anda. Member dapat masuk untuk melihat jadwal dan mengajukan request perubahan shift secara mandiri.",
-    helpBox2Title: "2. Navigasi Lembar Kerja & Riwayat (Undo/Redo)", helpBox2Desc: "Beralih antara Jadwal Tim dan Jadwal Umum melalui menu navigasi utama atau sidebar. Anda dapat menggunakan tombol Undo dan Redo untuk melacak atau mengembalikan perubahan data pada lembar kerja secara fleksibel.",
-    helpBox3Title: "3. Pengelolaan Folder & Penyimpanan Draft", helpBox3Desc: "Admin dapat mengakses menu Folder Penyimpanan untuk membuat direktori sub-folder, memindah, menyalin, atau menghapus file draft lembar kerja secara multi-pilih agar pengelolaan arsip bulanan lebih terstruktur.",
-    helpBox4Title: "4. Log Aktivitas & Hari Besar / Libur Nasional", helpBox4Desc: "Sistem secara otomatis mencatat setiap tindakan penting ke dalam Log Aktivitas & Request Jadwal. Kalender juga dilengkapi deteksi otomatis hari libur nasional serta hari besar Islam (Hijriah) beserta catatan penting bulanan.",
-    helpBox5Title: "5. Pengaturan Akun & Ekspor Laporan Bersih", helpBox5Desc: "Atur preferensi push notifikasi pengingat shift atau ubah nama profil sesi Anda melalui menu Pengaturan. Saat melakukan ekspor laporan ke format Excel, Word, atau PDF, sistem otomatis menyaring dokumen agar hanya menampilkan tabel jadwal dan catatan penting saja.",
+    helpBox2Title: "2. Pertukaran Shift Cepat (Drag and Drop)", helpBox2Desc: "Admin dapat langsung menukar atau memindahkan shift antar sel jadwal secara instan tanpa pop-up dengan cara menyeret (drag) sel shift asal dan melepaskannya (drop) ke sel tanggal/staf tujuan pada tabel jadwal.",
+    helpBox3Title: "3. Navigasi Lembar Kerja & Riwayat (Undo/Redo)", helpBox3Desc: "Beralih antara Jadwal Tim dan Jadwal Umum melalui menu navigasi utama atau sidebar. Anda dapat menggunakan tombol Undo dan Redo untuk melacak atau mengembalikan perubahan data pada lembar kerja secara fleksibel.",
+    helpBox4Title: "4. Pengelolaan Folder & Penyimpanan Draft", helpBox4Desc: "Admin dapat mengakses menu Folder Penyimpanan untuk membuat direktori sub-folder, memindah, menyalin, atau menghapus file draft lembar kerja secara multi-pilih agar pengelolaan arsip bulanan lebih terstruktur.",
+    helpBox5Title: "5. Log Aktivitas & Hari Besar / Libur Nasional", helpBox5Desc: "Sistem secara otomatis mencatat setiap tindakan penting ke dalam Log Aktivitas & Request Jadwal. Kalender juga dilengkapi deteksi otomatis hari libur nasional serta hari besar Islam (Hijriah) beserta catatan penting bulanan.",
     helpUnderstood: "Mengerti!",
     settingsTitle: "Pengaturan Akun & Personalisasi", settingsSubtitle: "Kelola preferensi notifikasi dan akun Anda",
     profileActive: "Profil Sesi Aktif", nameLabel: "Nama:", roleLabel: "Peran:", counterLabel: "Konter:", pinLabel: "PIN Server:",
@@ -713,10 +713,10 @@ const translations = {
     authBtnLogin: "Sign In to Scheduly Team", authBtnReg: "Register New Member",
     helpTitle: "Help Center & Full Guide", helpSubtitle: "Learn how to master Scheduly features quickly",
     helpBox1Title: "1. Admin & Member Account Creation Guide", helpBox1Desc: "How to Create Admin Account: Select 'Sign In (Login)' or 'Register New Member', choose role 'Admin', set counter name and secret counter PIN, then enter your full name. Admin has full access rights to manage schedules, add/delete staff, and save drafts. How to Create Member Account: Select 'Register New Member', enter the same counter name and server PIN as your Admin, select the corresponding Admin project, then enter your full name. Members can sign in to view schedules and independently submit shift change requests.",
-    helpBox2Title: "2. Worksheet Navigation & History (Undo/Redo)", helpBox2Desc: "Switch between Team Schedule and General Schedule via the main navigation menu or sidebar. You can use Undo and Redo buttons to flexibly track or revert data changes on the worksheet.",
-    helpBox3Title: "3. Folder Management & Draft Storage", helpBox3Desc: "Admins can access Folder Storage to create sub-folder directories, move, copy, or delete worksheet draft files via multi-select for structured monthly archiving.",
-    helpBox4Title: "4. Activity Logs & National Holidays / Special Days", helpBox4Desc: "The system automatically logs every important action into Activity Logs & Schedule Requests. The calendar is also equipped with automatic national holiday and Islamic (Hijri) holiday detection along with monthly important notes.",
-    helpBox5Title: "5. Account Settings & Clean Report Export", helpBox5Desc: "Manage shift reminder push notification preferences or change your session profile name via Settings. When exporting reports to Excel, Word, or PDF, the system automatically filters documents to display only the schedule table and important notes.",
+    helpBox2Title: "2. Quick Shift Exchange (Drag and Drop)", helpBox2Desc: "Admins can directly swap or move shift cells instantly without pop-ups by dragging the source shift cell and dropping it onto the target date/staff cell on the schedule table.",
+    helpBox3Title: "3. Worksheet Navigation & History (Undo/Redo)", helpBox3Desc: "Switch between Team Schedule and General Schedule via the main navigation menu or sidebar. You can use Undo and Redo buttons to flexibly track or revert data changes on the worksheet.",
+    helpBox4Title: "4. Folder Management & Draft Storage", helpBox4Desc: "Admins can access Folder Storage to create sub-folder directories, move, copy, or delete worksheet draft files via multi-select for structured monthly archiving.",
+    helpBox5Title: "5. Activity Logs & National Holidays / Special Days", helpBox5Desc: "The system automatically logs every important action into Activity Logs & Schedule Requests. The calendar is also equipped with automatic national holiday and Islamic (Hijri) holiday detection along with monthly important notes.",
     helpUnderstood: "Understood!",
     settingsTitle: "Account Settings & Personalization", settingsSubtitle: "Manage your notification preferences and account",
     profileActive: "Active Session Profile", nameLabel: "Name:", roleLabel: "Role:", counterLabel: "Counter:", pinLabel: "Server PIN:",
@@ -734,7 +734,7 @@ const translations = {
     logoutText: "Sign Out", copyLinkText: "Copy Link", exportText: "Export", undoText: "Undo", redoText: "Redo", clearSheetBtn: "Clear Workspace",
     activityLogHead: "📋 Activity Log & Schedule Requests", deleteLogBtn: "Delete Selected Logs",
     exportModalTitle: "Select Report Format", clearShiftText: "Clear Shift", confirmTitle: "Confirmation", confirmMsg: "Are you sure?", confirmNo: "No", confirmYes: "Yes",
-    tableColName: "Name / Name", selectRegisteredName: "-- Select Registered Name --", staffRegisteredBtn: "Registered Staff", staffManualBtn: "Manual Name Input", manualPlaceholder: "Type manual name...",
+    tableColName: "Name / Name", selectRegisteredName: "-- Select Registered Name --", staffRegisteredBtn: "Registered Staff", staffManualBtn: "Input Manual Name", manualPlaceholder: "Type manual name...",
     addStaffTitle: "Add Staff:",
     
     alertEnterNamePin: "Please enter your Name and Counter Server PIN!",
@@ -2123,35 +2123,17 @@ document.querySelectorAll('.export-format-btn').forEach(btn => {
       
       let monthKey = `${currentYear}-${currentMonth}`;
       let notes = globalNotes[monthKey] ? [...globalNotes[monthKey]] : [];
-      let specialDaysInfo = [];
-      let currentMonthSpecialDays = getSpecialDaysForMonth(currentYear, currentMonth);
-
-      for (let day in currentMonthSpecialDays) {
-        let dObj = new Date(currentYear, currentMonth, day);
-        let hijriStr = getHijriDate(dObj).string;
-        let masehiStr = `${day} ${monthsNameID[currentMonth]} ${currentYear}`;
-        specialDaysInfo.push(`${masehiStr} — ${hijriStr} : ${currentMonthSpecialDays[day]}`);
-      }
 
       let cleanNotesHTML = `<div class="export-notes-section">
-        <h3>Catatan & Hari Penting (${monthsNameID[currentMonth]} ${currentYear})</h3>`;
-      
-      if (specialDaysInfo.length > 0) {
-        cleanNotesHTML += `<p><strong>Hari Peringatan & Libur Nasional:</strong></p><ul>`;
-        specialDaysInfo.forEach(h => { cleanNotesHTML += `<li>${h}</li>`; });
-        cleanNotesHTML += `</ul>`;
-      }
+        <h3>Catatan Tim (${monthsNameID[currentMonth]} ${currentYear})</h3>`;
 
       if (notes.length > 0) {
-        cleanNotesHTML += `<p><strong>Catatan Tambahan:</strong></p>`;
         notes.forEach(n => {
           let formattedNote = n.replace(/\n/g, '<br>');
           cleanNotesHTML += `<p>${formattedNote}</p>`;
         });
-      }
-
-      if (specialDaysInfo.length === 0 && notes.length === 0) {
-        cleanNotesHTML += `<p><em>Belum ada catatan atau log untuk bulan ini.</em></p>`;
+      } else {
+        cleanNotesHTML += `<p><em>Belum ada catatan tim untuk bulan ini.</em></p>`;
       }
 
       cleanNotesHTML += `</div>`;
@@ -2370,7 +2352,74 @@ function renderTable() {
       let isHoliday = specialDaysMap[day] !== undefined;
       let tdClass = (isHoliday || isWeekend) ? 'bg-red-50/30 bg-red-custom' : '';
 
-      let td = document.createElement('td'); td.className = `p-1 text-center border-r border-b border-slate-300 cursor-pointer align-middle text-xs ${tdClass}`; 
+      let td = document.createElement('td'); 
+      td.className = `p-1 text-center border-r border-b border-slate-300 cursor-pointer align-middle text-xs ${tdClass}`; 
+      td.setAttribute('draggable', 'true');
+      td.setAttribute('data-staff', staff);
+      td.setAttribute('data-date', dKey);
+
+      // Event listener Drag and Drop untuk pertukaran shift antar sel jadwal tanpa pop-up
+      td.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', JSON.stringify({ staff: staff, date: dKey }));
+        td.classList.add('opacity-40');
+      });
+
+      td.addEventListener('dragend', () => {
+        td.classList.remove('opacity-40');
+      });
+
+      td.addEventListener('dragover', (e) => {
+        e.preventDefault();
+      });
+
+      td.addEventListener('drop', (e) => {
+        e.preventDefault();
+        td.classList.remove('opacity-40');
+        try {
+          let sourceData = JSON.parse(e.dataTransfer.getData('text/plain'));
+          let srcStaff = sourceData.staff;
+          let srcDate = sourceData.date;
+          let targetStaff = staff;
+          let targetDate = dKey;
+
+          if (srcStaff === targetStaff && srcDate === targetDate) return;
+
+          let isAdmin = (currentActivePage === 'general' || (userSession && userSession.role === 'admin'));
+          if (!isAdmin) {
+            alert(currentLang === 'id' ? "Hanya Admin yang dapat memindahkan atau menukar shift secara langsung." : "Only Admins can directly swap or move shifts.");
+            return;
+          }
+
+          saveStateToHistory();
+
+          let schedObj = currentActivePage === 'team' ? schedules : schedulesGen;
+          
+          let srcRecord = (schedObj[srcStaff] && schedObj[srcStaff][srcDate]) ? JSON.parse(JSON.stringify(schedObj[srcStaff][srcDate])) : null;
+          let targetRecord = (schedObj[targetStaff] && schedObj[targetStaff][targetDate]) ? JSON.parse(JSON.stringify(schedObj[targetStaff][targetDate])) : null;
+
+          if (!schedObj[srcStaff]) schedObj[srcStaff] = {};
+          if (!schedObj[targetStaff]) schedObj[targetStaff] = {};
+
+          if (targetRecord) {
+            schedObj[srcStaff][srcDate] = targetRecord;
+          } else {
+            delete schedObj[srcStaff][srcDate];
+          }
+
+          if (srcRecord) {
+            schedObj[targetStaff][targetDate] = srcRecord;
+          } else {
+            delete schedObj[targetStaff][targetDate];
+          }
+
+          addActivityLog(currentLang === 'id' ? `Admin menukar shift ${srcStaff} (${srcDate}) dengan ${targetStaff} (${targetDate})` : `Admin swapped shift between ${srcStaff} and ${targetStaff}`);
+          triggerAutoSave();
+          renderTable();
+        } catch (err) {
+          console.error(err);
+        }
+      });
+
       if (isHoliday) td.title = specialDaysMap[day];
       
       let shiftRecord = (currentSchedObj[staff] && currentSchedObj[staff][dKey]) ? currentSchedObj[staff][dKey] : null; 
@@ -2558,10 +2607,46 @@ function renderGlobalNotes() {
   }
 
   notes.forEach((text, idx) => { 
-    let item = document.createElement('div'); item.className = "bg-white border border-slate-300 rounded-lg p-2.5 flex flex-col gap-2 w-full shadow-xs"; 
-    
+    let item = document.createElement('div'); 
+    item.className = "bg-white border border-slate-300 rounded-lg p-2.5 flex flex-col gap-2 w-full shadow-xs cursor-move"; 
+    item.setAttribute('draggable', 'true');
+    item.setAttribute('data-index', idx);
+
+    item.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', idx);
+      item.classList.add('opacity-40');
+    });
+
+    item.addEventListener('dragend', () => {
+      item.classList.remove('opacity-40');
+    });
+
+    item.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    item.addEventListener('drop', (e) => {
+      e.preventDefault();
+      let fromIdx = parseInt(e.dataTransfer.getData('text/plain'));
+      let toIdx = idx;
+      if (fromIdx !== toIdx) {
+        saveStateToHistory();
+        let movedItem = notes.splice(fromIdx, 1)[0];
+        notes.splice(toIdx, 0, movedItem);
+        globalNotes[monthKey] = notes;
+        triggerAutoSave();
+        renderGlobalNotes();
+      }
+    });
+
     let taContainer = document.createElement('div');
     taContainer.className = "flex gap-2 items-start w-full";
+
+    let handleSpan = document.createElement('span');
+    handleSpan.className = "text-slate-400 font-bold select-none cursor-grab px-1 flex items-center";
+    handleSpan.innerHTML = "⋮⋮";
+    let titleText = currentLang === 'id' ? "Geser untuk memindahkan posisi catatan" : "Drag to reorder note";
+    handleSpan.title = titleText;
 
     let ta = document.createElement('textarea'); ta.rows = 2; ta.className = "w-full bg-transparent focus:outline-none p-1 rounded text-xs text-slate-800 resize-none border border-slate-200 focus:border-slate-400"; ta.value = text; 
     ta.disabled = (currentActivePage === 'team' && userSession && userSession.role !== 'admin'); 
@@ -2569,6 +2654,7 @@ function renderGlobalNotes() {
     let del = document.createElement('button'); del.className = "no-export text-slate-400 hover:text-slate-700 text-xs p-1 font-bold"; del.innerHTML = "✕"; 
     del.onclick = () => { showConfirm(currentLang === 'id' ? "Hapus Catatan" : "Delete Note", currentLang === 'id' ? "Yakin ingin menghapus catatan ini?" : "Are you sure you want to delete this note?", () => { saveStateToHistory(); notes.splice(idx, 1); globalNotes[monthKey] = notes; triggerAutoSave(); renderGlobalNotes(); }); }; 
     
+    taContainer.appendChild(handleSpan);
     taContainer.appendChild(ta); 
     if (currentActivePage === 'general' || (userSession && userSession.role === 'admin')) taContainer.appendChild(del);
     item.appendChild(taContainer);

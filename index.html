@@ -24,6 +24,9 @@ body:not(.theme-pinky) { background-image: radial-gradient(#cbd5e1 1px, transpar
 .badge-PS { background-color: #4f46e5; color: white; font-weight: 600; } 
 .badge-OFF { background-color: #dc2626; color: white; font-weight: 600; } 
 .badge-C { background-color: #475569; color: white; font-weight: 600; } 
+.badge-So-s { background-color: #7c3aed; color: white; font-weight: 600; } 
+.badge-Si-s { background-color: #0284c7; color: white; font-weight: 600; } 
+.badge-PS-s { background-color: #db2777; color: white; font-weight: 600; } 
 .badge-P, .badge-So { background-color: #ffffff; color: #1e293b; border: 1px solid #cbd5e1; font-weight: 600; } 
 .badge-gen-FULL { background-color: #059669; color: white; font-weight: 600; } 
 .badge-gen-Split { background-color: #ea580c; color: white; font-weight: 600; } 
@@ -50,30 +53,27 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <!-- MODAL TUTORIAL / INTERACTIVE WELCOME HINTS WALKTHROUGH -->
 <div id="interactiveTutorialModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[100] flex items-center justify-center p-4">
   <div class="standard-card p-6 md:p-8 w-full max-w-lg bg-white shadow-2xl relative" onclick="event.stopPropagation()">
-    <button type="button" id="skipTutorialBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center transition cursor-pointer" title="Lewati / Skip">✕</button>
+    <button type="button" id="skipTutorialBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center transition cursor-pointer" title="Lewati / Skip"></button>
     <div class="flex items-center gap-2 mb-4 border-b border-slate-200 pb-3 pr-8">
-      <div class="w-8 h-8 rounded-lg bg-[#ff3399] text-white flex items-center justify-center font-bold text-sm shadow-xs">💡</div>
+      <div class="w-8 h-8 rounded-lg bg-[#ff3399] text-white flex items-center justify-center font-bold text-sm shadow-xs"></div>
       <div>
         <h3 id="tutorialStepTitle" class="font-bold text-slate-900 text-sm">Panduan Video & Tips Interaktif</h3>
         <p class="text-[11px] text-slate-500" id="tutorialStepCounter">Langkah 1 dari 4</p>
       </div>
     </div>
 
-    <!-- Simulative Video / Illustration Screen Box -->
     <div class="bg-slate-900 rounded-lg p-4 mb-4 text-white relative flex flex-col items-center justify-center min-h-[160px] shadow-inner text-center">
-      <div id="tutorialVideoIcon" class="text-3xl mb-2">🎬</div>
+      <div id="tutorialVideoIcon" class="text-3xl mb-2"></div>
       <div id="tutorialVideoHeadline" class="font-bold text-sm mb-1 text-rose-300">Cara Buat Akun Admin</div>
       <p id="tutorialVideoDesc" class="text-xs text-slate-300 px-2 leading-relaxed">Pilih peran Admin pada portal login, masukkan nama konter dan PIN rahasia Anda untuk mulai mengelola jadwal.</p>
       
-      <!-- Video Play/Pause Status Indicator -->
-      <div id="tutorialPlayStatusBadge" class="absolute top-2 left-2 bg-emerald-600/80 text-white text-[9px] px-2 py-0.5 rounded font-mono">▶ Memutar Otomatis</div>
+      <div id="tutorialPlayStatusBadge" class="absolute top-2 left-2 bg-emerald-600/80 text-white text-[9px] px-2 py-0.5 rounded font-mono"> Memutar Otomatis</div>
     </div>
 
-    <!-- Controls: Play/Pause, Prev, Next, Skip -->
     <div class="flex items-center justify-between gap-2 text-xs">
       <div class="flex items-center gap-1.5">
         <button type="button" id="tutPrevBtn" class="bg-white text-slate-700 hover:bg-slate-100 border border-slate-300 px-3 py-2 rounded-lg font-medium transition cursor-pointer">&larr; Sebelumnya</button>
-        <button type="button" id="tutPlayPauseBtn" class="bg-slate-100 text-slate-800 hover:bg-slate-200 border border-slate-300 px-3 py-2 rounded-lg font-medium transition flex items-center gap-1 cursor-pointer"><span id="tutPlayPauseIcon">⏸</span> <span id="tutPlayPauseText">Jeda</span></button>
+        <button type="button" id="tutPlayPauseBtn" class="bg-slate-100 text-slate-800 hover:bg-slate-200 border border-slate-300 px-3 py-2 rounded-lg font-medium transition flex items-center gap-1 cursor-pointer"><span id="tutPlayPauseIcon"></span> <span id="tutPlayPauseText">Jeda</span></button>
       </div>
       <div class="flex items-center gap-1.5">
         <button type="button" id="tutNextBtn" class="bg-[#ff3399] hover:bg-rose-700 text-white font-semibold px-4 py-2 rounded-lg shadow-sm transition cursor-pointer">Berikutnya &rarr;</button>
@@ -85,7 +85,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <!-- MODAL AUTH / LOGIN & DAFTAR ANGGOTA BARU --> 
 <div id="authModal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4"> 
   <div class="standard-card p-6 md:p-8 w-full max-w-md bg-white shadow-2xl relative" onclick="event.stopPropagation()"> 
-    <button id="closeAuthModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center transition">✕</button>
+    <button id="closeAuthModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center transition"></button>
     <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3 pr-8"> 
       <div class="flex items-center gap-2.5"> 
         <div class="w-10 h-10 rounded-xl bg-[#ff3399] text-white flex items-center justify-center shadow-md shrink-0 logo-handwriting text-xl">C's</div> 
@@ -145,7 +145,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 md:p-8 w-full max-w-xl bg-white shadow-2xl relative max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()"> 
     <div class="flex items-center justify-between mb-5 border-b border-slate-200 pb-4"> 
       <div class="flex items-center gap-3"> 
-        <div class="w-12 h-12 rounded-xl bg-white text-black border border-black flex items-center justify-center shadow-sm shrink-0 font-bold text-lg">📅</div> 
+        <div class="w-12 h-12 rounded-xl bg-white text-black border border-black flex items-center justify-center shadow-sm shrink-0 font-bold text-lg"></div> 
         <div> 
           <h1 id="tr_homeTitle" class="text-xl font-bold text-slate-900">Scheduly</h1> 
           <p id="tr_homeSubtitle" class="text-xs text-slate-500">Pilih menu atau navigasi lembar kerja di bawah ini:</p> 
@@ -153,9 +153,8 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </div> 
       <button id="homeLangToggleBtn" class="bg-white hover:bg-slate-50 text-slate-800 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm shrink-0">ID / EN</button> 
     </div> 
-    <!-- Quick Hints Banner -->
     <div id="quickHintsBanner" class="bg-rose-50 border border-rose-200 rounded-lg p-3 mb-4 text-xs text-rose-800 flex items-start gap-2">
-      <span class="text-base">💡</span>
+      <span class="text-base"></span>
       <div>
         <span class="font-bold block mb-0.5" id="tr_homeQuickHintTitle">Panduan Cepat (Quick Tips):</span>
         <span id="tr_homeQuickHintDesc">Pilih "Jadwal & Catatan Tim" untuk masuk ke konter Anda, atau buka "Pusat Bantuan" jika memerlukan panduan lengkap penggunaan aplikasi.</span>
@@ -177,7 +176,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </button> 
       <button id="homeMenuGeneralBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-400 hover:bg-slate-50 flex items-center justify-between transition group cursor-pointer"> 
         <div class="flex items-center gap-3"> 
-          <span class="w-9 h-9 rounded-lg bg-white text-black border border-black group-hover:scale-110 transition flex items-center justify-center font-bold text-sm">📊</span> 
+          <span class="w-9 h-9 rounded-lg bg-white text-black border border-black group-hover:scale-110 transition flex items-center justify-center font-bold text-sm"></span> 
           <div> 
             <div id="tr_homeGenTitle" class="font-bold text-slate-900 text-sm">Jadwal Umum</div> 
             <div id="tr_homeGenDesc" class="text-slate-500 text-[11px]">Pengelolaan shift operasional umum secara komprehensif</div> 
@@ -187,7 +186,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </button> 
       <button id="homeMenuRootFolderBtn" class="w-full text-left p-3.5 rounded-lg border border-slate-400 hover:bg-slate-50 flex items-center justify-between transition group cursor-pointer"> 
         <div class="flex items-center gap-3"> 
-          <span class="w-9 h-9 rounded-lg bg-white text-black border border-black group-hover:scale-110 transition flex items-center justify-center font-bold text-sm">📁</span> 
+          <span class="w-9 h-9 rounded-lg bg-white text-black border border-black group-hover:scale-110 transition flex items-center justify-center font-bold text-sm"></span> 
           <div> 
             <div id="tr_homeFolderTitle" class="font-bold text-slate-900 text-sm">Folder & Penyimpanan</div> 
             <div id="tr_homeFolderDesc" class="text-slate-500 text-[11px]">Kelola direktori multi-folder dan arsip draft lembar kerja</div> 
@@ -198,10 +197,10 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     </div> 
     <div class="flex gap-2"> 
       <button id="openSettingsModalFromHome" class="flex-1 bg-white hover:bg-slate-50 text-black border border-black py-2.5 rounded-lg font-medium text-xs transition flex items-center justify-center gap-1.5 cursor-pointer"> 
-        <span>⚙️</span> <span id="tr_homeSettingsBtn">Pengaturan</span> 
+        <span></span> <span id="tr_homeSettingsBtn">Pengaturan</span> 
       </button> 
       <button id="openHelpModalFromHome" class="flex-1 bg-white hover:bg-slate-50 text-black border border-black py-2.5 rounded-lg font-medium text-xs transition flex items-center justify-center gap-1.5 cursor-pointer"> 
-        <span>❓</span> <span id="tr_homeHelpBtn">Pusat Bantuan</span> 
+        <span></span> <span id="tr_homeHelpBtn">Pusat Bantuan</span> 
       </button> 
     </div> 
   </div> 
@@ -212,18 +211,17 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="bg-white rounded-xl shadow-2xl flex flex-col flex-grow max-w-4xl w-full mx-auto overflow-hidden border border-slate-200 relative" onclick="event.stopPropagation()"> 
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-16"> 
       <div class="flex items-center gap-3"> 
-        <span class="w-8 h-8 rounded-lg bg-white text-black border border-black flex items-center justify-center font-bold text-xs">❓</span> 
+        <span class="w-8 h-8 rounded-lg bg-white text-black border border-black flex items-center justify-center font-bold text-xs"></span> 
         <div> 
           <h2 id="tr_helpTitle" class="text-base md:text-lg font-bold text-slate-900">Pusat Bantuan & Panduan Lengkap</h2> 
           <p id="tr_helpSubtitle" class="text-xs text-slate-500">Pelajari cara menguasai fitur Scheduly dengan cepat</p> 
         </div> 
       </div> 
-      <!-- Tombol Buka Ulang Tutorial Video -->
       <button type="button" id="reopenTutorialFromHelpBtn" class="bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs px-3 py-1.5 rounded-lg font-semibold transition shadow-xs flex items-center gap-1.5 cursor-pointer">
-        <span>🎬</span> <span>Putar Video Tutorial Interaktif</span>
+        <span></span> <span>Putar Video Tutorial Interaktif</span>
       </button>
     </div> 
-    <button id="closeHelpModalBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-white text-black border border-black hover:bg-slate-100 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
+    <button id="closeHelpModalBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-white text-black border border-black hover:bg-slate-100 font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup"></button> 
     <div class="p-6 flex-grow overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed"> 
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5"> 
         <div id="tr_helpBox1Title" class="font-bold text-slate-900 text-sm mb-1">1. Panduan Pembuatan Akun Admin & Member</div> 
@@ -255,10 +253,10 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 <!-- MODAL PENGATURAN & NOTIFIKASI --> 
 <div id="settingsModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="this.classList.add('hidden')"> 
   <div class="bg-white rounded-xl shadow-2xl flex flex-col max-w-lg w-full mx-auto overflow-hidden border border-slate-200 relative" onclick="event.stopPropagation()"> 
-    <button id="closeSettingsModalBtn" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center transition z-10" title="Tutup">✕</button>
+    <button id="closeSettingsModalBtn" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center transition z-10" title="Tutup"></button> 
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-12"> 
       <div class="flex items-center gap-3"> 
-        <span class="w-8 h-8 rounded-lg bg-white text-black border border-black flex items-center justify-center font-bold text-xs">⚙️</span> 
+        <span class="w-8 h-8 rounded-lg bg-white text-black border border-black flex items-center justify-center font-bold text-xs"></span> 
         <div> 
           <h2 id="tr_settingsTitle" class="text-base font-bold text-slate-900">Pengaturan Akun & Personalisasi</h2> 
           <p id="tr_settingsSubtitle" class="text-xs text-slate-500">Kelola preferensi notifikasi dan akun Anda</p> 
@@ -308,9 +306,9 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="bg-white rounded-xl shadow-2xl flex flex-col flex-grow max-w-6xl w-full mx-auto overflow-hidden border border-slate-200 relative" onclick="event.stopPropagation()"> 
     <div class="p-4 md:p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center pr-16"> 
       <div class="flex items-center gap-3"> 
-        <div class="w-10 h-10 rounded-lg bg-white text-black border border-black flex items-center justify-center text-xl shadow-sm font-bold">📁</div> 
+        <div class="w-10 h-10 rounded-lg bg-white text-black border border-black flex items-center justify-center text-xl shadow-sm font-bold"></div> 
         <div> 
-          <h2 id="tr_folderModalTitle" class="text-base md:text-lg font-bold text-slate-900">Folder • Ruang Simpan Draft & Multi-Folder</h2> 
+          <h2 id="tr_folderModalTitle" class="text-base md:text-lg font-bold text-slate-900">Folder � Ruang Simpan Draft & Multi-Folder</h2> 
           <p id="rootBreadcrumbPath" class="text-xs text-slate-500">Direktori Utama /</p> 
         </div> 
       </div> 
@@ -319,11 +317,11 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
           <span>+</span> <span id="tr_folderCreateBtn">Buat Folder</span>
         </button> 
         <button id="rootSaveCurrentDraftBtn" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-medium px-3.5 py-2 rounded-lg text-xs shadow-sm transition flex items-center gap-1.5">
-          <span>💾</span> <span id="tr_folderSaveSessionBtn">Simpan Sesi Aktif</span>
+          <span></span> <span id="tr_folderSaveSessionBtn">Simpan Sesi Aktif</span>
         </button> 
       </div> 
     </div> 
-    <button id="closeFullScreenFolderBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-white text-black border border-black font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup">✕</button> 
+    <button id="closeFullScreenFolderBtn" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-white text-black border border-black font-bold text-sm flex items-center justify-center z-20 shadow-sm" title="Tutup"></button> 
     <div class="px-6 py-3 bg-white border-b border-slate-100 flex justify-between items-center"> 
       <div class="flex items-center gap-2">
         <button id="rootBackBtn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-1.5 rounded-lg font-medium transition">&larr; <span id="tr_folderBackBtn">Kembali ke Folder Induk</span></button> 
@@ -340,7 +338,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-lg bg-white shadow-2xl relative flex flex-col max-h-[85vh]" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-3 pr-6"> 
       <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2"><span id="explorerModalTitle">Kelola Folder & Multi-Pilih Item</span></h3> 
-      <button id="closeFolderExplorerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeFolderExplorerBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <p class="text-xs text-slate-500 mb-3" id="explorerModalSubtitle">Pilih item untuk dipindah, disalin, atau dihapus secara multi-pilih.</p> 
     
@@ -364,7 +362,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 id="tr_saveFolderModalTitle" class="font-bold text-slate-900 text-sm">Simpan ke Folder</h3> 
-      <button id="closeSaveFolderModal" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeSaveFolderModal" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <div class="space-y-3 text-xs mb-4"> 
       <div><label id="tr_fileNameLabel" class="block font-semibold text-slate-700 mb-1">Nama File / Draft:</label><input type="text" id="saveFileNameInput" class="w-full p-2 border border-slate-300 rounded-lg bg-slate-50 text-xs"></div> 
@@ -384,7 +382,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       <div id="sidebarBrandIcon" class="w-8 h-8 rounded-lg bg-[#ff3399] text-white flex items-center justify-center shadow-xs shrink-0 logo-handwriting text-sm">C's</div> 
       <span id="tr_sidebarMenuTitle" class="font-bold text-slate-900 text-sm">Menu Scheduly</span> 
     </div> 
-    <button id="closeSidebarBtn" class="w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+    <button id="closeSidebarBtn" class="w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
   </div> 
   <div class="p-4 flex-grow space-y-4 text-xs overflow-y-auto"> 
     <div id="sidebarClandysAuthBox" class="bg-slate-50 border border-slate-200 rounded-lg p-3 hidden"> 
@@ -400,7 +398,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
           <span id="tr_navTeamSub" class="text-[10px] text-slate-500 font-normal pl-7">(Pramuniaga & Kasir)</span> 
         </button> 
         <button id="navPageGeneralBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-          <span class="font-bold">📊</span>
+          <span class="font-bold"></span>
           <span id="tr_navGenText">Jadwal Umum</span>
         </button> 
       </div> 
@@ -408,15 +406,15 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <hr class="border-slate-200"> 
     <div class="space-y-1"> 
       <button id="menuHomeBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold">🏠</span>
+        <span class="font-bold"></span>
         <span id="tr_menuHomeText">Beranda Utama</span>
       </button> 
       <button id="menuSettingsBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold">⚙️</span>
+        <span class="font-bold"></span>
         <span id="tr_menuSettingsText">Pengaturan & Notifikasi</span>
       </button> 
       <button id="menuHelpModalBtn" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition">
-        <span class="font-bold">❓</span>
+        <span class="font-bold"></span>
         <span id="tr_menuHelpText">Pusat Bantuan & Manual</span>
       </button> 
     </div> 
@@ -444,7 +442,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <header class="standard-card px-4 md:px-6 py-3.5 sticky top-0 z-30 flex justify-between items-center border-x-0 border-t-0 rounded-none bg-white"> 
     <div class="flex items-center gap-3"> 
       <button id="openSidebarBtn" class="w-9 h-9 rounded-lg bg-white hover:bg-slate-50 text-black border border-black flex items-center justify-center transition" title="Buka Menu">
-        <span class="font-bold text-base">☰</span>
+        <span class="font-bold text-base"></span>
       </button> 
       <div id="webBrandRefresh" class="flex items-center gap-2.5 cursor-pointer group" title="Kembali ke Beranda Utama"> 
         <div id="brandLogoBox" class="w-9 h-9 rounded-lg bg-[#ff3399] text-white flex items-center justify-center shadow-sm shrink-0 logo-handwriting text-base">C's</div> 
@@ -455,13 +453,13 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
       </div> 
     </div> 
     <div class="flex items-center gap-1.5 md:gap-2 no-export"> 
-      <button id="headerLogoutBtn" class="hidden bg-white hover:bg-slate-50 text-black border border-black text-xs px-3 py-2 rounded-lg font-medium transition shadow-sm items-center gap-1.5" title="Keluar"><span>🚪</span><span id="tr_headerLogoutText" class="hidden sm:inline">Logout</span></button> 
+      <button id="headerLogoutBtn" class="hidden bg-white hover:bg-slate-50 text-black border border-black text-xs px-3 py-2 rounded-lg font-medium transition shadow-sm items-center gap-1.5" title="Keluar"><span></span><span id="tr_headerLogoutText" class="hidden sm:inline">Logout</span></button> 
       <button id="copyLinkBtn" class="bg-white hover:bg-slate-50 text-black border border-black text-xs px-3 py-2 rounded-lg font-medium transition shadow-sm flex items-center gap-1.5">
-        <span>🔗</span>
+        <span></span>
         <span id="tr_copyLinkText" class="hidden md:inline">Salin Link</span>
       </button> 
       <button id="openExportModalBtn" class="bg-white hover:bg-slate-50 text-black border border-black text-xs px-3.5 py-2 rounded-lg font-medium transition shadow-sm flex items-center gap-1.5">
-        <span>📤</span>
+        <span></span>
         <span id="tr_exportText" class="hidden md:inline">Export</span>
       </button> 
       <button id="langToggleBtn" class="bg-white hover:bg-slate-50 text-slate-800 text-xs px-3 py-2 rounded-lg font-medium border border-slate-300 transition shadow-sm">ID / EN</button>  
@@ -478,11 +476,11 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <div class="flex flex-wrap items-center justify-between gap-2 mb-3 no-export px-1"> 
       <div class="flex items-center gap-1.5"> 
         <button id="undoBtn" class="bg-white hover:bg-slate-50 text-black border border-black text-xs px-3 py-2 rounded-lg font-medium transition shadow-sm flex items-center gap-1.5" disabled>
-          <span>↩</span>
+          <span></span>
           <span class="hidden sm:inline" id="undoText">Undo</span>
         </button> 
         <button id="redoBtn" class="bg-white hover:bg-slate-50 text-black border border-black text-xs px-3 py-2 rounded-lg font-medium transition shadow-sm flex items-center gap-1.5" disabled>
-          <span>🔄</span>
+          <span></span>
           <span class="hidden sm:inline" id="redoText">Redo</span>
         </button> 
       </div> 
@@ -510,13 +508,13 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
     <!-- BAGIAN LOG AKTIVITAS -->
     <div id="activityLogSection" class="standard-card p-5 mb-6 bg-white">
       <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-3">
-        <h3 id="tr_activityLogHeading" class="font-bold text-slate-900 text-sm flex items-center gap-2"><span>📋 Log Aktivitas & Request Jadwal</span></h3>
+        <h3 id="tr_activityLogHeading" class="font-bold text-slate-900 text-sm flex items-center gap-2"><span> Log Aktivitas & Request Jadwal</span></h3>
         <button id="deleteSelectedLogsBtn" class="no-export bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-3 py-1.5 rounded text-xs font-medium transition hidden">Hapus Log Terpilih</button>
       </div>
       <div id="activityLogContainer" class="space-y-2 text-xs max-h-60 overflow-y-auto"></div>
     </div>
   </main>  
-  <footer class="text-center py-4 text-xs text-slate-500 font-medium bg-white border-t border-slate-200 mt-auto" id="footerText">© 2026 Scheduly • Didesain untuk kemudahan & kenyamanan tim</footer> 
+  <footer class="text-center py-4 text-xs text-slate-500 font-medium bg-white border-t border-slate-200 mt-auto" id="footerText">� 2026 Scheduly � Didesain untuk kemudahan & kenyamanan tim</footer> 
 </div> 
 
 <!-- Pop-Up Export --> 
@@ -524,7 +522,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 id="tr_exportModalTitle" class="font-bold text-slate-900 text-sm">Pilih Format Laporan</h3> 
-      <button id="closeExportModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeExportModalBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <div class="grid grid-cols-2 gap-2.5 mb-2"> 
       <button type="button" class="export-format-btn py-3 px-3 rounded-lg border font-medium text-xs transition bg-white text-slate-800 border-slate-300 hover:bg-slate-50 text-left flex items-center gap-2 shadow-xs" data-format="xlsx"><div><div>Excel (.xlsx)</div></div></button> 
@@ -540,13 +538,16 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 id="selectedDateTitle" class="font-bold text-slate-900 text-sm">Pilih Shift</h3> 
-      <button id="closeFormBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeFormBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <input type="hidden" id="activeStaffKey"><input type="hidden" id="activeDateKey"> 
     <div class="grid grid-cols-3 gap-2" id="shiftActionButtonsContainer"> 
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="FULL">FULL</button> 
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-white text-slate-700 border-slate-300" data-value="P">P (Pagi)</button> 
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-white text-slate-700 border-slate-300" data-value="So">So (Sore)</button> 
+      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-purple-50 text-purple-800 border-purple-300" data-value="So(s)">So(s)</button>
+      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-sky-50 text-sky-800 border-sky-300" data-value="Si(s)">Si(s)</button>
+      <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-pink-50 text-pink-800 border-pink-300" data-value="PS(s)">PS(s)</button>
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="P(s)">P(s)</button> 
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="Pc">Pc</button> 
       <button type="button" class="shift-instant-btn py-2.5 px-2 rounded-lg border font-medium text-xs transition bg-slate-50 text-slate-800 border-slate-300" data-value="PS">PS</button> 
@@ -562,7 +563,7 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
   <div class="standard-card p-6 w-full max-w-sm relative z-50 bg-white" onclick="event.stopPropagation()"> 
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3 pr-6"> 
       <h3 id="selectedDateTitleGeneral" class="font-bold text-slate-900 text-sm">Pilih Shift Umum</h3> 
-      <button id="closeFormGeneralBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup">✕</button> 
+      <button id="closeFormGeneralBtn" class="absolute top-4 right-4 w-7 h-7 rounded-md bg-white hover:bg-slate-100 text-black border border-black font-bold text-xs flex items-center justify-center" title="Tutup"></button> 
     </div> 
     <input type="hidden" id="activeStaffKeyGen"><input type="hidden" id="activeDateKeyGen"> 
     <div class="grid grid-cols-3 gap-2"> 
@@ -594,7 +595,6 @@ body.theme-pinky #addGlobalNoteBtn:hover { background-color: #be123c !important;
 
 <!-- Script Utama (Terhubung Firebase Realtime Database Anda) --> 
 <script> 
-// KONFIGURASI FIREBASE CLOUD ANDA
 const firebaseConfig = {
   apiKey: "AIzaSyC1Zq_ibBJgHOeD20MHKd_ic6FChDcLkhc",
   authDomain: "scheduly-eebf5.firebaseapp.com",
@@ -605,7 +605,6 @@ const firebaseConfig = {
   appId: "1:278563884001:web:910f292ff760e63d2ee0a0"
 };
 
-// Inisialisasi Firebase
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
@@ -629,7 +628,7 @@ const translations = {
     menu_team_title: "Jadwal & Catatan Tim", menu_team_desc: "(Khusus Pramuniaga dan Kasir)", 
     menu_general_title: "Jadwal Umum", menu_general_desc: "Pengelolaan shift operasional umum secara komprehensif", 
     menu_folder_title: "Folder & Penyimpanan", menu_folder_desc: "Kelola direktori multi-folder dan arsip draft lembar kerja", 
-    autosave_text: "Tersimpan di Cloud", notes_heading: "Catatan & Hari Penting", btn_add_note: "+ Tambah Catatan", footer_text: "© 2026 Scheduly • Terhubung Cloud Server Real-time",
+    autosave_text: "Tersimpan di Cloud", notes_heading: "Catatan & Hari Penting", btn_add_note: "+ Tambah Catatan", footer_text: "� 2026 Scheduly � Terhubung Cloud Server Real-time",
     clearSheetTitle: "Kosongkan Lembar Kerja", clearSheetConfirm: "Apakah kamu yakin ingin mengosongkan seluruh data staff dan jadwal pada lembar kerja ini?",
     authTitle: "Portal Konter & Akses Sesi", authSubtitle: "Pilih masuk atau daftar anggota baru",
     authLoginTab: "Masuk (Login)", authRegisterTab: "Daftar Anggota Baru",
@@ -648,7 +647,7 @@ const translations = {
     changeNameBtn: "Ubah Nama", logoutBtn: "Keluar", deleteAccBtn: "Hapus Akun",
     pushNotifTitle: "Push Notifikasi & Pengingat Shift", pushNotifDesc: "Aktifkan untuk menerima notifikasi pengingat jadwal shift harian.",
     testPushBtn: "Tes Kirim Push Notifikasi Simulasi", saveSettingsBtn: "Simpan Pengaturan",
-    folderModalTitle: "Folder • Ruang Simpan Draft & Multi-Folder", folderCreateBtn: "Buat Folder", folderSaveSessionBtn: "Simpan Sesi Aktif",
+    folderModalTitle: "Folder � Ruang Simpan Draft & Multi-Folder", folderCreateBtn: "Buat Folder", folderSaveSessionBtn: "Simpan Sesi Aktif",
     folderBackBtn: "Kembali ke Folder Induk", folderMultiDel: "Multi-Pilih Hapus",
     explorerTitle: "Kelola Folder & Multi-Pilih Item", explorerSub: "Pilih item untuk dipindah, disalin, atau dihapus secara multi-pilih.",
     targetFolderLabel: "Pilih Folder Tujuan:", moveBtn: "Pindahkan Item", copyBtn: "Salin Item", delItemBtn: "Hapus Item Terpilih", closeBtn: "Tutup",
@@ -657,7 +656,7 @@ const translations = {
     navGenText: "Jadwal Umum", menuHomeText: "Beranda Utama", menuSettingsText: "Pengaturan & Notifikasi", menuHelpText: "Pusat Bantuan & Manual",
     folderStorageTitle: "Folder Penyimpanan", openWinBtn: "Buka Jendela", sbSaveBtn: "Simpan", sbFolderBtn: "Folder", sbMoveBtn: "Pindah", sbCopyBtn: "Salin", sbDelBtn: "Hapus Terpilih",
     logoutText: "Logout", copyLinkText: "Salin Link", exportText: "Export", undoText: "Undo", redoText: "Redo", clearSheetBtn: "Kosongkan Lembar Kerja",
-    activityLogHead: "📋 Log Aktivitas & Request Jadwal", deleteLogBtn: "Hapus Log Terpilih",
+    activityLogHead: " Log Aktivitas & Request Jadwal", deleteLogBtn: "Hapus Log Terpilih",
     exportModalTitle: "Pilih Format Laporan", clearShiftText: "Hapus Shift", confirmTitle: "Konfirmasi", confirmMsg: "Apakah kamu yakin?", confirmNo: "Tidak", confirmYes: "Ya",
     tableColName: "Nama / Name", selectRegisteredName: "-- Pilih Nama Terdaftar --", staffRegisteredBtn: "Staff Terdaftar", staffManualBtn: "Input Nama Manual", manualPlaceholder: "Ketik nama manual...",
     addStaffTitle: "Tambah Staf:",
@@ -705,7 +704,7 @@ const translations = {
     menu_team_title: "Team Schedule & Notes", menu_team_desc: "(Dedicated for Cashiers and Floor Staff)", 
     menu_general_title: "General Schedule", menu_general_desc: "Comprehensive operational shift management", 
     menu_folder_title: "Folder & Storage", menu_folder_desc: "Manage multi-folder directories and saved drafts", 
-    autosave_text: "Cloud Saved", notes_heading: "Notes & Important Days", btn_add_note: "+ Add Note", footer_text: "© 2026 Scheduly • Connected to Real-time Cloud Server",
+    autosave_text: "Cloud Saved", notes_heading: "Notes & Important Days", btn_add_note: "+ Add Note", footer_text: "� 2026 Scheduly � Connected to Real-time Cloud Server",
     clearSheetTitle: "Clear Workspace", clearSheetConfirm: "Are you sure you want to clear all staff and schedule data on this worksheet?",
     authTitle: "Counter Portal & Session Access", authSubtitle: "Choose login or register new member",
     authLoginTab: "Sign In (Login)", authRegisterTab: "Register New Member",
@@ -724,7 +723,7 @@ const translations = {
     changeNameBtn: "Change Name", logoutBtn: "Sign Out", deleteAccBtn: "Delete Account",
     pushNotifTitle: "Push Notifications & Shift Reminder", pushNotifDesc: "Enable to receive daily shift reminder notifications.",
     testPushBtn: "Test Simulated Push Notification", saveSettingsBtn: "Save Settings",
-    folderModalTitle: "Folder • Draft Storage & Multi-Folder", folderCreateBtn: "Create Folder", folderSaveSessionBtn: "Save Active Session",
+    folderModalTitle: "Folder � Draft Storage & Multi-Folder", folderCreateBtn: "Create Folder", folderSaveSessionBtn: "Save Active Session",
     folderBackBtn: "Back to Parent Folder", folderMultiDel: "Multi-Select Delete",
     explorerTitle: "Manage Folders & Multi-Select Items", explorerSub: "Select items to move, copy, or delete via multi-select.",
     targetFolderLabel: "Select Destination Folder:", moveBtn: "Move Items", copyBtn: "Copy Items", delItemBtn: "Delete Selected Items", closeBtn: "Close",
@@ -733,7 +732,7 @@ const translations = {
     navGenText: "General Schedule", menuHomeText: "Main Home", menuSettingsText: "Settings & Notifications", menuHelpText: "Help Center & Manual",
     folderStorageTitle: "Storage Folders", openWinBtn: "Open Window", sbSaveBtn: "Save", sbFolderBtn: "Folder", sbMoveBtn: "Move", sbCopyBtn: "Copy", sbDelBtn: "Delete Selected",
     logoutText: "Sign Out", copyLinkText: "Copy Link", exportText: "Export", undoText: "Undo", redoText: "Redo", clearSheetBtn: "Clear Workspace",
-    activityLogHead: "📋 Activity Log & Schedule Requests", deleteLogBtn: "Delete Selected Logs",
+    activityLogHead: " Activity Log & Schedule Requests", deleteLogBtn: "Delete Selected Logs",
     exportModalTitle: "Select Report Format", clearShiftText: "Clear Shift", confirmTitle: "Confirmation", confirmMsg: "Are you sure?", confirmNo: "No", confirmYes: "Yes",
     tableColName: "Name / Name", selectRegisteredName: "-- Select Registered Name --", staffRegisteredBtn: "Registered Staff", staffManualBtn: "Manual Name Input", manualPlaceholder: "Type manual name...",
     addStaffTitle: "Add Staff:",
@@ -903,7 +902,6 @@ langToggleBtn.addEventListener('click', toggleLanguage);
 homeLangToggleBtn.addEventListener('click', toggleLanguage); 
 authLangToggle.addEventListener('click', toggleLanguage);
 
-// INTERACTIVE TUTORIAL / WELCOME HINTS WALKTHROUGH LOGIC
 const interactiveTutorialModal = document.getElementById('interactiveTutorialModal');
 const tutorialStepTitle = document.getElementById('tutorialStepTitle');
 const tutorialStepCounter = document.getElementById('tutorialStepCounter');
@@ -921,22 +919,22 @@ const reopenTutorialFromHelpBtn = document.getElementById('reopenTutorialFromHel
 
 let tutorialSteps = [
   {
-    icon: "👑",
+    icon: "",
     headline: "1. Cara Buat Akun Admin",
     desc: "Pilih peran 'Admin' pada portal login, tentukan nama konter dan PIN rahasia Anda, lalu masukkan nama lengkap. Admin memiliki kendali penuh atas lembar kerja dan persetujuan request."
   },
   {
-    icon: "👥",
+    icon: "",
     headline: "2. Cara Buat Akun Member (Anggota)",
     desc: "Pilih tab 'Daftar Anggota Baru', masukkan Nama Konter dan PIN Server yang sama dengan Admin Anda, pilih proyek Admin yang sesuai, lalu masukkan nama lengkap Anda."
   },
   {
-    icon: "📅",
+    icon: "",
     headline: "3. Pengajuan & Persetujuan Request Shift",
-    desc: "Anggota dapat mengklik tanggal pada baris nama mereka untuk mengajukan request shift. Admin dapat langsung melihat request tersebut di Log Aktivitas dan menekan tombol '✔ Terima' atau '✕ Tolak'."
+    desc: "Anggota dapat mengklik tanggal pada baris nama mereka untuk mengajukan request shift. Admin dapat langsung melihat request tersebut di Log Aktivitas dan menekan tombol ' Terima' atau ' Tolak'."
   },
   {
-    icon: "💾",
+    icon: "",
     headline: "4. Sinkronisasi & Arsip Cloud",
     desc: "Semua perubahan tersimpan otomatis secara real-time ke server cloud pusat. Anda juga dapat menggunakan menu Folder Penyimpanan untuk mencadangkan draft bulanan."
   }
@@ -955,15 +953,15 @@ function renderTutorialStep() {
   tutorialVideoDesc.innerText = step.desc;
 
   tutPrevBtn.disabled = currentTutIndex === 0;
-  tutNextBtn.innerText = currentLang === 'id' ? (currentTutIndex === tutorialSteps.length - 1 ? "Selesai ✓" : "Berikutnya →") : (currentTutIndex === tutorialSteps.length - 1 ? "Finish ✓" : "Next →");
+  tutNextBtn.innerText = currentLang === 'id' ? (currentTutIndex === tutorialSteps.length - 1 ? "Selesai " : "Berikutnya ") : (currentTutIndex === tutorialSteps.length - 1 ? "Finish " : "Next ");
 }
 
 function startTutorialAutoPlay() {
   if (tutAutoPlayInterval) clearInterval(tutAutoPlayInterval);
   isTutorialPlaying = true;
-  tutPlayPauseIcon.innerText = "⏸";
+  tutPlayPauseIcon.innerText = "";
   tutPlayPauseText.innerText = currentLang === 'id' ? "Jeda" : "Pause";
-  tutorialPlayStatusBadge.innerText = currentLang === 'id' ? "▶ Memutar Otomatis" : "▶ Autoplaying";
+  tutorialPlayStatusBadge.innerText = currentLang === 'id' ? " Memutar Otomatis" : " Autoplaying";
   tutorialPlayStatusBadge.className = "absolute top-2 left-2 bg-emerald-600/80 text-white text-[9px] px-2 py-0.5 rounded font-mono";
 
   tutAutoPlayInterval = setInterval(() => {
@@ -978,9 +976,9 @@ function startTutorialAutoPlay() {
 function pauseTutorialAutoPlay() {
   if (tutAutoPlayInterval) clearInterval(tutAutoPlayInterval);
   isTutorialPlaying = false;
-  tutPlayPauseIcon.innerText = "▶";
+  tutPlayPauseIcon.innerText = "";
   tutPlayPauseText.innerText = currentLang === 'id' ? "Putar" : "Play";
-  tutorialPlayStatusBadge.innerText = currentLang === 'id' ? "⏸ Dijeda" : "⏸ Paused";
+  tutorialPlayStatusBadge.innerText = currentLang === 'id' ? " Dijeda" : " Paused";
   tutorialPlayStatusBadge.className = "absolute top-2 left-2 bg-amber-600/80 text-white text-[9px] px-2 py-0.5 rounded font-mono";
 }
 
@@ -1034,7 +1032,6 @@ if (reopenTutorialFromHelpBtn) {
   };
 }
 
-// Munculkan modal tutorial secara otomatis saat file dibuka
 interactiveTutorialModal.classList.remove('hidden');
 renderTutorialStep();
 startTutorialAutoPlay();
@@ -1508,8 +1505,8 @@ function applyTheme() {
     navPageGeneralBtn.className = "w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex items-center gap-2 transition"; 
   } else { 
     document.body.classList.remove('theme-pinky'); 
-    brandLogoBox.innerHTML = `<span class="font-bold text-xs">📊</span>`; 
-    sidebarBrandIcon.innerHTML = `<span class="font-bold text-xs">📊</span>`; 
+    brandLogoBox.innerHTML = `<span class="font-bold text-xs"></span>`; 
+    sidebarBrandIcon.innerHTML = `<span class="font-bold text-xs"></span>`; 
     unofficialBadgeHeader.classList.add('hidden'); 
     navPageGeneralBtn.className = "w-full text-left px-3 py-2.5 rounded-lg bg-slate-100 text-slate-900 font-semibold flex items-center gap-2 transition border border-slate-300"; 
     navPageTeamBtn.className = "w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-medium flex flex-col gap-0.5 transition"; 
@@ -2021,7 +2018,70 @@ document.querySelectorAll('.export-format-btn').forEach(btn => {
       a.download = fileName + '.csv';
       a.click();
     } else if (format === 'xlsx' || format === 'docx' || format === 'pdf') {
-      let inlineStyleContent = `<style>
+      
+      let excelStyle = `<style>
+        body { font-family: 'Calibri', 'Inter', sans-serif; font-size: 10pt; color: #000000; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 25px; background-color: #ffffff; table-layout: fixed; }
+        th, td { border: .5pt solid #94a3b8; padding: 6px 4px; text-align: center; vertical-align: middle; white-space: nowrap; overflow: hidden; }
+        th:first-child, td:first-child { width: 140px; text-align: left; padding-left: 8px; }
+        th { background-color: #e2e8f0; color: #0f172a; font-weight: bold; }
+        .bg-red-custom { background-color: #fee2e2 !important; color: #991b1b !important; }
+        .badge-FULL { background-color: #059669; color: #ffffff; font-weight: bold; }
+        .badge-Ps { background-color: #d97706; color: #ffffff; font-weight: bold; }
+        .badge-P-sub { background-color: #0891b2; color: #ffffff; font-weight: bold; }
+        .badge-Pc { background-color: #c026d3; color: #ffffff; font-weight: bold; }
+        .badge-PS { background-color: #4f46e5; color: #ffffff; font-weight: bold; }
+        .badge-OFF { background-color: #dc2626; color: #ffffff; font-weight: bold; }
+        .badge-C { background-color: #475569; color: #ffffff; font-weight: bold; }
+        .badge-So-s { background-color: #7c3aed; color: #ffffff; font-weight: bold; }
+        .badge-Si-s { background-color: #0284c7; color: #ffffff; font-weight: bold; }
+        .badge-PS-s { background-color: #db2777; color: #ffffff; font-weight: bold; }
+        .badge-P, .badge-So { background-color: #ffffff; color: #1e293b; border: 1px solid #cbd5e1; font-weight: bold; }
+        .badge-gen-FULL { background-color: #059669; color: #ffffff; font-weight: bold; }
+        .badge-gen-Split { background-color: #ea580c; color: #ffffff; font-weight: bold; }
+        .badge-gen-OFF { background-color: #dc2626; color: #ffffff; font-weight: bold; }
+        .badge-gen-CUTI { background-color: #475569; color: #ffffff; font-weight: bold; }
+        .badge-gen-Pagi, .badge-gen-Siang, .badge-gen-Mid, .badge-gen-Sore, .badge-gen-Malam { background-color: #ffffff; color: #1e293b; border: 1px solid #cbd5e1; font-weight: bold; }
+        .export-notes-section { margin-top: 25px; padding: 15px; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; }
+        .export-notes-section h3 { font-size: 12pt; font-weight: bold; margin-bottom: 10px; color: #0f172a; }
+        .export-notes-section p { font-size: 10pt; line-height: 1.5; color: #334155; margin-bottom: 6px; text-align: left; }
+        .export-notes-section ul { padding-left: 20px; margin: 6px 0; text-align: left; }
+        .export-notes-section li { font-size: 10pt; line-height: 1.4; color: #334155; margin-bottom: 4px; }
+      </style>`;
+
+      let docxStyle = `<style>
+        @page { size: A4 landscape; margin: 15mm; }
+        body { font-family: 'Calibri', 'Inter', sans-serif; font-size: 10pt; color: #1e293b; line-height: 1.4; }
+        h2 { font-size: 14pt; font-weight: bold; margin-bottom: 12px; color: #0f172a; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 25px; table-layout: fixed; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        th, td { border: 1pt solid #94a3b8; padding: 6px 3px; text-align: center; vertical-align: middle; overflow: hidden; word-break: break-word; }
+        th:first-child, td:first-child { width: 130px; text-align: left; padding-left: 8px; }
+        th { background-color: #f1f5f9; color: #0f172a; font-weight: bold; font-size: 9pt; }
+        .bg-red-custom { background-color: #fef2f2 !important; color: #b91c1c !important; }
+        .badge-FULL { background-color: #059669; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-Ps { background-color: #d97706; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-P-sub { background-color: #0891b2; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-Pc { background-color: #c026d3; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-PS { background-color: #4f46e5; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-OFF { background-color: #dc2626; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-C { background-color: #475569; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-So-s { background-color: #7c3aed; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-Si-s { background-color: #0284c7; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-PS-s { background-color: #db2777; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-P, .badge-So { background-color: #ffffff; color: #1e293b; border: 1px solid #cbd5e1; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-gen-FULL { background-color: #059669; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-gen-Split { background-color: #ea580c; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-gen-OFF { background-color: #dc2626; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-gen-CUTI { background-color: #475569; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .badge-gen-Pagi, .badge-gen-Siang, .badge-gen-Mid, .badge-gen-Sore, .badge-gen-Malam { background-color: #ffffff; color: #1e293b; border: 1px solid #cbd5e1; padding: 2px 4px; border-radius: 3px; font-weight: bold; display: inline-block; font-size: 8pt; }
+        .export-notes-section { margin-top: 25px; padding: 15px; background-color: #f8fafc; border: 1pt solid #cbd5e1; border-radius: 6px; }
+        .export-notes-section h3 { font-size: 12pt; font-weight: bold; margin-bottom: 10px; color: #0f172a; }
+        .export-notes-section p { font-size: 10pt; line-height: 1.6; color: #334155; margin-bottom: 8px; text-align: left; }
+        .export-notes-section ul { padding-left: 20px; margin: 6px 0; text-align: left; }
+        .export-notes-section li { font-size: 10pt; line-height: 1.5; color: #334155; margin-bottom: 4px; }
+      </style>`;
+
+      let inlineStyleContent = format === 'pdf' ? `<style>
         @page { size: landscape; margin: 12mm; }
         body { font-family: 'Inter', sans-serif; font-size: 10px; color: #1e293b; padding: 10px; width: 100%; box-sizing: border-box; }
         table { border-collapse: collapse; width: 100%; margin-bottom: 20px; table-layout: auto; }
@@ -2035,6 +2095,9 @@ document.querySelectorAll('.export-format-btn').forEach(btn => {
         .badge-PS { background-color: #4f46e5; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; }
         .badge-OFF { background-color: #dc2626; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; }
         .badge-C { background-color: #475569; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; }
+        .badge-So-s { background-color: #7c3aed; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; }
+        .badge-Si-s { background-color: #0284c7; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; }
+        .badge-PS-s { background-color: #db2777; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; }
         .badge-P, .badge-So { background-color: #ffffff; color: #1e293b; border: 1px solid #cbd5e1; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; }
         .badge-gen-FULL { background-color: #059669; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; }
         .badge-gen-Split { background-color: #ea580c; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; }
@@ -2046,7 +2109,7 @@ document.querySelectorAll('.export-format-btn').forEach(btn => {
         .export-notes-section p { font-size: 11px; line-height: 1.6; color: #334155; margin-bottom: 8px; white-space: pre-wrap; text-align: left; }
         .export-notes-section ul { padding-left: 16px; margin: 4px 0; text-align: left; }
         .export-notes-section li { font-size: 11px; line-height: 1.5; color: #334155; margin-bottom: 4px; }
-      </style>`;
+      </style>` : (format === 'xlsx' ? excelStyle : docxStyle);
 
       clonedTable.querySelectorAll('tr').forEach((tr, rIdx) => {
         let firstCell = tr.querySelector('td, th');
@@ -2067,7 +2130,7 @@ document.querySelectorAll('.export-format-btn').forEach(btn => {
         let dObj = new Date(currentYear, currentMonth, day);
         let hijriStr = getHijriDate(dObj).string;
         let masehiStr = `${day} ${monthsNameID[currentMonth]} ${currentYear}`;
-        specialDaysInfo.push(`${masehiStr} — ${hijriStr} : ${currentMonthSpecialDays[day]}`);
+        specialDaysInfo.push(`${masehiStr} � ${hijriStr} : ${currentMonthSpecialDays[day]}`);
       }
 
       let cleanNotesHTML = `<div class="export-notes-section">
@@ -2094,7 +2157,7 @@ document.querySelectorAll('.export-format-btn').forEach(btn => {
       cleanNotesHTML += `</div>`;
 
       let cleanContent = `<div style="width: 100%;">
-        <h2 style="font-size:16px; font-weight:bold; margin-bottom:10px;">${titleText.replace('_', ' ')} - Periode: ${dateStr}</h2>
+        <h2 style="font-size:15px; font-weight:bold; margin-bottom:12px;">${titleText.replace('_', ' ')} - Periode: ${dateStr}</h2>
         ${tableHTML}
         ${cleanNotesHTML}
       </div>`;
@@ -2179,11 +2242,11 @@ function renderActivityLogs() {
     let actionButtonsHtml = '';
     if (isAdmin && meta && meta.isRequest && !meta.processed) {
       actionButtonsHtml = `<div class="flex gap-1.5 shrink-0 ml-auto sm:ml-0">
-        <button onclick="approveRequest(${idx})" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-2 py-1 rounded text-[10px] shadow-xs transition" title="Terima Request">✔ Terima</button>
-        <button onclick="rejectRequest(${idx})" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-2 py-1 rounded text-[10px] shadow-xs transition" title="Tolak Request">✕ Tolak</button>
+        <button onclick="approveRequest(${idx})" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-2 py-1 rounded text-[10px] shadow-xs transition" title="Terima Request"> Terima</button>
+        <button onclick="rejectRequest(${idx})" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-2 py-1 rounded text-[10px] shadow-xs transition" title="Tolak Request"> Tolak</button>
       </div>`;
     } else if (meta && meta.isRequest && meta.processed) {
-      let statusBadge = meta.approved ? `<span class="text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 text-[10px]">✔ Diterima</span>` : `<span class="text-red-700 font-bold bg-red-50 px-1.5 py-0.5 rounded border border-red-200 text-[10px]">✕ Ditolak</span>`;
+      let statusBadge = meta.approved ? `<span class="text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 text-[10px]"> Diterima</span>` : `<span class="text-red-700 font-bold bg-red-50 px-1.5 py-0.5 rounded border border-red-200 text-[10px]"> Ditolak</span>`;
       actionButtonsHtml = `<div class="shrink-0 ml-auto sm:ml-0">${statusBadge}</div>`;
     }
 
@@ -2281,7 +2344,7 @@ function renderTable() {
     headerHTML += `<th class="p-2 text-center min-w-[44px] border-r border-slate-300 text-xs ${headerClass}" ${holidayTitle}><div>${day}</div><div class="text-[10px] ${isHoliday ? 'text-red-600 font-bold underline' : 'text-slate-500'}">${daysShort[dObj.getDay()]}</div></th>`; 
   } 
   headerHTML += `<th class="min-w-[16px] bg-transparent border-none p-0"></th>`; 
-  let shiftLabels = currentActivePage === 'team' ? ["FULL", "P", "So", "P(s)", "Pc", "PS", "OFF", "C", "Total"] : ["Pagi", "Siang", "Mid", "Sore", "Malam", "Split", "FULL", "OFF", "CUTI", "Total"]; 
+  let shiftLabels = currentActivePage === 'team' ? ["FULL", "P", "So", "So(s)", "Si(s)", "PS(s)", "P(s)", "Pc", "PS", "OFF", "C", "Total"] : ["Pagi", "Siang", "Mid", "Sore", "Malam", "Split", "FULL", "OFF", "CUTI", "Total"]; 
   shiftLabels.forEach((sh, idx) => { headerHTML += `<th class="p-2 text-center min-w-[38px] border-r border-slate-300 text-xs font-bold ${idx === shiftLabels.length - 1 ? 'bg-slate-200 text-slate-900' : 'bg-slate-100 text-slate-800'}">${sh}</th>`; }); 
   thead.innerHTML = headerHTML + `</tr>`; 
 
@@ -2294,9 +2357,9 @@ function renderTable() {
     tdName.className = "p-3 sticky left-0 bg-inherit z-10 font-bold border-r border-slate-300 flex justify-between items-center gap-2"; 
     
     let isStaffAdmin = (currentActivePage === 'team' && staffRoles[staff] === 'admin');
-    let roleBadgeHtml = (currentActivePage === 'team') ? `<div class="text-[9px] text-slate-500 flex items-center gap-1"><span>${isStaffAdmin ? '👑 Admin' : (currentLang === 'id' ? 'Anggota' : 'Member')}</span>${isAdminOrGeneral && !isStaffAdmin ? `<button onclick="promoteToAdmin('${staff}')" class="text-[8px] text-blue-600 hover:underline">${currentLang === 'id' ? 'Jadikan Admin' : 'Make Admin'}</button>` : ''}</div>` : '';
+    let roleBadgeHtml = (currentActivePage === 'team') ? `<div class="text-[9px] text-slate-500 flex items-center gap-1"><span>${isStaffAdmin ? ' Admin' : (currentLang === 'id' ? 'Anggota' : 'Member')}</span>${isAdminOrGeneral && !isStaffAdmin ? `<button onclick="promoteToAdmin('${staff}')" class="text-[8px] text-blue-600 hover:underline">${currentLang === 'id' ? 'Jadikan Admin' : 'Make Admin'}</button>` : ''}</div>` : '';
 
-    tdName.innerHTML = `<div class="flex flex-col"><input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-slate-400 focus:border-slate-600 focus:bg-white focus:outline-none px-1 py-0.5 rounded text-slate-900 font-medium truncate max-w-[110px] staff-name-input text-xs" data-old-name="${staff}" ${!isAdminOrGeneral ? 'disabled' : ''}>${roleBadgeHtml}</div> ${isAdminOrGeneral ? `<button class="no-export text-slate-400 hover:text-slate-700 p-1 rounded transition flex items-center justify-center font-bold text-xs" onclick="deleteStaff('${staff}')" title="${currentLang === 'id' ? 'Hapus Staf' : 'Delete Staff'}">✕</button>` : ''}`; 
+    tdName.innerHTML = `<div class="flex flex-col"><input type="text" value="${staff}" class="bg-transparent border-b border-transparent hover:border-slate-400 focus:border-slate-600 focus:bg-white focus:outline-none px-1 py-0.5 rounded text-slate-900 font-medium truncate max-w-[110px] staff-name-input text-xs" data-old-name="${staff}" ${!isAdminOrGeneral ? 'disabled' : ''}>${roleBadgeHtml}</div> ${isAdminOrGeneral ? `<button class="no-export text-slate-400 hover:text-slate-700 p-1 rounded transition flex items-center justify-center font-bold text-xs" onclick="deleteStaff('${staff}')" title="${currentLang === 'id' ? 'Hapus Staf' : 'Delete Staff'}"></button>` : ''}`; 
     tr.appendChild(tdName); 
 
     let counts = {}; shiftLabels.forEach(s => counts[s] = 0); counts.totalWork = 0; 
@@ -2313,7 +2376,7 @@ function renderTable() {
       let shiftRecord = (currentSchedObj[staff] && currentSchedObj[staff][dKey]) ? currentSchedObj[staff][dKey] : null; 
       let shift = shiftRecord ? shiftRecord.shift : "", initial = shiftRecord ? shiftRecord.initial : ""; 
       if (shift) { 
-        let badgeClass = currentActivePage === 'team' ? (shift === 'P(s)' ? 'badge-P-sub' : `badge-${shift}`) : `badge-gen-${shift}`; 
+        let badgeClass = currentActivePage === 'team' ? (shift === 'P(s)' ? 'badge-P-sub' : (shift === 'So(s)' ? 'badge-So-s' : (shift === 'Si(s)' ? 'badge-Si-s' : (shift === 'PS(s)' ? 'badge-PS-s' : `badge-${shift}`)))) : `badge-gen-${shift}`; 
         td.innerHTML = `<div class="font-semibold py-1 px-1 rounded text-xs ${badgeClass}">${initial || shift}</div>`; 
         if (counts[shift] !== undefined) counts[shift]++; if (shift !== 'OFF' && shift !== 'CUTI') counts.totalWork++; 
       } else { td.innerHTML = `<span class="text-slate-300">-</span>`; } 
@@ -2484,7 +2547,7 @@ function renderGlobalNotes() {
     let dObj = new Date(currentYear, currentMonth, day);
     let hijriStr = getHijriDate(dObj).string;
     let masehiStr = `${day} ${monthsNameID[currentMonth]} ${currentYear}`;
-    specialDaysInfo.push(`${masehiStr} — ${hijriStr} : ${currentMonthSpecialDays[day]}`);
+    specialDaysInfo.push(`${masehiStr} � ${hijriStr} : ${currentMonthSpecialDays[day]}`);
   }
 
   if (specialDaysInfo.length > 0) {
@@ -2503,7 +2566,7 @@ function renderGlobalNotes() {
     let ta = document.createElement('textarea'); ta.rows = 2; ta.className = "w-full bg-transparent focus:outline-none p-1 rounded text-xs text-slate-800 resize-none border border-slate-200 focus:border-slate-400"; ta.value = text; 
     ta.disabled = (currentActivePage === 'team' && userSession && userSession.role !== 'admin'); 
     
-    let del = document.createElement('button'); del.className = "no-export text-slate-400 hover:text-slate-700 text-xs p-1 font-bold"; del.innerHTML = "✕"; 
+    let del = document.createElement('button'); del.className = "no-export text-slate-400 hover:text-slate-700 text-xs p-1 font-bold"; del.innerHTML = ""; 
     del.onclick = () => { showConfirm(currentLang === 'id' ? "Hapus Catatan" : "Delete Note", currentLang === 'id' ? "Yakin ingin menghapus catatan ini?" : "Are you sure you want to delete this note?", () => { saveStateToHistory(); notes.splice(idx, 1); globalNotes[monthKey] = notes; triggerAutoSave(); renderGlobalNotes(); }); }; 
     
     taContainer.appendChild(ta); 
@@ -2516,7 +2579,7 @@ function renderGlobalNotes() {
       
       let saveBtn = document.createElement('button');
       saveBtn.className = "bg-slate-800 hover:bg-slate-900 text-white font-medium px-3 py-1 rounded text-[11px] transition shadow-xs";
-      saveBtn.innerText = currentLang === 'id' ? "Selesai ✓" : "Done ✓";
+      saveBtn.innerText = currentLang === 'id' ? "Selesai " : "Done ";
       
       ta.addEventListener('input', () => {
         actionFooter.classList.remove('hidden');
